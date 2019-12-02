@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.webapp.service.database.dao.NewsDao;
+import com.webapp.service.database.dao.impl.NewsDaoImpl;
 import com.webapp.model.News;
 import com.webapp.model.User;
 import com.webapp.util.DbUtil;
@@ -38,7 +38,7 @@ public class NewsController {
 
 	private DbUtil dbUtil;
 
-	private NewsDao newsDao = new NewsDao();
+	private NewsDaoImpl newsDao = new NewsDaoImpl();
 
 	@RequestMapping("/news")
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -143,7 +143,7 @@ public class NewsController {
 		Connection con = null;
 		try {
 			con = dbUtil.getCon();
-			NewsDao newsDao = new NewsDao();
+			NewsDaoImpl newsDao = new NewsDaoImpl();
 			News news = newsDao.newsShow(con, newsId);
 			request.setAttribute("news", news);
 			HttpSession session = request.getSession();

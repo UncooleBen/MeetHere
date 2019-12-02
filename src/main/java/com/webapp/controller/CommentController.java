@@ -17,8 +17,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.webapp.service.database.dao.CommentDao;
-import com.webapp.service.database.dao.CommentFinalDao;
+import com.webapp.service.database.dao.impl.CommentDaoImpl;
+import com.webapp.service.database.dao.impl.CommentDaoImpl;
 import com.webapp.model.Comment;
 import com.webapp.model.User;
 import com.webapp.util.DbUtil;
@@ -41,8 +41,8 @@ public class CommentController {
 
 	private DbUtil dbUtil;
 
-	private CommentDao commentDao = new CommentDao();
-	private CommentFinalDao commentFinalDao = new CommentFinalDao();
+	private CommentDaoImpl commentDao = new CommentDaoImpl();
+	private com.webapp.service.database.dao.impl.CommentDaoImpl commentFinalDao = com.webapp.service.database.dao.impl.CommentDaoImpl;
 
 	@RequestMapping("/comment")
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

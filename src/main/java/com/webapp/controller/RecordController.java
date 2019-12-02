@@ -19,8 +19,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.webapp.service.database.dao.BuildDao;
-import com.webapp.service.database.dao.RecordDao;
-import com.webapp.service.database.dao.RecordFinalDao;
+import com.webapp.service.database.dao.impl.RecordDaoImpl;
+import com.webapp.service.database.dao.impl.RecordDaoImpl;
 import com.webapp.model.Build;
 import com.webapp.model.Record;
 import com.webapp.model.User;
@@ -44,8 +44,8 @@ public class RecordController {
 
 	private DbUtil dbUtil;
 
-	private RecordDao recordDao = new RecordDao();
-	private RecordFinalDao recordFinalDao = new RecordFinalDao();
+	private RecordDaoImpl recordDao = new RecordDaoImpl();
+	private com.webapp.service.database.dao.impl.RecordDaoImpl recordFinalDao = com.webapp.service.database.dao.impl.RecordDaoImpl;
 
 	@RequestMapping("/record")
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

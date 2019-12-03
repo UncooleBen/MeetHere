@@ -4,130 +4,128 @@ import com.webapp.model.News;
 import com.webapp.service.database.DatabaseService;
 import com.webapp.service.database.dao.NewsDao;
 import com.webapp.util.StringUtil;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Juntao Peng
+ */
 public class NewsDaoImpl extends DatabaseService implements NewsDao {
-  @Override
-  public List<News> newsList(Connection con, News s_news) throws Exception {
-    List<News> newsList = new ArrayList<News>();
-    StringBuffer sb = new StringBuffer("select * from t_news t1");
-    if (StringUtil.isNotEmpty(s_news.getDate())) {
-      sb.append(" and t1.date=" + s_news.getDate());
-    }
-    if (StringUtil.isNotEmpty(s_news.getStartDate())) {
-      sb.append(" and TO_DAYS(t1.date)>=TO_DAYS('" + s_news.getStartDate() + "')");
-    }
-    if (StringUtil.isNotEmpty(s_news.getEndDate())) {
-      sb.append(" and TO_DAYS(t1.date)<=TO_DAYS('" + s_news.getEndDate() + "')");
-    }
-    PreparedStatement pstmt = con.prepareStatement(sb.toString().replaceFirst("and", "where"));
-    ResultSet rs = pstmt.executeQuery();
-    while (rs.next()) {
-      News news = new News();
-      news.setNewsId(rs.getInt("newsId"));
-      news.setDate(rs.getString("date"));
-      news.setAuthor(rs.getString("author"));
-      news.setTitle(rs.getString("title"));
-      news.setDetail(rs.getString("detail"));
-      newsList.add(news);
-    }
-    return newsList;
-  }
 
-  @Override
-  public List<News> newsListWithBuild(Connection con, News s_news, int buildId) throws Exception {
-    List<News> newsList = new ArrayList<News>();
-    StringBuffer sb = new StringBuffer("select * from t_news t1");
-    if (StringUtil.isNotEmpty(s_news.getStartDate())) {
-      sb.append(" and TO_DAYS(t1.date)>=TO_DAYS('" + s_news.getStartDate() + "')");
+    @Override
+    public List<News> listNews(int size) {
+        Connection connection = getConnection();
+        assert connection != null;
+        List<News> newsList = new ArrayList<News>();
+        String SELECT = "SELECT * FROM t_news ORDER BY last_modified DESC LIMIT = (?)";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
+            preparedStatement.setInt(1, size);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                News tempNews = new News(rs.getInt("id"), rs.getString("title"), rs.getLong("created"),
+                        rs.getLong("last_modified"), rs.getString("author"), rs.getString("detail"));
+                newsList.add(tempNews);
+            }
+            closeConnection(connection);
+            return newsList;
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace(System.err);
+            return newsList;
+        }
     }
-    if (StringUtil.isNotEmpty(s_news.getEndDate())) {
-      sb.append(" and TO_DAYS(t1.date)<=TO_DAYS('" + s_news.getEndDate() + "')");
-    }
-    PreparedStatement pstmt = con.prepareStatement(sb.toString().replaceFirst("and", "where"));
-    ResultSet rs = pstmt.executeQuery();
-    while (rs.next()) {
-      News news = new News();
-      news.setNewsId(rs.getInt("newsId"));
-      news.setDate(rs.getString("date"));
-      news.setDetail(rs.getString("detail"));
-      newsList.add(news);
-    }
-    return newsList;
-  }
 
-  @Override
-  public List<News> newsListWithNumber(Connection con, News s_news, String studentNumber)
-      throws Exception {
-    List<News> newsList = new ArrayList<News>();
-    StringBuffer sb = new StringBuffer("select * from t_news t1");
-    if (StringUtil.isNotEmpty(s_news.getStartDate())) {
-      sb.append(" and TO_DAYS(t1.date)>=TO_DAYS('" + s_news.getStartDate() + "')");
+    @Override
+    public News queryNewsById(int id) {
+        Connection connection = getConnection();
+        assert connection != null;
+        assert id > 0;
+        News result = null;
+        String SELECT = "SELECT * FROM t_news WHERE id = (?)";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
+            preparedStatement.setInt(1, id);
+            preparedStatement = connection.prepareStatement(SELECT);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                result = new News(rs.getInt("id"), rs.getString("title"), rs.getLong("created"),
+                        rs.getLong("last_modified"), rs.getString("author"), rs.getString("detail"));
+            }
+            closeConnection(connection);
+            return result;
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace(System.err);
+            return result;
+        }
     }
-    if (StringUtil.isNotEmpty(s_news.getEndDate())) {
-      sb.append(" and TO_DAYS(t1.date)<=TO_DAYS('" + s_news.getEndDate() + "')");
+
+    @Override
+    public boolean insertNews(News news) {
+        Connection connection = getConnection();
+        assert connection != null;
+        assert news != null;
+        String INSERT = "INSERT INTO t_news(title, created, last_modified, author, detail) VALUES(?,?,?,?,?)";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT);
+            preparedStatement.setString(1, news.getTitle());
+            preparedStatement.setLong(2, news.getCreated());
+            preparedStatement.setLong(3, news.getLastModified());
+            preparedStatement.setString(4, news.getAuthor());
+            preparedStatement.setString(5, news.getDetail());
+            preparedStatement.execute();
+            closeConnection(connection);
+            return true;
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace(System.err);
+            return false;
+        }
+
     }
-    PreparedStatement pstmt = con.prepareStatement(sb.toString().replaceFirst("and", "where"));
-    ResultSet rs = pstmt.executeQuery();
-    while (rs.next()) {
-      News news = new News();
-      news.setNewsId(rs.getInt("newsId"));
-      news.setDate(rs.getString("date"));
-      news.setDetail(rs.getString("detail"));
-      newsList.add(news);
+
+    @Override
+    public boolean deleteNewsById(int id) {
+        Connection connection = getConnection();
+        assert connection != null;
+        assert id > 0;
+        String DELETE = "DELETE FROM message WHERE id = (?)";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE);
+            preparedStatement.setInt(1, id);
+            preparedStatement.execute();
+            closeConnection(connection);
+            return true;
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace(System.err);
+            return false;
+        }
     }
-    return newsList;
-  }
 
-  @Override
-  public News newsShow(Connection con, String newsId) throws Exception {
-    String sql = "select * from t_news t1 where t1.newsId=?";
-    PreparedStatement pstmt = con.prepareStatement(sql);
-    pstmt.setString(1, newsId);
-    ResultSet rs = pstmt.executeQuery();
-    News news = new News();
-    if (rs.next()) {
-      news.setNewsId(rs.getInt("newsId"));
-      news.setDate(rs.getString("date"));
-      news.setTitle(rs.getString("title"));
-      news.setAuthor(rs.getString("author"));
-      news.setDetail(rs.getString("detail"));
+    @Override
+    public boolean updateNews(News news) {
+        Connection connection = getConnection();
+        assert connection != null;
+        assert news != null;
+        String UPDATE = "UPDATE t_news SET (title, created, last_modified, author, detail) WHERE id = (?) " +
+                "VALUES (?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);
+            preparedStatement.setString(1, news.getTitle());
+            preparedStatement.setLong(2, news.getCreated());
+            preparedStatement.setLong(3, news.getLastModified());
+            preparedStatement.setString(4, news.getAuthor());
+            preparedStatement.setString(5, news.getDetail());
+            preparedStatement.setInt(6, news.getId());
+            preparedStatement.execute();
+            closeConnection(connection);
+            return true;
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace(System.err);
+            return false;
+        }
     }
-    return news;
-  }
-
-  @Override
-  public int newsAdd(Connection con, News news) throws Exception {
-    String sql = "insert into t_news values(null,?,?,?,?)";
-    PreparedStatement pstmt = con.prepareStatement(sql);
-    pstmt.setString(1, news.getTitle());
-    pstmt.setString(2, news.getDate());
-    pstmt.setString(3, news.getAuthor());
-    pstmt.setString(4, news.getDetail());
-    return pstmt.executeUpdate();
-  }
-
-  @Override
-  public int newsDelete(Connection con, String newsId) throws Exception {
-    String sql = "delete from t_news where newsId=?";
-    PreparedStatement pstmt = con.prepareStatement(sql);
-    pstmt.setString(1, newsId);
-    return pstmt.executeUpdate();
-  }
-
-  @Override
-  public int newsUpdate(Connection con, News news) throws Exception {
-    String sql = "update t_news set title=?,date=?,author=?,detail=? where newsId=?";
-    PreparedStatement pstmt = con.prepareStatement(sql);
-    pstmt.setString(1, news.getTitle());
-    pstmt.setString(2, news.getDate());
-    pstmt.setString(3, news.getAuthor());
-    pstmt.setString(4, news.getDetail());
-    pstmt.setInt(5, news.getNewsId());
-    return pstmt.executeUpdate();
-  }
 }

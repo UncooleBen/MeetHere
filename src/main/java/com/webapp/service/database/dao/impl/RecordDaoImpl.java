@@ -1,183 +1,176 @@
 package com.webapp.service.database.dao.impl;
 
 import com.webapp.model.Build;
+import com.webapp.model.News;
 import com.webapp.model.Record;
+import com.webapp.service.database.DatabaseService;
 import com.webapp.service.database.dao.RecordDao;
 import com.webapp.util.StringUtil;
+import javafx.scene.chart.PieChart;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecordDaoImpl implements RecordDao {
-  public List<Record> recordList(Connection con, Record s_record) throws Exception {
-    List<Record> recordList = new ArrayList<Record>();
-    StringBuffer sb = new StringBuffer("select * from t_record t1");
-    if (StringUtil.isNotEmpty(s_record.getUserNumber())) {
-      sb.append(" and t1.userNumber like '%" + s_record.getUserNumber() + "%'");
-    } else if (StringUtil.isNotEmpty(s_record.getUserName())) {
-      sb.append(" and t1.userName like '%" + s_record.getUserName() + "%'");
-    }
-    if (s_record.getBuildId() != 0) {
-      sb.append(" and t1.buildId=" + s_record.getBuildId());
-    }
-    if (StringUtil.isNotEmpty(s_record.getDate())) {
-      sb.append(" and t1.date=" + s_record.getDate());
-    }
-    if (StringUtil.isNotEmpty(s_record.getStartDate())) {
-      sb.append(" and TO_DAYS(t1.date)>=TO_DAYS('" + s_record.getStartDate() + "')");
-    }
-    if (StringUtil.isNotEmpty(s_record.getEndDate())) {
-      sb.append(" and TO_DAYS(t1.date)<=TO_DAYS('" + s_record.getEndDate() + "')");
-    }
-    PreparedStatement pstmt = con.prepareStatement(sb.toString().replaceFirst("and", "where"));
-    ResultSet rs = pstmt.executeQuery();
-    while (rs.next()) {
-      Record record = new Record();
-      record.setRecordId(rs.getInt("recordId"));
-      record.setUserNumber(rs.getString("userNumber"));
-      record.setUserName(rs.getString("userName"));
-      int buildId = rs.getInt("buildId");
-      record.setBuildId(buildId);
-      record.setBuildName(BuildDao.buildName(con, buildId));
-      record.setRoomName(rs.getString("roomName"));
-      record.setDate(rs.getString("date"));
-      record.setDetail(rs.getString("detail"));
-      recordList.add(record);
-    }
-    return recordList;
-  }
+public class RecordDaoImpl extends DatabaseService implements RecordDao {
 
-  public List<Record> recordListWithBuild(Connection con, Record s_record, int buildId)
-      throws Exception {
-    List<Record> recordList = new ArrayList<Record>();
-    StringBuffer sb = new StringBuffer("select * from t_record t1");
-    if (StringUtil.isNotEmpty(s_record.getUserNumber())) {
-      sb.append(" and t1.userNumber like '%" + s_record.getUserNumber() + "%'");
-    } else if (StringUtil.isNotEmpty(s_record.getUserName())) {
-      sb.append(" and t1.userName like '%" + s_record.getUserName() + "%'");
+    @Override
+    public List<Record> listRecord(int size) {
+        Connection connection = getConnection();
+        assert connection != null;
+        List<Record> recordList = new ArrayList<Record>();
+        String SELECT = "SELECT * FROM t_record ORDER BY last_modified DESC LIMIT = (?)";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
+            preparedStatement.setInt(1, size);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                Record tempRecord = new Record(rs.getInt("id"), rs.getLong("time"), rs.getLong("start_date"),
+                        rs.getLong("end_date"), rs.getInt("user_id"), rs.getInt("building_id"),
+                        rs.getBoolean("verified"));
+                recordList.add(tempRecord);
+            }
+            closeConnection(connection);
+            return recordList;
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace(System.err);
+            return recordList;
+        }
     }
-    sb.append(" and t1.buildId=" + buildId);
-    if (StringUtil.isNotEmpty(s_record.getStartDate())) {
-      sb.append(" and TO_DAYS(t1.date)>=TO_DAYS('" + s_record.getStartDate() + "')");
-    }
-    if (StringUtil.isNotEmpty(s_record.getEndDate())) {
-      sb.append(" and TO_DAYS(t1.date)<=TO_DAYS('" + s_record.getEndDate() + "')");
-    }
-    PreparedStatement pstmt = con.prepareStatement(sb.toString().replaceFirst("and", "where"));
-    ResultSet rs = pstmt.executeQuery();
-    while (rs.next()) {
-      Record record = new Record();
-      record.setRecordId(rs.getInt("recordId"));
-      record.setUserNumber(rs.getString("userNumber"));
-      record.setUserName(rs.getString("userName"));
-      buildId = rs.getInt("buildId");
-      record.setBuildId(buildId);
-      record.setBuildName(BuildDao.buildName(con, buildId));
-      record.setRoomName(rs.getString("roomName"));
-      record.setDate(rs.getString("date"));
-      record.setDetail(rs.getString("detail"));
-      recordList.add(record);
-    }
-    return recordList;
-  }
 
-  public List<Record> recordListWithNumber(Connection con, Record s_record, String userNumber)
-      throws Exception {
-    List<Record> recordList = new ArrayList<Record>();
-    StringBuffer sb = new StringBuffer("select * from t_record t1");
-    if (StringUtil.isNotEmpty(userNumber)) {
-      sb.append(" and t1.userNumber =" + userNumber);
+    @Override
+    public List<Record> listRecordWithBuildId(int size, int buildId) {
+        Connection connection = getConnection();
+        assert connection != null;
+        List<Record> recordList = new ArrayList<Record>();
+        String SELECT = "SELECT * FROM t_record WHERE building_id = (?) ORDER BY last_modified DESC LIMIT = (?)";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
+            preparedStatement.setInt(1, buildId);
+            preparedStatement.setInt(2, size);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                Record tempRecord = new Record(rs.getInt("id"), rs.getLong("time"), rs.getLong("start_date"),
+                        rs.getLong("end_date"), rs.getInt("user_id"), rs.getInt("building_id"),
+                        rs.getBoolean("verified"));
+                recordList.add(tempRecord);
+            }
+            closeConnection(connection);
+            return recordList;
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace(System.err);
+            return recordList;
+        }
     }
-    if (StringUtil.isNotEmpty(s_record.getStartDate())) {
-      sb.append(" and TO_DAYS(t1.date)>=TO_DAYS('" + s_record.getStartDate() + "')");
-    }
-    if (StringUtil.isNotEmpty(s_record.getEndDate())) {
-      sb.append(" and TO_DAYS(t1.date)<=TO_DAYS('" + s_record.getEndDate() + "')");
-    }
-    PreparedStatement pstmt = con.prepareStatement(sb.toString().replaceFirst("and", "where"));
-    ResultSet rs = pstmt.executeQuery();
-    while (rs.next()) {
-      Record record = new Record();
-      record.setRecordId(rs.getInt("recordId"));
-      record.setUserNumber(rs.getString("userNumber"));
-      record.setUserName(rs.getString("userName"));
-      int buildId = rs.getInt("buildId");
-      record.setBuildId(buildId);
-      record.setBuildName(BuildDao.buildName(con, buildId));
-      record.setRoomName(rs.getString("roomName"));
-      record.setDate(rs.getString("date"));
-      record.setDetail(rs.getString("detail"));
-      recordList.add(record);
-    }
-    return recordList;
-  }
 
-  public List<Build> buildList(Connection con) throws Exception {
-    List<Build> buildList = new ArrayList<Build>();
-    String sql = "select * from t_build";
-    PreparedStatement pstmt = con.prepareStatement(sql);
-    ResultSet rs = pstmt.executeQuery();
-    while (rs.next()) {
-      Build build = new Build();
-      build.setBuildId(rs.getInt("buildId"));
-      build.setBuildName(rs.getString("buildName"));
-      build.setDetail(rs.getString("buildDetail"));
-      buildList.add(build);
+    @Override
+    public List<Record> listRecordWithUserId(int size, int userId) {
+        Connection connection = getConnection();
+        assert connection != null;
+        List<Record> recordList = new ArrayList<Record>();
+        String SELECT = "SELECT * FROM t_record WHERE user_id = (?) ORDER BY last_modified DESC LIMIT = (?)";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(2, size);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                Record tempRecord = new Record(rs.getInt("id"), rs.getLong("time"), rs.getLong("start_date"),
+                        rs.getLong("end_date"), rs.getInt("user_id"), rs.getInt("building_id"),
+                        rs.getBoolean("verified"));
+                recordList.add(tempRecord);
+            }
+            closeConnection(connection);
+            return recordList;
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace(System.err);
+            return recordList;
+        }
     }
-    return buildList;
-  }
 
-  public Record recordShow(Connection con, String recordId) throws Exception {
-    String sql = "select * from t_record t1 where t1.recordId=?";
-    PreparedStatement pstmt = con.prepareStatement(sql);
-    pstmt.setString(1, recordId);
-    ResultSet rs = pstmt.executeQuery();
-    Record record = new Record();
-    if (rs.next()) {
-      record.setRecordId(rs.getInt("recordId"));
-      record.setUserNumber(rs.getString("userNumber"));
-      record.setUserName(rs.getString("userName"));
-      int buildId = rs.getInt("buildId");
-      record.setBuildId(buildId);
-      record.setBuildName(BuildDao.buildName(con, buildId));
-      record.setRoomName(rs.getString("roomName"));
-      record.setDate(rs.getString("date"));
-      record.setDetail(rs.getString("detail"));
+    @Override
+    public Record queryRecordById(int id) {
+        Connection connection = getConnection();
+        assert connection != null;
+        Record result = null;
+        String SELECT = "SELECT * FROM t_record WHERE id = (?)";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                result = new Record(rs.getInt("id"), rs.getLong("time"), rs.getLong("start_date"),
+                        rs.getLong("end_date"), rs.getInt("user_id"), rs.getInt("building_id"),
+                        rs.getBoolean("verified"));
+            }
+            closeConnection(connection);
+            return result;
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace(System.err);
+            return result;
+        }
     }
-    return record;
-  }
 
-  public int recordAdd(Connection con, Record record) throws Exception {
-    String sql = "insert into t_record values(null,?,?,?,?,?,?)";
-    PreparedStatement pstmt = con.prepareStatement(sql);
-    pstmt.setString(1, record.getUserNumber());
-    pstmt.setString(2, record.getUserName());
-    pstmt.setInt(3, record.getBuildId());
-    pstmt.setString(4, record.getRoomName());
-    pstmt.setString(5, record.getDate());
-    pstmt.setString(6, record.getDetail());
-    return pstmt.executeUpdate();
-  }
+    @Override
+    public boolean insertRecord(Record record) {
+        Connection connection = getConnection();
+        assert connection != null;
+        assert record != null;
+        String INSERT = "INSERT INTO t_record(time, start_date, end_date, user_id, building_id, verified)" +
+                " VALUES(?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT);
+            preparedStatement.setLong(1, record.getTime());
+            preparedStatement.setLong(2, record.getStartDate());
+            preparedStatement.setLong(3, record.getEndDate());
+            preparedStatement.setInt(4, record.getUserId());
+            preparedStatement.setInt(5, record.getBuildId());
+            preparedStatement.setBoolean(6, record.isVerified());
+            preparedStatement.execute();
+            closeConnection(connection);
+            return true;
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace(System.err);
+            return false;
+        }
+    }
 
-  public int recordDelete(Connection con, String recordId) throws Exception {
-    String sql = "delete from t_record where recordId=?";
-    PreparedStatement pstmt = con.prepareStatement(sql);
-    pstmt.setString(1, recordId);
-    return pstmt.executeUpdate();
-  }
+    @Override
+    public boolean deleteRecordById(int id) {
+        Connection connection = getConnection();
+        assert connection != null;
+        assert id > 0;
+        String DELETE = "DELETE FROM t_record WHERE id = (?)";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE);
+            preparedStatement.execute();
+            closeConnection(connection);
+            return true;
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace(System.err);
+            return false;
+        }
+    }
 
-  public int recordUpdate(Connection con, Record record) throws Exception {
-    String sql =
-        "update t_record set userNumber=?,userName=?,buildId=?,roomName=?,detail=? where recordId=?";
-    PreparedStatement pstmt = con.prepareStatement(sql);
-    pstmt.setString(1, record.getUserNumber());
-    pstmt.setString(2, record.getUserName());
-    pstmt.setInt(3, record.getBuildId());
-    pstmt.setString(4, record.getRoomName());
-    pstmt.setString(5, record.getDetail());
-    pstmt.setInt(6, record.getRecordId());
-    return pstmt.executeUpdate();
-  }
+    @Override
+    public boolean verifyRecordById(int id) {
+        Connection connection = getConnection();
+        assert connection != null;
+        assert id > 0;
+        String UPDATE = "UPDATE t_record SET (verified) WHERE id = (?) VALUES (?, ?))";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);
+            preparedStatement.setBoolean(1, true);
+            preparedStatement.setInt(2, id);
+            preparedStatement.execute();
+            closeConnection(connection);
+            return true;
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace(System.err);
+            return false;
+        }
+    }
 }

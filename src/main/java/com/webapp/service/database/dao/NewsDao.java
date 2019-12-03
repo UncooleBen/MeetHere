@@ -5,11 +5,9 @@ import java.sql.Connection;
 import java.util.List;
 
 public interface NewsDao {
-  List<News> newsList(Connection con, News s_news);
-  List<News> newsListWithBuild(Connection con, News s_news, int buildId);
-  List<News> newsListWithNumber(Connection con, News s_news, String studentNumber);
-  News newsShow(Connection con, String newsId);
-  int newsAdd(Connection con, News news);
-  int newsDelete(Connection con, String newsId);
-  int newsUpdate(Connection con, News news);
+  List<News> listNews(int size);
+  News queryNewsById(int id);
+  boolean insertNews(News news);
+  boolean deleteNewsById(int id);
+  boolean updateNews(News news);
 }

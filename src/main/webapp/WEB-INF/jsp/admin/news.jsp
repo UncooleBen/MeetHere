@@ -3,37 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <script type="text/javascript">
-    $(document).ready(function(){
-        $("ul li:eq(4)").addClass("active");
-        $('.form_date').datetimepicker({
-            language:  'en',
-            weekStart: 1,
-            todayBtn:  1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            minView: 2,
-            forceParse: 0
-        });
-        $('.datatable').dataTable( {
-            "oLanguage": {
-                "sUrl": "/DormManage/media/zh_CN.json"
-            },
-            "bLengthChange": false, //改变每页显示数据数量
-            "bFilter": false, //过滤功能
-            "aoColumns": [
-                null,
-                null,
-                null,
-                null,
-                null,
-                { "asSorting": [ ] },
-                { "asSorting": [ ] }
-            ]
-        });
-        $("#DataTables_Table_0_wrapper .row-fluid").remove();
-    });
-
     window.onload = function(){
         $("#DataTables_Table_0_wrapper .row-fluid").remove();
     };
@@ -49,43 +18,39 @@
         新闻管理
     </div>
     <form name="myForm" class="form-search" method="post" action="news?action=search" style="padding-bottom: 0px">
-				<!--span class="data_search">
-					<span class="controls input-append date form_date" style="margin-right: 10px" data-date="" data-date-format="yyyy-mm-dd" data-link-format="yyyy-mm-dd">
-                    	<input id="startDate" name="startDate" style="width:120px;height: 30px;" placeholder="起始日期" type="text" value="${startDate }" readonly >
-                    	<span class="add-on"><i class="icon-remove"></i></span>
-						<span class="add-on"><i class="icon-th"></i></span>
-               		</span>
-					<span class="controls input-append date form_date" style="margin-right: 10px" data-date="" data-date-format="yyyy-mm-dd" data-link-format="yyyy-mm-dd">
-                    	<input id="endDate" name="endDate" style="width:120px;height: 30px;" placeholder="终止日期" type="text" value="${endDate }" readonly>
-                    	<span class="add-on"><i class="icon-remove"></i></span>
-						<span class="add-on"><i class="icon-th"></i></span>
-               		 </span>
+        <span class="data_search">
+					<font id="error" color="red">${error}</font>
+					<select id="searchType" name="searchType" style="width: 80px;">
+						<option value="name">标题</option>
+						<option value="id" >ID</option>
+					</select>
+					&nbsp;<input id="id_search_user_text" name="search_user_text" type="text"  style="width:120px;height: 30px;" class="input-medium search-query" value="${search_user_text}">
 					&nbsp;<button type="submit" class="btn btn-info" onkeydown="if(event.keyCode==13) myForm.submit()">搜索</button>
-				</span-->
+				</span>
     </form>
     <div>
         <table class="table table-striped table-bordered table-hover datatable">
             <thead>
-            <button class="btn btn-mini btn-info" type="button" onclick="javascript:window.location='news?action=preSave&newsId=${news.newsId }'">发布新闻</button>
+            <button class="btn btn-mini btn-info" type="button" onclick="javascript:window.location='news?action=add'">发布新闻</button>
             </thead>
             <thead>
             <tr>
                 <th>日期</th>
+                <th>最近修改</th>
                 <th>标题</th>
                 <th>作者</th>
-                <th>内容</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach  varStatus="i" var="news" items="${newsList }">
                 <tr>
-                    <td>${news.date }</td>
+                    <td>${news.created }</td>
+                    <td>${news.lastModified }</td>
                     <td>${news.title }</td>
                     <td>${news.author }</td>
-                    <td>${news.detail }</td>
                     <td>
-                        <button class="btn btn-mini btn-info" type="button" onclick="javascript:window.location='news?action=preSave&newsId=${news.newsId }'">修改</button>&nbsp;
-                        <button class="btn btn-mini btn-danger" type="button" onclick="newsDelete(${news.newsId })">删除</button></td>
+                        <button class="btn btn-mini btn-info" type="button" onclick="javascript:window.location='news?action=preSave&newsId=${news.id }'">修改</button>&nbsp;
+                        <button class="btn btn-mini btn-danger" type="button" onclick="newsDelete(${news.id })">删除</button></td>
                 </tr>
             </c:forEach>
             </tbody>

@@ -1,14 +1,23 @@
 package com.webapp.config;
 
-import com.webapp.service.database.DatabaseService;
+import com.webapp.service.database.dao.LoginDao;
+import com.webapp.service.database.dao.NewsDao;
+import com.webapp.service.database.dao.RecordDao;
 import com.webapp.service.database.dao.UserDao;
+import com.webapp.service.database.dao.impl.LoginDaoImpl;
+import com.webapp.service.database.dao.impl.NewsDaoImpl;
+import com.webapp.service.database.dao.impl.RecordDaoImpl;
 import com.webapp.service.database.dao.impl.UserDaoImpl;
 import com.webapp.service.filesystem.FaoImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.webapp.service.filesystem.Fao;
@@ -25,7 +34,8 @@ import com.webapp.service.filesystem.Fao;
 @EnableWebMvc
 @Configuration
 @ComponentScan({"com.webapp"})
-public class MvcConfig {
+@PropertySource("classpath:application.properties")
+public class MvcConfig implements WebMvcConfigurer {
 
 	@Bean
 	public InternalResourceViewResolver viewResolver() {
@@ -40,6 +50,16 @@ public class MvcConfig {
 		return new StandardServletMultipartResolver();
 	}
 
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+		return new PropertySourcesPlaceholderConfigurer();
+	}
+
+	@Override
+	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+	}
+
 	@Bean(name = "fao")
 	public Fao getFao() {
 		return new FaoImpl();
@@ -48,6 +68,21 @@ public class MvcConfig {
 	@Bean(name = "userDao")
 	public UserDao getUserDao() {
 		return new UserDaoImpl();
+	}
+
+	@Bean(name = "loginDao")
+	public LoginDao getLoginDao() {
+		return new LoginDaoImpl();
+	}
+
+	@Bean(name = "newsDao")
+	public NewsDao getNewsDao() {
+		return new NewsDaoImpl();
+	}
+
+	@Bean(name = "recordDao")
+	public RecordDao getRecordDao() {
+		return new RecordDaoImpl();
 	}
 
 

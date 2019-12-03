@@ -3,7 +3,6 @@ package com.webapp.service.database.dao.impl;
 import com.webapp.model.News;
 import com.webapp.service.database.DatabaseService;
 import com.webapp.service.database.dao.NewsDao;
-import com.webapp.util.StringUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,7 +21,7 @@ public class NewsDaoImpl extends DatabaseService implements NewsDao {
         Connection connection = getConnection();
         assert connection != null;
         List<News> newsList = new ArrayList<News>();
-        String SELECT = "SELECT * FROM t_news ORDER BY last_modified DESC LIMIT = (?)";
+        String SELECT = "SELECT * FROM t_news ORDER BY last_modified DESC LIMIT ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
             preparedStatement.setInt(1, size);
@@ -46,7 +45,7 @@ public class NewsDaoImpl extends DatabaseService implements NewsDao {
         assert connection != null;
         assert id > 0;
         News result = null;
-        String SELECT = "SELECT * FROM t_news WHERE id = (?)";
+        String SELECT = "SELECT * FROM t_news WHERE id = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
             preparedStatement.setInt(1, id);
@@ -92,7 +91,7 @@ public class NewsDaoImpl extends DatabaseService implements NewsDao {
         Connection connection = getConnection();
         assert connection != null;
         assert id > 0;
-        String DELETE = "DELETE FROM message WHERE id = (?)";
+        String DELETE = "DELETE FROM message WHERE id = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE);
             preparedStatement.setInt(1, id);
@@ -110,8 +109,8 @@ public class NewsDaoImpl extends DatabaseService implements NewsDao {
         Connection connection = getConnection();
         assert connection != null;
         assert news != null;
-        String UPDATE = "UPDATE t_news SET (title, created, last_modified, author, detail) WHERE id = (?) " +
-                "VALUES (?, ?, ?, ?, ?, ?)";
+        String UPDATE = "UPDATE t_news SET (title, created, last_modified, author, detail) WHERE id = ? " +
+                "VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);
             preparedStatement.setString(1, news.getTitle());

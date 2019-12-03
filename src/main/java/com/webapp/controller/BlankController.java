@@ -28,6 +28,8 @@ public class BlankController {
 			mv.setViewName("mainUser");
 			mv.addObject("mainPage", "user/blank.jsp");
 			return mv;
+		} else {
+			mv.setViewName("index");
 		}
 		return mv;
 	}

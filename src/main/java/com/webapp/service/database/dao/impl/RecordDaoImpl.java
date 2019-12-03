@@ -22,7 +22,7 @@ public class RecordDaoImpl extends DatabaseService implements RecordDao {
         Connection connection = getConnection();
         assert connection != null;
         List<Record> recordList = new ArrayList<Record>();
-        String SELECT = "SELECT * FROM t_record ORDER BY last_modified DESC LIMIT = (?)";
+        String SELECT = "SELECT * FROM t_record ORDER BY last_modified DESC LIMIT ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
             preparedStatement.setInt(1, size);
@@ -46,7 +46,7 @@ public class RecordDaoImpl extends DatabaseService implements RecordDao {
         Connection connection = getConnection();
         assert connection != null;
         List<Record> recordList = new ArrayList<Record>();
-        String SELECT = "SELECT * FROM t_record WHERE building_id = (?) ORDER BY last_modified DESC LIMIT = (?)";
+        String SELECT = "SELECT * FROM t_record WHERE building_id = (?) ORDER BY last_modified DESC LIMIT ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
             preparedStatement.setInt(1, buildId);
@@ -71,7 +71,7 @@ public class RecordDaoImpl extends DatabaseService implements RecordDao {
         Connection connection = getConnection();
         assert connection != null;
         List<Record> recordList = new ArrayList<Record>();
-        String SELECT = "SELECT * FROM t_record WHERE user_id = (?) ORDER BY last_modified DESC LIMIT = (?)";
+        String SELECT = "SELECT * FROM t_record WHERE user_id = (?) ORDER BY last_modified DESC LIMIT ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
             preparedStatement.setInt(1, userId);
@@ -96,7 +96,7 @@ public class RecordDaoImpl extends DatabaseService implements RecordDao {
         Connection connection = getConnection();
         assert connection != null;
         Record result = null;
-        String SELECT = "SELECT * FROM t_record WHERE id = (?)";
+        String SELECT = "SELECT * FROM t_record WHERE id = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
             preparedStatement.setInt(1, id);
@@ -143,7 +143,7 @@ public class RecordDaoImpl extends DatabaseService implements RecordDao {
         Connection connection = getConnection();
         assert connection != null;
         assert id > 0;
-        String DELETE = "DELETE FROM t_record WHERE id = (?)";
+        String DELETE = "DELETE FROM t_record WHERE id = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE);
             preparedStatement.execute();
@@ -160,7 +160,7 @@ public class RecordDaoImpl extends DatabaseService implements RecordDao {
         Connection connection = getConnection();
         assert connection != null;
         assert id > 0;
-        String UPDATE = "UPDATE t_record SET (verified) WHERE id = (?) VALUES (?, ?))";
+        String UPDATE = "UPDATE t_record SET (verified) WHERE id = ? VALUES (?))";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);
             preparedStatement.setBoolean(1, true);

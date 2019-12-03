@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.webapp.service.database.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,7 @@ import com.webapp.model.user.User;
 public class UserController {
 
     @Autowired
-    private UserDaoImpl userDao;
+    private UserDao userDao;
 
     @RequestMapping(value = "/user")
     public ModelAndView service(@RequestParam("action") String action, HttpServletRequest request,
@@ -64,7 +65,7 @@ public class UserController {
 
     private void list_users(ModelAndView mv) {
         mv.addObject("mainPage", "admin/user.jsp");
-        List<User> users = this.userDao.query_all_users();
+        List<User> users = this.userDao.queryAllUsers();
         if (users.size() > 0) {
             mv.addObject("user_list", users);
         }
@@ -72,11 +73,11 @@ public class UserController {
     }
 
     private void delete_user(ModelAndView mv, int id) {
-        this.userDao.delete_user(id);
+        this.userDao.deleteUser(id);
     }
 
     private void modify_user(ModelAndView mv, int id) {
-        User user = this.userDao.query_user_by_id(id);
+        User user = this.userDao.queryUserById(id);
         mv.addObject("mainPage", "admin/userModify.jsp");
         mv.addObject("id", String.valueOf(id));
         mv.addObject("user", user);
@@ -100,9 +101,9 @@ public class UserController {
         if (id_str != null && id_str.length() != 0) {
             int id = Integer.valueOf(id_str);
             user.set_id(id);
-            this.userDao.update_user_all(user);
+            this.userDao.updateUserAll(user);
         } else {
-            this.userDao.add_user(user);
+            this.userDao.addUser(user);
         }
 
     }
@@ -120,14 +121,14 @@ public class UserController {
         List<User> result_list = null;
         switch (keyword) {
             case "name":
-                result_list = this.userDao.query_user_by_name(argument);
+                result_list = this.userDao.queryUserByName(argument);
                 break;
             case "sex":
-                result_list = this.userDao.query_user_by_sex(Gender.valueOf(argument));
+                result_list = this.userDao.queryUserBySex(Gender.valueOf(argument));
                 break;
             case "id":
                 result_list = new ArrayList<>();
-                User result = this.userDao.query_user_by_id(Integer.valueOf(argument));
+                User result = this.userDao.queryUserById(Integer.valueOf(argument));
                 if (result != null) {
                     result_list.add(result);
                 }

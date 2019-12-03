@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.webapp.service.database.dao.LoginDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,21 +23,8 @@ import com.webapp.model.user.User;
 @Controller
 public class LoginController {
 
-	private LoginDaoImpl loginDao = new LoginDaoImpl();
-
-	@Value("${spring.datasource.url}")
-	private String dbUrl;
-
-	@Value("${spring.datasource.username}")
-	private String dbUsername;
-
-	@Value("${spring.datasource.password}")
-	private String dbPassword;
-
-	@Value("${spring.datasource.driver-class-name}")
-	private String dbClassname;
-
-	private DatabaseService databaseService;
+	@Autowired
+	private LoginDao loginDao;
 
 	@RequestMapping("/login")
 	public ModelAndView service(HttpServletRequest request, HttpServletResponse response)
@@ -45,38 +34,24 @@ public class LoginController {
 		HttpSession session = request.getSession();
 		String login_username = request.getParameter("username");
 		String login_password = request.getParameter("password");
-
-		Connection connection = null;
-		try {
-			databaseService = new DatabaseService(dbUrl, dbClassname, dbUsername, dbPassword);
-			connection = databaseService.getConnection();
-			User result_user = loginDao.Login(connection, login_username, login_password);
-			if (result_user != null) {
-				if (result_user instanceof Admin) {
-					Admin admin = (Admin) result_user;
-					mv.setViewName("mainAdmin");
-					session.setAttribute("currentUserType", "admin");
-					session.setAttribute("currentUser", admin);
-					mv.addObject("admin", admin);
-				} else if (result_user instanceof User) {
-					User user = result_user;
-					mv.setViewName("mainUser");
-					session.setAttribute("currentUserType", "admin");
-					session.setAttribute("currentUser", user);
-					mv.addObject("user", user);
-				}
-			} else if (result_user == null) {
-				mv.setViewName("index");
-				mv.addObject("error", "用户名或密码错误");
+		User result_user = loginDao.login(login_username, login_password);
+		if (result_user != null) {
+			if (result_user instanceof Admin) {
+				Admin admin = (Admin) result_user;
+				mv.setViewName("mainAdmin");
+				session.setAttribute("currentUserType", "admin");
+				session.setAttribute("currentUser", admin);
+				mv.addObject("admin", admin);
+			} else if (result_user instanceof User) {
+				User user = result_user;
+				mv.setViewName("mainUser");
+				session.setAttribute("currentUserType", "admin");
+				session.setAttribute("currentUser", user);
+				mv.addObject("user", user);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				databaseService.closeConnection(connection);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		} else if (result_user == null) {
+			mv.setViewName("index");
+			mv.addObject("error", "用户名或密码错误");
 		}
 		return mv;
 	}

@@ -11,7 +11,7 @@
 		<div class="data_list_title">
 			场地介绍
 		</div>
-		<form name="myForm" class="form-search" method="post" action="buildng?action=search">
+		<form name="myForm" class="form-search" method="post" action="building?action=search">
 				<span class="data_search">
 					名称:&nbsp;&nbsp;<input id="s_buildName" name="s_buildName" type="text"  style="width:120px;height: 30px;" class="input-medium search-query" value="${s_buildName }">
 					&nbsp;<button type="submit" class="btn btn-info" onkeydown="if(event.keyCode==13) myForm.submit()">搜索</button>
@@ -28,12 +28,12 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach  varStatus="i" var="buildng" items="${buildngList }">
+					<c:forEach  varStatus="i" var="building" items="${buildingList }">
 					<tr>
 						<td>${i.count+(page-1)*pageSize }</td>
-						<td>${buildng.buildName }</td>
-						<td>${buildng.detail==null||buildng.detail==""?"无":buildng.detail }</td>
-						<td>${buildng.price==null||buildng.price==""?"无":buildng.price }</td>
+						<td>${building.buildName }</td>
+						<td>${building.detail==null||building.detail==""?"无":building.detail }</td>
+						<td>${building.price==null||building.price==""?"无":building.price }</td>
 					</tr>
 					</c:forEach>
 				</tbody>
@@ -93,8 +93,8 @@
                         <td><input type="text" id="date"  name="date" style="margin-top:5px;height:30px;" /></td>
                         <td>
                             <select id="buildId" name="buildId" style="margin-top:5px;height:30px;">
-                                <c:forEach var="buildng" items="${buildngList }">
-                                    <option value="${buildng.buildId }" ${buildToSelect==buildng.buildId?'selected':'' }>${buildng.buildName }</option>
+                                <c:forEach var="building" items="${buildingList }">
+                                    <option value="${building.buildId }" ${buildToSelect==building.buildId?'selected':'' }>${building.buildName }</option>
                                 </c:forEach>
                             </select>
                         </td>

@@ -48,8 +48,8 @@
 						<td><font color="red">*</font>楼：</td>
 						<td>
 							<select id="buildId" name="buildId" style="margin-top:5px;height:30px;">
-								<c:forEach var="buildng" items="${buildngList }">
-									<option value="${buildng.buildId }" ${buildToSelect==buildng.buildId?'selected':'' }>${buildng.buildName }</option>
+								<c:forEach var="building" items="${buildingList }">
+									<option value="${building.buildId }" ${buildToSelect==building.buildId?'selected':'' }>${building.buildName }</option>
 								</c:forEach>
 							</select>
 						</td>
@@ -60,7 +60,7 @@
 					</tr>
 					<tr>
 						<td>&nbsp;备注：</td>
-						<td><textarea id="detail" name="detail" rows="10">${buildng.detail }</textarea></td>
+						<td><textarea id="detail" name="detail" rows="10">${building.detail }</textarea></td>
 					</tr>
 				</table>
 					<div align="center">

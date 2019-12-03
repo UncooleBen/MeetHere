@@ -1,12 +1,12 @@
 package com.webapp.model;
 
-public class Buildng {
+public class Building {
   private int id;
   private String name;
   private String description;
   private String price;
 
-  public Buildng() {}
+  public Building() {}
 
   public int getId() {
     return id;
@@ -40,7 +40,7 @@ public class Buildng {
     this.price = price;
   }
 
-  public Buildng(int id, String name, String description, String price) {
+  public Building(int id, String name, String description, String price) {
     this.id = id;
     this.name = name;
     this.description = description;

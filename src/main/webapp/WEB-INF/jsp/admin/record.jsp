@@ -67,8 +67,8 @@ function recordApprove(recordId) {
                		 </span-->
 					<select id="buildToSelect1" name="buildToSelect1" style="width: 110px;">
 					<option value="">全部场地</option>
-					<c:forEach var="buildng" items="${buildngList }">
-						<option value="${buildng.buildId }" ${buildToSelect==buildng.buildId?'selected':'' }>${buildng.buildName }</option>
+					<c:forEach var="building" items="${buildingList }">
+						<option value="${building.buildId }" ${buildToSelect==building.buildId?'selected':'' }>${building.buildName }</option>
 					</c:forEach>
 					</select>
 					<select id="searchType1" name="searchType1" style="width: 80px;">
@@ -124,8 +124,8 @@ function recordApprove(recordId) {
                		 </span-->
 					<select id="buildToSelect" name="buildToSelect" style="width: 110px;">
 					<option value="">全部场地</option>
-					<c:forEach var="buildng" items="${buildngList }">
-                        <option value="${buildng.buildId }" ${buildToSelect==buildng.buildId?'selected':'' }>${buildng.buildName }</option>
+					<c:forEach var="building" items="${buildingList }">
+                        <option value="${building.buildId }" ${buildToSelect==building.buildId?'selected':'' }>${building.buildName }</option>
                     </c:forEach>
 					</select>
 					<select id="searchType" name="searchType" style="width: 80px;">

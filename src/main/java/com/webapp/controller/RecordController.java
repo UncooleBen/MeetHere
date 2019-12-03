@@ -1,6 +1,6 @@
 package com.webapp.controller;
 
-import com.webapp.model.Buildng;
+import com.webapp.model.Building;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -134,11 +134,11 @@ public class RecordController {
 			if ("admin".equals(currentUserType)) {
 				List<Record> recordList = recordDao.recordList(con, record);
 				List<Record> recordFinalList = recordFinalDao.recordList(con, record);
-				List<Buildng> buildngList = recordDao.buildList(con);
-				List<Buildng> buildngFinalList = recordFinalDao.buildList(con);
-				buildngList.removeAll(buildngFinalList);
-				buildngList.addAll(buildngFinalList);
-				request.setAttribute("buildngList", buildngList);
+				List<Building> buildingList = recordDao.buildList(con);
+				List<Building> buildingFinalList = recordFinalDao.buildList(con);
+				buildingList.removeAll(buildingFinalList);
+				buildingList.addAll(buildingFinalList);
+				request.setAttribute("buildingList", buildingList);
 				request.setAttribute("recordList", recordList);
 				request.setAttribute("recordFinalList", recordFinalList);
 				request.setAttribute("mainPage", "admin/record.jsp");
@@ -234,9 +234,9 @@ public class RecordController {
 		BuildingDao buildingDao = new BuildingDao();
 		try {
 			con = dbUtil.getCon();
-			Buildng buildng = new Buildng();
-			List<Buildng> buildngList = buildingDao.buildAllList(con, buildng);
-			request.setAttribute("buildngList", buildngList);
+			Building building = new Building();
+			List<Building> buildingList = buildingDao.buildAllList(con, building);
+			request.setAttribute("buildingList", buildingList);
 			if (StringUtil.isNotEmpty(recordId)) {
 				Record record = recordDao.recordShow(con, recordId);
 				request.setAttribute("record", record);

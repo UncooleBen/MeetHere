@@ -87,7 +87,7 @@
 					<li><a href="blank"><i class="icon-chevron-right"></i>首页</a></li>
 					<li><a href="news?action=list"><i class="icon-chevron-right"></i>新闻</a></li>
 					<li><a href="comment?action=list"><i class="icon-chevron-right"></i>留言板</a></li>
-                    <li><a href="buildng?action=list"><i class="icon-chevron-right"></i>场地预约</a></li>
+                    <li><a href="building?action=list"><i class="icon-chevron-right"></i>场地预约</a></li>
 					<!--li><a href="record?action=add"><i class="icon-chevron-right"></i>我要预约</a></li-->
 					<li><a href="record?action=list"><i class="icon-chevron-right"></i>预约记录</a></li>
 					<li><a href="password?action=preChange"><i class="icon-chevron-right"></i>修改密码</a></li>

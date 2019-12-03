@@ -1,5 +1,6 @@
 package com.webapp.controller;
 
+import com.webapp.model.Building;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.webapp.service.database.dao.BuildingDao;
-import com.webapp.model.Buildng;
 import com.webapp.model.PageBean;
 import com.webapp.util.DbUtil;
 import com.webapp.util.StringUtil;
@@ -51,7 +51,7 @@ public class BuildController {
 		String s_buildName = request.getParameter("s_buildName");
 		String page = request.getParameter("page");
 		String action = request.getParameter("action");
-		Buildng buildng = new Buildng();
+		Building building = new Building();
 		if ("preSave".equals(action)) {
 			buildPreSave(request, response);
 			return;
@@ -63,26 +63,26 @@ public class BuildController {
 			return;
 		} else if ("list".equals(action)) {
 			if (StringUtil.isNotEmpty(s_buildName)) {
-				buildng.setBuildName(s_buildName);
+				building.setBuildName(s_buildName);
 			}
 			session.removeAttribute("s_buildName");
 			request.setAttribute("s_buildName", s_buildName);
 		} else if ("search".equals(action)) {
 			if (StringUtil.isNotEmpty(s_buildName)) {
-				buildng.setBuildName(s_buildName);
+				building.setBuildName(s_buildName);
 				session.setAttribute("s_buildName", s_buildName);
 			} else {
 				session.removeAttribute("s_buildName");
 			}
 		} else {
 			if (StringUtil.isNotEmpty(s_buildName)) {
-				buildng.setBuildName(s_buildName);
+				building.setBuildName(s_buildName);
 				session.setAttribute("s_buildName", s_buildName);
 			}
 			if (StringUtil.isEmpty(s_buildName)) {
 				Object o = session.getAttribute("s_buildName");
 				if (o != null) {
-					buildng.setBuildName((String) o);
+					building.setBuildName((String) o);
 				}
 			}
 		}
@@ -96,16 +96,16 @@ public class BuildController {
 		try {
 			dbUtil = new DbUtil(dbUrl, dbClassname, dbUsername, dbPassword);
 			con = dbUtil.getCon();
-			List<Buildng> buildngList = buildingDao.buildList(con, pageBean, buildng);
-			int total = buildingDao.buildCount(con, buildng);
+			List<Building> buildingList = buildingDao.buildList(con, pageBean, building);
+			int total = buildingDao.buildCount(con, building);
 			String pageCode = this.genPagation(total, Integer.parseInt(page), Integer.parseInt(pageSize));
 			request.setAttribute("pageCode", pageCode);
-			request.setAttribute("buildngList", buildngList);
+			request.setAttribute("buildingList", buildingList);
 			if ("admin".equals(currentUserType)) {
-				request.setAttribute("mainPage", "admin/buildng.jsp");
+				request.setAttribute("mainPage", "admin/building.jsp");
 				request.getRequestDispatcher("mainAdmin.jsp").forward(request, response);
 			} else {
-				request.setAttribute("mainPage", "user/buildng.jsp");
+				request.setAttribute("mainPage", "user/building.jsp");
 				request.getRequestDispatcher("mainUser.jsp").forward(request, response);
 			}
 		} catch (Exception e) {
@@ -143,26 +143,26 @@ public class BuildController {
 		String buildName = request.getParameter("buildName");
 		String detail = request.getParameter("detail");
 		String price = request.getParameter("buildPrice");
-		Buildng buildng = new Buildng(buildName, detail);
-		buildng.setPrice(price);
+		Building building = new Building(buildName, detail);
+		building.setPrice(price);
 		if (StringUtil.isNotEmpty(buildId)) {
-			buildng.setBuildId(Integer.parseInt(buildId));
+			building.setBuildId(Integer.parseInt(buildId));
 		}
 		Connection con = null;
 		try {
 			con = dbUtil.getCon();
 			int saveNum = 0;
 			if (StringUtil.isNotEmpty(buildId)) {
-				saveNum = buildingDao.buildUpdate(con, buildng);
+				saveNum = buildingDao.buildUpdate(con, building);
 			} else {
-				saveNum = buildingDao.buildAdd(con, buildng);
+				saveNum = buildingDao.buildAdd(con, building);
 			}
 			if (saveNum > 0) {
-				request.getRequestDispatcher("buildng?action=list").forward(request, response);
+				request.getRequestDispatcher("building?action=list").forward(request, response);
 			} else {
-				request.setAttribute("buildng", buildng);
+				request.setAttribute("building", building);
 				request.setAttribute("error", "����ʧ��");
-				request.setAttribute("mainPage", "buildng/buildSave.jsp");
+				request.setAttribute("mainPage", "building/buildSave.jsp");
 				request.getRequestDispatcher("mainAdmin.jsp").forward(request, response);
 			}
 		} catch (Exception e) {
@@ -183,8 +183,8 @@ public class BuildController {
 			Connection con = null;
 			try {
 				con = dbUtil.getCon();
-				Buildng buildng = buildingDao.buildShow(con, buildId);
-				request.setAttribute("buildng", buildng);
+				Building building = buildingDao.buildShow(con, buildId);
+				request.setAttribute("building", building);
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {

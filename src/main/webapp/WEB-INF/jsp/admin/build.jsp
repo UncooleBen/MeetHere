@@ -5,7 +5,7 @@
 <script type="text/javascript">
 	function buildDelete(buildId) {
 		if(confirm("您确定要删除这个楼吗？")) {
-			window.location="buildng?action=delete&buildId="+buildId;
+			window.location="building?action=delete&buildId="+buildId;
 		}
 	}
 	$(document).ready(function(){
@@ -16,8 +16,8 @@
 		<div class="data_list_title">
 			场地管理
 		</div>
-		<form name="myForm" class="form-search" method="post" action="buildng?action=search">
-				<button class="btn btn-success" type="button" style="margin-right: 50px;" onclick="javascript:window.location='buildng?action=preSave'">添加</button>
+		<form name="myForm" class="form-search" method="post" action="building?action=search">
+				<button class="btn btn-success" type="button" style="margin-right: 50px;" onclick="javascript:window.location='building?action=preSave'">添加</button>
 				<span class="data_search">
 					名称:&nbsp;&nbsp;<input id="s_buildName" name="s_buildName" type="text"  style="width:120px;height: 30px;" class="input-medium search-query" value="${s_buildName }">
 					&nbsp;<button type="submit" class="btn btn-info" onkeydown="if(event.keyCode==13) myForm.submit()">搜索</button>
@@ -35,15 +35,15 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach  varStatus="i" var="buildng" items="${buildngList }">
+					<c:forEach  varStatus="i" var="building" items="${buildingList }">
 					<tr>
 						<td>${i.count+(page-1)*pageSize }</td>
-						<td>${buildng.buildName }</td>
-						<td>${buildng.detail==null||buildng.detail==""?"无":buildng.detail }</td>
-						<td>${buildng.price==null||buildng.price==""?"无":buildng.price }</td>
+						<td>${building.buildName }</td>
+						<td>${building.detail==null||building.detail==""?"无":building.detail }</td>
+						<td>${building.price==null||building.price==""?"无":building.price }</td>
 						<td>
-							<button class="btn btn-mini btn-info" type="button" onclick="javascript:window.location='buildng?action=preSave&buildId=${buildng.buildId }'">修改</button>&nbsp;
-							<button class="btn btn-mini btn-danger" type="button" onclick="buildDelete(${buildng.buildId})">删除</button></td>
+							<button class="btn btn-mini btn-info" type="button" onclick="javascript:window.location='building?action=preSave&buildId=${building.buildId }'">修改</button>&nbsp;
+							<button class="btn btn-mini btn-danger" type="button" onclick="buildDelete(${building.buildId})">删除</button></td>
 					</tr>
 					</c:forEach>
 				</tbody>

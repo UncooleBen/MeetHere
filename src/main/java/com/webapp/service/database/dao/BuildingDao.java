@@ -1,16 +1,16 @@
 package com.webapp.service.database.dao;
 
-import com.webapp.model.Buildng;
+import com.webapp.model.Building;
 import java.util.List;
 
 public interface BuildingDao {
-  List<Buildng> listBuilding(int size);
+  List<Building> listBuilding(int size);
 
-  Buildng queryBuildingById(int id);
+  Building queryBuildingById(int id);
 
-  boolean addBuilding(Buildng buildng);
+  boolean addBuilding(Building building);
 
   boolean deleteBuilding(int id);
 
-  boolean updateBuilding(Buildng buildng);
+  boolean updateBuilding(Building building);
 }

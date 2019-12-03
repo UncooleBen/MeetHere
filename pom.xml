@@ -91,7 +91,7 @@
 
     </dependencies>
 
-    <build>
+    <buildng>
         <finalName>MeetHere</finalName>
         <plugins>
             <plugin>
@@ -111,6 +111,6 @@
             </plugin>
 
         </plugins>
-    </build>
+    </buildng>
 
 </project>

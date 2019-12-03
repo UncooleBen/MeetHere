@@ -1,11 +1,8 @@
 package com.webapp.service.database.dao.impl;
 
-import com.webapp.model.Build;
-import com.webapp.model.News;
 import com.webapp.model.Record;
 import com.webapp.service.database.DatabaseService;
 import com.webapp.service.database.dao.RecordDao;
-import com.webapp.util.StringUtil;
 import javafx.scene.chart.PieChart;
 
 import java.sql.Connection;

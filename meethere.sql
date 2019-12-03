@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
 -- Host: localhost    Database: meethere
 -- ------------------------------------------------------
--- Server version	8.0.13
+-- Server version	8.0.18
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
- SET NAMES utf8 ;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,7 +21,7 @@
 
 DROP TABLE IF EXISTS `t_building`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `t_building` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
@@ -42,12 +42,37 @@ INSERT INTO `t_building` VALUES (0,'null','null',0);
 UNLOCK TABLES;
 
 --
+-- Table structure for table `t_comment`
+--
+
+DROP TABLE IF EXISTS `t_comment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `t_comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
+  `date` int(11) NOT NULL,
+  `content` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `t_comment`
+--
+
+LOCK TABLES `t_comment` WRITE;
+/*!40000 ALTER TABLE `t_comment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `t_comment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `t_news`
 --
 
 DROP TABLE IF EXISTS `t_news`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `t_news` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(45) NOT NULL,
@@ -75,7 +100,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `t_record`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `t_record` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `time` int(11) NOT NULL,
@@ -104,7 +129,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `t_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `t_user` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
@@ -126,14 +151,6 @@ LOCK TABLES `t_user` WRITE;
 INSERT INTO `t_user` VALUES (0,'root','root','pjt','MALE',0,'999'),(4,'pjt','pjt','john','MALE',1,'123123123'),(7,'jiege','123','guoyuanjie','MALE',1,'123123'),(8,'zqf','123','zhouqifeng','MALE',1,'123123');
 /*!40000 ALTER TABLE `t_user` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping events for database 'meethere'
---
-
---
--- Dumping routines for database 'meethere'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -144,4 +161,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-03 15:14:46
+-- Dump completed on 2019-12-03 20:15:34

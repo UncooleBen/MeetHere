@@ -11,7 +11,7 @@
 		<div class="data_list_title">
 			场地介绍
 		</div>
-		<form name="myForm" class="form-search" method="post" action="build?action=search">
+		<form name="myForm" class="form-search" method="post" action="buildng?action=search">
 				<span class="data_search">
 					名称:&nbsp;&nbsp;<input id="s_buildName" name="s_buildName" type="text"  style="width:120px;height: 30px;" class="input-medium search-query" value="${s_buildName }">
 					&nbsp;<button type="submit" class="btn btn-info" onkeydown="if(event.keyCode==13) myForm.submit()">搜索</button>
@@ -28,12 +28,12 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach  varStatus="i" var="build" items="${buildList }">
+					<c:forEach  varStatus="i" var="buildng" items="${buildngList }">
 					<tr>
 						<td>${i.count+(page-1)*pageSize }</td>
-						<td>${build.buildName }</td>
-						<td>${build.detail==null||build.detail==""?"无":build.detail }</td>
-						<td>${build.price==null||build.price==""?"无":build.price }</td>
+						<td>${buildng.buildName }</td>
+						<td>${buildng.detail==null||buildng.detail==""?"无":buildng.detail }</td>
+						<td>${buildng.price==null||buildng.price==""?"无":buildng.price }</td>
 					</tr>
 					</c:forEach>
 				</tbody>
@@ -93,8 +93,8 @@
                         <td><input type="text" id="date"  name="date" style="margin-top:5px;height:30px;" /></td>
                         <td>
                             <select id="buildId" name="buildId" style="margin-top:5px;height:30px;">
-                                <c:forEach var="build" items="${buildList }">
-                                    <option value="${build.buildId }" ${buildToSelect==build.buildId?'selected':'' }>${build.buildName }</option>
+                                <c:forEach var="buildng" items="${buildngList }">
+                                    <option value="${buildng.buildId }" ${buildToSelect==buildng.buildId?'selected':'' }>${buildng.buildName }</option>
                                 </c:forEach>
                             </select>
                         </td>

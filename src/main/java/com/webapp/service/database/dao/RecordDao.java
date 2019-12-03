@@ -1,8 +1,6 @@
 package com.webapp.service.database.dao;
 
-import com.webapp.model.Build;
 import com.webapp.model.Record;
-import java.sql.Connection;
 import java.util.List;
 
 public interface RecordDao {

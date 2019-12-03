@@ -1,15 +1,20 @@
 package com.webapp.service.database.dao;
 
 import com.webapp.model.Comment;
-import java.sql.Connection;
 import java.util.List;
 
 public interface CommentDao {
-  List<Comment> commentList(Connection con, Comment s_comment);
-  List<Comment> commentListWithBuild(Connection con, Comment s_comment, int buildId);
-  List<Comment> commentListWithNumber(Connection con, Comment s_comment, String userNumber);
-  Comment commentShow(Connection con, String commentId);
-  int commentAdd(Connection con, Comment comment);
-  int commentDelete(Connection con, String commentId);
-  int commentUpdate(Connection con, Comment comment);
+  List<Comment> listComment(int size, boolean verified);
+
+  List<Comment> queryCommentByBuildingId(int buildId, boolean verified);
+
+  List<Comment> queryCommentByUserId(int userId, boolean verified);
+
+  Comment queryCommentById(int commentId, boolean verified);
+
+  boolean addComment(Comment comment);
+
+  boolean deleteComment(String commentId);
+
+  boolean updateComment(Comment comment);
 }

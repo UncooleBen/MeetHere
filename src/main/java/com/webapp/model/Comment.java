@@ -1,65 +1,47 @@
 package com.webapp.model;
 
 public class Comment {
-    private int commentId;
-    private String userNumber;
-    private String date;
-    private String detail;
-    private String startDate;
-    private String endDate;
+  private int id;
+  private int userId;
+  private long date;
+  private String content;
 
-    public Comment() {super();}
-    public Comment(String userNumber, String date, String detail) {
-        this.userNumber = userNumber;
-        this.date = date;
-        this.detail = detail;
+    public int getId() {
+        return id;
     }
 
-    public String getUserNumber() {
-        return userNumber;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setUserNumber(String userNumber) {
-        this.userNumber = userNumber;
+    public int getUserId() {
+        return userId;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
-
-    public String getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
-    }
-
-    public int getCommentId() {
-        return commentId;
-    }
-
-    public void setCommentId(int commentId) {
-        this.commentId = commentId;
-    }
-
-    public String getDate() {
+    public long getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(long date) {
         this.date = date;
     }
 
-    public String getDetail() {
-        return detail;
+    public String getcontent() {
+        return content;
     }
 
-    public void setDetail(String detail) {
-        this.detail = detail;
+    public void setcontent(String content) {
+        this.content = content;
+    }
+
+    public Comment(int id, int userId, long date, String content) {
+        this.id = id;
+        this.userId = userId;
+        this.date = date;
+        this.content = content;
     }
 }

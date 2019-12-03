@@ -88,7 +88,7 @@
 					<li><a href="user?action=list"><i class="icon-chevron-right"></i>用户管理</a></li>
 					<li><a href="news?action=list"><i class="icon-chevron-right"></i>新闻管理</a></li>
 					<li><a href="comment?action=list"><i class="icon-chevron-right"></i>留言管理</a></li>
-					<li><a href="build?action=list"><i class="icon-chevron-right"></i>场地管理</a></li>
+					<li><a href="buildng?action=list"><i class="icon-chevron-right"></i>场地管理</a></li>
 					<li><a href="record?action=list"><i class="icon-chevron-right"></i>预约管理</a></li>
 					<li><a href="password?action=preChange"><i class="icon-chevron-right"></i>修改密码</a></li>
 					<li><a href="index"><i class="icon-chevron-right"></i>退出系统</a></li>

@@ -1,5 +1,6 @@
 package com.webapp.controller;
 
+import com.webapp.model.Buildng;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,10 +19,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.webapp.service.database.dao.BuildDao;
+import com.webapp.service.database.dao.BuildingDao;
 import com.webapp.service.database.dao.impl.RecordDaoImpl;
-import com.webapp.service.database.dao.impl.RecordDaoImpl;
-import com.webapp.model.Build;
 import com.webapp.model.Record;
 import com.webapp.model.User;
 import com.webapp.util.DbUtil;
@@ -135,11 +134,11 @@ public class RecordController {
 			if ("admin".equals(currentUserType)) {
 				List<Record> recordList = recordDao.recordList(con, record);
 				List<Record> recordFinalList = recordFinalDao.recordList(con, record);
-				List<Build> buildList = recordDao.buildList(con);
-				List<Build> buildFinalList = recordFinalDao.buildList(con);
-				buildList.removeAll(buildFinalList);
-				buildList.addAll(buildFinalList);
-				request.setAttribute("buildList", buildList);
+				List<Buildng> buildngList = recordDao.buildList(con);
+				List<Buildng> buildngFinalList = recordFinalDao.buildList(con);
+				buildngList.removeAll(buildngFinalList);
+				buildngList.addAll(buildngFinalList);
+				request.setAttribute("buildngList", buildngList);
 				request.setAttribute("recordList", recordList);
 				request.setAttribute("recordFinalList", recordFinalList);
 				request.setAttribute("mainPage", "admin/record.jsp");
@@ -185,7 +184,7 @@ public class RecordController {
 	private void recordSave(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		BuildDao buildDao = new BuildDao();
+		BuildingDao buildingDao = new BuildingDao();
 		String recordId = request.getParameter("recordId");
 		User user1 = (User) (session.getAttribute("currentUser"));
 		String userNumber = user1.getUserNumber();
@@ -205,7 +204,7 @@ public class RecordController {
 			con = dbUtil.getCon();
 			int saveNum = 0;
 			Statement stmt = con.createStatement();
-			record.setBuildId(buildDao.buildShow(con, buildId).getBuildId());
+			record.setBuildId(buildingDao.buildShow(con, buildId).getBuildId());
 			record.setUserName(user1.getName());
 			record.setRoomName(roomName);
 			if (StringUtil.isNotEmpty(recordId) && Integer.parseInt(recordId) != 0) {
@@ -232,12 +231,12 @@ public class RecordController {
 		String recordId = request.getParameter("recordId");
 		String userNumber = request.getParameter("userNumber");
 		Connection con = null;
-		BuildDao buildDao = new BuildDao();
+		BuildingDao buildingDao = new BuildingDao();
 		try {
 			con = dbUtil.getCon();
-			Build build = new Build();
-			List<Build> buildList = buildDao.buildAllList(con, build);
-			request.setAttribute("buildList", buildList);
+			Buildng buildng = new Buildng();
+			List<Buildng> buildngList = buildingDao.buildAllList(con, buildng);
+			request.setAttribute("buildngList", buildngList);
 			if (StringUtil.isNotEmpty(recordId)) {
 				Record record = recordDao.recordShow(con, recordId);
 				request.setAttribute("record", record);

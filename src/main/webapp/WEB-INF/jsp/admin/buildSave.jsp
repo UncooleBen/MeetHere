@@ -18,7 +18,7 @@
 <div class="data_list">
 		<div class="data_list_title">
 		<c:choose>
-			<c:when test="${build.buildId!=null }">
+			<c:when test="${buildng.buildId!=null }">
 				修改楼
 			</c:when>
 			<c:otherwise>
@@ -26,21 +26,21 @@
 			</c:otherwise>
 		</c:choose>
 		</div>
-		<form action="build?action=save" method="post" onsubmit="return checkForm()">
+		<form action="buildng?action=save" method="post" onsubmit="return checkForm()">
 			<div class="data_form" >
-				<input type="hidden" id="buildId" name="buildId" value="${build.buildId }"/>
+				<input type="hidden" id="buildId" name="buildId" value="${buildng.buildId }"/>
 					<table align="center">
 						<tr>
 							<td><font color="red">*</font>名称：</td>
-							<td><input type="text" id="buildName"  name="buildName" value="${build.buildName }"  style="margin-top:5px;height:30px;" /></td>
+							<td><input type="text" id="buildName"  name="buildName" value="${buildng.buildName }"  style="margin-top:5px;height:30px;" /></td>
 						</tr>
 						<tr>
 							<td><font color="red">*</font>价格：</td>
-							<td><input type="text" id="buildPrice"  name="buildPrice" value="${build.price }"  style="margin-top:5px;height:30px;" /></td>
+							<td><input type="text" id="buildPrice"  name="buildPrice" value="${buildng.price }"  style="margin-top:5px;height:30px;" /></td>
 						</tr>
 						<tr>
 							<td>&nbsp;简介：</td>
-							<td><textarea id="detail" name="detail" rows="10">${build.detail }</textarea></td>
+							<td><textarea id="detail" name="detail" rows="10">${buildng.detail }</textarea></td>
 						</tr>
 					</table>
 					<div align="center">

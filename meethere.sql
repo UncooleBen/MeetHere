@@ -23,12 +23,12 @@ DROP TABLE IF EXISTS `t_building`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `t_building` (
-  `id` int(11) NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `description` varchar(45) NOT NULL,
   `price` decimal(11,0) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,6 +37,7 @@ CREATE TABLE `t_building` (
 
 LOCK TABLES `t_building` WRITE;
 /*!40000 ALTER TABLE `t_building` DISABLE KEYS */;
+INSERT INTO `t_building` VALUES (0,'null','null',0);
 /*!40000 ALTER TABLE `t_building` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -48,14 +49,14 @@ DROP TABLE IF EXISTS `t_news`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `t_news` (
-  `id` int(11) NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(45) NOT NULL,
   `created` int(11) NOT NULL,
   `last_modified` int(11) NOT NULL,
   `author` varchar(45) NOT NULL,
   `detail` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,6 +65,7 @@ CREATE TABLE `t_news` (
 
 LOCK TABLES `t_news` WRITE;
 /*!40000 ALTER TABLE `t_news` DISABLE KEYS */;
+INSERT INTO `t_news` VALUES (0,'null',0,0,'null','null');
 /*!40000 ALTER TABLE `t_news` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -75,12 +77,15 @@ DROP TABLE IF EXISTS `t_record`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `t_record` (
-  `id` int(11) NOT NULL,
-  `time` varchar(45) NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `time` int(11) NOT NULL,
+  `start_date` int(11) NOT NULL,
+  `end_date` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `building_id` int(11) NOT NULL,
+  `verified` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,6 +94,7 @@ CREATE TABLE `t_record` (
 
 LOCK TABLES `t_record` WRITE;
 /*!40000 ALTER TABLE `t_record` DISABLE KEYS */;
+INSERT INTO `t_record` VALUES (0,0,0,0,0,0,0);
 /*!40000 ALTER TABLE `t_record` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -100,7 +106,7 @@ DROP TABLE IF EXISTS `t_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `t_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
   `name` varchar(20) NOT NULL,
@@ -138,4 +144,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-02 20:32:09
+-- Dump completed on 2019-12-03 15:14:46

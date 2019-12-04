@@ -3,35 +3,38 @@ package com.webapp.service.database.dao.impl;
 import com.webapp.model.Building;
 import com.webapp.service.database.DatabaseService;
 import com.webapp.service.database.dao.BuildingDao;
-import com.webapp.util.StringUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class implements BuildingDao interface to interact with table 't_building' in database.
+ *
+ * @author Juntao Peng (original creator)
+ * @author Shangzhen Li (refactor)
+ */
 public class BuildingDaoImpl extends DatabaseService implements BuildingDao {
   private Connection connection;
 
-  public BuildingDaoImpl(Connection connection) {
+  public BuildingDaoImpl() {
     this.connection = getConnection();
   }
 
   @Override
   public List<Building> listBuilding(int size) {
     List<Building> buildingList = new ArrayList<>();
-    StringBuffer sb = new StringBuffer("SELECT * FROM t_build t1");
-    if (StringUtil.isNotEmpty(s_Buildng.getBuildName())) {
-      sb.append(" WHERE t1.buildName LIKE '%" + s_Buildng.getBuildName() + "%'");
-    }
+    String SQL = "SELECT * FROM t_building LIMIT ?";
     try {
-      PreparedStatement pstmt = connection.prepareStatement(sb.toString());
-      ResultSet rs = pstmt.executeQuery();
+      PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+      preparedStatement.setInt(1, size);
+      ResultSet rs = preparedStatement.executeQuery();
       while (rs.next()) {
         Building building = new Building();
-        building.setBuildId(rs.getInt("buildId"));
-        building.setBuildName(rs.getString("buildName"));
-        building.setDetail(rs.getString("buildDetail"));
+        building.setId(rs.getInt("id"));
+        building.setName(rs.getString("name"));
+        building.setDescription(rs.getString("description"));
         building.setPrice(rs.getString("price"));
         buildingList.add(building);
       }
@@ -47,34 +50,39 @@ public class BuildingDaoImpl extends DatabaseService implements BuildingDao {
     Building building = new Building();
     try {
       PreparedStatement pstmt = connection.prepareStatement(sql);
-      pstmt.setString(1, buildId);
+      pstmt.setInt(1, id);
       ResultSet rs = pstmt.executeQuery();
       if (rs.next()) {
-        building.setBuildId(rs.getInt("buildId"));
-        building.setBuildName(rs.getString("buildName"));
-        building.setDetail(rs.getString("buildDetail"));
+        building.setId(rs.getInt("id"));
+        building.setName(rs.getString("name"));
+        building.setDescription(rs.getString("description"));
         building.setPrice(rs.getString("price"));
+        return building;
       }
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
-    return building;
+    return null;
   }
 
   @Override
-  public boolean addBuilding(Building building){
+  public boolean addBuilding(Building building) {
     String sql = "INSERT INTO t_building(name,description,price) VALUES (?,?,?)";
     int result = 0;
     try {
       PreparedStatement pstmt = connection.prepareStatement(sql);
-      pstmt.setString(1, building.getBuildName());
-      pstmt.setString(2, building.getDetail());
+      pstmt.setString(1, building.getName());
+      pstmt.setString(2, building.getDescription());
       pstmt.setString(3, building.getPrice());
       result = pstmt.executeUpdate();
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
-    return result;
+    if (result != 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @Override
@@ -83,12 +91,16 @@ public class BuildingDaoImpl extends DatabaseService implements BuildingDao {
     int result = 0;
     try {
       PreparedStatement pstmt = connection.prepareStatement(sql);
-      pstmt.setString(1, buildId);
+      pstmt.setInt(1, id);
       result = pstmt.executeUpdate();
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
-    return result;
+    if (result != 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @Override
@@ -97,14 +109,18 @@ public class BuildingDaoImpl extends DatabaseService implements BuildingDao {
     int result = 0;
     try {
       PreparedStatement pstmt = connection.prepareStatement(sql);
-      pstmt.setString(1, building.getBuildName());
-      pstmt.setString(2, building.getDetail());
+      pstmt.setString(1, building.getName());
+      pstmt.setString(2, building.getDescription());
       pstmt.setString(3, building.getPrice());
-      pstmt.setInt(4, building.getBuildId());
+      pstmt.setInt(4, building.getId());
       result = pstmt.executeUpdate();
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
-    return result;
+    if (result != 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

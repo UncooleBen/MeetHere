@@ -38,7 +38,10 @@ public class Comment {
         this.content = content;
     }
 
-    public Comment(int id, int userId, long date, String content) {
+  public Comment() {
+  }
+
+  public Comment(int id, int userId, long date, String content) {
         this.id = id;
         this.userId = userId;
         this.date = date;

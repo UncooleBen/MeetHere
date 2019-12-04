@@ -3,6 +3,12 @@ package com.webapp.service.database.dao;
 import com.webapp.model.Comment;
 import java.util.List;
 
+/**
+ * This interface declares methods used to interact with table 't_comment' in the database.
+ *
+ * @author Juntao Peng (original creator)
+ * @author Shangzhen Li (refactor)
+ */
 public interface CommentDao {
   List<Comment> listComment(int size, boolean verified);
 

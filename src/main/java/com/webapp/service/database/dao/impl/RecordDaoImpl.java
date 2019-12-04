@@ -3,7 +3,6 @@ package com.webapp.service.database.dao.impl;
 import com.webapp.model.Record;
 import com.webapp.service.database.DatabaseService;
 import com.webapp.service.database.dao.RecordDao;
-import javafx.scene.chart.PieChart;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +11,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Juntao Peng
+ */
 public class RecordDaoImpl extends DatabaseService implements RecordDao {
 
     @Override
@@ -112,7 +114,7 @@ public class RecordDaoImpl extends DatabaseService implements RecordDao {
     }
 
     @Override
-    public boolean insertRecord(Record record) {
+    public boolean addRecord(Record record) {
         Connection connection = getConnection();
         assert connection != null;
         assert record != null;
@@ -136,7 +138,7 @@ public class RecordDaoImpl extends DatabaseService implements RecordDao {
     }
 
     @Override
-    public boolean deleteRecordById(int id) {
+    public boolean deleteRecord(int id) {
         Connection connection = getConnection();
         assert connection != null;
         assert id > 0;
@@ -153,15 +155,22 @@ public class RecordDaoImpl extends DatabaseService implements RecordDao {
     }
 
     @Override
-    public boolean verifyRecordById(int id) {
+    public boolean updateRecord(Record record) {
         Connection connection = getConnection();
         assert connection != null;
-        assert id > 0;
-        String UPDATE = "UPDATE t_record SET (verified) WHERE id = ? VALUES (?))";
+        assert record != null;
+        assert record.getId() > 0;
+        String UPDATE = "UPDATE t_record SET (time, start_date, end_date, user_id, building_id, verified) WHERE id = ? " +
+                "VALUES (?, ?, ?, ?, ?, ?))";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);
-            preparedStatement.setBoolean(1, true);
-            preparedStatement.setInt(2, id);
+            preparedStatement.setInt(1, record.getId());
+            preparedStatement.setLong(2, record.getTime());
+            preparedStatement.setLong(3, record.getStartDate());
+            preparedStatement.setLong(4, record.getEndDate());
+            preparedStatement.setInt(5, record.getUserId());
+            preparedStatement.setInt(6, record.getBuildId());
+            preparedStatement.setBoolean(7, record.isVerified());
             preparedStatement.execute();
             closeConnection(connection);
             return true;

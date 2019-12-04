@@ -12,7 +12,6 @@ import com.webapp.model.user.Gender;
 import com.webapp.model.user.User;
 import com.webapp.service.database.DatabaseService;
 import com.webapp.service.database.dao.UserDao;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.xml.crypto.Data;
 
@@ -28,8 +27,8 @@ public class UserDaoImpl extends DatabaseService implements UserDao {
         List<User> result = new ArrayList<>();
         String SELECT = "SELECT * FROM t_user";
         try {
-            PreparedStatement pstmt = connection.prepareStatement(SELECT);
-            ResultSet rs = pstmt.executeQuery();
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
+            ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String username = rs.getString("username");
@@ -66,9 +65,9 @@ public class UserDaoImpl extends DatabaseService implements UserDao {
         User result = null;
         String SELECT = "SELECT * FROM t_user WHERE id=(?)";
         try {
-            PreparedStatement pstmt = connection.prepareStatement(SELECT);
-            pstmt.setInt(1, id);
-            ResultSet rs = pstmt.executeQuery();
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 String username = rs.getString("username");
                 String password = rs.getString("password");
@@ -104,9 +103,9 @@ public class UserDaoImpl extends DatabaseService implements UserDao {
         List<User> result = new ArrayList<>();
         String SELECT = "SELECT * FROM t_user WHERE name=(?)";
         try {
-            PreparedStatement pstmt = connection.prepareStatement(SELECT);
-            pstmt.setString(1, name);
-            ResultSet rs = pstmt.executeQuery();
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
+            preparedStatement.setString(1, name);
+            ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int permission = rs.getInt("permission");
                 if (permission > 0) {
@@ -117,6 +116,37 @@ public class UserDaoImpl extends DatabaseService implements UserDao {
                     String sex = rs.getString("sex");
                     String tel = rs.getString("tel");
                     result.add(new User(id, username, password, _name, sex, tel));
+                }
+            }
+            closeConnection(connection);
+            return result;
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace(System.err);
+            return result;
+        }
+    }
+
+    @Override
+    public User queryUserByUsername(String username) {
+        Connection connection = getConnection();
+        assert connection != null;
+        assert username != null;
+        assert username.length() > 0;
+        User result = null;
+        String SELECT = "SELECT * FROM t_user WHERE username = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
+            preparedStatement.setString(1, username);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int permission = rs.getInt("permission");
+                if (permission > 0) {
+                    int id = rs.getInt("id");
+                    String password = rs.getString("password");
+                    String name = rs.getString("name");
+                    String sex = rs.getString("sex");
+                    String tel = rs.getString("tel");
+                    result = new User(id, username, password, name, sex, tel);
                 }
             }
             closeConnection(connection);
@@ -135,9 +165,9 @@ public class UserDaoImpl extends DatabaseService implements UserDao {
         List<User> result = new ArrayList<>();
         String SELECT = "SELECT * FROM t_user WHERE sex=(?)";
         try {
-            PreparedStatement pstmt = connection.prepareStatement(SELECT);
-            pstmt.setString(1, gender.toString());
-            ResultSet rs = pstmt.executeQuery();
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
+            preparedStatement.setString(1, gender.toString());
+            ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int permission = rs.getInt("permission");
                 if (permission > 0) {
@@ -159,34 +189,26 @@ public class UserDaoImpl extends DatabaseService implements UserDao {
     }
 
     @Override
-    public int addUser(User user) {
+    public boolean addUser(User user) {
         Connection connection = getConnection();
         assert connection != null;
         assert user != null;
-        int result = 0;
-        String INSERT = "INSERT INTO t_user values(null,?,?,?,?,?,?)";
-        String SELECT = "SELECT * FROM t_user WHERE username=(?) AND password=(?)";
+        boolean result = true;
+        String INSERT = "INSERT INTO t_user VALUES(null,?,?,?,?,?,?)";
         try {
-            PreparedStatement pstmt = connection.prepareStatement(INSERT);
-            pstmt.setString(1, user.get_username());
-            pstmt.setString(2, user.get_password());
-            pstmt.setString(3, user.get_name());
-            pstmt.setString(4, user.get_sex().toString());
-            pstmt.setInt(5, user.get_permission());
-            pstmt.setString(6, user.get_tel());
-            pstmt.executeUpdate();
-            // Check whether successes
-            pstmt = connection.prepareStatement(SELECT);
-            pstmt.setString(1, user.get_username());
-            pstmt.setString(2, user.get_password());
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                result = rs.getInt("id");
-            }
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT);
+            preparedStatement.setString(1, user.get_username());
+            preparedStatement.setString(2, user.get_password());
+            preparedStatement.setString(3, user.get_name());
+            preparedStatement.setString(4, user.get_sex().toString());
+            preparedStatement.setInt(5, user.get_permission());
+            preparedStatement.setString(6, user.get_tel());
+            preparedStatement.executeUpdate();
             closeConnection(connection);
             return result;
         } catch (SQLException sqlException) {
             sqlException.printStackTrace(System.err);
+            result = false;
             return result;
         }
 
@@ -200,9 +222,9 @@ public class UserDaoImpl extends DatabaseService implements UserDao {
         boolean result = true;
         String DELETE = "DELETE FROM t_user WHERE id=(?)";
         try {
-            PreparedStatement pstmt = connection.prepareStatement(DELETE);
-            pstmt.setInt(1, id);
-            pstmt.executeUpdate();
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
             closeConnection(connection);
             return result;
         } catch (SQLException sqlException) {
@@ -213,36 +235,29 @@ public class UserDaoImpl extends DatabaseService implements UserDao {
     }
 
     @Override
-    public int updateUserAll(User user) {
+    public boolean updateUser(User user) {
         Connection connection = getConnection();
         assert connection != null;
         assert user != null;
         assert user.get_id() > 0;
-        int result = 0;
+        boolean result = true;
         String UPDATE = "UPDATE t_user SET username=(?), password=(?), name=(?), sex=(?), permission=(?), tel=(?) WHERE id=(?)";
         String SELECT = "SELECT * FROM t_user WHERE username=(?) AND password=(?)";
         try {
-            PreparedStatement pstmt = connection.prepareStatement(UPDATE);
-            pstmt.setString(1, user.get_username());
-            pstmt.setString(2, user.get_password());
-            pstmt.setString(3, user.get_name());
-            pstmt.setString(4, user.get_sex().toString());
-            pstmt.setInt(5, user.get_permission());
-            pstmt.setString(6, user.get_tel());
-            pstmt.setInt(7, user.get_id());
-            pstmt.executeUpdate();
-            // Check whether successes
-            pstmt = connection.prepareStatement(SELECT);
-            pstmt.setString(1, user.get_username());
-            pstmt.setString(2, user.get_password());
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                result = rs.getInt("id");
-            }
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);
+            preparedStatement.setString(1, user.get_username());
+            preparedStatement.setString(2, user.get_password());
+            preparedStatement.setString(3, user.get_name());
+            preparedStatement.setString(4, user.get_sex().toString());
+            preparedStatement.setInt(5, user.get_permission());
+            preparedStatement.setString(6, user.get_tel());
+            preparedStatement.setInt(7, user.get_id());
+            preparedStatement.executeUpdate();
             closeConnection(connection);
             return result;
         } catch (SQLException sqlException) {
             sqlException.printStackTrace(System.err);
+            result = false;
             return result;
         }
     }
@@ -258,18 +273,10 @@ public class UserDaoImpl extends DatabaseService implements UserDao {
         String UPDATE = "UPDATE t_user SET password=(?) WHERE id=(?)";
         String SELECT = "SELECT * FROM t_user WHERE id=(?) AND password=(?)";
         try {
-            PreparedStatement pstmt = connection.prepareStatement(UPDATE);
-            pstmt.setString(1, password);
-            pstmt.setInt(2, id);
-            pstmt.executeUpdate();
-            // Check whether successes
-            pstmt = connection.prepareStatement(SELECT);
-            pstmt.setInt(1, id);
-            pstmt.setString(2, password);
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                result = true;
-            }
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);
+            preparedStatement.setString(1, password);
+            preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
             closeConnection(connection);
             return result;
         } catch (SQLException sqlException) {

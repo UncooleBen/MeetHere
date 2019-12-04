@@ -7,7 +7,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
+ * This class is a part of Software Testing MeetHere project.
+ * <p>
+ *     This is class gets and closes the database connection from mysql through jdbc.
+ * </p>
  * @author Juntao Peng
+ * @date 2019.12.2
  */
 public class DatabaseService {
 
@@ -24,6 +29,9 @@ public class DatabaseService {
 	private String dbClassname;
 
 
+	/**
+	 *
+	 */
 	public Connection getConnection() {
 		try {
 			Class.forName(dbClassname);

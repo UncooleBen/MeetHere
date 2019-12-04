@@ -9,6 +9,7 @@ import com.webapp.model.user.Admin;
 import com.webapp.model.user.User;
 import com.webapp.service.database.DatabaseService;
 import com.webapp.service.database.dao.LoginDao;
+import com.webapp.service.database.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -63,15 +64,15 @@ public class LoginDaoImpl extends DatabaseService implements LoginDao {
 		assert user != null;
 
 		User result_user = null;
-		String SELECT = "SELECT * FROM t_user WHERE username=(?)";
+		String SELECT = "SELECT * FROM t_user WHERE username = ?";
 		try {
 			PreparedStatement pstmt = connection.prepareStatement(SELECT);
 			pstmt.setString(1, user.get_username());
 			ResultSet rs = pstmt.executeQuery();
 			if (!rs.next()) {
-				UserDaoImpl userDao = new UserDaoImpl();
-				int id = userDao.addUser(user);
-				user.set_id(id);
+				UserDao userDao = new UserDaoImpl();
+				User tempUser = userDao.queryUserByUsername(user.get_username());
+				user.set_id(tempUser.get_id());
 				result_user = user;
 			}
 			closeConnection(connection);

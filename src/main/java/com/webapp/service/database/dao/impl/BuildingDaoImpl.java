@@ -16,16 +16,14 @@ import java.util.List;
  * @author Shangzhen Li (refactor)
  */
 public class BuildingDaoImpl extends DatabaseService implements BuildingDao {
-  private Connection connection;
 
-  public BuildingDaoImpl() {
-    this.connection = getConnection();
-  }
+  public BuildingDaoImpl() {}
 
   @Override
   public List<Building> listBuilding(int size) {
     List<Building> buildingList = new ArrayList<>();
     String SQL = "SELECT * FROM t_building LIMIT ?";
+    Connection connection = getConnection();
     try {
       PreparedStatement preparedStatement = connection.prepareStatement(SQL);
       preparedStatement.setInt(1, size);
@@ -40,6 +38,8 @@ public class BuildingDaoImpl extends DatabaseService implements BuildingDao {
       }
     } catch (Exception e) {
       System.out.println(e.getMessage());
+    } finally {
+      closeConnection(connection);
     }
     return buildingList;
   }
@@ -48,6 +48,7 @@ public class BuildingDaoImpl extends DatabaseService implements BuildingDao {
   public Building queryBuildingById(int id) {
     String sql = "SELECT * FROM t_building t1 WHERE t1.id=?";
     Building building = new Building();
+    Connection connection = getConnection();
     try {
       PreparedStatement pstmt = connection.prepareStatement(sql);
       pstmt.setInt(1, id);
@@ -61,6 +62,8 @@ public class BuildingDaoImpl extends DatabaseService implements BuildingDao {
       }
     } catch (Exception e) {
       System.out.println(e.getMessage());
+    } finally {
+      closeConnection(connection);
     }
     return null;
   }
@@ -69,6 +72,7 @@ public class BuildingDaoImpl extends DatabaseService implements BuildingDao {
   public boolean addBuilding(Building building) {
     String sql = "INSERT INTO t_building(name,description,price) VALUES (?,?,?)";
     int result = 0;
+    Connection connection = getConnection();
     try {
       PreparedStatement pstmt = connection.prepareStatement(sql);
       pstmt.setString(1, building.getName());
@@ -77,8 +81,10 @@ public class BuildingDaoImpl extends DatabaseService implements BuildingDao {
       result = pstmt.executeUpdate();
     } catch (Exception e) {
       System.out.println(e.getMessage());
+    } finally {
+      closeConnection(connection);
     }
-    if (result != 0) {
+    if (0 != result) {
       return true;
     } else {
       return false;
@@ -89,14 +95,17 @@ public class BuildingDaoImpl extends DatabaseService implements BuildingDao {
   public boolean deleteBuilding(int id) {
     String sql = "DELETE FROM t_building WHERE id=?";
     int result = 0;
+    Connection connection = getConnection();
     try {
       PreparedStatement pstmt = connection.prepareStatement(sql);
       pstmt.setInt(1, id);
       result = pstmt.executeUpdate();
     } catch (Exception e) {
       System.out.println(e.getMessage());
+    } finally {
+      closeConnection(connection);
     }
-    if (result != 0) {
+    if (0 != result) {
       return true;
     } else {
       return false;
@@ -107,6 +116,7 @@ public class BuildingDaoImpl extends DatabaseService implements BuildingDao {
   public boolean updateBuilding(Building building) {
     String sql = "UPDATE t_building SET name=?,description=?,price=? WHERE id=?";
     int result = 0;
+    Connection connection = getConnection();
     try {
       PreparedStatement pstmt = connection.prepareStatement(sql);
       pstmt.setString(1, building.getName());
@@ -116,8 +126,10 @@ public class BuildingDaoImpl extends DatabaseService implements BuildingDao {
       result = pstmt.executeUpdate();
     } catch (Exception e) {
       System.out.println(e.getMessage());
+    } finally {
+      closeConnection(connection);
     }
-    if (result != 0) {
+    if (0 != result) {
       return true;
     } else {
       return false;

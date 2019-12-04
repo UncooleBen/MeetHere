@@ -1,82 +1,82 @@
 package com.webapp.model;
 
-
-/**
- * @author Juntao Peng
- */
+/** @author Juntao Peng */
 public class Record {
-	
-	private int id;
-	private long time;
-	private long startDate;
-	private long endDate;
-	private int userId;
-	private int buildId;
-	private boolean verified;
 
-	public Record(int id, long time, long startDate, long endDate, int userId, int buildId, boolean verified) {
-		this.id = id;
-		this.time = time;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.userId = userId;
-		this.buildId = buildId;
-		this.verified = verified;
-	}
+  private int id;
+  private long time;
+  private long startDate;
+  private long endDate;
+  private int userId;
+  private int buildId;
+  private boolean verified;
 
-	public int getId() {
-		return id;
-	}
+  public Record(
+      int id, long time, long startDate, long endDate, int userId, int buildId, boolean verified) {
+    this.id = id;
+    this.time = time;
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.userId = userId;
+    this.buildId = buildId;
+    this.verified = verified;
+  }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+  public int getId() {
+    return id;
+  }
 
-	public long getTime() {
-		return time;
-	}
+  public void setId(int id) {
+    this.id = id;
+  }
 
-	public void setTime(long time) {
-		this.time = time;
-	}
+  public long getTime() {
+    return time;
+  }
 
-	public long getStartDate() {
-		return startDate;
-	}
+  public void setTime(long time) {
+    this.time = time;
+  }
 
-	public void setStartDate(long startDate) {
-		this.startDate = startDate;
-	}
+  public long getStartDate() {
+    return startDate;
+  }
 
-	public long getEndDate() {
-		return endDate;
-	}
+  public void setStartDate(long startDate) {
+    this.startDate = startDate;
+  }
 
-	public void setEndDate(long endDate) {
-		this.endDate = endDate;
-	}
+  public long getEndDate() {
+    return endDate;
+  }
 
-	public int getUserId() {
-		return userId;
-	}
+  public void setEndDate(long endDate) {
+    this.endDate = endDate;
+  }
 
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+  public int getUserId() {
+    return userId;
+  }
 
-	public int getBuildId() {
-		return buildId;
-	}
+  public Record() {}
 
-	public void setBuildId(int buildId) {
-		this.buildId = buildId;
-	}
+  public void setUserId(int userId) {
+    this.userId = userId;
+  }
 
-	public boolean isVerified() {
-		return verified;
-	}
+  public int getBuildId() {
+    return buildId;
+  }
 
-	public void setVerified(boolean verified) {
-		this.verified = verified;
-	}
+  public void setBuildId(int buildId) {
+    this.buildId = buildId;
+  }
+
+  public boolean isVerified() {
+    return verified;
+  }
+
+  public void setVerified(boolean verified) {
+    this.verified = verified;
+  }
 }

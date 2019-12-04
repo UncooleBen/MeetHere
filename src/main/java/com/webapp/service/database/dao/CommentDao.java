@@ -1,7 +1,6 @@
 package com.webapp.service.database.dao;
 
 import com.webapp.model.Comment;
-
 import java.util.List;
 
 /**
@@ -12,51 +11,53 @@ import java.util.List;
  */
 public interface CommentDao {
 
-    /**
-     * Get a list of comments in 't_comment' given verified.
-     *
-     * @param size The size of list
-     * @return A list of comments
-     */
-    List<Comment> listComment(int size);
+  /**
+   * Get a list of comments in 't_comment' given size and verified.
+   *
+   * @param size The size of list
+   * @param verified A flag whether comments are verified or not
+   * @return A list of comments
+   */
+  List<Comment> listComment(int size, boolean verified);
 
-    /**
-     * Query a list comments in 't_comment' given user id and verified.
-     *
-     * @param userId The related user id
-     * @return A list of comments
-     */
-    List<Comment> queryCommentByUserId(int userId);
+  /**
+   * Query a list comments in 't_comment' given user id and verified.
+   *
+   * @param userId The related user id
+   * @param verified A flag whether comments are verified or not
+   * @return A list of comments
+   */
+  List<Comment> queryCommentByUserId(int userId, boolean verified);
 
-    /**
-     * Query a comment in 't_comment' given id and verified.
-     *
-     * @param commentId The id
-     * @return A comment
-     */
-    Comment queryCommentById(int commentId);
+  /**
+   * Query a comment in 't_comment' given id.
+   *
+   * @param commentId The id
+   * @return A comment
+   */
+  Comment queryCommentById(int commentId);
 
-    /**
-     * Added a comment in 't_comment'
-     *
-     * @param comment The commend to add
-     * @return True if succeeded, otherwise false
-     */
-    boolean addComment(Comment comment);
+  /**
+   * Added a comment in 't_comment'
+   *
+   * @param comment The commend to add
+   * @return True if succeeded, otherwise false
+   */
+  boolean addComment(Comment comment);
 
-    /**
-     * Delete a comment in 't_comment' given comment id
-     *
-     * @param commentId The commend id to delete
-     * @return True if succeeded, otherwise false
-     */
-    boolean deleteComment(String commentId);
+  /**
+   * Delete a comment in 't_comment' given comment id
+   *
+   * @param commentId The commend id to delete
+   * @return True if succeeded, otherwise false
+   */
+  boolean deleteComment(int commentId);
 
-    /**
-     * Update a comment in 't_comment'
-     *
-     * @param comment The commend to add
-     * @return True if succeeded, otherwise false
-     */
-    boolean updateComment(Comment comment);
+  /**
+   * Update a comment in 't_comment'
+   *
+   * @param comment The commend to add
+   * @return True if succeeded, otherwise false
+   */
+  boolean updateComment(Comment comment);
 }

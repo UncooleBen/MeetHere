@@ -42,6 +42,8 @@ public class NewsController {
 	private void adminNewsService(ModelAndView mv, String action) {
 		switch (action) {
 			case "list":
+				//TODO 3. action = (admin-only) add (empty newsSave.jsp), delete, modify (redirect to newsSave.jsp), save (only in newsSave.jsp),
+				// list (both)
 			default:
 				listNews(mv);
 				break;

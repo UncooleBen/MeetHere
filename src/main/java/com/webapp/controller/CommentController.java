@@ -27,6 +27,9 @@ import com.webapp.util.StringUtil;
 @Controller
 public class CommentController {
 
+	//TODO 2. action =  delete (admin-only), verify (admin-only)
+	// list (both)
+
 	@Value("${spring.datasource.url}")
 	private String dbUrl;
 

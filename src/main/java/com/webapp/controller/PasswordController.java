@@ -19,6 +19,7 @@ import com.webapp.util.DbUtil;
 
 @Controller
 public class PasswordController {
+	//TODO 4. action = save (both) change (redirect to passwordChange.jsp, both)
 
 	@Value("${spring.datasource.url}")
 	private String dbUrl;

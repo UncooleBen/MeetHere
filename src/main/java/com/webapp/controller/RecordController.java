@@ -28,6 +28,8 @@ import com.webapp.util.StringUtil;
 
 @Controller
 public class RecordController {
+	//TODO 5. action = verify (admin), add (user)
+	// list (both), delete (both)
 
 	@Value("${spring.datasource.url}")
 	private String dbUrl;

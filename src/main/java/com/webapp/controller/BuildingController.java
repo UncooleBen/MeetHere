@@ -22,7 +22,9 @@ import com.webapp.util.StringUtil;
 
 @Controller
 @Configuration
-public class BuildController {
+public class BuildingController {
+	//TODO 1. action = (admin-only) add (empty BuildSave.jsp), delete, modify (redirect to build(ing)Save.jsp), save (only in BuildSave.jsp),
+	// list (both)
 
 	@Value("${spring.datasource.url}")
 	private String dbUrl;
@@ -176,7 +178,7 @@ public class BuildController {
 		}
 	}
 
-	private void buildPreSave(HttpServletRequest request, HttpServletResponse response)
+	private void buildModify(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String buildId = request.getParameter("buildId");
 		if (StringUtil.isNotEmpty(buildId)) {

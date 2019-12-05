@@ -1,5 +1,9 @@
 package com.webapp.model;
 
+/**
+ * @author Juntao Peng
+ * @author Shangzhen Li
+ */
 public class Building {
   private int id;
   private String name;

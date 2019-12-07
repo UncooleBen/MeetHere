@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.webapp.filter.LoginFilter;
 import com.webapp.service.database.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,119 +24,127 @@ import com.webapp.model.user.User;
 @Controller
 public class UserController {
 
+    UserDao userDao;
+
     @Autowired
-    private UserDao userDao;
+    public UserController(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     @RequestMapping(value = "/user")
     public ModelAndView service(@RequestParam("action") String action, HttpServletRequest request,
                                 HttpSession session) {
-        String currentUserType = (String) session.getAttribute("currentUserType");
-        assert currentUserType == "admin";
-        String id_str = request.getParameter("id");
-        int id = 0;
-        if (id_str != null && id_str.length() != 0) {
-            id = Integer.parseInt(id_str);
-        }
         ModelAndView mv = new ModelAndView();
+        String currentUserType = (String) session.getAttribute("currentUserType");
+        boolean isAuthorized = LoginFilter.isAuthorized(currentUserType, "admin", mv);
+        if (!isAuthorized) {
+            return mv;
+        }
+        String idStr = request.getParameter("id");
+        int id = 0;
+        if (idStr != null && idStr.length() != 0) {
+            id = Integer.parseInt(idStr);
+        }
+
         mv.setViewName("mainAdmin");
         switch (action) {
             case "delete":
-                delete_user(mv, id);
-                list_users(mv);
+                deleteUser(mv, id);
+                listUsers(mv);
                 break;
             case "modify":
-                modify_user(mv, id);
+                modifyUser(mv, id);
                 break;
             case "add":
-                add_user(mv);
+                addUser(mv);
                 break;
             case "save":
-                save_user(mv, request);
-                list_users(mv);
+                saveUser(mv, request);
+                listUsers(mv);
                 break;
             case "search":
-                search_user(mv, request);
+                searchUser(mv, request);
                 break;
             case "list":
             default:
-                list_users(mv);
+                listUsers(mv);
         }
         return mv;
     }
 
-    private void list_users(ModelAndView mv) {
+    private void listUsers(ModelAndView mv) {
         mv.addObject("mainPage", "admin/user.jsp");
         List<User> users = this.userDao.queryAllUsers();
         if (users.size() > 0) {
-            mv.addObject("user_list", users);
+            mv.addObject("userList", users);
         }
 
     }
 
-    private void delete_user(ModelAndView mv, int id) {
+    private void deleteUser(ModelAndView mv, int id) {
         this.userDao.deleteUser(id);
     }
 
-    private void modify_user(ModelAndView mv, int id) {
+    private void modifyUser(ModelAndView mv, int id) {
         User user = this.userDao.queryUserById(id);
         mv.addObject("mainPage", "admin/userModify.jsp");
         mv.addObject("id", String.valueOf(id));
         mv.addObject("user", user);
     }
 
-    private void add_user(ModelAndView mv) {
+    private void addUser(ModelAndView mv) {
         mv.addObject("mainPage", "admin/userModify.jsp");
         mv.addObject("id", null);
         mv.addObject("user", null);
     }
 
-    private void save_user(ModelAndView mv, HttpServletRequest request) {
+    private void saveUser(ModelAndView mv, HttpServletRequest request) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String name = request.getParameter("name");
         String tel = request.getParameter("tel");
         String sex = request.getParameter("sex");
         User user = new User(username, password, name, sex, tel);
-        String id_str = request.getParameter("id");
+        String idStr = request.getParameter("id");
 
-        if (id_str != null && id_str.length() != 0) {
-            int id = Integer.valueOf(id_str);
-            user.set_id(id);
-            this.userDao.updateUserAll(user);
+        if (idStr != null && idStr.length() != 0) {
+            int id = Integer.valueOf(idStr);
+            user.setId(id);
+            this.userDao.updateUser(user);
         } else {
             this.userDao.addUser(user);
         }
 
     }
 
-    private void search_user(ModelAndView mv, HttpServletRequest request) {
+    private void searchUser(ModelAndView mv, HttpServletRequest request) {
         String keyword = request.getParameter("searchType");
-        String argument = request.getParameter("search_user_text");
+        String argument = request.getParameter("searchUser_text");
         mv.addObject("mainPage", "admin/user.jsp");
         assert "name".equals(keyword) || "id".equals(keyword) || "sex".equals(keyword);
         if (argument == null || argument.length() == 0) {
-            list_users(mv);
+            listUsers(mv);
             return;
         }
 
-        List<User> result_list = null;
+        List<User> resultList = null;
         switch (keyword) {
             case "name":
-                result_list = this.userDao.queryUserByName(argument);
+                resultList = this.userDao.queryUserByName(argument);
                 break;
             case "sex":
-                result_list = this.userDao.queryUserBySex(Gender.valueOf(argument));
+                resultList = this.userDao.queryUserBySex(Gender.valueOf(argument));
                 break;
             case "id":
-                result_list = new ArrayList<>();
+                resultList = new ArrayList<>();
                 User result = this.userDao.queryUserById(Integer.valueOf(argument));
                 if (result != null) {
-                    result_list.add(result);
+                    resultList.add(result);
                 }
             default:
         }
-        if (result_list.size() > 0) {
-            mv.addObject("user_list", result_list);
+        if (resultList.size() > 0) {
+            mv.addObject("userList", resultList);
         }
 
     }

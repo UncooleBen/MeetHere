@@ -13,7 +13,6 @@ import com.webapp.model.user.User;
 import com.webapp.service.database.DatabaseService;
 import com.webapp.service.database.dao.UserDao;
 
-import javax.xml.crypto.Data;
 
 /**
  * @author Juntao Peng
@@ -197,12 +196,12 @@ public class UserDaoImpl extends DatabaseService implements UserDao {
         String INSERT = "INSERT INTO t_user VALUES(null,?,?,?,?,?,?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT);
-            preparedStatement.setString(1, user.get_username());
-            preparedStatement.setString(2, user.get_password());
-            preparedStatement.setString(3, user.get_name());
-            preparedStatement.setString(4, user.get_sex().toString());
-            preparedStatement.setInt(5, user.get_permission());
-            preparedStatement.setString(6, user.get_tel());
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getName());
+            preparedStatement.setString(4, user.getSex().toString());
+            preparedStatement.setInt(5, user.getPermission());
+            preparedStatement.setString(6, user.getTel());
             preparedStatement.executeUpdate();
             closeConnection(connection);
             return result;
@@ -239,19 +238,19 @@ public class UserDaoImpl extends DatabaseService implements UserDao {
         Connection connection = getConnection();
         assert connection != null;
         assert user != null;
-        assert user.get_id() > 0;
+        assert user.getId() > 0;
         boolean result = true;
         String UPDATE = "UPDATE t_user SET username=(?), password=(?), name=(?), sex=(?), permission=(?), tel=(?) WHERE id=(?)";
         String SELECT = "SELECT * FROM t_user WHERE username=(?) AND password=(?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);
-            preparedStatement.setString(1, user.get_username());
-            preparedStatement.setString(2, user.get_password());
-            preparedStatement.setString(3, user.get_name());
-            preparedStatement.setString(4, user.get_sex().toString());
-            preparedStatement.setInt(5, user.get_permission());
-            preparedStatement.setString(6, user.get_tel());
-            preparedStatement.setInt(7, user.get_id());
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getName());
+            preparedStatement.setString(4, user.getSex().toString());
+            preparedStatement.setInt(5, user.getPermission());
+            preparedStatement.setString(6, user.getTel());
+            preparedStatement.setInt(7, user.getId());
             preparedStatement.executeUpdate();
             closeConnection(connection);
             return result;

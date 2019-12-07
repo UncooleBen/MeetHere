@@ -46,4 +46,10 @@ public class Comment {
     this.date = date;
     this.content = content;
   }
+
+  public Comment(int userId, long date, String content) {
+    this.userId = userId;
+    this.date = date;
+    this.content = content;
+  }
 }

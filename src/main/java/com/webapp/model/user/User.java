@@ -1,13 +1,13 @@
 package com.webapp.model.user;
 
 public class User {
-	private int _id;
-	private String _username;
-	private String _password;
-	private String _name;
-	private Gender _sex;
-	private int _permission;
-	private String _tel;
+	private int id;
+	private String username;
+	private String password;
+	private String name;
+	private Gender sex;
+	private int permission;
+	private String tel;
 
 	public User() {
 
@@ -15,112 +15,112 @@ public class User {
 
 	public User(String username, String password, String name, String sex, String tel) {
 		super();
-		this._id = 0;
-		this._username = username;
-		this._password = password;
-		this._name = name;
-		this._sex = Gender.valueOf(sex);
-		this._permission = 1;
-		this._tel = tel;
+		this.id = 0;
+		this.username = username;
+		this.password = password;
+		this.name = name;
+		this.sex = Gender.valueOf(sex);
+		this.permission = 1;
+		this.tel = tel;
 	}
 
 	public User(int id, String username, String password, String name, String sex, String tel) {
 		super();
-		this._id = id;
-		this._username = username;
-		this._password = password;
-		this._name = name;
-		this._sex = Gender.valueOf(sex);
-		this._permission = 1;
-		this._tel = tel;
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.name = name;
+		this.sex = Gender.valueOf(sex);
+		this.permission = 1;
+		this.tel = tel;
 	}
 
 	/**
-	 * @return the _username
+	 * @return the username
 	 */
-	public String get_username() {
-		return _username;
+	public String getUsername() {
+		return username;
 	}
 
 	/**
-	 * @param _username the _username to set
+	 * @param username the username to set
 	 */
-	public void set_username(String _username) {
-		this._username = _username;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	/**
-	 * @return the _password
+	 * @return the password
 	 */
-	public String get_password() {
-		return _password;
+	public String getPassword() {
+		return password;
 	}
 
 	/**
-	 * @param _password the _password to set
+	 * @param password the password to set
 	 */
-	public void set_password(String _password) {
-		this._password = _password;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	/**
-	 * @return the _name
+	 * @return the name
 	 */
-	public String get_name() {
-		return _name;
+	public String getName() {
+		return name;
 	}
 
 	/**
-	 * @param _name the _name to set
+	 * @param name the name to set
 	 */
-	public void set_name(String _name) {
-		this._name = _name;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**
-	 * @return the _sex
+	 * @return the sex
 	 */
-	public Gender get_sex() {
-		return _sex;
+	public Gender getSex() {
+		return sex;
 	}
 
 	/**
-	 * @param _sex the _sex to set
+	 * @param sex the sex to set
 	 */
-	public void set_sex(String _sex) {
-		this._sex = Gender.valueOf(_sex);
+	public void setSex(String sex) {
+		this.sex = Gender.valueOf(sex);
 	}
 
 	/**
-	 * @return the _tel
+	 * @return the tel
 	 */
-	public String get_tel() {
-		return _tel;
+	public String getTel() {
+		return tel;
 	}
 
 	/**
-	 * @param _tel the _tel to set
+	 * @param tel the tel to set
 	 */
-	public void set_tel(String _tel) {
-		this._tel = _tel;
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 
 	/**
-	 * @return the _id
+	 * @return the id
 	 */
-	public int get_id() {
-		return _id;
+	public int getId() {
+		return id;
 	}
 
-	public void set_id(int id) {
-		this._id = id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	/**
-	 * @return the _permission
+	 * @return the permission
 	 */
-	public int get_permission() {
-		return _permission;
+	public int getPermission() {
+		return permission;
 	}
 
 }

@@ -50,4 +50,10 @@ public class Building {
     this.description = description;
     this.price = price;
   }
+
+  public Building(String name, String description, String price) {
+    this.name = name;
+    this.description = description;
+    this.price = price;
+  }
 }

@@ -24,7 +24,7 @@ public class LoginDaoImpl extends DatabaseService implements LoginDao {
 		assert loginUsername != null;
 		assert loginPassword != null;
 
-		User result_user = null;
+		User resultUser = null;
 		String SELECT = "SELECT * FROM t_user WHERE username=(?) AND password=(?)";
 		try {
 			PreparedStatement pstmt = connection.prepareStatement(SELECT);
@@ -41,10 +41,10 @@ public class LoginDaoImpl extends DatabaseService implements LoginDao {
 				String tel = rs.getString("tel");
 				switch (permission) {
 				case 0:
-					result_user = new Admin(id, username, password, name, sex, tel);
+					resultUser = new Admin(id, username, password, name, sex, tel);
 					break;
 				case 1:
-					result_user = new User(id, username, password, name, sex, tel);
+					resultUser = new User(id, username, password, name, sex, tel);
 					break;
 				default:
 					// Empty
@@ -54,7 +54,7 @@ public class LoginDaoImpl extends DatabaseService implements LoginDao {
 		} catch (SQLException sqlException) {
 			sqlException.printStackTrace(System.err);
 		}
-		return result_user;
+		return resultUser;
 	}
 
 	@Override
@@ -63,23 +63,23 @@ public class LoginDaoImpl extends DatabaseService implements LoginDao {
 		assert connection != null;
 		assert user != null;
 
-		User result_user = null;
+		User resultUser = null;
 		String SELECT = "SELECT * FROM t_user WHERE username = ?";
 		try {
 			PreparedStatement pstmt = connection.prepareStatement(SELECT);
-			pstmt.setString(1, user.get_username());
+			pstmt.setString(1, user.getUsername());
 			ResultSet rs = pstmt.executeQuery();
 			if (!rs.next()) {
 				UserDao userDao = new UserDaoImpl();
-				User tempUser = userDao.queryUserByUsername(user.get_username());
-				user.set_id(tempUser.get_id());
-				result_user = user;
+				User tempUser = userDao.queryUserByUsername(user.getUsername());
+				user.setId(tempUser.getId());
+				resultUser = user;
 			}
 			closeConnection(connection);
 		} catch (SQLException sqlException) {
 			sqlException.printStackTrace(System.err);
 		}
-		return result_user;
+		return resultUser;
 	}
 
 }

@@ -21,6 +21,9 @@ public class News {
 		this.detail = detail;
 	}
 
+	public News() {
+	}
+
 	public int getId() {
 		return id;
 	}

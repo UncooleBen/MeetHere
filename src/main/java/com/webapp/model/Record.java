@@ -8,7 +8,7 @@ public class Record {
   private long startDate;
   private long endDate;
   private int userId;
-  private int buildId;
+  private int buildingId;
   private boolean verified;
 
   public Record(
@@ -18,7 +18,7 @@ public class Record {
     this.startDate = startDate;
     this.endDate = endDate;
     this.userId = userId;
-    this.buildId = buildId;
+    this.buildingId = buildId;
     this.verified = verified;
   }
 
@@ -64,12 +64,12 @@ public class Record {
     this.userId = userId;
   }
 
-  public int getBuildId() {
-    return buildId;
+  public int getBuildingId() {
+    return buildingId;
   }
 
-  public void setBuildId(int buildId) {
-    this.buildId = buildId;
+  public void setBuildingId(int buildingId) {
+    this.buildingId = buildingId;
   }
 
   public boolean isVerified() {

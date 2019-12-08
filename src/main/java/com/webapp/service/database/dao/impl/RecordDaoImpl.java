@@ -3,7 +3,6 @@ package com.webapp.service.database.dao.impl;
 import com.webapp.model.Record;
 import com.webapp.service.database.DatabaseService;
 import com.webapp.service.database.dao.RecordDao;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -126,7 +125,7 @@ public class RecordDaoImpl extends DatabaseService implements RecordDao {
             preparedStatement.setLong(2, record.getStartDate());
             preparedStatement.setLong(3, record.getEndDate());
             preparedStatement.setInt(4, record.getUserId());
-            preparedStatement.setInt(5, record.getBuildId());
+            preparedStatement.setInt(5, record.getBuildingId());
             preparedStatement.setBoolean(6, record.isVerified());
             preparedStatement.execute();
             closeConnection(connection);
@@ -169,7 +168,7 @@ public class RecordDaoImpl extends DatabaseService implements RecordDao {
             preparedStatement.setLong(3, record.getStartDate());
             preparedStatement.setLong(4, record.getEndDate());
             preparedStatement.setInt(5, record.getUserId());
-            preparedStatement.setInt(6, record.getBuildId());
+            preparedStatement.setInt(6, record.getBuildingId());
             preparedStatement.setBoolean(7, record.isVerified());
             preparedStatement.execute();
             closeConnection(connection);

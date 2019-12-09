@@ -1,13 +1,14 @@
 package com.webapp.controller;
 
 import com.webapp.service.database.dao.UserDao;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author Shangzhen Li
@@ -16,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class PasswordController {
   // TODO 4. action = save (both) change (redirect to passwordChange.jsp, both)
   /**
-   * todo: need check
+   * todo: setViewName(mainXXXX) addObject("mainPage", "user/XXXXXX.jsp");
    */
 
   private UserDao userDao;

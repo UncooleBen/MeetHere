@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8" isELIgnored="false" %>
-<%@ page import="com.webapp.model.user.Admin" %>
-<%@ page import="com.webapp.model.user.User" %>
 <%
     if(request.getAttribute("user")==null){
         String username=null;
@@ -121,16 +119,16 @@
 <div class="container">
     <form name="myForm" class="form-signin" action="signupSubmit" method="post" onsubmit="return checkForm()">
         <h2 class="form-signin-heading"><font color="gray">场地预约与管理系统</font></h2>
-        <input id="username" name="username" value="${user.username }" type="text" class="input-block-level" placeholder="用户名">
-        <input id="name" name="name" value="${user.name }" type="text" class="input-block-level" placeholder="姓名">
-        <input id="password" name="password" value="${user.password }" type="password" class="input-block-level" placeholder="密码" >
+        <input id="username" name="username" value="" type="text" class="input-block-level" placeholder="用户名">
+        <input id="name" name="name" value="" type="text" class="input-block-level" placeholder="姓名">
+        <input id="password" name="password" value="" type="password" class="input-block-level" placeholder="密码">
         <label class="radio inline">
-            <input id="sex" type="radio" name="sex" value="MALE"  checked/> 男
+            <input id="sex" type="radio" name="sex" value="MALE" checked/> 男
         </label>
         <label class="radio inline">
-            <input id="sex" type="radio" name="sex" value="FEMALE"  /> 女
+            <input id="sex" type="radio" name="sex" value="FEMALE"/> 女
         </label>
-        <input id="tel" name="tel" value="${user.tel }" type="text" class="input-block-level" placeholder="电话">
+        <input id="tel" name="tel" value="" type="text" class="input-block-level" placeholder="电话">
         <font id="error" color="red">${error }</font><br>
         <div align="center" >
             <button class="btn btn-large btn-primary" type="submit">注册</button>

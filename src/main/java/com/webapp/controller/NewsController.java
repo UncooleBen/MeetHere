@@ -2,14 +2,15 @@ package com.webapp.controller;
 
 import com.webapp.model.News;
 import com.webapp.service.database.dao.NewsDao;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * @author Juntao Peng
@@ -47,7 +48,8 @@ public class NewsController {
       ModelAndView mv, String action, int newsId, HttpServletRequest request) {
     switch (action) {
       case "list":
-        // TODO 3. need check
+        // TODO setViewName(mainXXXX) addObject("mainPage", "user/XXXXXX.jsp");
+        // Add action "detail" addObject("news", news);
         break;
       case "add":
         mv.setViewName("admin/newsSave");
@@ -82,7 +84,6 @@ public class NewsController {
   }
 
   private void userNewsService(ModelAndView mv, String action) {
-    assert action.equals("list");
     // TODO: need check
     mv.setViewName("user/news");
     listNews(mv, "user");

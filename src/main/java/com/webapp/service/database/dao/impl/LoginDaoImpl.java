@@ -1,16 +1,14 @@
 package com.webapp.service.database.dao.impl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import com.webapp.model.user.Admin;
 import com.webapp.model.user.User;
 import com.webapp.service.database.DatabaseService;
 import com.webapp.service.database.dao.LoginDao;
-import com.webapp.service.database.dao.UserDao;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * @author Juntao Peng
@@ -30,6 +28,8 @@ public class LoginDaoImpl extends DatabaseService implements LoginDao {
 			PreparedStatement pstmt = connection.prepareStatement(SELECT);
 			pstmt.setString(1, loginUsername);
 			pstmt.setString(2, loginPassword);
+			System.out.println(loginUsername);
+			System.out.println(loginPassword);
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
 				int id = rs.getInt("id");
@@ -65,14 +65,21 @@ public class LoginDaoImpl extends DatabaseService implements LoginDao {
 
 		User resultUser = null;
 		String SELECT = "SELECT * FROM t_user WHERE username = ?";
+		String INSERT = "INSERT INTO t_user (username, password, name, sex, permission, tel) " +
+				"VALUES(?,?,?,?,?,?)";
 		try {
 			PreparedStatement pstmt = connection.prepareStatement(SELECT);
 			pstmt.setString(1, user.getUsername());
 			ResultSet rs = pstmt.executeQuery();
 			if (!rs.next()) {
-				UserDao userDao = new UserDaoImpl();
-				User tempUser = userDao.queryUserByUsername(user.getUsername());
-				user.setId(tempUser.getId());
+				pstmt = connection.prepareStatement(INSERT);
+				pstmt.setString(1, user.getUsername());
+				pstmt.setString(2, user.getPassword());
+				pstmt.setString(3, user.getName());
+				pstmt.setString(4, user.getSex().toString());
+				pstmt.setInt(5, 1);
+				pstmt.setString(6, user.getTel());
+				pstmt.execute();
 				resultUser = user;
 			}
 			closeConnection(connection);

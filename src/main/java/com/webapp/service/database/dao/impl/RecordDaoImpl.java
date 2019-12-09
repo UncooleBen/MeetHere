@@ -3,6 +3,7 @@ package com.webapp.service.database.dao.impl;
 import com.webapp.model.Record;
 import com.webapp.service.database.DatabaseService;
 import com.webapp.service.database.dao.RecordDao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,14 +17,15 @@ import java.util.List;
 public class RecordDaoImpl extends DatabaseService implements RecordDao {
 
     @Override
-    public List<Record> listRecord(int size) {
+    public List<Record> listRecord(int size, boolean verified) {
         Connection connection = getConnection();
         assert connection != null;
         List<Record> recordList = new ArrayList<Record>();
-        String SELECT = "SELECT * FROM t_record ORDER BY last_modified DESC LIMIT ?";
+        String SELECT = "SELECT * FROM t_record WHERE verified = ? ORDER BY time DESC LIMIT ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
-            preparedStatement.setInt(1, size);
+            preparedStatement.setBoolean(1, verified);
+            preparedStatement.setInt(2, size);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 Record tempRecord = new Record(rs.getInt("id"), rs.getLong("time"), rs.getLong("start_date"),
@@ -44,7 +46,7 @@ public class RecordDaoImpl extends DatabaseService implements RecordDao {
         Connection connection = getConnection();
         assert connection != null;
         List<Record> recordList = new ArrayList<Record>();
-        String SELECT = "SELECT * FROM t_record WHERE building_id = (?) ORDER BY last_modified DESC LIMIT ?";
+        String SELECT = "SELECT * FROM t_record WHERE building_id = (?) ORDER BY time DESC LIMIT ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
             preparedStatement.setInt(1, buildId);
@@ -69,7 +71,7 @@ public class RecordDaoImpl extends DatabaseService implements RecordDao {
         Connection connection = getConnection();
         assert connection != null;
         List<Record> recordList = new ArrayList<Record>();
-        String SELECT = "SELECT * FROM t_record WHERE user_id = (?) ORDER BY last_modified DESC LIMIT ?";
+        String SELECT = "SELECT * FROM t_record WHERE user_id = (?) ORDER BY time DESC LIMIT ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
             preparedStatement.setInt(1, userId);

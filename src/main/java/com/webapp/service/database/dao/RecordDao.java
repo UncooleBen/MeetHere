@@ -18,7 +18,7 @@ public interface RecordDao {
      * @param size The size of record list
      * @return A list of record
      */
-    List<Record> listRecord(int size);
+    List<Record> listRecord(int size, boolean verified);
 
     /**
      * Get the list of records in 't_record' given building id.

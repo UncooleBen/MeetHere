@@ -1,17 +1,17 @@
 package com.webapp.service.database.dao.impl;
 
+import com.webapp.model.user.Admin;
+import com.webapp.model.user.Gender;
+import com.webapp.model.user.User;
+import com.webapp.service.database.DatabaseService;
+import com.webapp.service.database.dao.UserDao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.webapp.model.user.Admin;
-import com.webapp.model.user.Gender;
-import com.webapp.model.user.User;
-import com.webapp.service.database.DatabaseService;
-import com.webapp.service.database.dao.UserDao;
 
 
 /**
@@ -217,7 +217,6 @@ public class UserDaoImpl extends DatabaseService implements UserDao {
     public boolean deleteUser(int id) {
         Connection connection = getConnection();
         assert connection != null;
-        assert id > 0;
         boolean result = true;
         String DELETE = "DELETE FROM t_user WHERE id=(?)";
         try {

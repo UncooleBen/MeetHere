@@ -3,14 +3,15 @@ package com.webapp.controller;
 import com.webapp.model.Record;
 import com.webapp.model.user.User;
 import com.webapp.service.database.dao.RecordDao;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * @author Shangzhen Li
@@ -50,11 +51,13 @@ public class RecordController {
         Record record = recordDao.queryRecordById(id);
         record.setVerified(true);
         recordDao.updateRecord(record);
+        listRecord(mv, true, -1);
         mv.addObject("mainPage", "admin/record.jsp");
         break;
       case "delete":
         int recordId = Integer.parseInt(request.getParameter("recordId"));
         recordDao.deleteRecord(recordId);
+        listRecord(mv, true, -1);
         mv.addObject("mainPage", "admin/record.jsp");
         break;
       case "list":
@@ -68,7 +71,7 @@ public class RecordController {
   private void userRecordService(ModelAndView mv, String action, HttpServletRequest request) {
     switch (action) {
       case "add":
-        mv.addObject("mainPage", "user/recordAdd.jsp");
+        mv.addObject("mainPage", "user/recordModify.jsp");
         break;
       case "save":
         Record record = new Record();

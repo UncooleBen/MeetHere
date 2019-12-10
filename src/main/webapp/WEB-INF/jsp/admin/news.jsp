@@ -18,17 +18,6 @@
     <div class="data_list_title">
         新闻管理
     </div>
-    <%--    <form name="myForm" class="form-search" method="post" action="news?action=search" style="padding-bottom: 0px">--%>
-    <%--        <span class="data_search">--%>
-    <%--					<font id="error" color="red">${error}</font>--%>
-    <%--					<select id="searchType" name="searchType" style="width: 80px;">--%>
-    <%--						<option value="name">标题</option>--%>
-    <%--						<option value="id" >ID</option>--%>
-    <%--					</select>--%>
-    <%--					&nbsp;<input id="id_search_user_text" name="search_user_text" type="text"  style="width:120px;height: 30px;" class="input-medium search-query" value="${search_user_text}">--%>
-    <%--					&nbsp;<button type="submit" class="btn btn-info" onkeydown="if(event.keyCode==13) myForm.submit()">搜索</button>--%>
-    <%--				</span>--%>
-    <%--    </form>--%>
     <div>
         <table class="table table-striped table-bordered table-hover datatable">
             <thead>

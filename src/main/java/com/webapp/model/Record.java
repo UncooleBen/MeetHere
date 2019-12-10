@@ -12,41 +12,53 @@ public class Record {
   private boolean verified;
 
   public Record(
-      int id, long time, long startDate, long endDate, int userId, int buildId, boolean verified) {
-    this.id = id;
-    this.time = time;
-    this.startDate = startDate;
-    this.endDate = endDate;
-    this.userId = userId;
-    this.buildingId = buildId;
-    this.verified = verified;
+          int id, long time, long startDate, long endDate, int userId, int buildId, boolean verified) {
+      this.id = id;
+      this.time = time;
+      this.startDate = startDate;
+      this.endDate = endDate;
+      this.userId = userId;
+      this.buildingId = buildId;
+      this.verified = verified;
   }
 
-  public int getId() {
-    return id;
-  }
+    public Record(long time, long startDate, long endDate, int userId, int buildId, boolean verified) {
+        this.time = time;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.userId = userId;
+        this.buildingId = buildId;
+        this.verified = verified;
+    }
 
-  public void setId(int id) {
-    this.id = id;
-  }
+    public Record() {
+    }
 
-  public long getTime() {
-    return time;
-  }
+    public int getId() {
+        return id;
+    }
 
-  public void setTime(long time) {
-    this.time = time;
-  }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-  public long getStartDate() {
-    return startDate;
-  }
+    public long getTime() {
+        return time;
+    }
 
-  public void setStartDate(long startDate) {
-    this.startDate = startDate;
-  }
+    public void setTime(long time) {
+        this.time = time;
+    }
 
-  public long getEndDate() {
+    public long getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(long startDate) {
+        this.startDate = startDate;
+    }
+
+    public long getEndDate() {
     return endDate;
   }
 
@@ -57,8 +69,6 @@ public class Record {
   public int getUserId() {
     return userId;
   }
-
-  public Record() {}
 
   public void setUserId(int userId) {
     this.userId = userId;

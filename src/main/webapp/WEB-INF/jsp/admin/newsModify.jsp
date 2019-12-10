@@ -20,16 +20,12 @@
         }
         return true;
     }
-
-    $(document).ready(function(){
-        $("ul li:eq(2)").addClass("active");
-    });
 </script>
 <div class="data_list">
     <div class="data_list_title">
         <c:choose>
-            <c:when test="${user.userId!=null }">
-                新闻发布
+            <c:when test="${news.id!=null }">
+                新闻修改
             </c:when>
             <c:otherwise>
                 新闻发布
@@ -55,7 +51,9 @@
             </table>
             <div align="center">
                 <input type="submit" class="btn btn-primary" value="保存"/>
-                &nbsp;<button class="btn btn-primary" type="button" onclick="javascript:window.location='news'">返回</button>
+                &nbsp;<button class="btn btn-primary" type="button"
+                              onclick="javascript:window.location='news?action=list'">返回
+            </button>
             </div>
             <div align="center">
                 <font id="error" color="red">${error }</font>

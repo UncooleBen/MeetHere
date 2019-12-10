@@ -2,7 +2,10 @@ package com.webapp.controller;
 
 import com.webapp.filter.LoginFilter;
 import com.webapp.model.Building;
+import com.webapp.model.Record;
+import com.webapp.model.user.User;
 import com.webapp.service.database.dao.BuildingDao;
+import com.webapp.service.database.dao.RecordDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,10 +20,12 @@ import java.util.List;
 public class BuildingController {
 
     BuildingDao buildingDao;
+    RecordDao recordDao;
 
     @Autowired
-    public BuildingController(BuildingDao buildingDao) {
+    public BuildingController(BuildingDao buildingDao, RecordDao recordDao) {
         this.buildingDao = buildingDao;
+        this.recordDao = recordDao;
     }
 
     @RequestMapping("/building")
@@ -32,7 +37,7 @@ public class BuildingController {
         if (!isAuthorized) {
             return mv;
         }
-        if (!"list".equals(action)) {
+        if (!"list".equals(action) && !"book".equals(action)) {
             isAuthorized = LoginFilter.isAuthorized(currentUserType, "admin", mv); /* Filter not login*/
             if (!isAuthorized) {
                 return mv;
@@ -59,11 +64,27 @@ public class BuildingController {
                 saveBuilding(mv, request);
                 listBuildings(mv, currentUserType);
                 break;
+            case "book":
+                bookBuilding(mv, request, session);
+                listBuildings(mv, currentUserType);
+                break;
             case "list":
             default:
                 listBuildings(mv, currentUserType);
         }
         return mv;
+    }
+
+    public void bookBuilding(ModelAndView mv, HttpServletRequest request, HttpSession session) {
+        User currentUser = (User) session.getAttribute("currentUser");
+        String buildingId = request.getParameter("buildingId");
+        String startDate = request.getParameter("startDate");
+        String duration = request.getParameter("duration");
+        int userId = currentUser.getId();
+        long currentTime = System.currentTimeMillis();
+        Record record = new Record(currentTime, currentTime, currentTime, userId,
+                Integer.parseInt(buildingId), false);
+        this.recordDao.addRecord(record);
     }
 
     public void listBuildings(ModelAndView mv, String currentUserType) {
@@ -96,10 +117,10 @@ public class BuildingController {
     }
 
     public void saveBuilding(ModelAndView mv, HttpServletRequest request) {
-        String name = request.getParameter("name");
-        String description = request.getParameter("description");
-        String price = request.getParameter("price");
-        String idStr = request.getParameter("id");
+        String name = request.getParameter("buildingName");
+        String description = request.getParameter("buildingDescription");
+        String price = request.getParameter("buildingPrice");
+        String idStr = request.getParameter("buildingId");
         Building building = new Building(name, description, price);
         if (idStr != null && idStr.length() != 0) {
             int id = Integer.valueOf(idStr);

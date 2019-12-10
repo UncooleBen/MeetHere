@@ -55,33 +55,6 @@ function recordApprove(recordId) {
 	<div class="data_list_title">
 		已审核记录
 	</div>
-	<%--		<form name="myForm1" class="form-search" method="post" action="record?action=search" style="padding-bottom: 0px">--%>
-	<%--				<span class="data_search">--%>
-	<%--					<!--span class="controls input-append date form_date" style="margin-right: 10px" data-date="" data-date-format="yyyy-mm-dd" data-link-format="yyyy-mm-dd">--%>
-	<%--                    	<input id="startDate" name="startDate" style="width:120px;height: 30px;" placeholder="起始日期" type="text" value="${startDate }" readonly >--%>
-	<%--                    	<span class="add-on"><i class="icon-remove"></i></span>--%>
-	<%--						<span class="add-on"><i class="icon-th"></i></span>--%>
-	<%--               		</span>--%>
-	<%--					<span class="controls input-append date form_date" style="margin-right: 10px" data-date="" data-date-format="yyyy-mm-dd" data-link-format="yyyy-mm-dd">--%>
-	<%--                    	<input id="endDate" name="endDate" style="width:120px;height: 30px;" placeholder="终止日期" type="text" value="${endDate }" readonly>--%>
-	<%--                    	<span class="add-on"><i class="icon-remove"></i></span>--%>
-	<%--						<span class="add-on"><i class="icon-th"></i></span>--%>
-	<%--               		 </span-->--%>
-	<%--					<select id="buildToSelect1" name="buildToSelect1" style="width: 110px;">--%>
-	<%--					<option value="">全部场地</option>--%>
-	<%--					<c:forEach var="building" items="${buildingList }">--%>
-	<%--						<option value="${building.buildId }" ${buildToSelect==building.buildId?'selected':'' }>${building.buildName }</option>--%>
-	<%--					</c:forEach>--%>
-	<%--					</select>--%>
-	<%--					<select id="searchType1" name="searchType1" style="width: 80px;">--%>
-	<%--					<option value="name">姓名</option>--%>
-	<%--					<option value="number" ${searchType eq "number"?'selected':'' }>客户</option>--%>
-	<%--					<option value="dorm" ${searchType eq "dorm"?'selected':'' }>天数</option>--%>
-	<%--					</select>--%>
-	<%--					&nbsp;<input id="s_userText1" name="s_userText1" type="text"  style="width:120px;height: 30px;" class="input-medium search-query" value="${s_userText }">--%>
-	<%--					&nbsp;<button type="submit" class="btn btn-info" onkeydown="if(event.keyCode==13) myForm.submit()">搜索</button>--%>
-	<%--				</span>--%>
-	<%--		</form>--%>
 	<div>
 		<table class="table table-striped table-bordered table-hover datatable">
 			<thead>
@@ -91,7 +64,6 @@ function recordApprove(recordId) {
 				<th>客户</th>
 				<th>场地</th>
 				<th>使用时间</th>
-				<%--					<th>备注</th>--%>
 			</tr>
 			</thead>
 			<tbody>
@@ -102,7 +74,9 @@ function recordApprove(recordId) {
 					<td>${record.userId }</td>
 					<td>${record.buildingId==null?"无":record.buildingId }</td>
 					<td>${record.time }</td>
-						<%--						<td>${record.detail }</td>--%>
+					<!-- see user/comment.jsp function convertDate(millisecond, id) for time conversion
+						Usage at line 39.
+					-->
 				</tr>
 			</c:forEach>
 			</tbody>
@@ -112,33 +86,6 @@ function recordApprove(recordId) {
 	<div class="data_list_title">
 		待审核记录
 	</div>
-	<%--    <form name="myForm" class="form-search" method="post" action="record?action=search" style="padding-bottom: 0px">--%>
-	<%--				<span class="data_search">--%>
-	<%--					<!--span class="controls input-append date form_date" style="margin-right: 10px" data-date="" data-date-format="yyyy-mm-dd" data-link-format="yyyy-mm-dd">--%>
-	<%--                    	<input id="startDate" name="startDate" style="width:120px;height: 30px;" placeholder="起始日期" type="text" value="${startDate }" readonly >--%>
-	<%--                    	<span class="add-on"><i class="icon-remove"></i></span>--%>
-	<%--						<span class="add-on"><i class="icon-th"></i></span>--%>
-	<%--               		</span>--%>
-	<%--					<span class="controls input-append date form_date" style="margin-right: 10px" data-date="" data-date-format="yyyy-mm-dd" data-link-format="yyyy-mm-dd">--%>
-	<%--                    	<input id="endDate" name="endDate" style="width:120px;height: 30px;" placeholder="终止日期" type="text" value="${endDate }" readonly>--%>
-	<%--                    	<span class="add-on"><i class="icon-remove"></i></span>--%>
-	<%--						<span class="add-on"><i class="icon-th"></i></span>--%>
-	<%--               		 </span-->--%>
-	<%--					<select id="buildToSelect" name="buildToSelect" style="width: 110px;">--%>
-	<%--					<option value="">全部场地</option>--%>
-	<%--					<c:forEach var="building" items="${buildingList }">--%>
-	<%--                        <option value="${building.buildId }" ${buildToSelect==building.buildId?'selected':'' }>${building.buildName }</option>--%>
-	<%--                    </c:forEach>--%>
-	<%--					</select>--%>
-	<%--					<select id="searchType" name="searchType" style="width: 80px;">--%>
-	<%--					<option value="name">姓名</option>--%>
-	<%--					<option value="number" ${searchType eq "number"?'selected':'' }>客户</option>--%>
-	<%--					<option value="dorm" ${searchType eq "dorm"?'selected':'' }>天数</option>--%>
-	<%--					</select>--%>
-	<%--					&nbsp;<input id="s_userText" name="s_userText" type="text"  style="width:120px;height: 30px;" class="input-medium search-query" value="${s_userText }">--%>
-	<%--					&nbsp;<button type="submit" class="btn btn-info" onkeydown="if(event.keyCode==13) myForm.submit()">搜索</button>--%>
-	<%--				</span>--%>
-	<%--    </form>--%>
 	<div>
 		<table class="table table-striped table-bordered table-hover datatable">
 			<thead>
@@ -148,7 +95,6 @@ function recordApprove(recordId) {
 				<th>客户</th>
 				<th>场地</th>
 				<th>使用时间</th>
-				<%--					<th>备注</th>--%>
 				<th>操作</th>
 			</tr>
 			</thead>

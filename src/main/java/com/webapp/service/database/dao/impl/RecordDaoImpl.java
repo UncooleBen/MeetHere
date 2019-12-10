@@ -3,6 +3,7 @@ package com.webapp.service.database.dao.impl;
 import com.webapp.model.Record;
 import com.webapp.service.database.DatabaseService;
 import com.webapp.service.database.dao.RecordDao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -45,7 +46,7 @@ public class RecordDaoImpl extends DatabaseService implements RecordDao {
         Connection connection = getConnection();
         assert connection != null;
         List<Record> recordList = new ArrayList<Record>();
-        String SELECT = "SELECT * FROM t_record WHERE building_id = (?) ORDER BY time DESC LIMIT ?";
+        String SELECT = "SELECT * FROM t_record WHERE building_id = ? ORDER BY time DESC LIMIT ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
             preparedStatement.setInt(1, buildId);
@@ -67,27 +68,27 @@ public class RecordDaoImpl extends DatabaseService implements RecordDao {
 
     @Override
     public List<Record> listRecordWithUserId(int size, int userId, boolean verified) {
-      Connection connection = getConnection();
-      assert connection != null;
-      List<Record> recordList = new ArrayList<Record>();
-      String SELECT = "SELECT * FROM t_record WHERE user_id = (?) ORDER BY time DESC LIMIT ?";
-      try {
-        PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
-        preparedStatement.setInt(1, userId);
-        preparedStatement.setInt(2, size);
-        ResultSet rs = preparedStatement.executeQuery();
-        while (rs.next()) {
-          Record tempRecord = new Record(rs.getInt("id"), rs.getLong("time"),
-              rs.getLong("start_date"),
-              rs.getLong("end_date"), rs.getInt("user_id"), rs.getInt("building_id"),
-              rs.getBoolean("verified"));
-          recordList.add(tempRecord);
-        }
-        closeConnection(connection);
-        return recordList;
-      } catch (SQLException sqlException) {
-        sqlException.printStackTrace(System.err);
-        return recordList;
+        Connection connection = getConnection();
+        assert connection != null;
+        List<Record> recordList = new ArrayList<Record>();
+        String SELECT = "SELECT * FROM t_record WHERE user_id = ? ORDER BY time DESC LIMIT ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(2, size);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                Record tempRecord = new Record(rs.getInt("id"), rs.getLong("time"),
+                        rs.getLong("start_date"),
+                        rs.getLong("end_date"), rs.getInt("user_id"), rs.getInt("building_id"),
+                        rs.getBoolean("verified"));
+                recordList.add(tempRecord);
+            }
+            closeConnection(connection);
+            return recordList;
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace(System.err);
+            return recordList;
         }
     }
 
@@ -142,7 +143,6 @@ public class RecordDaoImpl extends DatabaseService implements RecordDao {
     public boolean deleteRecord(int id) {
         Connection connection = getConnection();
         assert connection != null;
-        assert id > 0;
         String DELETE = "DELETE FROM t_record WHERE id = ?";
         try {
           PreparedStatement preparedStatement = connection.prepareStatement(DELETE);
@@ -161,20 +161,20 @@ public class RecordDaoImpl extends DatabaseService implements RecordDao {
         Connection connection = getConnection();
         assert connection != null;
         assert record != null;
-        assert record.getId() > 0;
-      String UPDATE = "UPDATE t_record SET time=?, start_date=?, end_date=?, user_id=?, building_id=?, verified=? WHERE id = ? ";
+        String UPDATE = "UPDATE t_record SET time = ?, start_date = ?, end_date = ?, user_id = ?, building_id = ?" +
+                ", verified = ? WHERE id = ?";
         try {
-          PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);
-          preparedStatement.setInt(7, record.getId());
-          preparedStatement.setLong(1, record.getTime());
-          preparedStatement.setLong(2, record.getStartDate());
-          preparedStatement.setLong(3, record.getEndDate());
-          preparedStatement.setInt(4, record.getUserId());
-          preparedStatement.setInt(5, record.getBuildingId());
-          preparedStatement.setBoolean(6, record.isVerified());
-          preparedStatement.execute();
-          closeConnection(connection);
-          return true;
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);
+            preparedStatement.setInt(7, record.getId());
+            preparedStatement.setLong(1, record.getTime());
+            preparedStatement.setLong(2, record.getStartDate());
+            preparedStatement.setLong(3, record.getEndDate());
+            preparedStatement.setInt(4, record.getUserId());
+            preparedStatement.setInt(5, record.getBuildingId());
+            preparedStatement.setBoolean(6, record.isVerified());
+            preparedStatement.execute();
+            closeConnection(connection);
+            return true;
         } catch (SQLException sqlException) {
             sqlException.printStackTrace(System.err);
             return false;

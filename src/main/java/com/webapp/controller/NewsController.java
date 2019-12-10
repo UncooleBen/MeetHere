@@ -2,14 +2,15 @@ package com.webapp.controller;
 
 import com.webapp.model.News;
 import com.webapp.service.database.dao.NewsDao;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * @author Juntao Peng
@@ -47,7 +48,7 @@ public class NewsController {
     switch (action) {
       // TODO need check
       case "add":
-        mv.addObject("mainPage", "admin/newsAdd.jsp");
+        mv.addObject("mainPage", "admin/newsModify.jsp");
         break;
       case "delete": {
         int newsId = Integer.parseInt(request.getParameter("newsId"));
@@ -62,7 +63,7 @@ public class NewsController {
         mv.addObject("title", news.getTitle());
         mv.addObject("author", news.getAuthor());
         mv.addObject("detail", news.getDetail());
-        mv.addObject("mainPage", "admin/newsAdd.jsp");
+        mv.addObject("mainPage", "admin/newsModify.jsp");
         break;
       }
       case "save": {

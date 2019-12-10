@@ -3,6 +3,7 @@ package com.webapp.service.database.dao.impl;
 import com.webapp.model.Comment;
 import com.webapp.service.database.DatabaseService;
 import com.webapp.service.database.dao.CommentDao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,8 +24,8 @@ public class CommentDaoImpl extends DatabaseService implements CommentDao {
   @Override
   public List<Comment> listComment(int size, boolean verified) {
     List<Comment> commentList = new ArrayList<Comment>();
-    String sql = "SELECT * FROM t_comment WHERE verified=? LIMIT ?";
-    Connection connection = getConnection();
+      String sql = "SELECT * FROM t_comment WHERE verified = ? LIMIT ?";
+      Connection connection = getConnection();
     try {
       PreparedStatement preparedStatement = connection.prepareStatement(sql);
       preparedStatement.setBoolean(1, verified);
@@ -61,8 +62,9 @@ public class CommentDaoImpl extends DatabaseService implements CommentDao {
         comment.setId(rs.getInt("id"));
         comment.setUserId(rs.getInt("userId"));
         comment.setDate(rs.getLong("date"));
-        comment.setContent(rs.getString("content"));
-        commentList.add(comment);
+          comment.setContent(rs.getString("content"));
+          comment.setVerified(rs.getBoolean("verified"));
+          commentList.add(comment);
       }
     } catch (SQLException sqlException) {
       sqlException.printStackTrace(System.err);
@@ -142,16 +144,17 @@ public class CommentDaoImpl extends DatabaseService implements CommentDao {
 
   @Override
   public boolean updateComment(Comment comment) {
-    String sql = "UPDATE t_comment SET userId=?,date=?,content=? WHERE id=?";
-    Connection connection = getConnection();
+      String sql = "UPDATE t_comment SET userId = ?, date = ?, content = ?, verified = ? WHERE id=?";
+      Connection connection = getConnection();
     int result = 0;
     try {
-      PreparedStatement preparedStatement = connection.prepareStatement(sql);
-      preparedStatement.setInt(1, comment.getUserId());
-      preparedStatement.setLong(2, comment.getDate());
-      preparedStatement.setString(3, comment.getContent());
-      preparedStatement.setInt(4, comment.getId());
-      result = preparedStatement.executeUpdate();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, comment.getUserId());
+        preparedStatement.setLong(2, comment.getDate());
+        preparedStatement.setString(3, comment.getContent());
+        preparedStatement.setBoolean(4, comment.isVerified());
+        preparedStatement.setInt(5, comment.getId());
+        result = preparedStatement.executeUpdate();
     } catch (Exception e) {
       System.out.println(e.getMessage());
     } finally {

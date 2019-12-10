@@ -28,8 +28,6 @@ public class LoginDaoImpl extends DatabaseService implements LoginDao {
 			PreparedStatement pstmt = connection.prepareStatement(SELECT);
 			pstmt.setString(1, loginUsername);
 			pstmt.setString(2, loginPassword);
-			System.out.println(loginUsername);
-			System.out.println(loginPassword);
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
 				int id = rs.getInt("id");

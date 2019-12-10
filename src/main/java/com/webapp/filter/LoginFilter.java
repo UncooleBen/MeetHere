@@ -17,7 +17,7 @@ public class LoginFilter {
         }
         /* Login and unauthorized user type */
         mv.setViewName("mainUser");
-        mv.addObject("mainPage", "blank.jsp");
+        mv.addObject("mainPage", "user/blank.jsp");
         return false;
     }
 

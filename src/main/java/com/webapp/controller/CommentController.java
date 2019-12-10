@@ -2,6 +2,7 @@ package com.webapp.controller;
 
 import com.webapp.filter.LoginFilter;
 import com.webapp.model.Comment;
+import com.webapp.model.user.User;
 import com.webapp.service.database.dao.CommentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,10 +16,6 @@ import java.util.List;
 
 @Controller
 public class CommentController {
-
-    //TODO 2. action =  delete (admin-only), verify (admin-only)
-    // list (both)
-	// add
 
     CommentDao commentDao;
 
@@ -36,30 +33,36 @@ public class CommentController {
         if (!isAuthorized) {
             return mv;
         }
-		if (!"list".equals(action) && !"add".equals(action)) {
-			isAuthorized = LoginFilter.isAuthorized(currentUserType, "admin", mv); /* Filter not login*/
-			if (!isAuthorized) {
-				return mv;
-			}
-		}
+        if (!"list".equals(action) && !"add".equals(action) && !"save".equals(action)) {
+            isAuthorized = LoginFilter.isAuthorized(currentUserType, "admin", mv); /* Filter not login*/
+            if (!isAuthorized) {
+                return mv;
+            }
+        }
         String idStr = request.getParameter("id");
         int id = 0;
         if (idStr != null && idStr.length() != 0) {
             id = Integer.parseInt(idStr);
         }
-        mv.setViewName("mainAdmin");
         switch (action) {
             case "delete":
+                mv.setViewName("mainAdmin");
                 deleteComment(mv, id);
                 listComments(mv, currentUserType);
-                if ("admin".equals(currentUserType)) {
-                	listUnverifiedComments(mv);
-				}
+                listUnverifiedComments(mv);
+                break;
+            case "verify":
+                mv.setViewName("mainAdmin");
+                verifyComment(mv, id);
+                listComments(mv, currentUserType);
+                listUnverifiedComments(mv);
                 break;
             case "add":
+                mv.setViewName("mainUser");
                 addComment(mv);
                 break;
             case "save":
+                mv.setViewName("mainUser");
                 saveComment(mv, request, session);
                 listComments(mv, currentUserType);
                 break;
@@ -67,10 +70,16 @@ public class CommentController {
             default:
                 listComments(mv, currentUserType);
                 if ("admin".equals(currentUserType)) {
-                	listUnverifiedComments(mv);
-				}
+                    listUnverifiedComments(mv);
+                }
         }
         return mv;
+    }
+
+    public void verifyComment(ModelAndView mv, int id) {
+        Comment comment = this.commentDao.queryCommentById(id);
+        comment.setVerified(true);
+        this.commentDao.updateComment(comment);
     }
 
     public void listComments(ModelAndView mv, String currentUserType) {
@@ -95,14 +104,12 @@ public class CommentController {
     }
 
     public void addComment(ModelAndView mv) {
-        mv.addObject("mainPage", "admin/commentModify.jsp");
-        mv.addObject("id", null);
-        mv.addObject("comment", null);
+        mv.addObject("mainPage", "user/commentSave.jsp");
     }
 
     public void saveComment(ModelAndView mv, HttpServletRequest request, HttpSession session) {
-        String userIdStr = (String) session.getAttribute("userId");
-        int userId = Integer.parseInt(userIdStr);
+        User currentUser = (User) session.getAttribute("currentUser");
+        int userId = currentUser.getId();
         long date = System.currentTimeMillis();
         String content = request.getParameter("content");
         Comment comment = new Comment(userId, date, content);

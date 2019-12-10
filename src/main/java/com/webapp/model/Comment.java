@@ -5,6 +5,7 @@ public class Comment {
   private int userId;
   private long date;
   private String content;
+  private boolean verified;
 
   public int getId() {
     return id;
@@ -38,13 +39,23 @@ public class Comment {
     this.content = content;
   }
 
-  public Comment() {}
-
-  public Comment(int id, int userId, long date, String content) {
+  public Comment(int id, int userId, long date, String content, boolean verified) {
     this.id = id;
     this.userId = userId;
     this.date = date;
     this.content = content;
+    this.verified = verified;
+  }
+
+  public boolean isVerified() {
+    return verified;
+  }
+
+  public Comment() {
+  }
+
+  public void setVerified(boolean verified) {
+    this.verified = verified;
   }
 
   public Comment(int userId, long date, String content) {

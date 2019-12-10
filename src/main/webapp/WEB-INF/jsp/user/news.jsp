@@ -42,6 +42,11 @@
   function newsDetail(newsID) {
     window.location = "news?action=detail&newsId=" + newsID;
   }
+
+  function convertDate(millisecond, id) {
+    date = new Date(millisecond);
+    document.getElementById(id).innerText = date.toDateString();
+  }
 </script>
 
 <div class="data_list">
@@ -62,7 +67,9 @@
                         <p>${news.author }</p>
                     </div>
                     <div class="data_box_text">
-                        <p>${news.created }</p>
+                        <p id="createdTime${i.index}">
+                            <script>convertDate(${news.created }, "createdTime${i.index}")</script>
+                        </p>
                     </div>
                     <div class="btn" onclick=newsDetail(${news.id })>查看</div>
                 </div>

@@ -76,9 +76,11 @@ public class RecordController {
         Record record = new Record();
         record.setBuildingId(Integer.parseInt(request.getParameter("buildingId")));
         record.setUserId(Integer.parseInt(request.getParameter("userId")));
-        record.setStartDate(Long.parseLong(request.getParameter("startDate")));
-        record.setEndDate(Long.parseLong(request.getParameter("endDate")));
-        record.setTime(Long.parseLong(request.getParameter("time")));
+        long startDate = Long.parseLong(request.getParameter("startDate"));
+        long endDate = Long.parseLong(request.getParameter("endDate"));
+        record.setStartDate(startDate);
+        record.setEndDate(endDate);
+        record.setTime(endDate - startDate);
         record.setVerified(false);
         recordDao.addRecord(record);
         mv.addObject("mainPage", "user/record.jsp");

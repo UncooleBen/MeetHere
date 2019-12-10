@@ -42,6 +42,16 @@ function recordDelete(recordId) {
 		window.location = "record?action=delete&recordId=" + recordId;
 	}
 }
+
+function convertDate(millisecond, id) {
+	date = new Date(millisecond);
+	document.getElementById(id).innerText = date.toDateString();
+}
+
+function convertTime(millisecond, id) {
+	var day = millisecond / (86400) + 1;
+	document.getElementById(id).innerText = day.toString() + "天";
+}
 </script>
 
 <div class="data_list">
@@ -77,11 +87,18 @@ function recordDelete(recordId) {
 			<tbody>
 			<c:forEach varStatus="i" var="record" items="${verifiedRecordList }">
 				<tr>
-					<td>${record.startDate }</td>
-					<td>${record.endDate}</td>
+					<td id="verifiedStartDate${i.index}">
+						<script>convertDate(${record.startDate },
+								"verifiedStartDate${i.index}")</script>
+					</td>
+					<td id="verifiedEndDate${i.index}">
+						<script>convertDate(${record.endDate}, "verifiedEndDate${i.index}")</script>
+					</td>
 					<td>${record.userId }</td>
 					<td>${record.buildingId==null?"无":record.buildingId }</td>
-					<td>${record.time }</td>
+					<td id="verifiedInterval${i.index}">
+						<script>convertTime(${record.time }, "verifiedInterval${i.index}")</script>
+					</td>
 				</tr>
 			</c:forEach>
 			</tbody>
@@ -120,11 +137,20 @@ function recordDelete(recordId) {
 			<tbody>
 			<c:forEach varStatus="i" var="record" items="${unverifiedRecordList }">
 				<tr>
-					<td>${record.startDate }</td>
-					<td>${record.endDate}</td>
+					<td id="unverifiedStartDate${i.index}">
+						<script>convertDate(${record.startDate },
+								"unverifiedStartDate${i.index}")</script>
+					</td>
+					<td id="unverifiedEndDate${i.index}">
+						<script>convertDate(${record.endDate},
+								"unverifiedEndDate${i.index}")</script>
+					</td>
 					<td>${record.userId }</td>
 					<td>${record.buildingId==null?"无":record.buildingId }</td>
-					<td>${record.time }</td>
+					<td id="unverifiedInterval${i.index}">
+						<script>convertTime(${record.time },
+								"unverifiedInterval${i.index}")</script>
+					</td>
 					<td>
 							<%--						<button class="btn btn-mini btn-info" type="button" onclick="javascript:window.location='record?action=preSave&recordId=${record.recordId }'">修改</button>&nbsp;--%>
 						<button class="btn btn-mini btn-danger" type="button"

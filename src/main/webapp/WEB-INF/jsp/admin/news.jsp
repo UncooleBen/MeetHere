@@ -12,6 +12,11 @@
       window.location = "news?action=delete&newsId=" + newsId;
     }
   }
+
+  function convertDate(millisecond, id) {
+    date = new Date(millisecond);
+    document.getElementById(id).innerText = date.toDateString();
+  }
 </script>
 
 <div class="data_list">
@@ -36,8 +41,13 @@
             <tbody>
             <c:forEach varStatus="i" var="news" items="${newsList }">
                 <tr>
-                    <td>${news.created }</td>
-                    <td>${news.lastModified }</td>
+                    <td id="createdTime${i.index}">
+                        <script>convertDate(${news.created}, "createdTime${i.index}")</script>
+                    </td>
+                    <td id="lastModifiedTime${i.index}">
+                        <script>convertDate(${news.lastModified },
+                            "lastModifiedTime${i.index}")</script>
+                    </td>
                     <td>${news.title }</td>
                     <td>${news.author }</td>
                     <td>

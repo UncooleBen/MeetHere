@@ -3,15 +3,14 @@ package com.webapp.controller;
 import com.webapp.model.Record;
 import com.webapp.model.user.User;
 import com.webapp.service.database.dao.RecordDao;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.List;
 
 /**
  * @author Shangzhen Li
@@ -71,18 +70,17 @@ public class RecordController {
   private void userRecordService(ModelAndView mv, String action, HttpServletRequest request) {
     switch (action) {
       case "add":
-        mv.addObject("mainPage", "user/recordModify.jsp");
+        mv.addObject("mainPage", "user/recordAdd.jsp");
         break;
       case "save":
         Record record = new Record();
-        record.setId(Integer.parseInt(request.getParameter("recordId")));
         record.setBuildingId(Integer.parseInt(request.getParameter("buildingId")));
         record.setUserId(Integer.parseInt(request.getParameter("userId")));
         record.setStartDate(Long.parseLong(request.getParameter("startDate")));
         record.setEndDate(Long.parseLong(request.getParameter("endDate")));
         record.setTime(Long.parseLong(request.getParameter("time")));
         record.setVerified(false);
-        recordDao.updateRecord(record);
+        recordDao.addRecord(record);
         mv.addObject("mainPage", "user/record.jsp");
         break;
       case "delete":

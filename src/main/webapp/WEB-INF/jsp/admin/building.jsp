@@ -26,33 +26,39 @@
 		<div>
 			<table class="table table-striped table-bordered table-hover datatable">
 				<thead>
-					<tr>
-						<th width="15%">编号</th>
-						<th>名称</th>
-						<th>简介</th>
-						<th>价格</th>
-						<th width="20%">操作</th>
-					</tr>
+				<tr>
+					<th width="15%">编号</th>
+					<th>名称</th>
+					<th>简介</th>
+					<th>价格</th>
+					<th width="20%">操作</th>
+				</tr>
 				</thead>
 				<tbody>
-					<c:forEach  varStatus="i" var="building" items="${buildingList }">
+				<c:forEach varStatus="i" var="building" items="${buildingList }">
 					<tr>
 						<td>${i.count+(page-1)*pageSize }</td>
-						<td>${building.buildName }</td>
+						<td>${building.buildingName }</td>
 						<td>${building.detail==null||building.detail==""?"无":building.detail }</td>
 						<td>${building.price==null||building.price==""?"无":building.price }</td>
 						<td>
-							<button class="btn btn-mini btn-info" type="button" onclick="javascript:window.location='building?action=preSave&buildId=${building.buildId }'">修改</button>&nbsp;
-							<button class="btn btn-mini btn-danger" type="button" onclick="buildDelete(${building.buildId})">删除</button></td>
+							<button class="btn btn-mini btn-info" type="button"
+									onclick="javascript:window.location='building?action=preSave&buildId=${building.buildId }'">
+								修改
+							</button>&nbsp;
+							<button class="btn btn-mini btn-danger" type="button"
+									onclick="buildDelete(${building.buildingId})">删除
+							</button>
+						</td>
 					</tr>
-					</c:forEach>
+				</c:forEach>
 				</tbody>
 			</table>
 		</div>
-		<div align="center"><font color="red">${error }</font></div>
-		<div class="pagination pagination-centered">
-			<ul>
-				${pageCode }
-			</ul>
-		</div>
+	<div align="center"><font color="red">${error }</font></div>
+	<div class="pagination pagination-centered">
+		<ul>
+			${pageCode }
+		</ul>
+	</div>
 </div>

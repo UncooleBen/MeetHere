@@ -86,9 +86,12 @@
 <body>
 <div class="container-fluid" style="padding-right: 0px;padding-left: 0px;">
 	<div region="north" style="height: 100px;background-image: url('resources/images/bg.jpg')">
-		<div align="left" style="width: 80%;height:100px ;float: left;padding-top: 40px;padding-left: 30px;"><font
-				color="white" size="6">MeetHere</font></div>
-		<div style="padding-top: 70px;padding-right: 20px;">当前用户：&nbsp;<font color="red">${currentUser.username }</font>
+		<div align="left"
+			 style="width: 80%;height:100px ;float: left;padding-top: 40px;padding-left: 30px;">
+			<font
+					color="white" size="6">MeetHere</font></div>
+		<div style="padding-top: 70px;padding-right: 20px;">当前用户：&nbsp;<font
+				color="red">${currentUser.username }</font>
 		</div>
 	</div>
 </div>
@@ -100,16 +103,16 @@
 				<li><a href="user?action=list"><i class="icon-chevron-right"></i>用户管理</a></li>
 				<li><a href="news?action=list"><i class="icon-chevron-right"></i>新闻管理</a></li>
 				<li><a href="comment?action=list"><i class="icon-chevron-right"></i>留言管理</a></li>
-					<li><a href="building?action=list"><i class="icon-chevron-right"></i>场地管理</a></li>
-					<li><a href="record?action=list"><i class="icon-chevron-right"></i>预约管理</a></li>
-					<li><a href="password?action=preChange"><i class="icon-chevron-right"></i>修改密码</a></li>
-					<li><a href="index"><i class="icon-chevron-right"></i>退出系统</a></li>
-				</ul>
-			</div>
-					<div class="span10">
-						<jsp:include page="${ mainPage==null ? 'admin/blank.jsp' : mainPage }"></jsp:include>
-					</div>
-			</div>
+				<li><a href="building?action=list"><i class="icon-chevron-right"></i>场地管理</a></li>
+				<li><a href="record?action=list"><i class="icon-chevron-right"></i>预约管理</a></li>
+				<li><a href="password?action=change"><i class="icon-chevron-right"></i>修改密码</a></li>
+				<li><a href="index"><i class="icon-chevron-right"></i>退出系统</a></li>
+			</ul>
 		</div>
+		<div class="span10">
+			<jsp:include page="${ mainPage==null ? 'admin/blank.jsp' : mainPage }"></jsp:include>
+		</div>
+	</div>
+</div>
 </body>
 </html>

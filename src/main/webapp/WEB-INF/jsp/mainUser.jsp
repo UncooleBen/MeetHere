@@ -101,16 +101,16 @@
                 <li><a href="news?action=list"><i class="icon-chevron-right"></i>新闻</a></li>
                 <li><a href="comment?action=list"><i class="icon-chevron-right"></i>留言板</a></li>
                 <li><a href="building?action=list"><i class="icon-chevron-right"></i>场地预约</a></li>
-					<!--li><a href="record?action=add"><i class="icon-chevron-right"></i>我要预约</a></li-->
-					<li><a href="record?action=list"><i class="icon-chevron-right"></i>预约记录</a></li>
-					<li><a href="password?action=preChange"><i class="icon-chevron-right"></i>修改密码</a></li>
-					<li><a href="index"><i class="icon-chevron-right"></i>退出系统</a></li>
-				</ul>
-			</div>
-					<div class="span10">
-						<jsp:include page="${ mainPage==null ? 'user/blank.jsp' : mainPage }"></jsp:include>
-					</div>
-			</div>
-		</div>
+                <!--li><a href="record?action=add"><i class="icon-chevron-right"></i>我要预约</a></li-->
+                <li><a href="record?action=list"><i class="icon-chevron-right"></i>预约记录</a></li>
+                <li><a href="password?action=change"><i class="icon-chevron-right"></i>修改密码</a></li>
+                <li><a href="index"><i class="icon-chevron-right"></i>退出系统</a></li>
+            </ul>
+        </div>
+        <div class="span10">
+            <jsp:include page="${ mainPage==null ? 'user/blank.jsp' : mainPage }"></jsp:include>
+        </div>
+    </div>
+</div>
 </body>
 </html>

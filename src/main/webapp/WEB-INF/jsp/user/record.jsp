@@ -33,106 +33,104 @@ $(document).ready(function(){
 	$("#DataTables_Table_0_wrapper .row-fluid").remove();
 });
 
-window.onload = function(){ 
+window.onload = function () {
 	$("#DataTables_Table_0_wrapper .row-fluid").remove();
 };
 
 function recordDelete(recordId) {
-    if(confirm("您确定要取消本次预约吗？")) {
-        window.location="record?action=delete&recordId="+recordId;
-    }
+	if (confirm("您确定要取消本次预约吗？")) {
+		window.location = "record?action=delete&recordId=" + recordId;
+	}
 }
 </script>
 
 <div class="data_list">
-		<div class="data_list_title">
-			已审核记录
-		</div>
-		<form name="myForm1" class="form-search" method="post" action="recordFinal?action=search" style="padding-bottom: 0px">
-				<!--span class="data_search">
-					<span class="controls input-append date form_date" style="margin-right: 10px" data-date="" data-date-format="yyyy-mm-dd" data-link-format="yyyy-mm-dd">
-                    	<input id="startDate" name="startDate" style="width:120px;height: 30px;" placeholder="起始日期" type="text" value="${startDate }" readonly >
-                    	<span class="add-on"><i class="icon-remove"></i></span>
-						<span class="add-on"><i class="icon-th"></i></span>
-               		</span>
-					<span class="controls input-append date form_date" style="margin-right: 10px" data-date="" data-date-format="yyyy-mm-dd" data-link-format="yyyy-mm-dd">
-                    	<input id="endDate" name="endDate" style="width:120px;height: 30px;" placeholder="终止日期" type="text" value="${endDate }" readonly>
-                    	<span class="add-on"><i class="icon-remove"></i></span>
-						<span class="add-on"><i class="icon-th"></i></span>
-               		</span>
-					&nbsp;<button type="submit" class="btn btn-info" onkeydown="if(event.keyCode==13) myForm.submit()">搜索</button>
-				</span-->
-		</form>
-		<div>
-			<table class="table table-striped table-bordered table-hover datatable">
-				<thead>
-					<tr>
-					<th>起始日期</th>
-					<th>工号</th>
-					<th>姓名</th>
-					<th>场地</th>
-					<th>天数</th>
-					<th>备注</th>
-					</tr>
-				</thead>
-				<tbody>
-				<c:forEach  varStatus="i" var="record" items="${recordFinalList }">
-					<tr>
-						<td>${record.date }</td>
-						<td>${record.userNumber }</td>
-						<td>${record.userName }</td>
-						<td>${record.buildName==null?"无":record.buildName }</td>
-						<td>${record.roomName }</td>
-						<td>${record.detail }</td>
-					</tr>
-				</c:forEach>
-				</tbody>
-			</table>
-		</div>
-		<div align="center"><font color="red">${error }</font></div>
 	<div class="data_list_title">
-		待审核记录
+		已审核记录
 	</div>
-	<form name="myForm2" class="form-search" method="post" action="record?action=search" style="padding-bottom: 0px">
-		<!--span class="data_search">
-					<span class="controls input-append date form_date" style="margin-right: 10px" data-date="" data-date-format="yyyy-mm-dd" data-link-format="yyyy-mm-dd">
-                    	<input id="startDate" name="startDate" style="width:120px;height: 30px;" placeholder="起始日期" type="text" value="${startDate }" readonly >
-                    	<span class="add-on"><i class="icon-remove"></i></span>
-						<span class="add-on"><i class="icon-th"></i></span>
-               		</span>
-					<span class="controls input-append date form_date" style="margin-right: 10px" data-date="" data-date-format="yyyy-mm-dd" data-link-format="yyyy-mm-dd">
-                    	<input id="endDate" name="endDate" style="width:120px;height: 30px;" placeholder="终止日期" type="text" value="${endDate }" readonly>
-                    	<span class="add-on"><i class="icon-remove"></i></span>
-						<span class="add-on"><i class="icon-th"></i></span>
-               		</span>
-					&nbsp;<button type="submit" class="btn btn-info" onkeydown="if(event.keyCode==13) myForm.submit()">搜索</button>
-				</span-->
-	</form>
+	<%--		<form name="myForm1" class="form-search" method="post" action="record?action=search" style="padding-bottom: 0px">--%>
+	<%--				<!--span class="data_search">--%>
+	<%--					<span class="controls input-append date form_date" style="margin-right: 10px" data-date="" data-date-format="yyyy-mm-dd" data-link-format="yyyy-mm-dd">--%>
+	<%--                    	<input id="startDate" name="startDate" style="width:120px;height: 30px;" placeholder="起始日期" type="text" value="${startDate }" readonly >--%>
+	<%--                    	<span class="add-on"><i class="icon-remove"></i></span>--%>
+	<%--						<span class="add-on"><i class="icon-th"></i></span>--%>
+	<%--               		</span>--%>
+	<%--					<span class="controls input-append date form_date" style="margin-right: 10px" data-date="" data-date-format="yyyy-mm-dd" data-link-format="yyyy-mm-dd">--%>
+	<%--                    	<input id="endDate" name="endDate" style="width:120px;height: 30px;" placeholder="终止日期" type="text" value="${endDate }" readonly>--%>
+	<%--                    	<span class="add-on"><i class="icon-remove"></i></span>--%>
+	<%--						<span class="add-on"><i class="icon-th"></i></span>--%>
+	<%--               		</span>--%>
+	<%--					&nbsp;<button type="submit" class="btn btn-info" onkeydown="if(event.keyCode==13) myForm.submit()">搜索</button>--%>
+	<%--				</span-->--%>
+	<%--		</form>--%>
 	<div>
 		<table class="table table-striped table-bordered table-hover datatable">
 			<thead>
 			<tr>
 				<th>起始日期</th>
-				<th>工号</th>
-				<th>姓名</th>
+				<th>结束日期</th>
+				<th>客户</th>
 				<th>场地</th>
-				<th>天数</th>
-				<th>备注</th>
-                <th>操作</th>
+				<th>使用时间</th>
 			</tr>
 			</thead>
 			<tbody>
-			<c:forEach  varStatus="i" var="record" items="${recordList }">
+			<c:forEach varStatus="i" var="record" items="${verifiedRecordList }">
 				<tr>
-					<td>${record.date }</td>
-					<td>${record.userNumber }</td>
-					<td>${record.userName }</td>
-					<td>${record.buildName==null?"无":record.buildName }</td>
-					<td>${record.roomName }</td>
-					<td>${record.detail }</td>
+					<td>${record.startDate }</td>
+					<td>${record.endDate}</td>
+					<td>${record.userId }</td>
+					<td>${record.buildingId==null?"无":record.buildingId }</td>
+					<td>${record.time }</td>
+				</tr>
+			</c:forEach>
+			</tbody>
+		</table>
+	</div>
+	<div align="center"><font color="red">${error }</font></div>
+	<div class="data_list_title">
+		待审核记录
+	</div>
+	<%--	<form name="myForm2" class="form-search" method="post" action="record?action=search" style="padding-bottom: 0px">--%>
+	<!--span class="data_search">
+					<span class="controls input-append date form_date" style="margin-right: 10px" data-date="" data-date-format="yyyy-mm-dd" data-link-format="yyyy-mm-dd">
+                    	<input id="startDate" name="startDate" style="width:120px;height: 30px;" placeholder="起始日期" type="text" value="${startDate }" readonly >
+                    	<span class="add-on"><i class="icon-remove"></i></span>
+						<span class="add-on"><i class="icon-th"></i></span>
+               		</span>
+					<span class="controls input-append date form_date" style="margin-right: 10px" data-date="" data-date-format="yyyy-mm-dd" data-link-format="yyyy-mm-dd">
+                    	<input id="endDate" name="endDate" style="width:120px;height: 30px;" placeholder="终止日期" type="text" value="${endDate }" readonly>
+                    	<span class="add-on"><i class="icon-remove"></i></span>
+						<span class="add-on"><i class="icon-th"></i></span>
+               		</span>
+					&nbsp;<button type="submit" class="btn btn-info" onkeydown="if(event.keyCode==13) myForm.submit()">搜索</button>
+				</span-->
+	<%--	</form>--%>
+	<div>
+		<table class="table table-striped table-bordered table-hover datatable">
+			<thead>
+			<tr>
+				<th>起始日期</th>
+				<th>结束日期</th>
+				<th>客户</th>
+				<th>场地</th>
+				<th>使用时间</th>
+			</tr>
+			</thead>
+			<tbody>
+			<c:forEach varStatus="i" var="record" items="${unverifiedRecordList }">
+				<tr>
+					<td>${record.startDate }</td>
+					<td>${record.endDate}</td>
+					<td>${record.userId }</td>
+					<td>${record.buildingId==null?"无":record.buildingId }</td>
+					<td>${record.time }</td>
 					<td>
-						<button class="btn btn-mini btn-info" type="button" onclick="javascript:window.location='record?action=preSave&recordId=${record.recordId }'">修改</button>&nbsp;
-						<button class="btn btn-mini btn-danger" type="button" onclick="recordDelete(${record.recordId })">取消</button></td>
+							<%--						<button class="btn btn-mini btn-info" type="button" onclick="javascript:window.location='record?action=preSave&recordId=${record.recordId }'">修改</button>&nbsp;--%>
+						<button class="btn btn-mini btn-danger" type="button"
+								onclick="recordDelete(${record.recordId })">取消
+						</button>
+					</td>
 					</td>
 				</tr>
 			</c:forEach>

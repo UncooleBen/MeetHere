@@ -1,117 +1,115 @@
 package com.webapp.controller;
 
 import com.webapp.model.Record;
+import com.webapp.model.user.User;
 import com.webapp.service.database.dao.RecordDao;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.List;
-
 /**
  * @author Shangzhen Li
  */
 @Controller
 public class RecordController {
-    // TODO 5. action = verify (admin), add (user)
-    // list (both), delete (both)
-    /* todo:setViewName(mainXXXX) addObject("mainPage", "user/XXXXXX.jsp"); */
+  // TODO 5. need check
 
-    RecordDao recordDao;
+  RecordDao recordDao;
 
-    @Autowired
-    public RecordController(RecordDao recordDao) {
-        this.recordDao = recordDao;
+  @Autowired
+  public RecordController(RecordDao recordDao) {
+    this.recordDao = recordDao;
+  }
+
+  @RequestMapping("/record")
+  public ModelAndView service(
+      HttpServletRequest request, @RequestParam(value = "action") String action) {
+    ModelAndView mv = new ModelAndView();
+    HttpSession session = request.getSession();
+    String userType = (String) session.getAttribute("currentUserType");
+    if ("user".equals(userType)) {
+      mv.setViewName("mainUser");
+      userRecordService(mv, action, request);
+    } else if ("admin".equals(userType)) {
+      mv.setViewName("mainAdmin");
+      adminRecordService(mv, action, request);
     }
+    return mv;
+  }
 
-    @RequestMapping("/record")
-    public ModelAndView service(
-            HttpServletRequest request, @RequestParam(value = "action") String action) {
-        ModelAndView mv = new ModelAndView();
+  private void adminRecordService(ModelAndView mv, String action, HttpServletRequest request) {
+    switch (action) {
+      case "verify":
+        /*todo: refresh after verifying?*/
+        int id = Integer.parseInt(request.getParameter("recordId"));
+        Record record = recordDao.queryRecordById(id);
+        record.setVerified(true);
+        recordDao.updateRecord(record);
+        mv.addObject("mainPage", "admin/record.jsp");
+        break;
+      case "delete":
+        int recordId = Integer.parseInt(request.getParameter("recordId"));
+        recordDao.deleteRecord(recordId);
+        mv.addObject("mainPage", "admin/record.jsp");
+        break;
+      case "list":
+      default:
+        listRecord(mv, true, -1);
+        mv.addObject("mainPage", "admin/record.jsp");
+        break;
+    }
+  }
+
+  private void userRecordService(ModelAndView mv, String action, HttpServletRequest request) {
+    switch (action) {
+      case "add":
+        mv.addObject("mainPage", "user/recordAdd.jsp");
+        break;
+      case "save":
+        Record record = new Record();
+        record.setId(Integer.parseInt(request.getParameter("recordId")));
+        record.setBuildingId(Integer.parseInt(request.getParameter("buildingId")));
+        record.setUserId(Integer.parseInt(request.getParameter("userId")));
+        record.setStartDate(Long.parseLong(request.getParameter("startDate")));
+        record.setEndDate(Long.parseLong(request.getParameter("endDate")));
+        record.setTime(Long.parseLong(request.getParameter("time")));
+        record.setVerified(false);
+        recordDao.updateRecord(record);
+        mv.addObject("mainPage", "user/record.jsp");
+        break;
+      case "delete":
+        int recordId = Integer.parseInt(request.getParameter("recordId"));
+        recordDao.deleteRecord(recordId);
+        mv.addObject("mainPage", "user/record.jsp");
+        break;
+      case "list":
+      default:
         HttpSession session = request.getSession();
-        String userType = (String) session.getAttribute("currentUserType");
-        if ("user".equals(userType)) {
-            userRecordService(mv, action, request);
-        } else if ("admin".equals(userType)) {
-			adminRecordService(mv, action, request);
-		}
-		return mv;
-	}
-
-	private void adminRecordService(ModelAndView mv, String action, HttpServletRequest request) {
-		switch (action) {
-			case "verify":
-				Record record = new Record();
-				record.setId(Integer.parseInt(request.getParameter("recordId")));
-				record.setBuildingId(Integer.parseInt(request.getParameter("buildingId")));
-				record.setUserId(Integer.parseInt(request.getParameter("userId")));
-				record.setStartDate(Long.parseLong(request.getParameter("startDate")));
-				record.setEndDate(Long.parseLong(request.getParameter("endDate")));
-				record.setTime(Long.parseLong(request.getParameter("time")));
-				record.setVerified(true);
-                recordDao.updateRecord(record);
-                mv.setViewName("admin/record");
-                break;
-            case "delete":
-                int recordId = Integer.parseInt(request.getParameter("recordId"));
-                recordDao.deleteRecord(recordId);
-                mv.setViewName("admin/record");
-                break;
-            case "list":
-            default:
-                listRecord(mv, true);
-                mv.setViewName("admin/record");
-                break;
-        }
-	}
-
-	private void userRecordService(ModelAndView mv, String action, HttpServletRequest request) {
-		switch (action) {
-			case "add":
-				mv.setViewName("user/recordAdd");
-				break;
-			case "save":
-				Record record = new Record();
-				record.setId(Integer.parseInt(request.getParameter("recordId")));
-				record.setBuildingId(Integer.parseInt(request.getParameter("buildingId")));
-				record.setUserId(Integer.parseInt(request.getParameter("userId")));
-				record.setStartDate(Long.parseLong(request.getParameter("startDate")));
-				record.setEndDate(Long.parseLong(request.getParameter("endDate")));
-				record.setTime(Long.parseLong(request.getParameter("time")));
-				record.setVerified(false);
-                recordDao.updateRecord(record);
-                mv.setViewName("admin/record");
-                break;
-            case "delete":
-                int recordId = Integer.parseInt(request.getParameter("recordId"));
-                recordDao.deleteRecord(recordId);
-                mv.setViewName("user/record");
-                break;
-            case "list":
-            default:
-                listRecord(mv, false);
-                mv.setViewName("user/record");
-                break;
-        }
+        User user = (User) session.getAttribute("currentUser");
+        int userId = user.getId();
+        listRecord(mv, false, userId);
+        mv.addObject("mainPage", "user/record.jsp");
+        break;
     }
+  }
 
-    private void listRecord(ModelAndView mv, boolean isAdmin) {
-        List<Record> verifiedRecordList = recordDao.listRecord(20, true);
-        if (isAdmin) {
-            List<Record> unverifiedRecordList = recordDao.listRecord(20, false);
-            if (verifiedRecordList != null && unverifiedRecordList != null) {
-                mv.addObject("verifiedRecordList", verifiedRecordList);
-                mv.addObject("unverifiedRecordList", unverifiedRecordList);
-            }
-        } else {
-            if (verifiedRecordList != null) {
-                mv.addObject("recordList", verifiedRecordList);
-            }
-        }
-
+  private void listRecord(ModelAndView mv, boolean isAdmin, int userId) {
+    List<Record> verifiedRecordList = recordDao.listRecord(20, true);
+    if (isAdmin) {
+      List<Record> unverifiedRecordList = recordDao.listRecord(20, false);
+      mv.addObject("verifiedRecordList", verifiedRecordList);
+      mv.addObject("unverifiedRecordList", unverifiedRecordList);
+    } else {
+      mv.addObject("recordList", verifiedRecordList);
+      if (userId >= 0) {
+        List<Record> unverifiedRecordList = recordDao.listRecordWithUserId(20, userId, false);
+        mv.addObject("unverifiedRecordList", unverifiedRecordList);
+      }
     }
+  }
 }

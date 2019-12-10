@@ -2,20 +2,20 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript">
-    function checkForm(){
-        var title=document.getElementById("title").value;
-        var author=document.getElementById("author").value;
-        var detail=document.getElementById("detail".value;
-        if(detail==null){
-            document.getElementById("error").innerHTML="内容不能为空！";
-            return false;
-        }
-        if(title==null){
-            document.getElementById("error").innerHTML="标题不能为空！";
-            return false;
-        }
-        if(author==null){
-            document.getElementById("error").innerHTML="作者不能为空！";
+  function checkForm() {
+    var title = document.getElementById("title").value;
+    var author = document.getElementById("author").value;
+    var detail = document.getElementById("detail").value;
+    if (detail == null) {
+      document.getElementById("error").innerHTML = "内容不能为空！";
+      return false;
+    }
+    if (title == null) {
+      document.getElementById("error").innerHTML = "标题不能为空！";
+      return false;
+    }
+    if (author == null) {
+      document.getElementById("error").innerHTML = "作者不能为空！";
             return false;
         }
         return true;
@@ -28,7 +28,7 @@
 <div class="data_list">
     <div class="data_list_title">
         <c:choose>
-            <c:when test="${user.studentId!=null }">
+            <c:when test="${user.userId!=null }">
                 新闻发布
             </c:when>
             <c:otherwise>
@@ -37,8 +37,8 @@
         </c:choose>
     </div>
     <form action="news?action=save" method="post" onsubmit="return checkForm()">
-        <div class="data_form" >
-            <input type="hidden" id="newsId" name="newsId" value="${news.newsId }"/>
+        <div class="data_form">
+            <input type="hidden" id="newsId" name="newsId" value="${news.id }"/>
             <table align="center">
                 <tr>
                     <td>&nbsp;标题：</td>

@@ -40,8 +40,9 @@ public interface UserDao {
      *
      * @param username The username
      * @return A list user if there is users with the given username, otherwise null
-     */
+     *
     User queryUserByUsername(String username);
+     */
 
     /**
      * Query users by sex

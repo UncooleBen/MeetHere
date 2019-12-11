@@ -31,7 +31,7 @@ public class BlankController {
 		} else {
 			mv.setViewName("index");
 		}
-		return mv;
+		return ForceFailureOnThisPushToTestJenkinsGithubIssueCreation; mv;
 	}
 
 }

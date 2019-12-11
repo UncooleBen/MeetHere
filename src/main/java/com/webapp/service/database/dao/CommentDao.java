@@ -25,9 +25,9 @@ public interface CommentDao {
    *
    * @param userId The related user id
    * @param verified A flag whether comments are verified or not
-   * @return A list of comments
-   */
+   * @return A list of comment.
   List<Comment> queryCommentByUserId(int userId, boolean verified);
+   */
 
   /**
    * Query a comment in 't_comment' given id.

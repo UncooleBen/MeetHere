@@ -125,36 +125,36 @@ public class UserDaoImpl extends DatabaseService implements UserDao {
         }
     }
 
-    @Override
-    public User queryUserByUsername(String username) {
-        Connection connection = getConnection();
-        assert connection != null;
-        assert username != null;
-        assert username.length() > 0;
-        User result = null;
-        String SELECT = "SELECT * FROM t_user WHERE username = ?";
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
-            preparedStatement.setString(1, username);
-            ResultSet rs = preparedStatement.executeQuery();
-            while (rs.next()) {
-                int permission = rs.getInt("permission");
-                if (permission > 0) {
-                    int id = rs.getInt("id");
-                    String password = rs.getString("password");
-                    String name = rs.getString("name");
-                    String sex = rs.getString("sex");
-                    String tel = rs.getString("tel");
-                    result = new User(id, username, password, name, sex, tel);
-                }
-            }
-            closeConnection(connection);
-            return result;
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace(System.err);
-            return result;
-        }
-    }
+//    @Override
+//    public User queryUserByUsername(String username) {
+//        Connection connection = getConnection();
+//        assert connection != null;
+//        assert username != null;
+//        assert username.length() > 0;
+//        User result = null;
+//        String SELECT = "SELECT * FROM t_user WHERE username = ?";
+//        try {
+//            PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
+//            preparedStatement.setString(1, username);
+//            ResultSet rs = preparedStatement.executeQuery();
+//            while (rs.next()) {
+//                int permission = rs.getInt("permission");
+//                if (permission > 0) {
+//                    int id = rs.getInt("id");
+//                    String password = rs.getString("password");
+//                    String name = rs.getString("name");
+//                    String sex = rs.getString("sex");
+//                    String tel = rs.getString("tel");
+//                    result = new User(id, username, password, name, sex, tel);
+//                }
+//            }
+//            closeConnection(connection);
+//            return result;
+//        } catch (SQLException sqlException) {
+//            sqlException.printStackTrace(System.err);
+//            return result;
+//        }
+//    }
 
     @Override
     public List<User> queryUserBySex(Gender gender) {

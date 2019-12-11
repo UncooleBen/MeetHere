@@ -41,30 +41,30 @@ public class RecordDaoImpl extends DatabaseService implements RecordDao {
         }
     }
 
-    @Override
-    public List<Record> listRecordWithBuildId(int size, int buildId) {
-        Connection connection = getConnection();
-        assert connection != null;
-        List<Record> recordList = new ArrayList<Record>();
-        String SELECT = "SELECT * FROM t_record WHERE building_id = ? ORDER BY time DESC LIMIT ?";
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
-            preparedStatement.setInt(1, buildId);
-            preparedStatement.setInt(2, size);
-            ResultSet rs = preparedStatement.executeQuery();
-            while (rs.next()) {
-                Record tempRecord = new Record(rs.getInt("id"), rs.getLong("time"), rs.getLong("start_date"),
-                        rs.getLong("end_date"), rs.getInt("user_id"), rs.getInt("building_id"),
-                        rs.getBoolean("verified"));
-                recordList.add(tempRecord);
-            }
-            closeConnection(connection);
-            return recordList;
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace(System.err);
-            return recordList;
-        }
-    }
+//    @Override
+//    public List<Record> listRecordWithBuildId(int size, int buildId) {
+//        Connection connection = getConnection();
+//        assert connection != null;
+//        List<Record> recordList = new ArrayList<Record>();
+//        String SELECT = "SELECT * FROM t_record WHERE building_id = ? ORDER BY time DESC LIMIT ?";
+//        try {
+//            PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
+//            preparedStatement.setInt(1, buildId);
+//            preparedStatement.setInt(2, size);
+//            ResultSet rs = preparedStatement.executeQuery();
+//            while (rs.next()) {
+//                Record tempRecord = new Record(rs.getInt("id"), rs.getLong("time"), rs.getLong("start_date"),
+//                        rs.getLong("end_date"), rs.getInt("user_id"), rs.getInt("building_id"),
+//                        rs.getBoolean("verified"));
+//                recordList.add(tempRecord);
+//            }
+//            closeConnection(connection);
+//            return recordList;
+//        } catch (SQLException sqlException) {
+//            sqlException.printStackTrace(System.err);
+//            return recordList;
+//        }
+//    }
 
     @Override
     public List<Record> listRecordWithUserId(int size, int userId, boolean verified) {

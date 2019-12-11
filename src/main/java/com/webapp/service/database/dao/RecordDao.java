@@ -25,8 +25,8 @@ public interface RecordDao {
      * @param size    The size of record list
      * @param buildId The building id
      * @return A list of record
-     */
     List<Record> listRecordWithBuildId(int size, int buildId);
+     */
 
     /**
      * Get the list of records in 't_record' given user id.

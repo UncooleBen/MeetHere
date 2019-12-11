@@ -14,11 +14,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * @author Juntao Peng
+ */
 @Controller
 public class LoginController {
 
+
+	LoginDao loginDao;
+
 	@Autowired
-	private LoginDao loginDao;
+	public LoginController(LoginDao loginDao) {
+		this.loginDao = loginDao;
+	}
 
 	@RequestMapping("/login")
 	public ModelAndView service(HttpServletRequest request, HttpServletResponse response)

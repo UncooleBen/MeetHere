@@ -47,32 +47,32 @@ public class CommentDaoImpl extends DatabaseService implements CommentDao {
     return commentList;
   }
 
-  @Override
-  public List<Comment> queryCommentByUserId(int userId, boolean verified) {
-    List<Comment> commentList = new ArrayList<>();
-    String sql = "SELECT * FROM t_comment WHERE userId = ? AND verified=? ";
-    Connection connection = getConnection();
-    try {
-      PreparedStatement preparedStatement = connection.prepareStatement(sql);
-      preparedStatement.setInt(1, userId);
-      preparedStatement.setBoolean(2, verified);
-      ResultSet rs = preparedStatement.executeQuery();
-      while (rs.next()) {
-        Comment comment = new Comment();
-        comment.setId(rs.getInt("id"));
-        comment.setUserId(rs.getInt("userId"));
-        comment.setDate(rs.getLong("date"));
-          comment.setContent(rs.getString("content"));
-          comment.setVerified(rs.getBoolean("verified"));
-          commentList.add(comment);
-      }
-    } catch (SQLException sqlException) {
-      sqlException.printStackTrace(System.err);
-    } finally {
-      closeConnection(connection);
-    }
-    return commentList;
-  }
+//  @Override
+//  public List<Comment> queryCommentByUserId(int userId, boolean verified) {
+//    List<Comment> commentList = new ArrayList<>();
+//    String sql = "SELECT * FROM t_comment WHERE userId = ? AND verified=? ";
+//    Connection connection = getConnection();
+//    try {
+//      PreparedStatement preparedStatement = connection.prepareStatement(sql);
+//      preparedStatement.setInt(1, userId);
+//      preparedStatement.setBoolean(2, verified);
+//      ResultSet rs = preparedStatement.executeQuery();
+//      while (rs.next()) {
+//        Comment comment = new Comment();
+//        comment.setId(rs.getInt("id"));
+//        comment.setUserId(rs.getInt("userId"));
+//        comment.setDate(rs.getLong("date"));
+//          comment.setContent(rs.getString("content"));
+//          comment.setVerified(rs.getBoolean("verified"));
+//          commentList.add(comment);
+//      }
+//    } catch (SQLException sqlException) {
+//      sqlException.printStackTrace(System.err);
+//    } finally {
+//      closeConnection(connection);
+//    }
+//    return commentList;
+//  }
 
   @Override
   public Comment queryCommentById(int commentId) {

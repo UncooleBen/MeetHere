@@ -35,6 +35,17 @@ public class User {
 		this.tel = tel;
 	}
 
+	public User(int id, String username, String password, String name, String sex, String tel, int permission) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.name = name;
+		this.sex = Gender.valueOf(sex);
+		this.permission = permission;
+		this.tel = tel;
+	}
+
 	/**
 	 * @return the username
 	 */

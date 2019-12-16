@@ -1,6 +1,8 @@
 package com.webapp.service.database;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,20 +16,28 @@ import java.sql.SQLException;
  * @author Juntao Peng
  * @date 2019.12.2
  */
+
+@Component
 public class DatabaseService {
 
 	@Value("${spring.datasource.url}")
-	private String dbUrl;
-
+	String dbUrl;
 	@Value("${spring.datasource.username}")
-	private String dbUsername;
-
+	String dbUsername;
 	@Value("${spring.datasource.password}")
-	private String dbPassword;
-
+	String dbPassword;
 	@Value("${spring.datasource.driver-class-name}")
-	private String dbClassname;
-
+	String dbClassname;
+	
+//	public DatabaseService(@Value("${spring.datasource.url}") String dbUrl,
+//						   @Value("${spring.datasource.username}") String dbUsername,
+//						   @Value("${spring.datasource.password}") String dbPassword,
+//						   @Value("${spring.datasource.driver-class-name}") String dbClassname) {
+//		this.dbUrl = dbUrl;
+//		this.dbUsername = dbUsername;
+//		this.dbPassword = dbPassword;
+//		this.dbClassname = dbClassname;
+//	}
 
 	/**
 	 *

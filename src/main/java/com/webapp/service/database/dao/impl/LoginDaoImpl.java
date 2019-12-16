@@ -58,8 +58,6 @@ public class LoginDaoImpl extends DatabaseService implements LoginDao {
 	@Override
 	public User signup(User user) {
 		Connection connection = getConnection();
-		assert connection != null;
-		assert user != null;
 
 		User resultUser = null;
 		String SELECT = "SELECT * FROM t_user WHERE username = ?";

@@ -11,9 +11,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class UserDaoImplIntegrationTest {
+class UserDaoImplIT {
     UserDaoImpl userDao;
     Connection connection;
 

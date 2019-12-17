@@ -4,15 +4,12 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
-import org.springframework.util.ReflectionUtils;
-
-import javax.xml.crypto.Data;
 
 import java.sql.Connection;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DatabaseServiceIntegrationTest {
+class DatabaseServiceIT {
 
     DatabaseService databaseService;
     Connection connection;

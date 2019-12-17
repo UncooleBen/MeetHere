@@ -10,9 +10,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class RecordDaoImplIntegrationTest {
+class RecordDaoImplIT {
     RecordDaoImpl recordDao;
     Connection connection;
 

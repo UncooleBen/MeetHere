@@ -10,14 +10,15 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import java.sql.Connection;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class LoginDaoImplIntegrationTest {
-    
+class LoginDaoImplIT {
+
     LoginDaoImpl loginDao;
     UserDaoImpl userDao;
     Connection connection;
-    
+
     @BeforeEach
     void init() {
         this.loginDao = new LoginDaoImpl();

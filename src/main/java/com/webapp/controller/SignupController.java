@@ -46,6 +46,7 @@ public class SignupController {
 		String name = request.getParameter("name");
 		String tel = request.getParameter("tel");
 		String sex = request.getParameter("sex");
+
 		User currentUser = null;
 		User user = new User(username, password, name, sex, tel);
 		currentUser = loginDao.signup(user);

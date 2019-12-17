@@ -6,4 +6,9 @@ public class Admin extends User {
 		super(id, username, password, name, sex, tel, 0);
 	}
 
+	public  Admin()
+	{
+
+	}
+
 }

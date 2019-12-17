@@ -25,12 +25,12 @@ class BuildingControllerTest {
         private BuildingController buildingController =new BuildingController(buildingDao,recordDao);
 
 
-      //  @Test
+       //@Test
       /*  public void service_test()
         {
             String action="";
             when(session.getAttribute("currentUserType")).thenReturn(result);
-            when(LoginFilter.isAuthorized("","",)).Then
+          //  when(LoginFilter.isAuthorized("","",)).Then
             ModelAndView result=buildingController.service(action,request,session);
         }*/
 

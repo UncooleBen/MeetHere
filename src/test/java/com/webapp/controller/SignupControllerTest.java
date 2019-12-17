@@ -37,28 +37,53 @@ class SignupControllerTest
     }
 
     @Test
-    public  void signUpSubmit_test()throws ServletException, IOException
-    {
+    public  void signUpSubmit_WhenUserIsNull()throws ServletException, IOException {
         when(request.getParameter("username")).thenReturn("PengGe");
         when(request.getParameter("password")).thenReturn("123456");
         when(request.getParameter("name")).thenReturn("PengJunTao");
         when(request.getParameter("tel")).thenReturn("911");
         when(request.getParameter("sex")).thenReturn("FEMALE");
 
-        User user=new User("PengGe","123456","PengJunTao","FEMALE","911");
+        User user = new User("PengGe", "123456", "PengJunTao", "FEMALE", "911");
 
-        User currentUser=new User();
+        User currentUser = null;
 
 
         when(loginDao.signup(user)).thenReturn(currentUser);
 
 
+        ModelAndView result = signupController.signupSubmit(request, response);
 
-        ModelAndView result= signupController.signupSubmit(request,response);
-
+        verify(request).setCharacterEncoding("utf-8");
         assertAll(
-                ()->assertEquals(result.getViewName(),"signup"),
-                ()->assertEquals(result.getModelMap().get("error"),"该用户名已存在")
+                () -> assertEquals(result.getViewName(), "signup"),
+                () -> assertEquals(result.getModelMap().get("error"), "该用户名已存在")
         );
-}
+    }
+
+        @Test
+        public  void signUpSubmit_WhenUserIsNotNull()throws ServletException, IOException
+        {
+            when(request.getParameter("username")).thenReturn("PengGe");
+            when(request.getParameter("password")).thenReturn("123456");
+            when(request.getParameter("name")).thenReturn("PengJunTao");
+            when(request.getParameter("tel")).thenReturn("911");
+            when(request.getParameter("sex")).thenReturn("FEMALE");
+
+            User user=new User("PengGe","123456","PengJunTao","FEMALE","911");
+
+            User currentUser=new User();
+
+
+            when(loginDao.signup(user)).thenReturn(currentUser);
+
+
+
+            ModelAndView result= signupController.signupSubmit(request,response);
+
+            assertAll(
+                    ()->assertEquals(result.getViewName(),"index"),
+                    ()->assertEquals(result.getModelMap().get("user"),currentUser)
+            );
+        }
 }

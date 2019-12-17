@@ -89,4 +89,32 @@ public class Record {
   public void setVerified(boolean verified) {
     this.verified = verified;
   }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Record record = (Record) o;
+
+        if (id != record.id) return false;
+        if (time != record.time) return false;
+        if (startDate != record.startDate) return false;
+        if (endDate != record.endDate) return false;
+        if (userId != record.userId) return false;
+        if (buildingId != record.buildingId) return false;
+        return verified == record.verified;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (int) (time ^ (time >>> 32));
+        result = 31 * result + (int) (startDate ^ (startDate >>> 32));
+        result = 31 * result + (int) (endDate ^ (endDate >>> 32));
+        result = 31 * result + userId;
+        result = 31 * result + buildingId;
+        result = 31 * result + (verified ? 1 : 0);
+        return result;
+    }
 }

@@ -21,8 +21,13 @@ import com.webapp.model.user.User;
 @Controller
 public class SignupController {
 
-	@Autowired
+
 	private LoginDao loginDao;
+
+	@Autowired
+	public SignupController(LoginDao loginDao) {
+		this.loginDao = loginDao;
+	}
 
 	@RequestMapping("/signup")
 	public ModelAndView signupPage() {

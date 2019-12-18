@@ -21,8 +21,13 @@ import com.webapp.model.user.User;
 @Controller
 public class SignupController {
 
-	@Autowired
+
 	private LoginDao loginDao;
+
+	@Autowired
+	public SignupController(LoginDao loginDao) {
+		this.loginDao = loginDao;
+	}
 
 	@RequestMapping("/signup")
 	public ModelAndView signupPage() {
@@ -41,6 +46,7 @@ public class SignupController {
 		String name = request.getParameter("name");
 		String tel = request.getParameter("tel");
 		String sex = request.getParameter("sex");
+
 		User currentUser = null;
 		User user = new User(username, password, name, sex, tel);
 		currentUser = loginDao.signup(user);

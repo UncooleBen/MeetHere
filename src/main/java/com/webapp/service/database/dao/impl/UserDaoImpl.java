@@ -24,7 +24,7 @@ public class UserDaoImpl extends DatabaseService implements UserDao {
         Connection connection = getConnection();
         assert connection != null;
         List<User> result = new ArrayList<>();
-        String SELECT = "SELECT * FROM t_user";
+        String SELECT = "SELECT * FROM t_user ORDER BY id DESC";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
             ResultSet rs = preparedStatement.executeQuery();
@@ -38,7 +38,7 @@ public class UserDaoImpl extends DatabaseService implements UserDao {
                 String tel = rs.getString("tel");
                 switch (permission) {
                     case 0:
-                        // Admin admin = new Admin(id, username, password, name, sex, tel);
+                        Admin admin = new Admin(id, username, password, name, sex, tel);
                         break;
                     case 1:
                         User user = new User(id, username, password, name, sex, tel);
@@ -76,7 +76,7 @@ public class UserDaoImpl extends DatabaseService implements UserDao {
                 String tel = rs.getString("tel");
                 switch (permission) {
                     case 0:
-                        result = new Admin(id, username, password, name, sex, tel);
+                        //result = new Admin(id, username, password, name, sex, tel);
                         break;
                     case 1:
                         result = new User(id, username, password, name, sex, tel);

@@ -113,7 +113,7 @@ public class NewsController {
 
   private void listNews(ModelAndView mv, String userType) {
     if ("user".equals(userType)) {
-      mv.addObject("mainPage", "user/news.jsp");
+      //mv.addObject("mainPage", "user/news.jsp");
     } else if ("admin".equals(userType)) {
       mv.addObject("mainPage", "admin/news.jsp");
     }

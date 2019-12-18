@@ -143,7 +143,7 @@ public class UserController {
                 }
             default:
         }
-        if (resultList.size() > 0) {
+        if (resultList.size() > 0) {;
             mv.addObject("userList", resultList);
         }
 

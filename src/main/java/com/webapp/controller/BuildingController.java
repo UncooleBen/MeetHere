@@ -75,7 +75,7 @@ public class BuildingController {
         return mv;
     }
 
-    public void bookBuilding(ModelAndView mv, HttpServletRequest request, HttpSession session) {
+    private void bookBuilding(ModelAndView mv, HttpServletRequest request, HttpSession session) {
         User currentUser = (User) session.getAttribute("currentUser");
         String buildingId = request.getParameter("buildingId");
         String startDate = request.getParameter("startDate");
@@ -87,7 +87,7 @@ public class BuildingController {
         this.recordDao.addRecord(record);
     }
 
-    public void listBuildings(ModelAndView mv, String currentUserType) {
+    private void listBuildings(ModelAndView mv, String currentUserType) {
         List<Building> buildingList = this.buildingDao.listBuilding(20);
         if ("admin".equals(currentUserType)) {
             mv.setViewName("mainAdmin");
@@ -99,24 +99,24 @@ public class BuildingController {
         mv.addObject("buildingList", buildingList);
     }
 
-    public void deleteBuilding(ModelAndView mv, int id) {
+    private void deleteBuilding(ModelAndView mv, int id) {
         this.buildingDao.deleteBuilding(id);
     }
 
-    public void modifyBuilding(ModelAndView mv, int id) {
+    private void modifyBuilding(ModelAndView mv, int id) {
         Building building = this.buildingDao.queryBuildingById(id);
         mv.addObject("mainPage", "admin/buildingModify.jsp");
         mv.addObject("id", String.valueOf(id));
         mv.addObject("building", building);
     }
 
-    public void addBuilding(ModelAndView mv) {
+    private void addBuilding(ModelAndView mv) {
         mv.addObject("mainPage", "admin/buildingModify.jsp");
         mv.addObject("id", null);
         mv.addObject("building", null);
     }
 
-    public void saveBuilding(ModelAndView mv, HttpServletRequest request) {
+    private void saveBuilding(ModelAndView mv, HttpServletRequest request) {
         String name = request.getParameter("buildingName");
         String description = request.getParameter("buildingDescription");
         String price = request.getParameter("buildingPrice");

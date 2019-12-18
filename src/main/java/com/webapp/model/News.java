@@ -12,8 +12,15 @@ public class News {
 	private String detail;
 
 	public News(int id, String title, long created, long lastModified, String author, String detail) {
-		super();
 		this.id = id;
+		this.title = title;
+		this.created = created;
+		this.lastModified = lastModified;
+		this.author = author;
+		this.detail = detail;
+	}
+
+	public News(String title, long created, long lastModified, String author, String detail) {
 		this.title = title;
 		this.created = created;
 		this.lastModified = lastModified;

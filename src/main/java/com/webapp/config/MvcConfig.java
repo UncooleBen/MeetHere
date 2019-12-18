@@ -2,7 +2,6 @@ package com.webapp.config;
 
 import com.webapp.service.database.dao.*;
 import com.webapp.service.database.dao.impl.*;
-import com.webapp.service.filesystem.FaoImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -13,8 +12,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-
-import com.webapp.service.filesystem.Fao;
 
 /**
  * This class is a part of Software-Testing lab02 timeline.
@@ -52,11 +49,6 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-    }
-
-    @Bean(name = "fao")
-    public Fao getFao() {
-        return new FaoImpl();
     }
 
     @Bean(name = "userDao")

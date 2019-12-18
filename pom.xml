@@ -47,6 +47,13 @@
     </dependency>
 
     <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>5.1.5.RELEASE</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.17</version>
@@ -99,6 +106,8 @@
 
   <build>
     <finalName>MeetHere</finalName>
+	<sourceDirectory>src/main/java</sourceDirectory>
+    <testSourceDirectory>src/test/java</testSourceDirectory>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -114,6 +123,27 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.0.0-M4</version>
+		<configuration>
+			<excludes>
+				<exclude>**/*IT</exclude>
+			</excludes>
+		</configuration>
+		<executions>
+			<execution>
+				<phase>integration-test</phase>
+				<goals>
+					<goal>test</goal>
+				</goals>
+				<configuration>
+					<excludes>
+						<exclude>none</exclude>
+					</excludes>
+					<includes>
+						<include>**/*IT</include>
+					</includes>
+				</configuration>
+			</execution>
+		</executions>
       </plugin>
     </plugins>
   </build>

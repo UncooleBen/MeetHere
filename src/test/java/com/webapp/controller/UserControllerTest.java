@@ -1,5 +1,6 @@
 package com.webapp.controller;
 
+import com.webapp.model.user.Gender;
 import com.webapp.service.database.dao.UserDao;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.servlet.ModelAndView;
@@ -40,6 +41,8 @@ class UserControllerTest {
         assertNotNull(result);
 
     }
+
+
 
     @Test
     public void service_When_ActionIsDelete()
@@ -117,13 +120,14 @@ class UserControllerTest {
     }
 
     @Test
-    public void service_When_ActionIsSave()
+    public void service_When_ActionIsSave_IdstrIsNotNull()
     {
         String action="save";
-        String type="dsa";
+        String type="admin";
 
         List<User>  users=new ArrayList<User>();
         users.add(new User());
+        User user = new User("PengGe", "123456", "PengJunTao", "FEMALE", "911");
 
         when(session.getAttribute("currentUserType")).thenReturn(type);
         when(request.getParameter("id")).thenReturn("305");
@@ -133,40 +137,180 @@ class UserControllerTest {
         when(request.getParameter("password")).thenReturn("123456");
         when(request.getParameter("name")).thenReturn("PengJunTao");
         when(request.getParameter("tel")).thenReturn("911");
-        when(request.getParameter("sex")).thenReturn("man");
+        when(request.getParameter("sex")).thenReturn("FEMALE");
 
 
         ModelAndView result=userController.service(action,request,session);
-        verify(userDao.deleteUser(350));
-        verify(userDao.queryAllUsers());
-        assertEquals(result.getViewName(),"mainAdmin");
-        assertEquals(result.getModelMap().get("mainPage"),"admin/user.jsp");
+        user.setId(305);
+        verify(userDao).updateUser(user);
+        assertAll(
+                ()->assertEquals(result.getViewName(),"mainAdmin"),
+                ()->assertEquals(result.getModelMap().get("mainPage"),"admin/user.jsp"),
+                ()->assertEquals(result.getModelMap().get("userList"),users)
+        );
+    }
 
+    @Test
+    public void service_When_ActionIsSave_IdstrIsNull()
+    {
+        String action="save";
+        String type="admin";
+
+        List<User>  users=new ArrayList<User>();
+        users.add(new User());
+        User user = new User("PengGe", "123456", "PengJunTao", "FEMALE", "911");
+
+        when(session.getAttribute("currentUserType")).thenReturn(type);
+        when(request.getParameter("id")).thenReturn("");
+        when(userDao.queryAllUsers()).thenReturn(users);
+
+        when(request.getParameter("username")).thenReturn("PengGe");
+        when(request.getParameter("password")).thenReturn("123456");
+        when(request.getParameter("name")).thenReturn("PengJunTao");
+        when(request.getParameter("tel")).thenReturn("911");
+        when(request.getParameter("sex")).thenReturn("FEMALE");
+
+
+        ModelAndView result=userController.service(action,request,session);
+        verify(userDao).addUser(user);
+        assertAll(
+                ()->assertEquals(result.getViewName(),"mainAdmin"),
+                ()->assertEquals(result.getModelMap().get("mainPage"),"admin/user.jsp"),
+                ()->assertEquals(result.getModelMap().get("userList"),users)
+        );
     }
 
 
     @Test
-    public void service_When_ActionIsSearch()
+    public void service_When_ActionIsSearch_KeyWordEqualName()
     {
         String action="search";
-        String type="dsa";
+        String type="admin";
+
+        String keyword="name";
+        String argument="456";
+        List<User>  resultList=new ArrayList<User>();
+        resultList.add(new User());
+
+
+
+        when(session.getAttribute("currentUserType")).thenReturn(type);
+        when(request.getParameter("id")).thenReturn("305");
+        when(request.getParameter("searchType")).thenReturn(keyword);
+        when(request.getParameter("searchUser_text")).thenReturn(argument);
+
+
+        when(userDao.queryUserByName(argument)).thenReturn(resultList);
+
+
+
+        ModelAndView result=userController.service(action,request,session);
+
+        assertAll(
+                ()->assertEquals(result.getViewName(),"mainAdmin"),
+                ()->assertEquals(result.getModelMap().get("mainPage"),"admin/user.jsp"),
+                ()->assertEquals(result.getModelMap().get("userList"),resultList)
+        );
+    }
+
+    @Test
+    public void service_When_ActionIsSearch_KeyWordEqualSex()
+    {
+        String action="search";
+        String type="admin";
+
+        String keyword="sex";
+        String argument="FEMALE";
+        List<User>  resultList=new ArrayList<User>();
+        resultList.add(new User());
+
+
+
+        when(session.getAttribute("currentUserType")).thenReturn(type);
+        when(request.getParameter("id")).thenReturn("305");
+        when(request.getParameter("searchType")).thenReturn(keyword);
+        when(request.getParameter("searchUser_text")).thenReturn(argument);
+
+
+        when(userDao.queryUserBySex(Gender.valueOf(argument))).thenReturn(resultList);
+
+
+
+        ModelAndView result=userController.service(action,request,session);
+
+        assertAll(
+                ()->assertEquals(result.getViewName(),"mainAdmin"),
+                ()->assertEquals(result.getModelMap().get("mainPage"),"admin/user.jsp"),
+                ()->assertEquals(result.getModelMap().get("userList"),resultList)
+        );
+    }
+
+    @Test
+    public void service_When_ActionIsSearch_KeyWordEqualId()
+    {
+        String action="search";
+        String type="admin";
+
+        String keyword="id";
+        String argument="305";
+        List<User>  resultList=new ArrayList<User>();
+        User user=new User();
+        resultList.add(user);
+
+
+
+        when(session.getAttribute("currentUserType")).thenReturn(type);
+        when(request.getParameter("id")).thenReturn("305");
+        when(request.getParameter("searchType")).thenReturn(keyword);
+        when(request.getParameter("searchUser_text")).thenReturn(argument);
+
+
+        when(userDao.queryUserById(Integer.valueOf(argument))).thenReturn(user);
+
+
+
+        ModelAndView result=userController.service(action,request,session);
+
+        assertAll(
+                ()->assertEquals(result.getViewName(),"mainAdmin"),
+                ()->assertEquals(result.getModelMap().get("mainPage"),"admin/user.jsp"),
+                ()->assertEquals(result.getModelMap().get("userList"),resultList)
+        );
+    }
+
+    @Test
+    public void service_When_ActionIsSearch_ArgumentIsEmpty()
+    {
+        String action="search";
+        String type="admin";
+
+        String keyword="id";
+        String argument="";
 
         List<User>  users=new ArrayList<User>();
         users.add(new User());
 
+
+
         when(session.getAttribute("currentUserType")).thenReturn(type);
         when(request.getParameter("id")).thenReturn("305");
+        when(request.getParameter("searchType")).thenReturn(keyword);
+        when(request.getParameter("searchUser_text")).thenReturn(argument);
+
+
         when(userDao.queryAllUsers()).thenReturn(users);
 
 
 
         ModelAndView result=userController.service(action,request,session);
-        verify(userDao.deleteUser(350));
-        verify(userDao.queryAllUsers());
-        assertEquals(result.getViewName(),"mainAdmin");
-        assertEquals(result.getModelMap().get("mainPage"),"admin/user.jsp");
 
+        assertAll(
+                ()->assertEquals(result.getViewName(),"mainAdmin"),
+                ()->assertEquals(result.getModelMap().get("mainPage"),"admin/user.jsp"),
+                ()->assertEquals(result.getModelMap().get("userList"),users)
+        );
     }
+
 
     @Test
     public void service_When_ActionIsList()

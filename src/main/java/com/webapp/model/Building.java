@@ -56,4 +56,26 @@ public class Building {
     this.description = description;
     this.price = price;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Building building = (Building) o;
+
+    if (id != building.id) return false;
+    if (!name.equals(building.name)) return false;
+    if (!description.equals(building.description)) return false;
+    return price.equals(building.price);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = id;
+    result = 31 * result + name.hashCode();
+    result = 31 * result + description.hashCode();
+    result = 31 * result + price.hashCode();
+    return result;
+  }
 }

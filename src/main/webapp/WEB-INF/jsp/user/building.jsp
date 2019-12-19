@@ -30,21 +30,31 @@
 	</div>
 	<div align="center"><font color="red">${error }</font></div>
 </div>
+<script src="resources/media/js/moment.js"></script>
 <script type="text/javascript">
 	function checkForm() {
-		var buildName = document.getElementById("buildName").value;
-		var roomName = document.getElementById("roomName").value;
-		var date = document.getElementById("date").value;
-		if (buildName == null || buildName == "") {
-			document.getElementById("error").innerHTML = "楼不能为空！";
+		var startDate = document.getElementById("startDate").value;
+		var duration = document.getElementById("duration").value;
+		if (startDate == null || startDate == "") {
+			document.getElementById("error").innerHTML = "起始日期不能为空！";
 			return false;
 		}
-		if (roomName == null || roomName == "") {
-			document.getElementById("error").innerHTML = "房间不能为空！";
+		if (duration == null || duration == "") {
+			document.getElementById("error").innerHTML = "天数不能为空！";
 			return false;
 		}
-		if (date == null) {
-			document.getElementById("error").innerHTML = "日期不能为空！";
+		if (isNaN(duration)) {
+			document.getElementById("error").innerHTML = "天数必须为整数! ";
+			return false;
+		}
+		if (!moment(startDate, 'YYYY-MM-DD', true).isValid()) {
+			document.getElementById("error").innerHTML = "起始日期格式必须为 2019-01-01 ！";
+			return false;
+		}
+		var now = moment(new Date());
+		var date = moment(startDate, 'YYYY-MM-DD', true);
+		if (now.diff(date) > 0) {
+			document.getElementById("error").innerHTML = "请填写今天以后的日期 ！";
 			return false;
 		}
 		return true;

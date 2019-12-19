@@ -14,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Controller
@@ -21,11 +23,13 @@ public class BuildingController {
 
     BuildingDao buildingDao;
     RecordDao recordDao;
+    SimpleDateFormat sdf;
 
     @Autowired
     public BuildingController(BuildingDao buildingDao, RecordDao recordDao) {
         this.buildingDao = buildingDao;
         this.recordDao = recordDao;
+        this.sdf = new SimpleDateFormat("yyyy-MM-dd");
     }
 
     @RequestMapping("/building")
@@ -82,9 +86,15 @@ public class BuildingController {
         String duration = request.getParameter("duration");
         int userId = currentUser.getId();
         long currentTime = System.currentTimeMillis();
-        Record record = new Record(currentTime, currentTime, currentTime, userId,
-                Integer.parseInt(buildingId), false);
-        this.recordDao.addRecord(record);
+        try {
+            long startDateInLong = this.sdf.parse(startDate).getTime();
+            long endDateInLong = (long) Double.parseDouble(duration) * 60 * 1000 * 24 + startDateInLong;
+            Record record = new Record(currentTime, startDateInLong, endDateInLong, userId,
+                    Integer.parseInt(buildingId), false);
+            this.recordDao.addRecord(record);
+        } catch (ParseException pe) {
+            pe.printStackTrace(System.err);
+        }
     }
 
     private void listBuildings(ModelAndView mv, String currentUserType) {

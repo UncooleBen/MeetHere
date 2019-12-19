@@ -10,8 +10,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import java.sql.Connection;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class LoginDaoImplIT {
 
@@ -46,27 +45,28 @@ class LoginDaoImplIT {
     @Test
     void shouldReturnAdminWhenLoginWithAdmin() {
         User user = this.loginDao.login("root", "root");
-        assertTrue(user instanceof Admin);
-        assertEquals("root", user.getUsername());
-        assertEquals("root", user.getPassword());
-        assertEquals("pjt", user.getName());
-        assertEquals(Gender.MALE, user.getSex());
-        assertEquals(0, user.getId());
-        assertEquals("999", user.getTel());
-        assertEquals(0, user.getPermission());
+        assertAll(
+                () -> assertTrue(user instanceof Admin),
+                () -> assertEquals("root", user.getUsername()),
+                () -> assertEquals("root", user.getPassword()),
+                () -> assertEquals("pjt", user.getName()),
+                () -> assertEquals(Gender.MALE, user.getSex()),
+                () -> assertEquals(0, user.getId()),
+                () -> assertEquals("999", user.getTel()),
+                () -> assertEquals(0, user.getPermission()));
     }
 
     @Test
     void shouldReturnUserWhenLoginWithUser() {
         User user = this.loginDao.login("pjt", "pjt");
-        assertTrue(user instanceof User);
-        assertEquals("pjt", user.getUsername());
-        assertEquals("pjt", user.getPassword());
-        assertEquals("john", user.getName());
-        assertEquals(Gender.MALE, user.getSex());
-        assertEquals(4, user.getId());
-        assertEquals("123123123", user.getTel());
-        assertEquals(1, user.getPermission());
+        assertAll(
+                () -> assertEquals("pjt", user.getUsername()),
+                () -> assertEquals("pjt", user.getPassword()),
+                () -> assertEquals("john", user.getName()),
+                () -> assertEquals(Gender.MALE, user.getSex()),
+                () -> assertEquals(4, user.getId()),
+                () -> assertEquals("123123123", user.getTel()),
+                () -> assertEquals(1, user.getPermission()));
     }
 
     @Test
@@ -74,13 +74,13 @@ class LoginDaoImplIT {
         User user = new User("username", "password", "name", "FEMALE", "1234");
         this.loginDao.signup(user);
         User signupUser = this.loginDao.login("username", "password");
-        assertTrue(signupUser instanceof User);
-        assertEquals(user.getUsername(), signupUser.getUsername());
-        assertEquals(user.getPassword(), signupUser.getPassword());
-        assertEquals(user.getName(), signupUser.getName());
-        assertEquals(user.getSex(), signupUser.getSex());
-        assertEquals(user.getTel(), signupUser.getTel());
-        assertEquals(user.getPermission(), signupUser.getPermission());
+        assertAll(
+                () -> assertEquals(user.getUsername(), signupUser.getUsername()),
+                () -> assertEquals(user.getPassword(), signupUser.getPassword()),
+                () -> assertEquals(user.getName(), signupUser.getName()),
+                () -> assertEquals(user.getSex(), signupUser.getSex()),
+                () -> assertEquals(user.getTel(), signupUser.getTel()),
+                () -> assertEquals(user.getPermission(), signupUser.getPermission()));
         this.userDao.deleteUser(signupUser.getId());
     }
 

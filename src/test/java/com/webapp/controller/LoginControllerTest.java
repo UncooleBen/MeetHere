@@ -17,8 +17,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class LoginControllerTest {
-    private LoginDao loginDao=mock(LoginDao.class);
-    private LoginController loginController=new LoginController(loginDao);
+    private LoginDao loginDao = mock(LoginDao.class);
+    private LoginController loginController = new LoginController(loginDao);
     private HttpServletRequest request=mock(HttpServletRequest.class);
     private HttpSession session=mock(HttpSession.class);
     private HttpServletResponse response=mock(HttpServletResponse.class);
@@ -31,14 +31,14 @@ class LoginControllerTest {
 
         User user=null;
 
-        when( request.getSession()).thenReturn(session);
+        when(request.getSession()).thenReturn(session);
         when(request.getParameter("username")).thenReturn(username);
         when(request.getParameter("password")).thenReturn(password);
 
         when(loginDao.login(username,password)).thenReturn(user);
 
 
-        ModelAndView result=loginController.service(request,response);
+        ModelAndView result = loginController.service(request,response);
         verify(request).setCharacterEncoding("utf-8");
 
         assertAll(

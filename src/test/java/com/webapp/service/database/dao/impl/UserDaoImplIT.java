@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UserDaoImplIT {
@@ -42,12 +43,13 @@ class UserDaoImplIT {
         User user = new User("username", "password", "name", "MALE", "tel");
         this.userDao.addUser(user);
         User insertedUser = this.userDao.queryAllUsers().get(0);
-        assertEquals(user.getPermission(), insertedUser.getPermission());
-        assertEquals(user.getTel(), insertedUser.getTel());
-        assertEquals(user.getSex(), insertedUser.getSex());
-        assertEquals(user.getName(), insertedUser.getName());
-        assertEquals(user.getUsername(), insertedUser.getUsername());
-        assertEquals(user.getPassword(), insertedUser.getPassword());
+        assertAll(
+                () -> assertEquals(user.getPermission(), insertedUser.getPermission()),
+                () -> assertEquals(user.getTel(), insertedUser.getTel()),
+                () -> assertEquals(user.getSex(), insertedUser.getSex()),
+                () -> assertEquals(user.getName(), insertedUser.getName()),
+                () -> assertEquals(user.getUsername(), insertedUser.getUsername()),
+                () -> assertEquals(user.getPassword(), insertedUser.getPassword()));
         this.userDao.deleteUser(insertedUser.getId());
     }
 
@@ -57,12 +59,13 @@ class UserDaoImplIT {
         User user = new User("username", "password", "name", "MALE", "tel");
         this.userDao.addUser(user);
         User insertedUser = this.userDao.queryUserById(this.userDao.queryAllUsers().get(0).getId());
-        assertEquals(user.getPermission(), insertedUser.getPermission());
-        assertEquals(user.getTel(), insertedUser.getTel());
-        assertEquals(user.getSex(), insertedUser.getSex());
-        assertEquals(user.getName(), insertedUser.getName());
-        assertEquals(user.getUsername(), insertedUser.getUsername());
-        assertEquals(user.getPassword(), insertedUser.getPassword());
+        assertAll(
+                () -> assertEquals(user.getPermission(), insertedUser.getPermission()),
+                () -> assertEquals(user.getTel(), insertedUser.getTel()),
+                () -> assertEquals(user.getSex(), insertedUser.getSex()),
+                () -> assertEquals(user.getName(), insertedUser.getName()),
+                () -> assertEquals(user.getUsername(), insertedUser.getUsername()),
+                () -> assertEquals(user.getPassword(), insertedUser.getPassword()));
         this.userDao.deleteUser(insertedUser.getId());
     }
 
@@ -71,25 +74,26 @@ class UserDaoImplIT {
     void add20UserAndQueryByList() {
         List<User> userList = new ArrayList<>();
         long time = System.currentTimeMillis();
-        for (int i=0; i<20; i++) {
-            userList.add(new User("username"+i, "password"+i, "name"+i,
-                    "MALE", "tel"+i));
+        for (int i = 0; i < 20; i++) {
+            userList.add(new User("username" + i, "password" + i, "name" + i,
+                    "MALE", "tel" + i));
         }
         for (User user : userList) {
             this.userDao.addUser(user);
         }
         List<User> resultList = this.userDao.queryAllUsers();
-        for (int i=0; i<20; i++) {
-            User user = userList.get(20-i-1);
+        for (int i = 0; i < 20; i++) {
+            User user = userList.get(20 - i - 1);
             User insertedUser = resultList.get(i);
-            assertEquals(user.getPermission(), insertedUser.getPermission());
-            assertEquals(user.getTel(), insertedUser.getTel());
-            assertEquals(user.getSex(), insertedUser.getSex());
-            assertEquals(user.getName(), insertedUser.getName());
-            assertEquals(user.getUsername(), insertedUser.getUsername());
-            assertEquals(user.getPassword(), insertedUser.getPassword());
+            assertAll(
+                    () -> assertEquals(user.getPermission(), insertedUser.getPermission()),
+                    () -> assertEquals(user.getTel(), insertedUser.getTel()),
+                    () -> assertEquals(user.getSex(), insertedUser.getSex()),
+                    () -> assertEquals(user.getName(), insertedUser.getName()),
+                    () -> assertEquals(user.getUsername(), insertedUser.getUsername()),
+                    () -> assertEquals(user.getPassword(), insertedUser.getPassword()));
         }
-        for (int i=0; i<20; i++) {
+        for (int i = 0; i < 20; i++) {
             User user = resultList.get(i);
             this.userDao.deleteUser(user.getId());
         }
@@ -99,15 +103,15 @@ class UserDaoImplIT {
     void add20UserAndUpdate() {
         List<User> userList = new ArrayList<>();
         long time = System.currentTimeMillis();
-        for (int i=0; i<20; i++) {
-            userList.add(new User("username"+i, "password"+i, "name"+i,
-                    "MALE", "tel"+i));
+        for (int i = 0; i < 20; i++) {
+            userList.add(new User("username" + i, "password" + i, "name" + i,
+                    "MALE", "tel" + i));
         }
         for (User user : userList) {
             this.userDao.addUser(user);
         }
         List<User> resultList = this.userDao.queryAllUsers();
-        for (int i=0; i<20; i++) {
+        for (int i = 0; i < 20; i++) {
             User resultUser = resultList.get(0);
             resultUser.setName("new name");
             resultUser.setPassword("new password");
@@ -117,17 +121,18 @@ class UserDaoImplIT {
             this.userDao.updateUser(resultUser);
         }
         List<User> updatedResultList = this.userDao.queryAllUsers();
-        for (int i=0; i<20; i++) {
+        for (int i = 0; i < 20; i++) {
             User user = resultList.get(i);
             User insertedUser = updatedResultList.get(i);
-            assertEquals(user.getPermission(), insertedUser.getPermission());
-            assertEquals(user.getTel(), insertedUser.getTel());
-            assertEquals(user.getSex(), insertedUser.getSex());
-            assertEquals(user.getName(), insertedUser.getName());
-            assertEquals(user.getUsername(), insertedUser.getUsername());
-            assertEquals(user.getPassword(), insertedUser.getPassword());
+            assertAll(
+                    () -> assertEquals(user.getPermission(), insertedUser.getPermission()),
+                    () -> assertEquals(user.getTel(), insertedUser.getTel()),
+                    () -> assertEquals(user.getSex(), insertedUser.getSex()),
+                    () -> assertEquals(user.getName(), insertedUser.getName()),
+                    () -> assertEquals(user.getUsername(), insertedUser.getUsername()),
+                    () -> assertEquals(user.getPassword(), insertedUser.getPassword()));
         }
-        for (int i=0; i<20; i++) {
+        for (int i = 0; i < 20; i++) {
             User user = resultList.get(i);
             this.userDao.deleteUser(user.getId());
         }
@@ -137,30 +142,32 @@ class UserDaoImplIT {
     void add20UserAndUpdatePassword() {
         List<User> userList = new ArrayList<>();
         long time = System.currentTimeMillis();
-        for (int i=0; i<20; i++) {
-            userList.add(new User("username"+i, "password"+i, "name"+i,
-                    "MALE", "tel"+i));
+        for (int i = 0; i < 20; i++) {
+            userList.add(new User("username" + i, "password" + i, "name" + i,
+                    "MALE", "tel" + i));
         }
         for (User user : userList) {
             this.userDao.addUser(user);
         }
         List<User> resultList = this.userDao.queryAllUsers();
-        for (int i=0; i<20; i++) {
+        for (int i = 0; i < 20; i++) {
             User resultUser = resultList.get(i);
-            this.userDao.updateUserPassword(resultUser.getId(), "new password"+i);
+            this.userDao.updateUserPassword(resultUser.getId(), "new password" + i);
         }
         List<User> updatedResultList = this.userDao.queryAllUsers();
-        for (int i=0; i<20; i++) {
+        for (int i = 0; i < 20; i++) {
             User user = resultList.get(i);
             User insertedUser = updatedResultList.get(i);
-            assertEquals(user.getPermission(), insertedUser.getPermission());
-            assertEquals(user.getTel(), insertedUser.getTel());
-            assertEquals(user.getSex(), insertedUser.getSex());
-            assertEquals(user.getName(), insertedUser.getName());
-            assertEquals(user.getUsername(), insertedUser.getUsername());
-            assertEquals("new password"+i, insertedUser.getPassword());
+            final int index = i;
+            assertAll(
+                    () -> assertEquals(user.getPermission(), insertedUser.getPermission()),
+                    () -> assertEquals(user.getTel(), insertedUser.getTel()),
+                    () -> assertEquals(user.getSex(), insertedUser.getSex()),
+                    () -> assertEquals(user.getName(), insertedUser.getName()),
+                    () -> assertEquals(user.getUsername(), insertedUser.getUsername()),
+                    () -> assertEquals("new password" + index, insertedUser.getPassword()));
         }
-        for (int i=0; i<20; i++) {
+        for (int i = 0; i < 20; i++) {
             User user = resultList.get(i);
             this.userDao.deleteUser(user.getId());
         }

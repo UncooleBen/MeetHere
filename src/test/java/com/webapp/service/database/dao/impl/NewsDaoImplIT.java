@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class NewsDaoImplIT {
@@ -42,11 +43,12 @@ class NewsDaoImplIT {
         News news = new News("title", time, time, "author", "detail");
         this.newsDao.insertNews(news);
         News insertedNews = this.newsDao.listNews(1).get(0);
-        assertEquals(news.getAuthor(), insertedNews.getAuthor());
-        assertEquals(news.getCreated(), insertedNews.getCreated());
-        assertEquals(news.getDetail(), insertedNews.getDetail());
-        assertEquals(news.getLastModified(), insertedNews.getLastModified());
-        assertEquals(news.getTitle(), insertedNews.getTitle());
+        assertAll(
+                () -> assertEquals(news.getAuthor(), insertedNews.getAuthor()),
+                () -> assertEquals(news.getCreated(), insertedNews.getCreated()),
+                () -> assertEquals(news.getDetail(), insertedNews.getDetail()),
+                () -> assertEquals(news.getLastModified(), insertedNews.getLastModified()),
+                () -> assertEquals(news.getTitle(), insertedNews.getTitle()));
         this.newsDao.deleteNewsById(insertedNews.getId());
     }
 
@@ -56,11 +58,12 @@ class NewsDaoImplIT {
         News news = new News("title", time, time, "author", "detail");
         this.newsDao.insertNews(news);
         News insertedNews = this.newsDao.queryNewsById(this.newsDao.listNews(1).get(0).getId());
-        assertEquals(news.getAuthor(), insertedNews.getAuthor());
-        assertEquals(news.getCreated(), insertedNews.getCreated());
-        assertEquals(news.getDetail(), insertedNews.getDetail());
-        assertEquals(news.getLastModified(), insertedNews.getLastModified());
-        assertEquals(news.getTitle(), insertedNews.getTitle());
+        assertAll(
+                () -> assertEquals(news.getAuthor(), insertedNews.getAuthor()),
+                () -> assertEquals(news.getCreated(), insertedNews.getCreated()),
+                () -> assertEquals(news.getDetail(), insertedNews.getDetail()),
+                () -> assertEquals(news.getLastModified(), insertedNews.getLastModified()),
+                () -> assertEquals(news.getTitle(), insertedNews.getTitle()));
         this.newsDao.deleteNewsById(insertedNews.getId());
     }
 
@@ -68,23 +71,24 @@ class NewsDaoImplIT {
     void add20NewsAndQueryByList() {
         List<News> newsList = new ArrayList<>();
         long time = System.currentTimeMillis();
-        for (int i=19; i>=0; i--) {
-            newsList.add(new News("title"+i, time+i, time+i, "author"+i, "detail"+i));
+        for (int i = 19; i >= 0; i--) {
+            newsList.add(new News("title" + i, time + i, time + i, "author" + i, "detail" + i));
         }
         for (News news : newsList) {
             this.newsDao.insertNews(news);
         }
         List<News> resultList = this.newsDao.listNews(20);
-        for (int i=0; i<20; i++) {
+        for (int i = 0; i < 20; i++) {
             News news = newsList.get(i);
             News insertedNews = resultList.get(i);
-            assertEquals(news.getAuthor(), insertedNews.getAuthor());
-            assertEquals(news.getCreated(), insertedNews.getCreated());
-            assertEquals(news.getDetail(), insertedNews.getDetail());
-            assertEquals(news.getLastModified(), insertedNews.getLastModified());
-            assertEquals(news.getTitle(), insertedNews.getTitle());
+            assertAll(
+                    () -> assertEquals(news.getAuthor(), insertedNews.getAuthor()),
+                    () -> assertEquals(news.getCreated(), insertedNews.getCreated()),
+                    () -> assertEquals(news.getDetail(), insertedNews.getDetail()),
+                    () -> assertEquals(news.getLastModified(), insertedNews.getLastModified()),
+                    () -> assertEquals(news.getTitle(), insertedNews.getTitle()));
         }
-        for (int i=0; i<20; i++) {
+        for (int i = 0; i < 20; i++) {
             News news = resultList.get(i);
             this.newsDao.deleteNewsById(news.getId());
         }
@@ -94,33 +98,34 @@ class NewsDaoImplIT {
     void add20NewsAndUpdate() {
         List<News> newsList = new ArrayList<>();
         long time = System.currentTimeMillis();
-        for (int i=19; i>=0; i--) {
-            newsList.add(new News("title"+i, time+i, time+i, "author"+i, "detail"+i));
+        for (int i = 19; i >= 0; i--) {
+            newsList.add(new News("title" + i, time + i, time + i, "author" + i, "detail" + i));
         }
         for (News news : newsList) {
             this.newsDao.insertNews(news);
         }
         List<News> resultList = this.newsDao.listNews(20);
-        for (int i=0; i<20; i++) {
+        for (int i = 0; i < 20; i++) {
             News news = resultList.get(i);
             news.setAuthor("new author" + i);
-            news.setDetail("new detail"+i);
-            news.setLastModified(time*2+i);
-            news.setCreated(time*2+i);
-            news.setTitle("new title"+i);
+            news.setDetail("new detail" + i);
+            news.setLastModified(time * 2 + i);
+            news.setCreated(time * 2 + i);
+            news.setTitle("new title" + i);
             this.newsDao.updateNews(news);
         }
         List<News> updatedResultList = this.newsDao.listNews(20);
-        for (int i=0; i<20; i++) {
-            News news = resultList.get(20-i-1);
+        for (int i = 0; i < 20; i++) {
+            News news = resultList.get(20 - i - 1);
             News insertedNews = updatedResultList.get(i);
-            assertEquals(news.getAuthor(), insertedNews.getAuthor());
-            assertEquals(news.getCreated(), insertedNews.getCreated());
-            assertEquals(news.getDetail(), insertedNews.getDetail());
-            assertEquals(news.getLastModified(), insertedNews.getLastModified());
-            assertEquals(news.getTitle(), insertedNews.getTitle());
+            assertAll(
+			() ->            assertEquals(news.getAuthor(), insertedNews.getAuthor()),
+			() ->            assertEquals(news.getCreated(), insertedNews.getCreated()),
+			() ->            assertEquals(news.getDetail(), insertedNews.getDetail()),
+			() ->            assertEquals(news.getLastModified(), insertedNews.getLastModified()),
+			() ->            assertEquals(news.getTitle(), insertedNews.getTitle()));
         }
-        for (int i=0; i<20; i++) {
+        for (int i = 0; i < 20; i++) {
             News news = updatedResultList.get(i);
             this.newsDao.deleteNewsById(news.getId());
         }

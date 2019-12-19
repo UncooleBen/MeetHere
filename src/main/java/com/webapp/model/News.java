@@ -78,4 +78,30 @@ public class News {
 	public void setDetail(String detail) {
 		this.detail = detail;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		News news = (News) o;
+
+		if (id != news.id) return false;
+		if (created != news.created) return false;
+		if (lastModified != news.lastModified) return false;
+		if (!title.equals(news.title)) return false;
+		if (!author.equals(news.author)) return false;
+		return detail.equals(news.detail);
+	}
+
+	@Override
+	public int hashCode() {
+		int result = id;
+		result = 31 * result + title.hashCode();
+		result = 31 * result + (int) (created ^ (created >>> 32));
+		result = 31 * result + (int) (lastModified ^ (lastModified >>> 32));
+		result = 31 * result + author.hashCode();
+		result = 31 * result + detail.hashCode();
+		return result;
+	}
 }

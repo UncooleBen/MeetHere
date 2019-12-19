@@ -280,7 +280,7 @@ class BuildingControllerTest {
 
 
                 ModelAndView result=buildingController.service(action,request,session);
-
+                //TODO
                 verify(recordDao).addRecord(record);
 
                 assertAll(
@@ -314,7 +314,7 @@ class BuildingControllerTest {
 
 
                 ModelAndView result=buildingController.service(action,request,session);
-
+                //TODO
                 verify(recordDao).addRecord(record);
 
                 assertAll(

@@ -36,8 +36,10 @@ class DatabaseServiceIT {
     @Test
     void testGetConnection() throws Throwable {
         connection = databaseService.getConnection();
-        assertNotNull(connection);
-        assertFalse(connection.isClosed());
+        assertAll(
+                () -> assertNotNull(connection),
+                () -> assertFalse(connection.isClosed())
+        );
     }
 
     @Test

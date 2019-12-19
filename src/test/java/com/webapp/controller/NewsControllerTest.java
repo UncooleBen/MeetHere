@@ -1,10 +1,8 @@
 package com.webapp.controller;
 
 import com.webapp.model.News;
-import com.webapp.model.user.User;
 import com.webapp.service.database.dao.NewsDao;
 import org.junit.jupiter.api.Test;
-import org.springframework.util.Assert;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;

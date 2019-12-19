@@ -63,4 +63,28 @@ public class Comment {
     this.date = date;
     this.content = content;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Comment comment = (Comment) o;
+
+    if (id != comment.id) return false;
+    if (userId != comment.userId) return false;
+    if (date != comment.date) return false;
+    if (verified != comment.verified) return false;
+    return content.equals(comment.content);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = id;
+    result = 31 * result + userId;
+    result = 31 * result + (int) (date ^ (date >>> 32));
+    result = 31 * result + content.hashCode();
+    result = 31 * result + (verified ? 1 : 0);
+    return result;
+  }
 }

@@ -90,8 +90,8 @@ public class CommentDaoImpl extends DatabaseService implements CommentDao {
         comment.setDate(rs.getLong("date"));
         comment.setContent(rs.getString("content"));
       }
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
+    } catch (SQLException sqle) {
+      sqle.printStackTrace(System.err);
     } finally {
       closeConnection(connection);
     }
@@ -109,8 +109,8 @@ public class CommentDaoImpl extends DatabaseService implements CommentDao {
       preparedStatement.setLong(2, comment.getDate());
       preparedStatement.setString(3, comment.getContent());
       result = preparedStatement.executeUpdate();
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
+    } catch (SQLException sqle) {
+      sqle.printStackTrace(System.err);
     } finally {
       closeConnection(connection);
     }
@@ -130,8 +130,8 @@ public class CommentDaoImpl extends DatabaseService implements CommentDao {
       PreparedStatement preparedStatement = connection.prepareStatement(sql);
       preparedStatement.setInt(1, commentId);
       result = preparedStatement.executeUpdate();
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
+    } catch (SQLException sqle) {
+      sqle.printStackTrace(System.err);
     } finally {
       closeConnection(connection);
     }
@@ -155,8 +155,8 @@ public class CommentDaoImpl extends DatabaseService implements CommentDao {
         preparedStatement.setBoolean(4, comment.isVerified());
         preparedStatement.setInt(5, comment.getId());
         result = preparedStatement.executeUpdate();
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
+    } catch (SQLException sqle) {
+      sqle.printStackTrace(System.err);
     } finally {
       closeConnection(connection);
     }

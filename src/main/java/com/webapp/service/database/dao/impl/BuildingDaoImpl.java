@@ -6,6 +6,7 @@ import com.webapp.service.database.dao.BuildingDao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,8 +37,8 @@ public class BuildingDaoImpl extends DatabaseService implements BuildingDao {
         building.setPrice(rs.getString("price"));
         buildingList.add(building);
       }
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
+    } catch (SQLException sqle) {
+      sqle.printStackTrace(System.err);
     } finally {
       closeConnection(connection);
     }
@@ -60,8 +61,8 @@ public class BuildingDaoImpl extends DatabaseService implements BuildingDao {
         building.setPrice(rs.getString("price"));
         return building;
       }
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
+    } catch (SQLException sqle) {
+      sqle.printStackTrace(System.err);
     } finally {
       closeConnection(connection);
     }
@@ -79,8 +80,8 @@ public class BuildingDaoImpl extends DatabaseService implements BuildingDao {
       pstmt.setString(2, building.getDescription());
       pstmt.setString(3, building.getPrice());
       result = pstmt.executeUpdate();
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
+    } catch (SQLException sqle) {
+      sqle.printStackTrace(System.err);
     } finally {
       closeConnection(connection);
     }
@@ -100,8 +101,8 @@ public class BuildingDaoImpl extends DatabaseService implements BuildingDao {
       PreparedStatement pstmt = connection.prepareStatement(sql);
       pstmt.setInt(1, id);
       result = pstmt.executeUpdate();
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
+    } catch (SQLException sqle) {
+      sqle.printStackTrace(System.err);
     } finally {
       closeConnection(connection);
     }
@@ -124,8 +125,8 @@ public class BuildingDaoImpl extends DatabaseService implements BuildingDao {
       pstmt.setString(3, building.getPrice());
       pstmt.setInt(4, building.getId());
       result = pstmt.executeUpdate();
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
+    } catch (SQLException sqle) {
+      sqle.printStackTrace(System.err);
     } finally {
       closeConnection(connection);
     }

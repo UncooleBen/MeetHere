@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class PasswordController {
-  // TODO 4. need check
 
   private UserDao userDao;
 

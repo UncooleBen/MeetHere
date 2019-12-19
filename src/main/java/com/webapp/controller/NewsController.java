@@ -43,7 +43,6 @@ public class NewsController {
 
   private void adminNewsService(ModelAndView mv, String action, HttpServletRequest request) {
     switch (action) {
-      // TODO need check
       case "add":
         mv.addObject("mainPage", "admin/newsModify.jsp");
         break;
@@ -94,7 +93,6 @@ public class NewsController {
   }
 
   private void userNewsService(ModelAndView mv, String action, HttpServletRequest request) {
-    // TODO: need check
     switch (action) {
       case "detail": {
         int newsId = Integer.parseInt(request.getParameter("newsId"));

@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class RecordController {
-  // TODO 5. need check
 
   RecordDao recordDao;
 

@@ -18,6 +18,9 @@ import com.webapp.service.database.DatabaseService;
 import com.webapp.service.database.dao.impl.LoginDaoImpl;
 import com.webapp.model.user.User;
 
+/**
+ * @author Juntao Peng
+ */
 @Controller
 public class SignupController {
 

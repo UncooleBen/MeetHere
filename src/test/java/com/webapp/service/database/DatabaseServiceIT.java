@@ -9,6 +9,9 @@ import java.sql.Connection;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * @author Juntao Peng
+ */
 class DatabaseServiceIT {
 
     DatabaseService databaseService;

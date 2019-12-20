@@ -14,6 +14,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * @author Juntao Peng
+ */
 class UserDaoImplIT {
     UserDaoImpl userDao;
     Connection connection;

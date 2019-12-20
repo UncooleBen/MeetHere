@@ -18,6 +18,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+
+/**
+ * @author Juntao Peng
+ */
 @Controller
 public class BuildingController {
 

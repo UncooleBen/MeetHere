@@ -23,7 +23,7 @@ public class BuildingDaoImpl extends DatabaseService implements BuildingDao {
   @Override
   public List<Building> listBuilding(int size) {
     List<Building> buildingList = new ArrayList<>();
-    String SQL = "SELECT * FROM t_building LIMIT ?";
+    String SQL = "SELECT * FROM t_building ORDER BY id DESC LIMIT ?";
     Connection connection = getConnection();
     try {
       PreparedStatement preparedStatement = connection.prepareStatement(SQL);

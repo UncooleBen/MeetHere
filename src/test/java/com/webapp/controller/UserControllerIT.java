@@ -127,7 +127,7 @@ public class UserControllerIT {
 
     @ParameterizedTest
     @MethodSource("userProvider")
-    void delete5Users(String username, String password, String name, String sex, String tel) throws Throwable {
+    void deleteUsers(String username, String password, String name, String sex, String tel) throws Throwable {
         User expectedUser = new User(username, password, name, sex, tel);
         this.userDao.addUser(expectedUser);
         expectedUser = this.userDao.queryAllUsers().get(0);
@@ -148,15 +148,9 @@ public class UserControllerIT {
 
     @ParameterizedTest
     @MethodSource("userProvider")
-    void save5UsersThenDelete(String username, String password, String name, String sex, String tel) throws Throwable {
+    void saveUsersThenDelete(String username, String password, String name, String sex, String tel) throws Throwable {
         Map<String, Object> sessionAttrs = new HashMap<>();
         sessionAttrs.put("currentUserType", "admin");
-        Map<String, Object> requestAttrs = new HashMap<>();
-        requestAttrs.put("username", username);
-        requestAttrs.put("password", password);
-        requestAttrs.put("name", name);
-        requestAttrs.put("sex", sex);
-        requestAttrs.put("tel", tel);
         this.mockMvc.perform(post("/user?action=save")
                 .param("username", username)
                 .param("password", password)
@@ -181,7 +175,7 @@ public class UserControllerIT {
 
     @ParameterizedTest
     @MethodSource("existedUserProvider")
-    void update5UsersThenRestore(int id, String username, String password, String name, String sex, String tel) throws Throwable {
+    void updateUsersThenRestore(int id, String username, String password, String name, String sex, String tel) throws Throwable {
         String newPassword = "clandestine password";
         Map<String, Object> sessionAttrs = new HashMap<>();
         sessionAttrs.put("currentUserType", "admin");

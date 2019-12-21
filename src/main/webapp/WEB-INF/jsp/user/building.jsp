@@ -60,9 +60,6 @@
 		return true;
 	}
 
-	$(document).ready(function () {
-		$("ul li:eq(2)").addClass("active");
-	});
 </script>
 <div class="data_list">
 	<div class="data_list_title">
@@ -70,7 +67,6 @@
 	</div>
 	<form action="building?action=book" method="post" onsubmit="return checkForm()">
 		<div class="data_form">
-			<input type="hidden" id="recordId" name="recordId" value="${record.recordId }"/>
 			<div>
 				<table class="table table-striped table-bordered table-hover datatable">
 					<thead>

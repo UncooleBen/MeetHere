@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>MeetHere</title>
+    <title>MeetHere场地预约与管理系统</title>
 
     <link href="resources/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="resources/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">

@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MeetHere</title>
+    <title>MeetHere场地预约与管理系统</title>
     <link href="resources/style/dorm.css" rel="stylesheet">
     <link href="resources/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="resources/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
@@ -88,7 +88,7 @@
 <div class="container-fluid" style="padding-right: 0px;padding-left: 0px;">
     <div region="north" style="height: 100px;background-image: url('resources/images/bg.jpg')">
         <div align="left" style="width: 80%;height:100px ;float: left;padding-top: 40px;padding-left: 30px;"><font
-                color="white" size="6">场地预约与管理系统</font></div>
+                color="white" size="6">MeetHere场地预约与管理系统</font></div>
         <div style="padding-top: 70px;padding-right: 20px;">当前用户：&nbsp;<font color="red">${currentUser.username }</font>
         </div>
     </div>
@@ -101,7 +101,6 @@
                 <li><a href="news?action=list"><i class="icon-chevron-right"></i>新闻</a></li>
                 <li><a href="comment?action=list"><i class="icon-chevron-right"></i>留言板</a></li>
                 <li><a href="building?action=list"><i class="icon-chevron-right"></i>场地预约</a></li>
-                <!--li><a href="record?action=add"><i class="icon-chevron-right"></i>我要预约</a></li-->
                 <li><a href="record?action=list"><i class="icon-chevron-right"></i>预约记录</a></li>
                 <li><a href="password?action=change"><i class="icon-chevron-right"></i>修改密码</a></li>
                 <li><a href="index"><i class="icon-chevron-right"></i>退出系统</a></li>

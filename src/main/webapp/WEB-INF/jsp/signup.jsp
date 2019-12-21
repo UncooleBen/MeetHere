@@ -25,7 +25,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>场地预约与管理系统登录</title>
+    <title>MeetHere场地预约与管理系统登录</title>
     <link href="resources/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="resources/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
     <script src="resources/bootstrap/js/jQuery.js"></script>
@@ -112,7 +112,7 @@
 <body>
 <div class="container">
     <form name="myForm" class="form-signin" action="signupSubmit" method="post" onsubmit="return checkForm()">
-        <h2 class="form-signin-heading"><font color="gray">场地预约与管理系统</font></h2>
+        <h2 class="form-signin-heading"><font color="gray">MeetHere场地预约与管理系统</font></h2>
         <input id="username" name="username" value="" type="text" class="input-block-level" placeholder="用户名">
         <input id="name" name="name" value="" type="text" class="input-block-level" placeholder="姓名">
         <input id="password" name="password" value="" type="password" class="input-block-level" placeholder="密码">

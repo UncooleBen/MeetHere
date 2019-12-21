@@ -3,33 +3,33 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script type="text/javascript">
-  function checkForm() {
-    var buildingName = document.getElementById("buildingName").value;
-    // var roomName=document.getElementById("roomName").value;
-    var startDate = document.getElementById("startDate").value;
-    var endDate = document.getElementById("endDate").value;
-    if (buildingName == null || buildingName == "") {
-      document.getElementById("error").innerHTML = "楼不能为空！";
-      return false;
+    function checkForm() {
+        var buildingName = document.getElementById("buildingName").value;
+        // var roomName=document.getElementById("roomName").value;
+        var startDate = document.getElementById("startDate").value;
+        var endDate = document.getElementById("endDate").value;
+        if (buildingName == null || buildingName == "") {
+            document.getElementById("error").innerHTML = "楼不能为空！";
+            return false;
+        }
+        // if(roomName==null||roomName==""){
+        //     document.getElementById("error").innerHTML="房间不能为空！";
+        //     return false;
+        // }
+        if (startDate == null) {
+            document.getElementById("error").innerHTML = "起始日期不能为空！";
+            return false;
+        }
+        if (endDate == null) {
+            document.getElementById("error").innerHTML = "结束日期不能为空！";
+            return false;
+        }
+        return true;
     }
-    // if(roomName==null||roomName==""){
-    //     document.getElementById("error").innerHTML="房间不能为空！";
-    //     return false;
-    // }
-    if (startDate == null) {
-      document.getElementById("error").innerHTML = "起始日期不能为空！";
-      return false;
-    }
-    if (endDate == null) {
-      document.getElementById("error").innerHTML = "结束日期不能为空！";
-      return false;
-    }
-    return true;
-  }
 
-  $(document).ready(function () {
-    $("ul li:eq(2)").addClass("active");
-  });
+    $(document).ready(function () {
+        $("ul li:eq(2)").addClass("active");
+    });
 </script>
 <div class="data_list">
     <div class="data_list_title">
@@ -79,7 +79,7 @@
             <div align="center">
                 <input type="submit" class="btn btn-primary" value="保存"/>
                 &nbsp;<button class="btn btn-primary" type="button"
-                              onclick="javascript:window.location='record'">返回
+                              onclick="window.location='record'">返回
             </button>
             </div>
             <div align="center">

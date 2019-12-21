@@ -298,6 +298,7 @@ public class BuildingControllerIT {
                 Arguments.of(3, "2020-2-29", "5")
         );
     }
+
     @ParameterizedTest
     @MethodSource("bookingInfoProvider")
     void bookBuilding_whenUserIsUser(int buildingId, String startDate, String duration) throws Throwable {

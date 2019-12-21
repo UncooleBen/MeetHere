@@ -1,26 +1,28 @@
 package com.webapp.model;
 
-/** @author Juntao Peng */
+/**
+ * @author Juntao Peng
+ */
 public class Record {
 
-  private int id;
-  private long time;
-  private long startDate;
-  private long endDate;
-  private int userId;
-  private int buildingId;
-  private boolean verified;
+    private int id;
+    private long time;
+    private long startDate;
+    private long endDate;
+    private int userId;
+    private int buildingId;
+    private boolean verified;
 
-  public Record(
-          int id, long time, long startDate, long endDate, int userId, int buildId, boolean verified) {
-      this.id = id;
-      this.time = time;
-      this.startDate = startDate;
-      this.endDate = endDate;
-      this.userId = userId;
-      this.buildingId = buildId;
-      this.verified = verified;
-  }
+    public Record(
+            int id, long time, long startDate, long endDate, int userId, int buildId, boolean verified) {
+        this.id = id;
+        this.time = time;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.userId = userId;
+        this.buildingId = buildId;
+        this.verified = verified;
+    }
 
     public Record(long time, long startDate, long endDate, int userId, int buildId, boolean verified) {
         this.time = time;
@@ -59,36 +61,36 @@ public class Record {
     }
 
     public long getEndDate() {
-    return endDate;
-  }
+        return endDate;
+    }
 
-  public void setEndDate(long endDate) {
-    this.endDate = endDate;
-  }
+    public void setEndDate(long endDate) {
+        this.endDate = endDate;
+    }
 
-  public int getUserId() {
-    return userId;
-  }
+    public int getUserId() {
+        return userId;
+    }
 
-  public void setUserId(int userId) {
-    this.userId = userId;
-  }
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
-  public int getBuildingId() {
-    return buildingId;
-  }
+    public int getBuildingId() {
+        return buildingId;
+    }
 
-  public void setBuildingId(int buildingId) {
-    this.buildingId = buildingId;
-  }
+    public void setBuildingId(int buildingId) {
+        this.buildingId = buildingId;
+    }
 
-  public boolean isVerified() {
-    return verified;
-  }
+    public boolean isVerified() {
+        return verified;
+    }
 
-  public void setVerified(boolean verified) {
-    this.verified = verified;
-  }
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
 
     @Override
     public boolean equals(Object o) {

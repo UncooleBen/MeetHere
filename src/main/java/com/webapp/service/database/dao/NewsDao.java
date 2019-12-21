@@ -2,7 +2,6 @@ package com.webapp.service.database.dao;
 
 import com.webapp.model.News;
 
-import java.sql.Connection;
 import java.util.List;
 
 /**

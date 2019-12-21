@@ -145,11 +145,11 @@ public class RecordDaoImpl extends DatabaseService implements RecordDao {
         assert connection != null;
         String DELETE = "DELETE FROM t_record WHERE id = ?";
         try {
-          PreparedStatement preparedStatement = connection.prepareStatement(DELETE);
-          preparedStatement.setInt(1, id);
-          preparedStatement.execute();
-          closeConnection(connection);
-          return true;
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE);
+            preparedStatement.setInt(1, id);
+            preparedStatement.execute();
+            closeConnection(connection);
+            return true;
         } catch (SQLException sqlException) {
             sqlException.printStackTrace(System.err);
             return false;

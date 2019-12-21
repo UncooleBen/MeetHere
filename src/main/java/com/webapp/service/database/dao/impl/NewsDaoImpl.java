@@ -3,6 +3,7 @@ package com.webapp.service.database.dao.impl;
 import com.webapp.model.News;
 import com.webapp.service.database.DatabaseService;
 import com.webapp.service.database.dao.NewsDao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -50,7 +51,7 @@ public class NewsDaoImpl extends DatabaseService implements NewsDao {
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 result = new News(rs.getInt("id"), rs.getString("title"), rs.getLong("created"),
-                    rs.getLong("last_modified"), rs.getString("author"), rs.getString("detail"));
+                        rs.getLong("last_modified"), rs.getString("author"), rs.getString("detail"));
             }
             closeConnection(connection);
             return result;

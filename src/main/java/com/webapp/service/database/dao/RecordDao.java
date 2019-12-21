@@ -1,6 +1,7 @@
 package com.webapp.service.database.dao;
 
 import com.webapp.model.Record;
+
 import java.util.List;
 
 
@@ -31,10 +32,8 @@ public interface RecordDao {
     /**
      * Get the list of records in 't_record' given user id.
      *
-     * @param size
-     *     The size of record list
-     * @param userId
-     *     The user id
+     * @param size   The size of record list
+     * @param userId The user id
      * @return A list of record
      */
     List<Record> listRecordWithUserId(int size, int userId, boolean verified);

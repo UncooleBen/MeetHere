@@ -1,5 +1,5 @@
 module('Mouse Navigation 2012', {
-    setup: function(){
+    setup: function () {
         /*
             Tests start with picker on March 31, 2012.  Fun facts:
 
@@ -9,18 +9,18 @@ module('Mouse Navigation 2012', {
             * March 31, 2012 was on a Saturday
         */
         this.input = $('<input type="text" value="31-03-2012">')
-                        .appendTo('#qunit-fixture')
-                        .datetimepicker({format: "dd-mm-yyyy", viewSelect: 2})
-                        .focus(); // Activate for visibility checks
-        this.dp = this.input.data('datetimepicker')
+            .appendTo('#qunit-fixture')
+            .datetimepicker({format: "dd-mm-yyyy", viewSelect: 2})
+            .focus(); // Activate for visibility checks
+        this.dp = this.input.data('datetimepicker');
         this.picker = this.dp.picker;
     },
-    teardown: function(){
+    teardown: function () {
         this.picker.remove();
     }
 });
 
-test('Selecting date resets viewDate and date', function(){
+test('Selecting date resets viewDate and date', function () {
     var target;
 
     // Rendered correctly
@@ -30,15 +30,15 @@ test('Selecting date resets viewDate and date', function(){
 
     // Updated internally on click
     target.click();
-    datesEqual(this.dp.viewDate, UTCDate(2012, 2, 4))
-    datesEqual(this.dp.date, UTCDate(2012, 2, 4))
+    datesEqual(this.dp.viewDate, UTCDate(2012, 2, 4));
+    datesEqual(this.dp.date, UTCDate(2012, 2, 4));
 
     // Re-rendered on click
     target = this.picker.find('.datetimepicker-days tbody td:first');
     equal(target.text(), '26'); // Should be Feb 29
 });
 
-test('Navigating next/prev by month', function(){
+test('Navigating next/prev by month', function () {
     var target;
 
     equal(this.dp.viewMode, 2);
@@ -70,7 +70,7 @@ test('Navigating next/prev by month', function(){
     // (includes "old" days at start of month, even if that's all the first week-row consists of)
 });
 
-test('Navigating to/from year view', function(){
+test('Navigating to/from year view', function () {
     var target;
 
     equal(this.dp.viewMode, 2);
@@ -93,7 +93,7 @@ test('Navigating to/from year view', function(){
     datesEqual(this.dp.date, UTCDate(2012, 2, 31));
 });
 
-test('Navigating to/from decade view', function(){
+test('Navigating to/from decade view', function () {
     var target;
 
     equal(this.dp.viewMode, 2);
@@ -133,7 +133,7 @@ test('Navigating to/from decade view', function(){
     datesEqual(this.dp.date, UTCDate(2012, 2, 31));
 });
 
-test('Navigating prev/next in year view', function(){
+test('Navigating prev/next in year view', function () {
     var target;
 
     equal(this.dp.viewMode, 2);
@@ -165,7 +165,7 @@ test('Navigating prev/next in year view', function(){
     datesEqual(this.dp.date, UTCDate(2012, 2, 31));
 });
 
-test('Navigating prev/next in decade view', function(){
+test('Navigating prev/next in decade view', function () {
     var target;
 
     equal(this.dp.viewMode, 2);
@@ -207,7 +207,7 @@ test('Navigating prev/next in decade view', function(){
     datesEqual(this.dp.date, UTCDate(2012, 2, 31));
 });
 
-test('Selecting date from previous month resets viewDate and date, changing month displayed', function(){
+test('Selecting date from previous month resets viewDate and date, changing month displayed', function () {
     var target;
 
     // Rendered correctly
@@ -219,77 +219,77 @@ test('Selecting date from previous month resets viewDate and date, changing mont
     // Updated internally on click
     target.click();
     equal(this.picker.find('.datetimepicker-days thead th.switch').text(), 'February 2012');
-    datesEqual(this.dp.viewDate, UTCDate(2012, 1, 26))
-    datesEqual(this.dp.date, UTCDate(2012, 1, 26))
+    datesEqual(this.dp.viewDate, UTCDate(2012, 1, 26));
+    datesEqual(this.dp.date, UTCDate(2012, 1, 26));
 
     // Re-rendered on click
     target = this.picker.find('.datetimepicker-days tbody td:first');
     equal(target.text(), '29'); // Should be Jan 29
 });
 
-test('Selecting date from next month resets viewDate and date, changing month displayed', function(){
-  var target;
+test('Selecting date from next month resets viewDate and date, changing month displayed', function () {
+    var target;
 
-  this.input.val('01-04-2012');
-  this.dp.update();
+    this.input.val('01-04-2012');
+    this.dp.update();
 
-  // Rendered correctly
-  equal(this.dp.viewMode, 2);
-  target = this.picker.find('.datetimepicker-days tbody td:last');
-  equal(target.text(), '5'); // Should be May 5
-  equal(this.picker.find('.datetimepicker-days thead th.switch').text(), 'April 2012');
+    // Rendered correctly
+    equal(this.dp.viewMode, 2);
+    target = this.picker.find('.datetimepicker-days tbody td:last');
+    equal(target.text(), '5'); // Should be May 5
+    equal(this.picker.find('.datetimepicker-days thead th.switch').text(), 'April 2012');
 
-  // Updated internally on click
-  target.click();
-  equal(this.picker.find('.datetimepicker-days thead th.switch').text(), 'May 2012');
-  datesEqual(this.dp.viewDate, UTCDate(2012, 4, 5))
-  datesEqual(this.dp.date, UTCDate(2012, 4, 5))
+    // Updated internally on click
+    target.click();
+    equal(this.picker.find('.datetimepicker-days thead th.switch').text(), 'May 2012');
+    datesEqual(this.dp.viewDate, UTCDate(2012, 4, 5));
+    datesEqual(this.dp.date, UTCDate(2012, 4, 5));
 
-  // Re-rendered on click
-  target = this.picker.find('.datetimepicker-days tbody td:first');
-  equal(target.text(), '29'); // Should be Apr 29
+    // Re-rendered on click
+    target = this.picker.find('.datetimepicker-days tbody td:first');
+    equal(target.text(), '29'); // Should be Apr 29
 });
 
-test('Selecting date from next month when the current month has 31 days resets viewDate and date, changing month displayed to the following month', function(){
-  var target;
+test('Selecting date from next month when the current month has 31 days resets viewDate and date, changing month displayed to the following month', function () {
+    var target;
 
-  // use Date AND Time mode
-  this.dp.viewSelect = 0;
+    // use Date AND Time mode
+    this.dp.viewSelect = 0;
 
-  this.input.val('2012-01-31');
-  this.dp.update();
-  equal(this.picker.find('.datetimepicker-days tbody td.day.active').text(), '31');
+    this.input.val('2012-01-31');
+    this.dp.update();
+    equal(this.picker.find('.datetimepicker-days tbody td.day.active').text(), '31');
 
-  // Rendered correctly
-  equal(this.dp.viewMode, 2);
-  target = this.picker.find('.datetimepicker-days tbody td:last');
-  equal(target.text(), '4');
-  equal(this.picker.find('.datetimepicker-days thead th.switch').text(), 'January 2012');
+    // Rendered correctly
+    equal(this.dp.viewMode, 2);
+    target = this.picker.find('.datetimepicker-days tbody td:last');
+    equal(target.text(), '4');
+    equal(this.picker.find('.datetimepicker-days thead th.switch').text(), 'January 2012');
 
-  // Updated internally on click
-  target.click();
-  equal(this.picker.find('.datetimepicker-days thead th.switch').text(), 'February 2012');
-  datesEqual(this.dp.viewDate, UTCDate(2012, 1, 4));
+    // Updated internally on click
+    target.click();
+    equal(this.picker.find('.datetimepicker-days thead th.switch').text(), 'February 2012');
+    datesEqual(this.dp.viewDate, UTCDate(2012, 1, 4));
 });
 
-test('Selecting date from previous month when the current month has 31 days resets viewDate and date, changing month displayed to the preceding month', function(){
-  var target;
+test('Selecting date from previous month when the current month has 31 days resets viewDate and date, changing month displayed to the preceding month', function () {
+    var target;
 
-  // use Date AND Time mode
-  this.dp.viewSelect = 0;
+    // use Date AND Time mode
+    this.dp.viewSelect = 0;
 
-  this.input.val('2012-03-31');
-  this.dp.update();
-  equal(this.picker.find('.datetimepicker-days tbody td.day.active').text(), '31');
+    this.input.val('2012-03-31');
+    this.dp.update();
+    equal(this.picker.find('.datetimepicker-days tbody td.day.active').text(), '31');
 
-  // Rendered correctly
-  equal(this.dp.viewMode, 2);
-  target = this.picker.find('.datetimepicker-days tbody td.old:last');
-  equal(target.text(), '29');
-  equal(this.picker.find('.datetimepicker-days thead th.switch').text(), 'March 2012');
+    // Rendered correctly
+    equal(this.dp.viewMode, 2);
+    target = this.picker.find('.datetimepicker-days tbody td.old:last');
+    equal(target.text(), '29');
+    equal(this.picker.find('.datetimepicker-days thead th.switch').text(), 'March 2012');
 
-  // Updated internally on click
-  target.click();
-  equal(this.picker.find('.datetimepicker-days thead th.switch').text(), 'February 2012');
-  datesEqual(this.dp.viewDate, UTCDate(2012, 1, 29));
+    // Updated internally on click
+    target.click();
+    equal(this.picker.find('.datetimepicker-days thead th.switch').text(), 'February 2012');
+    datesEqual(this.dp.viewDate, UTCDate(2012, 1, 29));
 });

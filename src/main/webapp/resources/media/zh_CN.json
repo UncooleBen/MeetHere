@@ -1,17 +1,17 @@
 {
-    "sProcessing":   "´¦ÀíÖÐ...",
-    "sLengthMenu":   "_MENU_ ¼ÇÂ¼/Ò³",
-    "sZeroRecords":  "Ã»ÓÐÆ¥ÅäµÄ¼ÇÂ¼",
-    "sInfo":         "ÏÔÊ¾µÚ _START_ ÖÁ _END_ Ïî¼ÇÂ¼£¬¹² _TOTAL_ Ïî",
-    "sInfoEmpty":    "ÏÔÊ¾µÚ 0 ÖÁ 0 Ïî¼ÇÂ¼£¬¹² 0 Ïî",
-    "sInfoFiltered": "(ÓÉ _MAX_ Ïî¼ÇÂ¼¹ýÂË)",
-    "sInfoPostFix":  "",
-    "sSearch":       "¹ýÂË:",
-    "sUrl":          "",
-    "oPaginate": {
-        "sFirst":    "Ê×Ò³",
-        "sPrevious": "ÉÏÒ³",
-        "sNext":     "ÏÂÒ³",
-        "sLast":     "Ä©Ò³"
-    }
+  "sProcessing": "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½...",
+  "sLengthMenu": "_MENU_ ï¿½ï¿½Â¼/Ò³",
+  "sZeroRecords": "Ã»ï¿½ï¿½Æ¥ï¿½ï¿½Ä¼ï¿½Â¼",
+  "sInfo": "ï¿½ï¿½Ê¾ï¿½ï¿½ _START_ ï¿½ï¿½ _END_ ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ _TOTAL_ ï¿½ï¿½",
+  "sInfoEmpty": "ï¿½ï¿½Ê¾ï¿½ï¿½ 0 ï¿½ï¿½ 0 ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ 0 ï¿½ï¿½",
+  "sInfoFiltered": "(ï¿½ï¿½ _MAX_ ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½)",
+  "sInfoPostFix": "",
+  "sSearch": "ï¿½ï¿½ï¿½ï¿½:",
+  "sUrl": "",
+  "oPaginate": {
+    "sFirst": "ï¿½ï¿½Ò³",
+    "sPrevious": "ï¿½ï¿½Ò³",
+    "sNext": "ï¿½ï¿½Ò³",
+    "sLast": "Ä©Ò³"
+  }
 }

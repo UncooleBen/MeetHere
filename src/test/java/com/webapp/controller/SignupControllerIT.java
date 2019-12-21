@@ -28,9 +28,9 @@ import java.util.stream.Stream;
 
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 /**
  * @author Juntao Peng
@@ -76,7 +76,7 @@ public class SignupControllerIT {
 
     @ParameterizedTest
     @MethodSource("validUsernamePasswordPairProvider")
-    void shouldGoToIndexWithUsernameFilled_WhenSignupSucceeded (String username, String password, String name,
+    void shouldGoToIndexWithUsernameFilled_WhenSignupSucceeded(String username, String password, String name,
                                                                String sex, String tel) throws Throwable {
         this.mockMvc.perform(post("/signupSubmit")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -112,8 +112,8 @@ public class SignupControllerIT {
 
     @ParameterizedTest
     @MethodSource("invalidUsernamePasswordPairProvider")
-    void shouldErrorMessage_WhenSignupFailed (String username, String password, String name,
-                                                                String sex, String tel) throws Throwable {
+    void shouldErrorMessage_WhenSignupFailed(String username, String password, String name,
+                                             String sex, String tel) throws Throwable {
         this.mockMvc.perform(post("/signupSubmit")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .content(EntityUtils.toString(new UrlEncodedFormEntity(Arrays.asList(

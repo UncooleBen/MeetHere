@@ -1,22 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8" isELIgnored="false" %>
 <%
-    if(request.getAttribute("user")==null){
-        String username=null;
-        String password=null;
-        String userType=null;
+    if (request.getAttribute("user") == null) {
+        String username = null;
+        String password = null;
+        String userType = null;
 
 
-        if(username==null){
-            username="";
+        if (username == null) {
+            username = "";
         }
 
-        if(password==null){
-            password="";
+        if (password == null) {
+            password = "";
         }
 
-        if(userType==null){
-            userType="";
+        if (userType == null) {
+            userType = "";
         }
 
     }
@@ -73,10 +73,10 @@
 
         .radio {
             padding-top: 10px;
-            padding-bottom:10px;
+            padding-bottom: 10px;
         }
 
-        .form-signin-heading{
+        .form-signin-heading {
             text-align: center;
         }
 
@@ -89,14 +89,16 @@
             -webkit-border-radius: 5px;
             -moz-border-radius: 5px;
             border-radius: 5px;
-            -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-            -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-            box-shadow: 0 1px 2px rgba(0,0,0,.05);
+            -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+            -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
         }
+
         .form-signin .form-signin-heading,
         .form-signin .checkbox {
             margin-bottom: 10px;
         }
+
         .form-signin input[type="text"],
         .form-signin input[type="password"] {
             font-size: 16px;
@@ -122,10 +124,10 @@
         </label>
         <input id="tel" name="tel" value="" type="text" class="input-block-level" placeholder="电话">
         <font id="error" color="red">${error }</font><br>
-        <div align="center" >
+        <div align="center">
             <button class="btn btn-large btn-primary" type="submit">注册</button>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="btn btn-large btn-primary" type="reset" >重置</button>
+            <button class="btn btn-large btn-primary" type="reset">重置</button>
         </div>
         <p align="center" style="padding-top: 15px;"></p>
     </form>

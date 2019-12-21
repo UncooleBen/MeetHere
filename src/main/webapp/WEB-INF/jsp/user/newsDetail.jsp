@@ -4,10 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <script>
-  function convertDate(millisecond, id) {
-    date = new Date(millisecond);
-    document.getElementById(id).innerText = date.toDateString();
-  }
+    function convertDate(millisecond, id) {
+        date = new Date(millisecond);
+        document.getElementById(id).innerText = date.toDateString();
+    }
 </script>
 <div class="data_list">
     <div class="data_list_title">

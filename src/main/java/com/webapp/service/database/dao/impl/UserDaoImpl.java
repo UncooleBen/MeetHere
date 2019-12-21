@@ -18,7 +18,7 @@ import java.util.List;
  * @author Juntao Peng
  */
 public class UserDaoImpl extends DatabaseService implements UserDao {
-    
+
     @Override
     public List<User> queryAllUsers() {
         Connection connection = getConnection();

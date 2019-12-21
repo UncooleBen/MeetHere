@@ -4,49 +4,49 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <script type="text/javascript">
-  $(document).ready(function () {
-    $("ul li:eq(4)").addClass("active");
-    $('.form_date').datetimepicker({
-      language: 'en',
-      weekStart: 1,
-      todayBtn: 1,
-      autoclose: 1,
-      todayHighlight: 1,
-      startView: 2,
-      minView: 2,
-      forceParse: 0
+    $(document).ready(function () {
+        $("ul li:eq(4)").addClass("active");
+        $('.form_date').datetimepicker({
+            language: 'en',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+        $('.datatable').dataTable({
+            "oLanguage": {
+                "sUrl": "/DormManage/media/zh_CN.json"
+            },
+            "bLengthChange": false, //改变每页显示数据数量
+            "bFilter": false, //过滤功能
+            "aoColumns": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                {"asSorting": []},
+                {"asSorting": []}
+            ]
+        });
+        $("#DataTables_Table_0_wrapper .row-fluid").remove();
     });
-    $('.datatable').dataTable({
-      "oLanguage": {
-        "sUrl": "/DormManage/media/zh_CN.json"
-      },
-      "bLengthChange": false, //改变每页显示数据数量
-      "bFilter": false, //过滤功能
-      "aoColumns": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        {"asSorting": []},
-        {"asSorting": []}
-      ]
-    });
-    $("#DataTables_Table_0_wrapper .row-fluid").remove();
-  });
 
-  window.onload = function () {
-    $("#DataTables_Table_0_wrapper .row-fluid").remove();
-  };
+    window.onload = function () {
+        $("#DataTables_Table_0_wrapper .row-fluid").remove();
+    };
 
-  function newsDetail(newsID) {
-    window.location = "news?action=detail&newsId=" + newsID;
-  }
+    function newsDetail(newsID) {
+        window.location = "news?action=detail&newsId=" + newsID;
+    }
 
-  function convertDate(millisecond, id) {
-    date = new Date(millisecond);
-    document.getElementById(id).innerText = date.toDateString();
-  }
+    function convertDate(millisecond, id) {
+        date = new Date(millisecond);
+        document.getElementById(id).innerText = date.toDateString();
+    }
 </script>
 
 <div class="data_list">

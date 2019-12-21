@@ -77,7 +77,7 @@ public class MvcConfig implements WebMvcConfigurer {
     }
 
     @Bean(name = "commentDao")
-    public  CommentDao getCommentDao() {
+    public CommentDao getCommentDao() {
         return new CommentDaoImpl();
     }
 

@@ -70,6 +70,7 @@ public interface UserDao {
 
     /**
      * Update a user record in 't_user'
+     *
      * @param user The user to update
      * @return True if succeeded, otherwise false
      */
@@ -77,7 +78,8 @@ public interface UserDao {
 
     /**
      * Update a user's password in 't_user'
-     * @param id The user's id
+     *
+     * @param id       The user's id
      * @param password The new password
      * @return True if succeeded, otherwise false
      */

@@ -94,10 +94,10 @@ public class CommentController {
         mv.addObject("commentList", commentList);
     }
 
-	public void listUnverifiedComments(ModelAndView mv) {
-		List<Comment> unverifiedCommentList = this.commentDao.listComment(20, false);
-		mv.addObject("unverifiedCommentList", unverifiedCommentList);
-	}
+    public void listUnverifiedComments(ModelAndView mv) {
+        List<Comment> unverifiedCommentList = this.commentDao.listComment(20, false);
+        mv.addObject("unverifiedCommentList", unverifiedCommentList);
+    }
 
     public void deleteComment(ModelAndView mv, int id) {
         this.commentDao.deleteComment(id);

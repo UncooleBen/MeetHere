@@ -1,7 +1,6 @@
 package com.webapp.service.database.dao.impl;
 
 
-
 import com.webapp.model.user.Admin;
 import com.webapp.model.user.Gender;
 import com.webapp.model.user.User;
@@ -20,9 +19,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.when;
 
 class UserDaoImplTest {
     private UserDao userDao;
@@ -36,9 +35,7 @@ class UserDaoImplTest {
     private PrintStream originalErr;
 
 
-
-    class TestableUserDaoImpl extends UserDaoImpl
-    {
+    class TestableUserDaoImpl extends UserDaoImpl {
         @Override
         public Connection getConnection() {
             return connection;
@@ -67,25 +64,23 @@ class UserDaoImplTest {
 
 
     @Test
-    void test_throws_sql_exception_when_query_All_Users() throws SQLException
-    {
+    void test_throws_sql_exception_when_query_All_Users() throws SQLException {
         when(connection.prepareStatement(anyString())).thenThrow(test_sql_exception);
         this.userDao.queryAllUsers();
         assertTrue(errContent.toString().contains("java.sql.SQLException"));
     }
 
     @Test
-    void test_queryAllUsers_WhenPermissionIs_0() throws SQLException
-    {
-        int id=305;
-        String username="PG";
-        String password="123466";
-        String name="pengge";
-        String sex="FEMALE";
-        int permission=0;
-        String tel="911";
+    void test_queryAllUsers_WhenPermissionIs_0() throws SQLException {
+        int id = 305;
+        String username = "PG";
+        String password = "123466";
+        String name = "pengge";
+        String sex = "FEMALE";
+        int permission = 0;
+        String tel = "911";
 
-        Admin admin=new Admin(id, username, password, name, sex, tel);
+        Admin admin = new Admin(id, username, password, name, sex, tel);
 
         List<User> userList = new ArrayList<>();
 
@@ -103,24 +98,21 @@ class UserDaoImplTest {
         when(rs.getInt("permission")).thenReturn(permission);
 
 
-
-
-        assertEquals(userList,this.userDao.queryAllUsers());
+        assertEquals(userList, this.userDao.queryAllUsers());
 
     }
 
     @Test
-    void test_queryAllUsers_WhenPermissionIs_1() throws SQLException
-    {
-        int id=305;
-        String username="PG";
-        String password="123466";
-        String name="pengge";
-        String sex="FEMALE";
-        int permission=1;
-        String tel="911";
+    void test_queryAllUsers_WhenPermissionIs_1() throws SQLException {
+        int id = 305;
+        String username = "PG";
+        String password = "123466";
+        String name = "pengge";
+        String sex = "FEMALE";
+        int permission = 1;
+        String tel = "911";
 
-        User user=new User(id, username, password, name, sex, tel);
+        User user = new User(id, username, password, name, sex, tel);
 
         List<User> userList = new ArrayList<>();
         userList.add(user);
@@ -139,32 +131,28 @@ class UserDaoImplTest {
         when(rs.getInt("permission")).thenReturn(permission);
 
 
-
-
-        assertEquals(userList,this.userDao.queryAllUsers());
+        assertEquals(userList, this.userDao.queryAllUsers());
 
     }
 
     @Test
-    void test_throws_sql_exception_when_query_user_by_id() throws SQLException
-    {
+    void test_throws_sql_exception_when_query_user_by_id() throws SQLException {
         when(connection.prepareStatement(anyString())).thenThrow(test_sql_exception);
         this.userDao.queryUserById(5);
         assertTrue(errContent.toString().contains("java.sql.SQLException"));
     }
 
     @Test
-    void test_query_User_By_Id_WhenPermissionIs_0() throws SQLException
-    {
-        int id=305;
-        String username="PG";
-        String password="123466";
-        String name="pengge";
-        String sex="FEMALE";
-        int permission=0;
-        String tel="911";
+    void test_query_User_By_Id_WhenPermissionIs_0() throws SQLException {
+        int id = 305;
+        String username = "PG";
+        String password = "123466";
+        String name = "pengge";
+        String sex = "FEMALE";
+        int permission = 0;
+        String tel = "911";
 
-        User user=null;
+        User user = null;
 
 
         when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
@@ -180,22 +168,21 @@ class UserDaoImplTest {
         when(rs.getInt("permission")).thenReturn(permission);
 
 
-        assertEquals(user,this.userDao.queryUserById(5));
-        verify(preparedStatement).setInt(1,5);
+        assertEquals(user, this.userDao.queryUserById(5));
+        verify(preparedStatement).setInt(1, 5);
     }
 
     @Test
-    void test_query_User_By_Id_WhenPermissionIs_1() throws SQLException
-    {
-        int id=305;
-        String username="PG";
-        String password="123466";
-        String name="pengge";
-        String sex="FEMALE";
-        int permission=1;
-        String tel="911";
+    void test_query_User_By_Id_WhenPermissionIs_1() throws SQLException {
+        int id = 305;
+        String username = "PG";
+        String password = "123466";
+        String name = "pengge";
+        String sex = "FEMALE";
+        int permission = 1;
+        String tel = "911";
 
-        User user=new User(5, username, password, name, sex, tel);
+        User user = new User(5, username, password, name, sex, tel);
 
 
         when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
@@ -211,31 +198,29 @@ class UserDaoImplTest {
         when(rs.getInt("permission")).thenReturn(permission);
 
 
-        assertEquals(user,this.userDao.queryUserById(5));
-        verify(preparedStatement).setInt(1,5);
-}
+        assertEquals(user, this.userDao.queryUserById(5));
+        verify(preparedStatement).setInt(1, 5);
+    }
 
 
     @Test
-    void test_throws_sql_exception_when_query_user_by_name() throws SQLException
-    {
+    void test_throws_sql_exception_when_query_user_by_name() throws SQLException {
         when(connection.prepareStatement(anyString())).thenThrow(test_sql_exception);
         this.userDao.queryUserByName("PG");
         assertTrue(errContent.toString().contains("java.sql.SQLException"));
     }
 
     @Test
-    void test_query_user_by_name_WhenPermissionIs_1() throws SQLException
-    {
-        int id=305;
-        String username="PG";
-        String password="123466";
-        String name="pengge";
-        String sex="FEMALE";
-        int permission=1;
-        String tel="911";
+    void test_query_user_by_name_WhenPermissionIs_1() throws SQLException {
+        int id = 305;
+        String username = "PG";
+        String password = "123466";
+        String name = "pengge";
+        String sex = "FEMALE";
+        int permission = 1;
+        String tel = "911";
 
-        User user=new User(id, username, password, name, sex, tel);
+        User user = new User(id, username, password, name, sex, tel);
         List<User> userList = new ArrayList<>();
         userList.add(user);
 
@@ -252,33 +237,31 @@ class UserDaoImplTest {
         when(rs.getInt("permission")).thenReturn(permission);
 
 
-        assertEquals(userList,this.userDao.queryUserByName("PG"));
-        verify(preparedStatement).setString(1,"PG");
+        assertEquals(userList, this.userDao.queryUserByName("PG"));
+        verify(preparedStatement).setString(1, "PG");
     }
 
 
     //TODO By Sex
 
     @Test
-    void test_throws_sql_exception_when_query_user_by_sex() throws SQLException
-    {
+    void test_throws_sql_exception_when_query_user_by_sex() throws SQLException {
         when(connection.prepareStatement(anyString())).thenThrow(test_sql_exception);
         this.userDao.queryUserBySex(Gender.FEMALE);
         assertTrue(errContent.toString().contains("java.sql.SQLException"));
     }
 
     @Test
-    void test_query_user_by_sex_WhenPermissionIs_1() throws SQLException
-    {
-        int id=305;
-        String username="PG";
-        String password="123456";
-        String name="pengge";
-        String sex="FEMALE";
-        int permission=1;
-        String tel="911";
+    void test_query_user_by_sex_WhenPermissionIs_1() throws SQLException {
+        int id = 305;
+        String username = "PG";
+        String password = "123456";
+        String name = "pengge";
+        String sex = "FEMALE";
+        int permission = 1;
+        String tel = "911";
 
-        User user=new User(id, username, password, name, sex, tel);
+        User user = new User(id, username, password, name, sex, tel);
         List<User> userList = new ArrayList<>();
         userList.add(user);
 
@@ -294,115 +277,107 @@ class UserDaoImplTest {
         when(rs.getString("tel")).thenReturn(tel);
         when(rs.getInt("permission")).thenReturn(permission);
 
-        assertEquals(userList,this.userDao.queryUserBySex(Gender.FEMALE));
-        verify(preparedStatement).setString(1,"FEMALE");
+        assertEquals(userList, this.userDao.queryUserBySex(Gender.FEMALE));
+        verify(preparedStatement).setString(1, "FEMALE");
     }
 
 
     @Test
-    void test_throws_sql_exception_when_add_User() throws SQLException
-    {
+    void test_throws_sql_exception_when_add_User() throws SQLException {
         when(connection.prepareStatement(anyString())).thenThrow(test_sql_exception);
         this.userDao.addUser(new User());
         assertTrue(errContent.toString().contains("java.sql.SQLException"));
     }
 
     @Test
-    void test_add_User_When_Result_Is_True() throws SQLException
-    {
-        int id=305;
-        String username="PG";
-        String password="123466";
-        String name="pengge";
-        String sex="FEMALE";
-        int permission=1;
-        String tel="911";
+    void test_add_User_When_Result_Is_True() throws SQLException {
+        int id = 305;
+        String username = "PG";
+        String password = "123466";
+        String name = "pengge";
+        String sex = "FEMALE";
+        int permission = 1;
+        String tel = "911";
 
-        User user=new User(id, username, password, name, sex, tel);
+        User user = new User(id, username, password, name, sex, tel);
 
 
         when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
         when(preparedStatement.executeUpdate()).thenReturn(1);
 
-        boolean result=this.userDao.addUser(user);
+        boolean result = this.userDao.addUser(user);
 
-        assertEquals(result,true);
-        verify(preparedStatement).setString(1,username);
-        verify(preparedStatement).setString(2,password);
-        verify(preparedStatement).setString(3,name);
-        verify(preparedStatement).setString(4,sex);
-        verify(preparedStatement).setInt(5,permission);
-        verify(preparedStatement).setString(6,tel);
+        assertEquals(result, true);
+        verify(preparedStatement).setString(1, username);
+        verify(preparedStatement).setString(2, password);
+        verify(preparedStatement).setString(3, name);
+        verify(preparedStatement).setString(4, sex);
+        verify(preparedStatement).setInt(5, permission);
+        verify(preparedStatement).setString(6, tel);
 
         verify(preparedStatement).executeUpdate();
-
 
 
     }
 
 
     @Test
-    void test_delete_User_When_Result_Is_True() throws SQLException
-    {
+    void test_delete_User_When_Result_Is_True() throws SQLException {
 
         when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
         when(preparedStatement.executeUpdate()).thenReturn(1);
 
-        boolean result=this.userDao.deleteUser(5);
+        boolean result = this.userDao.deleteUser(5);
 
-        assertEquals(result,true);
-        verify(preparedStatement).setInt(1,5);
+        assertEquals(result, true);
+        verify(preparedStatement).setInt(1, 5);
         verify(preparedStatement).executeUpdate();
 
     }
 
 
     @Test
-    void test_throws_sql_exception_when_deleteUser() throws SQLException
-    {
+    void test_throws_sql_exception_when_deleteUser() throws SQLException {
         when(connection.prepareStatement(anyString())).thenThrow(test_sql_exception);
         this.userDao.deleteUser(5);
         assertTrue(errContent.toString().contains("java.sql.SQLException"));
     }
 
     @Test
-    void test_throws_sql_exception_when_updateUser() throws SQLException
-    {
+    void test_throws_sql_exception_when_updateUser() throws SQLException {
         when(connection.prepareStatement(anyString())).thenThrow(test_sql_exception);
-        User user=new User();
+        User user = new User();
         user.setId(5);
         this.userDao.updateUser(user);
         assertTrue(errContent.toString().contains("java.sql.SQLException"));
     }
 
     @Test
-    void test_update_User_When_Result_Is_True() throws SQLException
-    {
-        int id=305;
-        String username="PG";
-        String password="123466";
-        String name="pengge";
-        String sex="FEMALE";
-        int permission=1;
-        String tel="911";
+    void test_update_User_When_Result_Is_True() throws SQLException {
+        int id = 305;
+        String username = "PG";
+        String password = "123466";
+        String name = "pengge";
+        String sex = "FEMALE";
+        int permission = 1;
+        String tel = "911";
 
-        User user=new User(id, username, password, name, sex, tel);
-
+        User user = new User(id, username, password, name, sex, tel);
 
 
         when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
         when(preparedStatement.executeUpdate()).thenReturn(1);
 
-        boolean result=this.userDao.updateUser(user);
+        boolean result = this.userDao.updateUser(user);
 
-        assertEquals(result,true);
-        verify(preparedStatement).setString(1,username);
-        verify(preparedStatement).setString(2,password);
-        verify(preparedStatement).setString(3,name);
-        verify(preparedStatement).setString(4,sex);
-        verify(preparedStatement).setInt(5,permission);
-        verify(preparedStatement).setString(6,tel);
-        verify(preparedStatement).setInt(7,id);
+        assertEquals(result, true);
+        verify(preparedStatement).setString(1, username);
+        verify(preparedStatement).setString(2, password);
+        verify(preparedStatement).setString(3, name);
+        verify(preparedStatement).setString(4, sex);
+        verify(preparedStatement).setInt(5, permission);
+        verify(preparedStatement).setString(6, tel);
+        verify(preparedStatement).setInt(7, id);
 
         verify(preparedStatement).executeUpdate();
 

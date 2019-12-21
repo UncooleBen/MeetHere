@@ -9,35 +9,29 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.verify;
-
-class SignupControllerTest
-{
-    private LoginDao loginDao=mock(LoginDao.class);
-    private SignupController signupController=new SignupController(loginDao);
-    private HttpServletRequest request=mock(HttpServletRequest.class);
-    private HttpSession session=mock(HttpSession.class);
-    private HttpServletResponse response=mock(HttpServletResponse.class);
+class SignupControllerTest {
+    private LoginDao loginDao = mock(LoginDao.class);
+    private SignupController signupController = new SignupController(loginDao);
+    private HttpServletRequest request = mock(HttpServletRequest.class);
+    private HttpSession session = mock(HttpSession.class);
+    private HttpServletResponse response = mock(HttpServletResponse.class);
 
 
     @Test
-    public  void signUpPage_test()
-    {
-        ModelAndView result= signupController.signupPage();
-        assertEquals(result.getViewName(),"signup");
+    public void signUpPage_test() {
+        ModelAndView result = signupController.signupPage();
+        assertEquals(result.getViewName(), "signup");
 
     }
 
     @Test
-    public  void signUpSubmit_WhenUserIsNull()throws ServletException, IOException {
+    public void signUpSubmit_WhenUserIsNull() throws ServletException, IOException {
         when(request.getParameter("username")).thenReturn("PengGe");
         when(request.getParameter("password")).thenReturn("123456");
         when(request.getParameter("name")).thenReturn("PengJunTao");
@@ -61,29 +55,27 @@ class SignupControllerTest
         );
     }
 
-        @Test
-        public  void signUpSubmit_WhenUserIsNotNull()throws ServletException, IOException
-        {
-            when(request.getParameter("username")).thenReturn("PengGe");
-            when(request.getParameter("password")).thenReturn("123456");
-            when(request.getParameter("name")).thenReturn("PengJunTao");
-            when(request.getParameter("tel")).thenReturn("911");
-            when(request.getParameter("sex")).thenReturn("FEMALE");
+    @Test
+    public void signUpSubmit_WhenUserIsNotNull() throws ServletException, IOException {
+        when(request.getParameter("username")).thenReturn("PengGe");
+        when(request.getParameter("password")).thenReturn("123456");
+        when(request.getParameter("name")).thenReturn("PengJunTao");
+        when(request.getParameter("tel")).thenReturn("911");
+        when(request.getParameter("sex")).thenReturn("FEMALE");
 
-            User user=new User("PengGe","123456","PengJunTao","FEMALE","911");
+        User user = new User("PengGe", "123456", "PengJunTao", "FEMALE", "911");
 
-            User currentUser=new User();
-
-
-            when(loginDao.signup(user)).thenReturn(currentUser);
+        User currentUser = new User();
 
 
+        when(loginDao.signup(user)).thenReturn(currentUser);
 
-            ModelAndView result= signupController.signupSubmit(request,response);
 
-            assertAll(
-                    ()->assertEquals(result.getViewName(),"index"),
-                    ()->assertEquals(result.getModelMap().get("user"),currentUser)
-            );
-        }
+        ModelAndView result = signupController.signupSubmit(request, response);
+
+        assertAll(
+                () -> assertEquals(result.getViewName(), "index"),
+                () -> assertEquals(result.getModelMap().get("user"), currentUser)
+        );
+    }
 }

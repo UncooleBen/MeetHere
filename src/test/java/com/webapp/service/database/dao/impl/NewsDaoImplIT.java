@@ -122,11 +122,11 @@ class NewsDaoImplIT {
             News news = resultList.get(20 - i - 1);
             News insertedNews = updatedResultList.get(i);
             assertAll(
-			() ->            assertEquals(news.getAuthor(), insertedNews.getAuthor()),
-			() ->            assertEquals(news.getCreated(), insertedNews.getCreated()),
-			() ->            assertEquals(news.getDetail(), insertedNews.getDetail()),
-			() ->            assertEquals(news.getLastModified(), insertedNews.getLastModified()),
-			() ->            assertEquals(news.getTitle(), insertedNews.getTitle()));
+                    () -> assertEquals(news.getAuthor(), insertedNews.getAuthor()),
+                    () -> assertEquals(news.getCreated(), insertedNews.getCreated()),
+                    () -> assertEquals(news.getDetail(), insertedNews.getDetail()),
+                    () -> assertEquals(news.getLastModified(), insertedNews.getLastModified()),
+                    () -> assertEquals(news.getTitle(), insertedNews.getTitle()));
         }
         for (int i = 0; i < 20; i++) {
             News news = updatedResultList.get(i);

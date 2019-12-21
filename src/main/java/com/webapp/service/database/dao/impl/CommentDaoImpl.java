@@ -19,33 +19,34 @@ import java.util.List;
  */
 public class CommentDaoImpl extends DatabaseService implements CommentDao {
 
-  public CommentDaoImpl() {}
-
-  @Override
-  public List<Comment> listComment(int size, boolean verified) {
-    List<Comment> commentList = new ArrayList<Comment>();
-      String sql = "SELECT * FROM t_comment WHERE verified = ? LIMIT ?";
-      Connection connection = getConnection();
-    try {
-      PreparedStatement preparedStatement = connection.prepareStatement(sql);
-      preparedStatement.setBoolean(1, verified);
-      preparedStatement.setInt(2, size);
-      ResultSet rs = preparedStatement.executeQuery();
-      while (rs.next()) {
-        Comment comment = new Comment();
-        comment.setId(rs.getInt("id"));
-        comment.setUserId(rs.getInt("userId"));
-        comment.setDate(rs.getLong("date"));
-        comment.setContent(rs.getString("content"));
-        commentList.add(comment);
-      }
-    } catch (SQLException sqlException) {
-      sqlException.printStackTrace(System.err);
-    } finally {
-      closeConnection(connection);
+    public CommentDaoImpl() {
     }
-    return commentList;
-  }
+
+    @Override
+    public List<Comment> listComment(int size, boolean verified) {
+        List<Comment> commentList = new ArrayList<Comment>();
+        String sql = "SELECT * FROM t_comment WHERE verified = ? LIMIT ?";
+        Connection connection = getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setBoolean(1, verified);
+            preparedStatement.setInt(2, size);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                Comment comment = new Comment();
+                comment.setId(rs.getInt("id"));
+                comment.setUserId(rs.getInt("userId"));
+                comment.setDate(rs.getLong("date"));
+                comment.setContent(rs.getString("content"));
+                commentList.add(comment);
+            }
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace(System.err);
+        } finally {
+            closeConnection(connection);
+        }
+        return commentList;
+    }
 
 //  @Override
 //  public List<Comment> queryCommentByUserId(int userId, boolean verified) {
@@ -74,96 +75,84 @@ public class CommentDaoImpl extends DatabaseService implements CommentDao {
 //    return commentList;
 //  }
 
-  @Override
-  public Comment queryCommentById(int commentId) {
-    String sql = "SELECT * FROM t_comment t1 WHERE t1.id=?";
-    Connection connection = getConnection();
-    Comment comment = null;
-    try {
-      PreparedStatement preparedStatement = connection.prepareStatement(sql);
-      preparedStatement.setInt(1, commentId);
-      ResultSet rs = preparedStatement.executeQuery();
-      if (rs.next()) {
-        comment = new Comment();
-        comment.setId(rs.getInt("id"));
-        comment.setUserId(rs.getInt("userId"));
-        comment.setDate(rs.getLong("date"));
-        comment.setContent(rs.getString("content"));
-      }
-    } catch (SQLException sqle) {
-      sqle.printStackTrace(System.err);
-    } finally {
-      closeConnection(connection);
+    @Override
+    public Comment queryCommentById(int commentId) {
+        String sql = "SELECT * FROM t_comment t1 WHERE t1.id=?";
+        Connection connection = getConnection();
+        Comment comment = null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, commentId);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                comment = new Comment();
+                comment.setId(rs.getInt("id"));
+                comment.setUserId(rs.getInt("userId"));
+                comment.setDate(rs.getLong("date"));
+                comment.setContent(rs.getString("content"));
+            }
+        } catch (SQLException sqle) {
+            sqle.printStackTrace(System.err);
+        } finally {
+            closeConnection(connection);
+        }
+        return comment;
     }
-    return comment;
-  }
 
-  @Override
-  public boolean addComment(Comment comment) {
-    String sql = "INSERT INTO t_comment(userId,date,content) VALUES (?,?,?)";
-    Connection connection = getConnection();
-    int result = 0;
-    try {
-      PreparedStatement preparedStatement = connection.prepareStatement(sql);
-      preparedStatement.setInt(1, comment.getUserId());
-      preparedStatement.setLong(2, comment.getDate());
-      preparedStatement.setString(3, comment.getContent());
-      result = preparedStatement.executeUpdate();
-    } catch (SQLException sqle) {
-      sqle.printStackTrace(System.err);
-    } finally {
-      closeConnection(connection);
+    @Override
+    public boolean addComment(Comment comment) {
+        String sql = "INSERT INTO t_comment(userId,date,content) VALUES (?,?,?)";
+        Connection connection = getConnection();
+        int result = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, comment.getUserId());
+            preparedStatement.setLong(2, comment.getDate());
+            preparedStatement.setString(3, comment.getContent());
+            result = preparedStatement.executeUpdate();
+        } catch (SQLException sqle) {
+            sqle.printStackTrace(System.err);
+        } finally {
+            closeConnection(connection);
+        }
+        return 0 != result;
     }
-    if (0 != result) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 
-  @Override
-  public boolean deleteComment(int commentId) {
-    String sql = "DELETE FROM t_comment WHERE id=?";
-    Connection connection = getConnection();
-    int result = 0;
-    try {
-      PreparedStatement preparedStatement = connection.prepareStatement(sql);
-      preparedStatement.setInt(1, commentId);
-      result = preparedStatement.executeUpdate();
-    } catch (SQLException sqle) {
-      sqle.printStackTrace(System.err);
-    } finally {
-      closeConnection(connection);
+    @Override
+    public boolean deleteComment(int commentId) {
+        String sql = "DELETE FROM t_comment WHERE id=?";
+        Connection connection = getConnection();
+        int result = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, commentId);
+            result = preparedStatement.executeUpdate();
+        } catch (SQLException sqle) {
+            sqle.printStackTrace(System.err);
+        } finally {
+            closeConnection(connection);
+        }
+        return 0 != result;
     }
-    if (0 != result) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 
-  @Override
-  public boolean updateComment(Comment comment) {
-      String sql = "UPDATE t_comment SET userId = ?, date = ?, content = ?, verified = ? WHERE id=?";
-      Connection connection = getConnection();
-    int result = 0;
-    try {
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setInt(1, comment.getUserId());
-        preparedStatement.setLong(2, comment.getDate());
-        preparedStatement.setString(3, comment.getContent());
-        preparedStatement.setBoolean(4, comment.isVerified());
-        preparedStatement.setInt(5, comment.getId());
-        result = preparedStatement.executeUpdate();
-    } catch (SQLException sqle) {
-      sqle.printStackTrace(System.err);
-    } finally {
-      closeConnection(connection);
+    @Override
+    public boolean updateComment(Comment comment) {
+        String sql = "UPDATE t_comment SET userId = ?, date = ?, content = ?, verified = ? WHERE id=?";
+        Connection connection = getConnection();
+        int result = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, comment.getUserId());
+            preparedStatement.setLong(2, comment.getDate());
+            preparedStatement.setString(3, comment.getContent());
+            preparedStatement.setBoolean(4, comment.isVerified());
+            preparedStatement.setInt(5, comment.getId());
+            result = preparedStatement.executeUpdate();
+        } catch (SQLException sqle) {
+            sqle.printStackTrace(System.err);
+        } finally {
+            closeConnection(connection);
+        }
+        return 0 != result;
     }
-    if (0 != result) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 }

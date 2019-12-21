@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <script type="text/javascript">
     function commentDelete(commentId) {
@@ -19,7 +19,7 @@
     <div class="data_list_title">
         留言板
     </div>
-    <button class="btn btn-mini btn-info" type="button" onclick="javascript:window.location='comment?action=add'">我要留言
+    <button class="btn btn-mini btn-info" type="button" onclick="window.location='comment?action=add'">我要留言
     </button>&nbsp;
     <div class="data_box">
         <c:forEach varStatus="commentListLoop" var="comment" items="${commentList }">
@@ -43,5 +43,5 @@
                 </div>
             </div>
         </c:forEach>
-	</div>
+    </div>
 </div>

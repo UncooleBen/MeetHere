@@ -112,6 +112,7 @@ class BuildingDaoImplTest
                 when(connection.prepareStatement(anyString())).thenThrow(test_sql_exception);
                 this.buildingDao.queryBuildingById(5);
                 assertTrue(errContent.toString().contains("java.sql.SQLException"));
+
         }
 
 

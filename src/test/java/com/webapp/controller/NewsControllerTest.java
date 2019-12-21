@@ -93,6 +93,10 @@ class NewsControllerTest {
         when(session.getAttribute("currentUserType")).thenReturn(usertype);
 
         when(request.getParameter("newsId")).thenReturn("123");
+        when(request.getParameter("title")).thenReturn("2");
+        when(request.getParameter("author")).thenReturn("3");
+        when(request.getParameter("detail")).thenReturn("4");
+
         when(newsDao.queryNewsById(123)).thenReturn(news);
 
         ModelAndView result = newsController.service(action, request);
@@ -109,21 +113,18 @@ class NewsControllerTest {
         String usertype = "admin";
 
         News news = new News();
-        Date time = new Date();
 
 
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute("currentUserType")).thenReturn(usertype);
 
-        when(request.getParameter("newsId")).thenReturn("1");
+        when(request.getParameter("newsId")).thenReturn("");
         when(request.getParameter("title")).thenReturn("2");
         when(request.getParameter("author")).thenReturn("3");
         when(request.getParameter("detail")).thenReturn("4");
-        //news.se
-        //TODO
 
         ModelAndView result = newsController.service(action, request);
-        verify(newsDao).insertNews(news);
+        verify(newsDao).insertNews(any(News.class));
         assertAll(
                 () -> assertEquals(result.getViewName(), "mainAdmin"),
                 () -> assertEquals(result.getModelMap().get("mainPage"), "admin/news.jsp")

@@ -1,38 +1,34 @@
--- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: meethere
 -- ------------------------------------------------------
--- Server version	8.0.18
+-- Server version	8.0.17
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT = @@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS = @@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION = @@COLLATION_CONNECTION */;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE = @@TIME_ZONE */;
-/*!40103 SET TIME_ZONE = '+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS = @@UNIQUE_CHECKS, UNIQUE_CHECKS = 0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS = @@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS = 0 */;
-/*!40101 SET @OLD_SQL_MODE = @@SQL_MODE, SQL_MODE = 'NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES = @@SQL_NOTES, SQL_NOTES = 0 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `t_building`
 --
 
 DROP TABLE IF EXISTS `t_building`;
-/*!40101 SET @saved_cs_client = @@character_set_client */;
-/*!50503 SET character_set_client = utf8 */;
-CREATE TABLE `t_building`
-(
-    `id`          int(11) unsigned NOT NULL AUTO_INCREMENT,
-    `name`        varchar(45)      NOT NULL,
-    `description` varchar(45)      NOT NULL,
-    `price`       decimal(11, 0)   NOT NULL,
-    PRIMARY KEY (`id`)
-) ENGINE = InnoDB
-  AUTO_INCREMENT = 49
-  DEFAULT CHARSET = utf8
-  COLLATE = utf8_unicode_ci;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `t_building` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `price` decimal(11,0) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,10 +36,8 @@ CREATE TABLE `t_building`
 --
 
 LOCK TABLES `t_building` WRITE;
-/*!40000 ALTER TABLE `t_building`
-    DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_building`
-    ENABLE KEYS */;
+/*!40000 ALTER TABLE `t_building` DISABLE KEYS */;
+/*!40000 ALTER TABLE `t_building` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -51,20 +45,16 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `t_comment`;
-/*!40101 SET @saved_cs_client = @@character_set_client */;
-/*!50503 SET character_set_client = utf8 */;
-CREATE TABLE `t_comment`
-(
-    `id`       int(11)    NOT NULL AUTO_INCREMENT,
-    `userId`   int(11)    NOT NULL,
-    `date`     mediumtext NOT NULL,
-    `content`  text       NOT NULL,
-    `verified` tinyint(1) NOT NULL DEFAULT '0',
-    PRIMARY KEY (`id`)
-) ENGINE = InnoDB
-  AUTO_INCREMENT = 36
-  DEFAULT CHARSET = utf8
-  COLLATE = utf8_unicode_ci;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `t_comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
+  `date` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `content` text COLLATE utf8_unicode_ci NOT NULL,
+  `verified` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,10 +62,8 @@ CREATE TABLE `t_comment`
 --
 
 LOCK TABLES `t_comment` WRITE;
-/*!40000 ALTER TABLE `t_comment`
-    DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_comment`
-    ENABLE KEYS */;
+/*!40000 ALTER TABLE `t_comment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `t_comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -83,21 +71,17 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `t_news`;
-/*!40101 SET @saved_cs_client = @@character_set_client */;
-/*!50503 SET character_set_client = utf8 */;
-CREATE TABLE `t_news`
-(
-    `id`            int(11) unsigned NOT NULL AUTO_INCREMENT,
-    `title`         varchar(45)      NOT NULL,
-    `created`       mediumtext       NOT NULL,
-    `last_modified` mediumtext       NOT NULL,
-    `author`        varchar(45)      NOT NULL,
-    `detail`        text             NOT NULL,
-    PRIMARY KEY (`id`)
-) ENGINE = InnoDB
-  AUTO_INCREMENT = 4
-  DEFAULT CHARSET = utf8
-  COLLATE = utf8_unicode_ci;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `t_news` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `created` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `last_modified` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `author` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `detail` text COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,13 +89,9 @@ CREATE TABLE `t_news`
 --
 
 LOCK TABLES `t_news` WRITE;
-/*!40000 ALTER TABLE `t_news`
-    DISABLE KEYS */;
-INSERT INTO `t_news`
-VALUES (0, 'modified with time', '0', '1575976262906', 'modified with time', 'modified with time'),
-       (3, 'new with time', '1575976240888', '1575976240888', 'new with time', 'new with time');
-/*!40000 ALTER TABLE `t_news`
-    ENABLE KEYS */;
+/*!40000 ALTER TABLE `t_news` DISABLE KEYS */;
+INSERT INTO `t_news` VALUES (0,'modified with time','0','1575976262906','modified with time','modified with time'),(3,'new with time','1575976240888','1575976240888','new with time','new with time');
+/*!40000 ALTER TABLE `t_news` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -119,22 +99,18 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `t_record`;
-/*!40101 SET @saved_cs_client = @@character_set_client */;
-/*!50503 SET character_set_client = utf8 */;
-CREATE TABLE `t_record`
-(
-    `id`          int(11) unsigned NOT NULL AUTO_INCREMENT,
-    `time`        mediumtext       NOT NULL,
-    `start_date`  mediumtext       NOT NULL,
-    `end_date`    mediumtext       NOT NULL,
-    `user_id`     int(11)          NOT NULL,
-    `building_id` int(11)          NOT NULL,
-    `verified`    tinyint(1)       NOT NULL DEFAULT '0',
-    PRIMARY KEY (`id`)
-) ENGINE = InnoDB
-  AUTO_INCREMENT = 3
-  DEFAULT CHARSET = utf8
-  COLLATE = utf8_unicode_ci;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `t_record` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `time` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `start_date` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `end_date` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `building_id` int(11) NOT NULL,
+  `verified` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=171 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -142,12 +118,9 @@ CREATE TABLE `t_record`
 --
 
 LOCK TABLES `t_record` WRITE;
-/*!40000 ALTER TABLE `t_record`
-    DISABLE KEYS */;
-INSERT INTO `t_record`
-VALUES (2, '0', '0', '0', 0, 0, 0);
-/*!40000 ALTER TABLE `t_record`
-    ENABLE KEYS */;
+/*!40000 ALTER TABLE `t_record` DISABLE KEYS */;
+INSERT INTO `t_record` VALUES (2,'0','0','0',0,0,0);
+/*!40000 ALTER TABLE `t_record` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -155,21 +128,18 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `t_user`;
-/*!40101 SET @saved_cs_client = @@character_set_client */;
-/*!50503 SET character_set_client = utf8 */;
-CREATE TABLE `t_user`
-(
-    `id`         int(11) unsigned                        NOT NULL AUTO_INCREMENT,
-    `username`   varchar(20)                             NOT NULL,
-    `password`   varchar(20)                             NOT NULL,
-    `name`       varchar(20)                             NOT NULL,
-    `sex`        enum ('MALE','FEMALE','TRANSGENDER','') NOT NULL,
-    `permission` int(11)                                 NOT NULL,
-    `tel`        varchar(15) DEFAULT NULL,
-    PRIMARY KEY (`id`)
-) ENGINE = InnoDB
-  AUTO_INCREMENT = 10
-  DEFAULT CHARSET = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `t_user` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `sex` enum('MALE','FEMALE','TRANSGENDER','') NOT NULL,
+  `permission` int(11) NOT NULL,
+  `tel` varchar(15) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=232 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -177,20 +147,13 @@ CREATE TABLE `t_user`
 --
 
 LOCK TABLES `t_user` WRITE;
-/*!40000 ALTER TABLE `t_user`
-    DISABLE KEYS */;
-INSERT INTO `t_user`
-VALUES (0, 'root', 'root', 'pjt', 'MALE', 0, '999'),
-       (4, 'pjt', 'pjt', 'john', 'MALE', 1, '123123123'),
-       (7, 'jiege', '123', 'guoyuanjie', 'MALE', 1, '123123'),
-       (8, 'zqf', '123', 'zhouqifeng', 'MALE', 1, '123123'),
-       (9, 'testuser', 'test', 'testusername', 'MALE', 1, 'testtel');
-/*!40000 ALTER TABLE `t_user`
-    ENABLE KEYS */;
+/*!40000 ALTER TABLE `t_user` DISABLE KEYS */;
+INSERT INTO `t_user` VALUES (0,'root','root','pjt','MALE',0,'999'),(1,'admin','admin','lsz','MALE',0,'130'),(2,'chairman','chairman','gyj','MALE',0,'130'),(4,'pjt','pjt','pengjuntao','MALE',1,'123123123'),(7,'lsz','lsz','lishanzhen','MALE',1,'123123'),(8,'gyj','gyj','guoyuanjie','MALE',1,'123123'),(9,'testuser','test','testusername','MALE',1,'testtel'),(10,'999','999','999','MALE',1,'999');
+/*!40000 ALTER TABLE `t_user` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!40103 SET TIME_ZONE = @OLD_TIME_ZONE */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-/*!40101 SET SQL_MODE = @OLD_SQL_MODE */;
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
@@ -198,4 +161,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-20 18:50:44
+-- Dump completed on 2019-12-21 13:39:45

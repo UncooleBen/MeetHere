@@ -65,7 +65,7 @@ class LoginDaoImplIT {
         assertAll(
                 () -> assertEquals("pjt", user.getUsername()),
                 () -> assertEquals("pjt", user.getPassword()),
-                () -> assertEquals("john", user.getName()),
+                () -> assertEquals("pengjuntao", user.getName()),
                 () -> assertEquals(Gender.MALE, user.getSex()),
                 () -> assertEquals(4, user.getId()),
                 () -> assertEquals("123123123", user.getTel()),

@@ -127,7 +127,7 @@ public class UserController {
             return;
         }
 
-        List<User> resultList = null;
+        List<User> resultList = new ArrayList<>();
         switch (keyword) {
             case "name":
                 resultList = this.userDao.queryUserByName(argument);
@@ -143,9 +143,8 @@ public class UserController {
                 }
             default:
         }
-        if (resultList.size() > 0) {;
-            mv.addObject("userList", resultList);
-        }
+
+        mv.addObject("userList", resultList);
 
     }
 

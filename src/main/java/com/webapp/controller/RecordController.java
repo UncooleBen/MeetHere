@@ -44,7 +44,6 @@ public class RecordController {
   private void adminRecordService(ModelAndView mv, String action, HttpServletRequest request) {
     switch (action) {
       case "verify":
-        /*todo: refresh after verifying?*/
         int id = Integer.parseInt(request.getParameter("recordId"));
         Record record = recordDao.queryRecordById(id);
         record.setVerified(true);

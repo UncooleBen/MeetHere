@@ -40,34 +40,34 @@
 					<table align="center">
 						<tr>
 							<td><font color="red">*</font>用户名：</td>
-							<td><input type="text" id="username"  name="username" value="${user._username }"  style="margin-top:5px;height:30px;" /></td>
+							<td><input type="text" id="username"  name="username" value="${user.username }"  style="margin-top:5px;height:30px;" /></td>
 						</tr>
 						<tr>
 							<td><font color="red">*</font>密码：</td>
-							<td><input type="password" id="password"  name="password" value="${user._password }"  style="margin-top:5px;height:30px;" /></td>
+							<td><input type="password" id="password"  name="password" value="${user.password }"  style="margin-top:5px;height:30px;" /></td>
 						</tr>
 						<tr>
 							<td><font color="red">*</font>重复密码：</td>
-							<td><input type="password" id="rPassword"  name="rPassword" value="${user._password }"  style="margin-top:5px;height:30px;" /></td>
+							<td><input type="password" id="rPassword"  name="rPassword" value="${user.password }"  style="margin-top:5px;height:30px;" /></td>
 						</tr>
 						<tr>
 							<td><font color="red">*</font>姓名：</td>
-							<td><input type="text" id="name"  name="name" value="${user._name }"  style="margin-top:5px;height:30px;" /></td>
+							<td><input type="text" id="name"  name="name" value="${user.name }"  style="margin-top:5px;height:30px;" /></td>
 						</tr>
 						<tr>
 							<td><font color="red">*</font>性别：</td>
 							<td>
 								<select id="sex" name="sex" style="width: 90px;">
 									<option value="">请选择...</option>
-									<option value="MALE" ${user._sex eq "MALE" ? 'selected' : '' }>男</option>
-									<option value="FEMALE" ${user._sex eq "FEMALE" ? 'selected' : ''}>女</option>
+									<option value="MALE" ${user.sex eq "MALE" ? 'selected' : '' }>男</option>
+									<option value="FEMALE" ${user.sex eq "FEMALE" ? 'selected' : ''}>女</option>
 								</select>
 							</td>
 						</tr>
 
 						<tr>
 							<td><font color="red">*</font>联系电话：</td>
-							<td><input type="text" id="tel"  name="tel" value="${user._tel }"  style="margin-top:5px;height:30px;" /></td>
+							<td><input type="text" id="tel"  name="tel" value="${user.tel }"  style="margin-top:5px;height:30px;" /></td>
 						</tr>
 					</table>
 					<div align="center">

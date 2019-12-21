@@ -44,12 +44,14 @@ public class LoginController {
 				session.setAttribute("currentUserType", "admin");
 				session.setAttribute("currentUser", admin);
 				mv.addObject("admin", admin);
+				mv.addObject("mainPage", "admin/blank.jsp");
 			} else if (result_user instanceof User) {
 				User user = result_user;
 				mv.setViewName("mainUser");
 				session.setAttribute("currentUserType", "user");
 				session.setAttribute("currentUser", user);
 				mv.addObject("user", user);
+				mv.addObject("mainPage", "user/blank.jsp");
 			}
 		} else if (result_user == null) {
 			mv.setViewName("index");

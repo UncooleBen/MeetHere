@@ -37,14 +37,6 @@
             var sex = document.getElementById("sex").value;
             var tel = document.getElementById("tel").value;
             var name = document.getElementById("name").value;
-            var userTypes = document.getElementsByName("userType");
-            var userType = null;
-            for(var i=0;i<userTypes.length;i++) {
-                if(userTypes[i].checked) {
-                    userType=userTypes[i].value;
-                    break;
-                }
-            }
             if (username == null || username == "") {
                 document.getElementById("error").innerHTML = "用户名不能为空";
                 return false;

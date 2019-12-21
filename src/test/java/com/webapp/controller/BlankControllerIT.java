@@ -28,8 +28,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration(classes = MvcConfig.class)
 public class BlankControllerIT {
     @Autowired
-    BlankController blankController;
-    @Autowired
     WebApplicationContext wac;
     MockMvc mockMvc;
 

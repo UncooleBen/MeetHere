@@ -13,8 +13,12 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
+import java.text.SimpleDateFormat;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -259,29 +263,30 @@ class BuildingControllerTest {
         @Test
         public void service_WhenActionIsBook_UserIsUser()
         {
-                //TODO 测不了
                 String action="book";
                 String currentUserType="user";
+                String buildingId="305";
+                String startDate="2019-02-16";
+                String duration="1545";
 
                 List<Building> buildingList=new LinkedList<>();
                 buildingList.add(new Building());
 
                 User user =new User();
 
-                Record record=new Record();
 
                 when(session.getAttribute("currentUserType")).thenReturn(currentUserType);
+                when(request.getParameter("id")).thenReturn("111");
                 when(buildingDao.listBuilding(20)).thenReturn(buildingList);
 
                 when(session.getAttribute("currentUser")).thenReturn(user);
-                when(request.getParameter("buildingId")).thenReturn("305");
-                when(request.getParameter("startDate")).thenReturn("");
-                when(request.getParameter("duration")).thenReturn("");
+                when(request.getParameter("buildingId")).thenReturn(buildingId);
+                when(request.getParameter("startDate")).thenReturn(startDate);
+                when(request.getParameter("duration")).thenReturn(duration);
 
 
                 ModelAndView result=buildingController.service(action,request,session);
-                //TODO
-                verify(recordDao).addRecord(record);
+                verify(recordDao).addRecord(any(Record.class));
 
                 assertAll(
                         ()->assertEquals(result.getViewName(),"mainUser"),
@@ -291,35 +296,78 @@ class BuildingControllerTest {
         }
 
         @Test
+        public void service_Try_Throws_Parse_Exception_WhenActionIsBook_UserIsAdmin()
+        {
+
+            ByteArrayOutputStream outContent=new ByteArrayOutputStream();
+            ByteArrayOutputStream errContent=new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent));
+            System.setErr(new PrintStream(errContent));
+
+
+            String action="book";
+            String currentUserType="user";
+            String buildingId="305";
+            String startDate="";
+            String duration="1545";
+
+
+            User user =new User();
+
+
+            when(session.getAttribute("currentUserType")).thenReturn(currentUserType);
+            when(request.getParameter("id")).thenReturn("111");
+
+            when(session.getAttribute("currentUser")).thenReturn(user);
+            when(request.getParameter("buildingId")).thenReturn(buildingId);
+            when(request.getParameter("startDate")).thenReturn(startDate);
+            when(request.getParameter("duration")).thenReturn(duration);
+
+            System.out.println(errContent.toString());
+            System.out.println("111");
+            //TODO 异常处理
+           // Throwable exception = assertThrows(ParseException.class,
+                //    ()->{ buildingController.service(action,request,session); }
+                //    );
+
+
+        }
+
+
+
+
+
+        @Test
         public void service_WhenActionIsBook_UserIsAdmin()
         {
-                //TODO 测不了
-                String action="book";
-                String currentUserType="admin";
+            String action="book";
+            String currentUserType="admin";
+            String buildingId="305";
+            String startDate="2019-02-16";
+            String duration="1545";
 
-                List<Building> buildingList=new LinkedList<>();
-                buildingList.add(new Building());
+            List<Building> buildingList=new LinkedList<>();
+            buildingList.add(new Building());
 
-                User user =new User();
-
-                Record record=new Record();
-
-                when(session.getAttribute("currentUserType")).thenReturn(currentUserType);
-                when(buildingDao.listBuilding(20)).thenReturn(buildingList);
-
-                when(session.getAttribute("currentUser")).thenReturn(user);
-                when(request.getParameter("buildingId")).thenReturn("305");
-                when(request.getParameter("startDate")).thenReturn("");
-                when(request.getParameter("duration")).thenReturn("");
+            User user =new User();
 
 
-                ModelAndView result=buildingController.service(action,request,session);
-                //TODO
-                verify(recordDao).addRecord(record);
+            when(session.getAttribute("currentUserType")).thenReturn(currentUserType);
+            when(request.getParameter("id")).thenReturn("111");
+            when(buildingDao.listBuilding(20)).thenReturn(buildingList);
+
+            when(session.getAttribute("currentUser")).thenReturn(user);
+            when(request.getParameter("buildingId")).thenReturn(buildingId);
+            when(request.getParameter("startDate")).thenReturn(startDate);
+            when(request.getParameter("duration")).thenReturn(duration);
+
+
+            ModelAndView result=buildingController.service(action,request,session);
+            verify(recordDao).addRecord(any(Record.class));
 
                 assertAll(
                         ()->assertEquals(result.getViewName(),"mainAdmin"),
-                        ()->assertEquals(result.getModelMap().get("mainPage"),"user/building.jsp"),
+                        ()->assertEquals(result.getModelMap().get("mainPage"),"admin/building.jsp"),
                         ()->assertEquals(result.getModelMap().get("buildingList"),buildingList)
                 );
         }

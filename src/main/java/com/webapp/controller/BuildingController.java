@@ -33,6 +33,7 @@ public class BuildingController {
     public BuildingController(BuildingDao buildingDao, RecordDao recordDao) {
         this.buildingDao = buildingDao;
         this.recordDao = recordDao;
+        this.sdf = new SimpleDateFormat("yyyy-MM-dd");
     }
 
     @RequestMapping("/building")

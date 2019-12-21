@@ -24,11 +24,11 @@ DROP TABLE IF EXISTS `t_building`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `t_building` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `description` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `price` decimal(11,0) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=744 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,11 +50,11 @@ DROP TABLE IF EXISTS `t_comment`;
 CREATE TABLE `t_comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `userId` int(11) NOT NULL,
-  `date` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `content` text COLLATE utf8_unicode_ci NOT NULL,
+  `date` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `content` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `verified` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,13 +75,13 @@ DROP TABLE IF EXISTS `t_news`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `t_news` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `created` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `last_modified` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `author` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `detail` text COLLATE utf8_unicode_ci NOT NULL,
+  `title` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `created` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `last_modified` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `author` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `detail` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=256 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,7 +90,6 @@ CREATE TABLE `t_news` (
 
 LOCK TABLES `t_news` WRITE;
 /*!40000 ALTER TABLE `t_news` DISABLE KEYS */;
-INSERT INTO `t_news` VALUES (0,'modified with time','0','1575976262906','modified with time','modified with time'),(3,'new with time','1575976240888','1575976240888','new with time','new with time');
 /*!40000 ALTER TABLE `t_news` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -103,14 +102,14 @@ DROP TABLE IF EXISTS `t_record`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `t_record` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `time` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `start_date` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `end_date` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `time` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `start_date` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `end_date` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `user_id` int(11) NOT NULL,
   `building_id` int(11) NOT NULL,
   `verified` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=171 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=531 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +118,6 @@ CREATE TABLE `t_record` (
 
 LOCK TABLES `t_record` WRITE;
 /*!40000 ALTER TABLE `t_record` DISABLE KEYS */;
-INSERT INTO `t_record` VALUES (2,'0','0','0',0,0,0);
 /*!40000 ALTER TABLE `t_record` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,7 +137,7 @@ CREATE TABLE `t_user` (
   `permission` int(11) NOT NULL,
   `tel` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=232 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=544 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -161,4 +159,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-21 13:39:45
+-- Dump completed on 2019-12-21 18:16:50

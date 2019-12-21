@@ -52,9 +52,9 @@ public class BuildingDaoImplIT {
     // Execute query
     List<Building> buildings = buildingDao.listBuilding(5);
     assertEquals(3, buildings.size());
-    Building returnedBuilding0 = buildings.get(0);
+    Building returnedBuilding0 = buildings.get(2);
     Building returnedBuilding1 = buildings.get(1);
-    Building returnedBuilding2 = buildings.get(2);
+    Building returnedBuilding2 = buildings.get(0);
     assertAll(
         () -> assertEquals(TEST_NAME_0, returnedBuilding0.getName()),
         () -> assertEquals(TEST_DESCRIPTION_0, returnedBuilding0.getDescription()),
@@ -84,9 +84,9 @@ public class BuildingDaoImplIT {
     // Execute query
     List<Building> buildings = buildingDao.listBuilding(5);
     assertEquals(3, buildings.size());
-    Building returnedBuilding0 = buildings.get(0);
+    Building returnedBuilding0 = buildings.get(2);
     Building returnedBuilding1 = buildings.get(1);
-    Building returnedBuilding2 = buildings.get(2);
+    Building returnedBuilding2 = buildings.get(0);
     assertAll(
         () -> assertEquals(TEST_NAME_0, returnedBuilding0.getName()),
         () -> assertEquals(TEST_DESCRIPTION_0, returnedBuilding0.getDescription()),

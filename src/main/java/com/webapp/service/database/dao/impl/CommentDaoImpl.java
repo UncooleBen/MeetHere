@@ -3,7 +3,6 @@ package com.webapp.service.database.dao.impl;
 import com.webapp.model.Comment;
 import com.webapp.service.database.DatabaseService;
 import com.webapp.service.database.dao.CommentDao;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -38,6 +37,7 @@ public class CommentDaoImpl extends DatabaseService implements CommentDao {
                 comment.setUserId(rs.getInt("userId"));
                 comment.setDate(rs.getLong("date"));
                 comment.setContent(rs.getString("content"));
+                comment.setVerified(rs.getBoolean("verified"));
                 commentList.add(comment);
             }
         } catch (SQLException sqlException) {

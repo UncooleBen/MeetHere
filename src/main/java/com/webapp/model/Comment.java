@@ -66,15 +66,27 @@ public class Comment {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Comment comment = (Comment) o;
 
-        if (id != comment.id) return false;
-        if (userId != comment.userId) return false;
-        if (date != comment.date) return false;
-        if (verified != comment.verified) return false;
+        if (id != comment.id) {
+            return false;
+        }
+        if (userId != comment.userId) {
+            return false;
+        }
+        if (date != comment.date) {
+            return false;
+        }
+        if (verified != comment.verified) {
+            return false;
+        }
         return content.equals(comment.content);
     }
 

@@ -59,7 +59,6 @@ public class CommentControllerIT {
   };
   final int verifiedCount = 3;
   final String urlPrefix = "/WEB-INF/jsp/";
-  // TODO: lsz
   @Autowired
   CommentDao commentDao;
   @Autowired
@@ -75,14 +74,17 @@ public class CommentControllerIT {
           arguments("delete", totalCount - 1),
           arguments("verify", 0),
           arguments("verify", totalCount / 2),
-          arguments("verify", totalCount - 1));
+          arguments("verify", totalCount - 1),
+          arguments("other", 0),
+          arguments("other", totalCount / 2),
+          arguments("other", totalCount - 1));
     }
     return null;
   }
 
   static Stream<Arguments> adminIllegalActionProvider() {
     if (totalCount > 0) {
-      return Stream.of(arguments("add"), arguments("save"));
+      return Stream.of(arguments("add"), arguments("save"), arguments("other"));
     }
     return null;
   }
@@ -99,8 +101,8 @@ public class CommentControllerIT {
     this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
     // Add 3 unverified comments and 3 verified comments
     for (int i = 0; i < totalCount; i++) {
-      this.commentDao
-          .addComment(new Comment(this.userIdList[i], this.dateList[i], this.contentList[i]));
+      this.commentDao.addComment(
+          new Comment(this.userIdList[i], this.dateList[i], this.contentList[i]));
     }
     this.idList = new int[totalCount];
     List<Comment> addedCommentList = this.commentDao.listComment(totalCount, false);
@@ -196,8 +198,9 @@ public class CommentControllerIT {
     Map<String, Object> sessionAttrs = new HashMap<>();
     sessionAttrs.put("currentUserType", "user");
     this.mockMvc
-        .perform(get("/comment?action=" + action + "&id=" + this.idList[idIndex])
-            .sessionAttrs(sessionAttrs))
+        .perform(
+            get("/comment?action=" + action + "&id=" + this.idList[idIndex])
+                .sessionAttrs(sessionAttrs))
         .andExpect(status().isOk())
         .andExpect(view().name("mainUser"))
         .andExpect(forwardedUrl(this.urlPrefix + "mainUser.jsp"))

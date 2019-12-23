@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
 -- Host: localhost    Database: meethere
 -- ------------------------------------------------------
--- Server version	8.0.17
+-- Server version	8.0.18
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT = @@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS = @@CHARACTER_SET_RESULTS */;
@@ -24,15 +24,15 @@ DROP TABLE IF EXISTS `t_building`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `t_building`
 (
-    `id`          int(11) unsigned                                       NOT NULL AUTO_INCREMENT,
-    `name`        varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-    `description` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-    `price`       decimal(11, 0)                                         NOT NULL,
+    `id`          int(11) unsigned NOT NULL AUTO_INCREMENT,
+    `name`        varchar(45)      NOT NULL,
+    `description` varchar(45)      NOT NULL,
+    `price`       decimal(11, 0)   NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 744
-  DEFAULT CHARSET = utf8
-  COLLATE = utf8_unicode_ci;
+  AUTO_INCREMENT = 49
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -55,16 +55,16 @@ DROP TABLE IF EXISTS `t_comment`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `t_comment`
 (
-    `id`       int(11)                                               NOT NULL AUTO_INCREMENT,
-    `userId`   int(11)                                               NOT NULL,
-    `date`     mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-    `content`  text CHARACTER SET utf8 COLLATE utf8_unicode_ci       NOT NULL,
-    `verified` tinyint(1)                                            NOT NULL DEFAULT '0',
+    `id`       int(11)    NOT NULL AUTO_INCREMENT,
+    `userId`   int(11)    NOT NULL,
+    `date`     mediumtext NOT NULL,
+    `content`  text       NOT NULL,
+    `verified` tinyint(1) NOT NULL DEFAULT '0',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 84
-  DEFAULT CHARSET = utf8
-  COLLATE = utf8_unicode_ci;
+  AUTO_INCREMENT = 1411
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -87,17 +87,17 @@ DROP TABLE IF EXISTS `t_news`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `t_news`
 (
-    `id`            int(11) unsigned                                       NOT NULL AUTO_INCREMENT,
-    `title`         varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-    `created`       mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci  NOT NULL,
-    `last_modified` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci  NOT NULL,
-    `author`        varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-    `detail`        text CHARACTER SET utf8 COLLATE utf8_unicode_ci        NOT NULL,
+    `id`            int(11) unsigned NOT NULL AUTO_INCREMENT,
+    `title`         varchar(45)      NOT NULL,
+    `created`       mediumtext       NOT NULL,
+    `last_modified` mediumtext       NOT NULL,
+    `author`        varchar(45)      NOT NULL,
+    `detail`        text             NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 256
-  DEFAULT CHARSET = utf8
-  COLLATE = utf8_unicode_ci;
+  AUTO_INCREMENT = 193
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -120,18 +120,18 @@ DROP TABLE IF EXISTS `t_record`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `t_record`
 (
-    `id`          int(11) unsigned                                      NOT NULL AUTO_INCREMENT,
-    `time`        mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-    `start_date`  mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-    `end_date`    mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-    `user_id`     int(11)                                               NOT NULL,
-    `building_id` int(11)                                               NOT NULL,
-    `verified`    tinyint(1)                                            NOT NULL DEFAULT '0',
+    `id`          int(11) unsigned NOT NULL AUTO_INCREMENT,
+    `time`        mediumtext       NOT NULL,
+    `start_date`  mediumtext       NOT NULL,
+    `end_date`    mediumtext       NOT NULL,
+    `user_id`     int(11)          NOT NULL,
+    `building_id` int(11)          NOT NULL,
+    `verified`    tinyint(1)       NOT NULL DEFAULT '0',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 531
-  DEFAULT CHARSET = utf8
-  COLLATE = utf8_unicode_ci;
+  AUTO_INCREMENT = 673
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -163,7 +163,7 @@ CREATE TABLE `t_user`
     `tel`        varchar(15) DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 544
+  AUTO_INCREMENT = 158
   DEFAULT CHARSET = utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -175,14 +175,10 @@ LOCK TABLES `t_user` WRITE;
 /*!40000 ALTER TABLE `t_user`
     DISABLE KEYS */;
 INSERT INTO `t_user`
-VALUES (0, 'root', 'root', 'pjt', 'MALE', 0, '999'),
-       (1, 'admin', 'admin', 'lsz', 'MALE', 0, '130'),
-       (2, 'chairman', 'chairman', 'gyj', 'MALE', 0, '130'),
-       (4, 'pjt', 'pjt', 'pengjuntao', 'MALE', 1, '123123123'),
-       (7, 'lsz', 'lsz', 'lishanzhen', 'MALE', 1, '123123'),
-       (8, 'gyj', 'gyj', 'guoyuanjie', 'MALE', 1, '123123'),
-       (9, 'testuser', 'test', 'testusername', 'MALE', 1, 'testtel'),
-       (10, '999', '999', '999', 'MALE', 1, '999');
+VALUES (0, 'root', 'root', 'admin', 'MALE', 0, '123'),
+       (4, 'pjt', 'pjt', 'john', 'MALE', 1, '123123123'),
+       (7, 'jiege', '123', 'guoyuanjie', 'MALE', 1, '123123'),
+       (8, 'zqf', '123', 'zhouqifeng', 'MALE', 1, '123123');
 /*!40000 ALTER TABLE `t_user`
     ENABLE KEYS */;
 UNLOCK TABLES;
@@ -196,4 +192,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION = @OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES = @OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-21 18:16:50
+-- Dump completed on 2019-12-23 23:30:58

@@ -82,7 +82,7 @@ public class NewsController {
                     news.setDetail(request.getParameter("detail"));
                     newsDao.insertNews(news);
                 }
-                mv.addObject("mainPage", "admin/news.jsp");
+                listNews(mv, "admin");
                 break;
             }
             case "list":

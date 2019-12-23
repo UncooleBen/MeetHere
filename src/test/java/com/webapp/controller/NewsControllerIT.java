@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -43,7 +44,6 @@ import org.springframework.web.context.WebApplicationContext;
 public class NewsControllerIT {
 
   final String urlPrefix = "/WEB-INF/jsp/";
-  //TODO: lsz
   MockMvc mockMvc;
   @Autowired
   NewsDao newsDao;
@@ -57,8 +57,7 @@ public class NewsControllerIT {
         arguments("user", "delete"),
         arguments("user", "modify"),
         arguments("user", "save"),
-        arguments("admin", "detail")
-    );
+        arguments("admin", "detail"));
   }
 
   @BeforeEach
@@ -69,8 +68,8 @@ public class NewsControllerIT {
     final long TEST_LAST_MODIFIED = 2000000;
     final String TEST_AUTHOR = "test author";
     final String TEST_DETAIL = "test detail";
-    this.testNews = new News(TEST_TITLE, TEST_CREATED, TEST_LAST_MODIFIED, TEST_AUTHOR,
-        TEST_DETAIL);
+    this.testNews =
+        new News(TEST_TITLE, TEST_CREATED, TEST_LAST_MODIFIED, TEST_AUTHOR, TEST_DETAIL);
     assertTrue(this.newsDao.insertNews(this.testNews));
     List<News> newsList = this.newsDao.listNews(20);
     for (News news : newsList) {
@@ -111,87 +110,163 @@ public class NewsControllerIT {
   void givenUserWhenActionIsDetailThenRedirectToNewsDetail() throws Exception {
     Map<String, Object> sessionAttrs = new HashMap<>();
     sessionAttrs.put("currentUserType", "user");
-    MvcResult result = this.mockMvc
-        .perform(
-            get("/news?action=detail&newsId=" + this.testNews.getId()).sessionAttrs(sessionAttrs))
-        .andExpect(status().isOk())
-        .andExpect(view().name("mainUser"))
-        .andExpect(forwardedUrl(this.urlPrefix + "mainUser.jsp"))
-        .andExpect(model().attribute("mainPage", "user/newsDetail.jsp"))
-        .andReturn();
+    MvcResult result =
+        this.mockMvc
+            .perform(
+                get("/news?action=detail&newsId=" + this.testNews.getId())
+                    .sessionAttrs(sessionAttrs))
+            .andExpect(status().isOk())
+            .andExpect(view().name("mainUser"))
+            .andExpect(forwardedUrl(this.urlPrefix + "mainUser.jsp"))
+            .andExpect(model().attribute("mainPage", "user/newsDetail.jsp"))
+            .andReturn();
     News news = (News) result.getModelAndView().getModelMap().get("news");
-    assertAll(
-        () -> assertEquals(this.testNews, news)
-    );
+    assertAll(() -> assertEquals(this.testNews, news));
   }
 
   @Test
   void givenUserWhenActionIsListThenList() throws Exception {
     Map<String, Object> sessionAttrs = new HashMap<>();
     sessionAttrs.put("currentUserType", "user");
-    MvcResult result = this.mockMvc
-        .perform(get("/news?action=list").sessionAttrs(sessionAttrs))
-        .andExpect(status().isOk())
-        .andExpect(view().name("mainUser"))
-        .andExpect(forwardedUrl(this.urlPrefix + "mainUser.jsp"))
-        .andExpect(model().attribute("mainPage", "user/news.jsp"))
-        .andReturn();
+    MvcResult result =
+        this.mockMvc
+            .perform(get("/news?action=list").sessionAttrs(sessionAttrs))
+            .andExpect(status().isOk())
+            .andExpect(view().name("mainUser"))
+            .andExpect(forwardedUrl(this.urlPrefix + "mainUser.jsp"))
+            .andExpect(model().attribute("mainPage", "user/news.jsp"))
+            .andReturn();
     List<News> newsList = (List<News>) result.getModelAndView().getModelMap().get("newsList");
     assertAll(
-        () -> assertEquals(1, newsList.size()),
-        () -> assertEquals(this.testNews, newsList.get(0))
-    );
+        () -> assertEquals(1, newsList.size()), () -> assertEquals(this.testNews, newsList.get(0)));
   }
 
   @Test
   void givenAdminWhenActionIsAddThenRedirectToNewsModify() throws Exception {
     Map<String, Object> sessionAttrs = new HashMap<>();
     sessionAttrs.put("currentUserType", "admin");
-    MvcResult result = this.mockMvc
-        .perform(get("/news?action=add").sessionAttrs(sessionAttrs))
-        .andExpect(status().isOk())
-        .andExpect(view().name("mainAdmin"))
-        .andExpect(forwardedUrl(this.urlPrefix + "mainAdmin.jsp"))
-        .andExpect(model().attribute("mainPage", "admin/newsModify.jsp"))
-        .andReturn();
-    assertAll(
-        () -> assertNull(result.getModelAndView().getModelMap().get("news"))
-    );
+    MvcResult result =
+        this.mockMvc
+            .perform(get("/news?action=add").sessionAttrs(sessionAttrs))
+            .andExpect(status().isOk())
+            .andExpect(view().name("mainAdmin"))
+            .andExpect(forwardedUrl(this.urlPrefix + "mainAdmin.jsp"))
+            .andExpect(model().attribute("mainPage", "admin/newsModify.jsp"))
+            .andReturn();
+    assertAll(() -> assertNull(result.getModelAndView().getModelMap().get("news")));
   }
 
   @Test
   void givenAdminWhenActionIsModifyThenRedirectToNewsModify() throws Exception {
     Map<String, Object> sessionAttrs = new HashMap<>();
     sessionAttrs.put("currentUserType", "admin");
-    MvcResult result = this.mockMvc
-        .perform(
-            get("/news?action=modify&newsId=" + this.testNews.getId()).sessionAttrs(sessionAttrs))
-        .andExpect(status().isOk())
-        .andExpect(view().name("mainAdmin"))
-        .andExpect(forwardedUrl(this.urlPrefix + "mainAdmin.jsp"))
-        .andExpect(model().attribute("mainPage", "admin/newsModify.jsp"))
-        .andReturn();
+    MvcResult result =
+        this.mockMvc
+            .perform(
+                get("/news?action=modify&newsId=" + this.testNews.getId())
+                    .sessionAttrs(sessionAttrs))
+            .andExpect(status().isOk())
+            .andExpect(view().name("mainAdmin"))
+            .andExpect(forwardedUrl(this.urlPrefix + "mainAdmin.jsp"))
+            .andExpect(model().attribute("mainPage", "admin/newsModify.jsp"))
+            .andReturn();
     assertAll(
-        () -> assertEquals(this.testNews, result.getModelAndView().getModelMap().get("news"))
-    );
+        () -> assertEquals(this.testNews, result.getModelAndView().getModelMap().get("news")));
   }
 
   @Test
   void givenAdminWhenActionIsDeleteThenDelete() throws Exception {
     Map<String, Object> sessionAttrs = new HashMap<>();
     sessionAttrs.put("currentUserType", "admin");
-    MvcResult result = this.mockMvc
-        .perform(
-            get("/news?action=delete&newsId=" + this.testNews.getId()).sessionAttrs(sessionAttrs))
-        .andExpect(status().isOk())
-        .andExpect(view().name("mainAdmin"))
-        .andExpect(forwardedUrl(this.urlPrefix + "mainAdmin.jsp"))
-        .andExpect(model().attribute("mainPage", "admin/news.jsp"))
-        .andReturn();
+    MvcResult result =
+        this.mockMvc
+            .perform(
+                get("/news?action=delete&newsId=" + this.testNews.getId())
+                    .sessionAttrs(sessionAttrs))
+            .andExpect(status().isOk())
+            .andExpect(view().name("mainAdmin"))
+            .andExpect(forwardedUrl(this.urlPrefix + "mainAdmin.jsp"))
+            .andExpect(model().attribute("mainPage", "admin/news.jsp"))
+            .andReturn();
     List<News> newsList = (List<News>) result.getModelAndView().getModelMap().get("newsList");
-    assertAll(
-        () -> assertEquals(0, newsList.size())
-    );
+    assertAll(() -> assertEquals(0, newsList.size()));
   }
 
+  @Test
+  void givenAdminWhenActionIsSaveNewNewsThenSave() throws Exception {
+    Map<String, Object> sessionAttrs = new HashMap<>();
+    sessionAttrs.put("currentUserType", "admin");
+    final String TEST_TITLE = "test new title";
+    final String TEST_AUTHOR = "test new author";
+    final String TEST_DETAIL = "test new detail";
+    MvcResult result =
+        this.mockMvc
+            .perform(
+                post("/news?action=save")
+                    .sessionAttrs(sessionAttrs)
+                    .param("newsId", "")
+                    .param("title", TEST_TITLE)
+                    .param("author", TEST_AUTHOR)
+                    .param("detail", TEST_DETAIL))
+            .andExpect(status().isOk())
+            .andExpect(view().name("mainAdmin"))
+            .andExpect(forwardedUrl(this.urlPrefix + "mainAdmin.jsp"))
+            .andExpect(model().attribute("mainPage", "admin/news.jsp"))
+            .andReturn();
+    List<News> newsList = (List<News>) result.getModelAndView().getModelMap().get("newsList");
+    assertAll(
+        () -> assertEquals(2, newsList.size()),
+        () -> assertEquals(this.testNews, newsList.get(0)),
+        () -> assertEquals(TEST_TITLE, newsList.get(1).getTitle()),
+        () -> assertEquals(TEST_AUTHOR, newsList.get(1).getAuthor()),
+        () -> assertEquals(TEST_DETAIL, newsList.get(1).getDetail()),
+        // Delete added data from database
+        () -> assertTrue(this.newsDao.deleteNewsById(newsList.get(1).getId())));
+  }
+
+  @Test
+  void givenAdminWhenActionIsSaveModifiedNewsThenSave() throws Exception {
+    Map<String, Object> sessionAttrs = new HashMap<>();
+    sessionAttrs.put("currentUserType", "admin");
+    final String TEST_TITLE = "test new title";
+    final String TEST_AUTHOR = "test new author";
+    final String TEST_DETAIL = "test new detail";
+    MvcResult result =
+        this.mockMvc
+            .perform(
+                post("/news?action=save")
+                    .sessionAttrs(sessionAttrs)
+                    .param("newsId", String.valueOf(this.testNews.getId()))
+                    .param("title", TEST_TITLE)
+                    .param("author", TEST_AUTHOR)
+                    .param("detail", TEST_DETAIL))
+            .andExpect(status().isOk())
+            .andExpect(view().name("mainAdmin"))
+            .andExpect(forwardedUrl(this.urlPrefix + "mainAdmin.jsp"))
+            .andExpect(model().attribute("mainPage", "admin/news.jsp"))
+            .andReturn();
+    List<News> newsList = (List<News>) result.getModelAndView().getModelMap().get("newsList");
+    assertAll(
+        () -> assertEquals(1, newsList.size()),
+        () -> assertEquals(TEST_TITLE, newsList.get(0).getTitle()),
+        () -> assertEquals(TEST_AUTHOR, newsList.get(0).getAuthor()),
+        () -> assertEquals(TEST_DETAIL, newsList.get(0).getDetail()));
+  }
+
+  @Test
+  void givenAdminWhenActionIsListThenList() throws Exception {
+    Map<String, Object> sessionAttrs = new HashMap<>();
+    sessionAttrs.put("currentUserType", "admin");
+    MvcResult result =
+        this.mockMvc
+            .perform(get("/news?action=list").sessionAttrs(sessionAttrs))
+            .andExpect(status().isOk())
+            .andExpect(view().name("mainAdmin"))
+            .andExpect(forwardedUrl(this.urlPrefix + "mainAdmin.jsp"))
+            .andExpect(model().attribute("mainPage", "admin/news.jsp"))
+            .andReturn();
+    List<News> newsList = (List<News>) result.getModelAndView().getModelMap().get("newsList");
+    assertAll(
+        () -> assertEquals(1, newsList.size()), () -> assertEquals(this.testNews, newsList.get(0)));
+  }
 }

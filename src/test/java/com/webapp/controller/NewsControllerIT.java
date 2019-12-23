@@ -57,7 +57,9 @@ public class NewsControllerIT {
         arguments("user", "delete"),
         arguments("user", "modify"),
         arguments("user", "save"),
-        arguments("admin", "detail"));
+        arguments("user", "other"),
+        arguments("admin", "detail"),
+        arguments("admin", "other"));
   }
 
   @BeforeEach
@@ -87,7 +89,7 @@ public class NewsControllerIT {
 
   @ParameterizedTest
   @MethodSource("illegalUserTypeAndActionProvider")
-  void givenUserTypeWhenActionIsIllegalThenReturnToBlank(String userType, String action)
+  void givenUserTypeWhenActionIsIllegalThenList(String userType, String action)
       throws Exception {
     Map<String, Object> sessionAttrs = new HashMap<>();
     sessionAttrs.put("currentUserType", userType);

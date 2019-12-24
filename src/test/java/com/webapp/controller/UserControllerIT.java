@@ -43,6 +43,9 @@ public class UserControllerIT {
     WebApplicationContext wac;
     MockMvc mockMvc;
 
+    List<User> users;
+    Map<String, User> userMap;
+
     static Stream<Arguments> userProvider() {
         return Stream.of(
                 Arguments.of("username1", "password1", "name1", "MALE", "tel1"),
@@ -50,14 +53,6 @@ public class UserControllerIT {
                 Arguments.of("username3", "password3", "name3", "MALE", "tel3"),
                 Arguments.of("username4", "password4", "name4", "FEMALE", "tel4"),
                 Arguments.of("username5", "password5", "name5", "MALE", "tel5")
-        );
-    }
-
-    static Stream<Arguments> existedUserProvider() {
-        return Stream.of(
-                Arguments.of(9, "testuser", "test", "testusername", "MALE", "testtel"),
-                Arguments.of(8, "gyj", "gyj", "guoyuanjie", "MALE", "123123"),
-                Arguments.of(7, "lsz", "lsz", "lishanzhen", "MALE", "123123")
         );
     }
 
@@ -80,16 +75,33 @@ public class UserControllerIT {
     @BeforeEach
     void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        User user1 = new User("username1", "password1", "name1", "MALE", "tel1");
+        User user2 = new User("username2", "password2", "name2", "FEMALE", "tel2");
+        User user3 = new User("username3", "password3", "name3", "MALE", "tel3");
+        User user4 = new User("username4", "password4", "name4", "FEMALE", "tel4");
+        User user5 = new User("username5", "password5", "name5", "MALE", "tel5");
+        this.userDao.addUser(user1);
+        this.userDao.addUser(user2);
+        this.userDao.addUser(user3);
+        this.userDao.addUser(user4);
+        this.userDao.addUser(user5);
+        this.users = this.userDao.queryAllUsers();
+        this.userMap = new HashMap<>();
+        for (User user : this.users) {
+            this.userMap.put(user.getUsername(), user);
+        }
     }
 
     @AfterEach
     void tearDown() {
-
+        for (User user : this.users) {
+            this.userDao.deleteUser(user.getId());
+        }
     }
 
     @Test
     void shouldReturnListUser_whenAdminActionList() throws Throwable {
-        List<String> usernames = Arrays.asList("999", "testuser", "gyj", "lsz", "pjt");
+        List<String> usernames = Arrays.asList("username5", "username4", "username3", "username2", "username1");
         Map<String, Object> sessionAttrs = new HashMap<>();
         sessionAttrs.put("currentUserType", "admin");
         MvcResult result = this.mockMvc.perform(get("/user?action=list").sessionAttrs(sessionAttrs))
@@ -108,7 +120,7 @@ public class UserControllerIT {
 
     @Test
     void shouldReturnListUser_whenAdminActionNull() throws Throwable {
-        List<String> usernames = Arrays.asList("999", "testuser", "gyj", "lsz", "pjt");
+        List<String> usernames = Arrays.asList("username5", "username4", "username3", "username2", "username1");
         Map<String, Object> sessionAttrs = new HashMap<>();
         sessionAttrs.put("currentUserType", "admin");
         MvcResult result = this.mockMvc.perform(get("/user?action=").sessionAttrs(sessionAttrs))
@@ -128,9 +140,7 @@ public class UserControllerIT {
     @ParameterizedTest
     @MethodSource("userProvider")
     void deleteUsers(String username, String password, String name, String sex, String tel) throws Throwable {
-        User expectedUser = new User(username, password, name, sex, tel);
-        this.userDao.addUser(expectedUser);
-        expectedUser = this.userDao.queryAllUsers().get(0);
+        User expectedUser = this.userMap.get(username);
         Map<String, Object> sessionAttrs = new HashMap<>();
         sessionAttrs.put("currentUserType", "admin");
         MvcResult result = this.mockMvc.perform(get("/user?action=delete&id=" + expectedUser.getId()).sessionAttrs(sessionAttrs))
@@ -174,8 +184,10 @@ public class UserControllerIT {
     }
 
     @ParameterizedTest
-    @MethodSource("existedUserProvider")
-    void updateUsersThenRestore(int id, String username, String password, String name, String sex, String tel) throws Throwable {
+    @MethodSource("userProvider")
+    void updateUsers(String username, String password, String name, String sex, String tel) throws Throwable {
+        User addedUser = this.userMap.get(username);
+        int id = addedUser.getId();
         String newPassword = "clandestine password";
         Map<String, Object> sessionAttrs = new HashMap<>();
         sessionAttrs.put("currentUserType", "admin");
@@ -191,16 +203,14 @@ public class UserControllerIT {
                 .andExpect(view().name("mainAdmin"))
                 .andExpect(forwardedUrl("/WEB-INF/jsp/mainAdmin.jsp"))
                 .andExpect(model().attribute("mainPage", "admin/user.jsp"));
-        User addedUser = this.userDao.queryUserByName(name).get(0);
+        User updatedUser = this.userDao.queryUserByName(name).get(0);
         assertAll(
-                () -> assertEquals(username, addedUser.getUsername()),
-                () -> assertEquals(newPassword, addedUser.getPassword()),
-                () -> assertEquals(name, addedUser.getName()),
-                () -> assertEquals(sex, addedUser.getSex().toString()),
-                () -> assertEquals(tel, addedUser.getTel())
+                () -> assertEquals(username, updatedUser.getUsername()),
+                () -> assertEquals(newPassword, updatedUser.getPassword()),
+                () -> assertEquals(name, updatedUser.getName()),
+                () -> assertEquals(sex, updatedUser.getSex().toString()),
+                () -> assertEquals(tel, updatedUser.getTel())
         );
-        // Restore password
-        this.userDao.updateUserPassword(id, password);
     }
 
     @ParameterizedTest

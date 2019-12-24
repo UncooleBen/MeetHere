@@ -83,6 +83,7 @@ class UserDaoImplTest {
         Admin admin = new Admin(id, username, password, name, sex, tel);
 
         List<User> userList = new ArrayList<>();
+        userList.add(admin);
 
         when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
 

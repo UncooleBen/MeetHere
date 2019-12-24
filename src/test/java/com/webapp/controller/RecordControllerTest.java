@@ -45,17 +45,20 @@ class RecordControllerTest {
     public void service_WhenUserTypeIsUser_ActionIsSave() {
         String action = "save";
         String usertype = "user";
+        User user = mock(User.class);
+
 
         Record record = new Record();
         record.setBuildingId(Integer.parseInt("13"));
-        record.setUserId(Integer.parseInt("305"));
+        record.setUserId(Integer.parseInt("100"));
         long startDate = Long.parseLong("1");
         long endDate = Long.parseLong("1001");
         record.setStartDate(startDate);
         record.setEndDate(endDate);
         record.setTime(endDate - startDate);
         record.setVerified(false);
-
+        when(user.getId()).thenReturn(100);
+        when(session.getAttribute("currentUser")).thenReturn(user);
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute("currentUserType")).thenReturn(usertype);
 
@@ -79,9 +82,12 @@ class RecordControllerTest {
         String action = "delete";
         String usertype = "user";
 
+        User user = mock(User.class);
+        when(user.getId()).thenReturn(100);
+
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute("currentUserType")).thenReturn(usertype);
-
+        when(session.getAttribute("currentUser")).thenReturn(user);
         when(request.getParameter("recordId")).thenReturn("305");
 
 
@@ -119,7 +125,7 @@ class RecordControllerTest {
         assertAll(
                 () -> assertEquals(result.getViewName(), "mainUser"),
                 () -> assertEquals(result.getModelMap().get("mainPage"), "user/record.jsp"),
-                () -> assertEquals(result.getModelMap().get("recordList"), verifiedRecordList),
+                () -> assertEquals(result.getModelMap().get("verifiedRecordList"), verifiedRecordList),
                 () -> assertEquals(result.getModelMap().get("unverifiedRecordList"), unverifiedRecordList)
         );
     }
@@ -149,7 +155,7 @@ class RecordControllerTest {
         assertAll(
                 () -> assertEquals(result.getViewName(), "mainUser"),
                 () -> assertEquals(result.getModelMap().get("mainPage"), "user/record.jsp"),
-                () -> assertEquals(result.getModelMap().get("recordList"), verifiedRecordList),
+                () -> assertEquals(result.getModelMap().get("verifiedRecordList"), verifiedRecordList),
                 () -> assertEquals(result.getModelMap().get("unverifiedRecordList"), unverifiedRecordList)
         );
     }

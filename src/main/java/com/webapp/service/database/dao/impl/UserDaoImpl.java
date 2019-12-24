@@ -39,6 +39,7 @@ public class UserDaoImpl extends DatabaseService implements UserDao {
                 switch (permission) {
                     case 0:
                         Admin admin = new Admin(id, username, password, name, sex, tel);
+                        result.add(admin);
                         break;
                     case 1:
                         User user = new User(id, username, password, name, sex, tel);

@@ -1,6 +1,9 @@
 package com.webapp.controller;
 
 import com.webapp.config.MvcConfig;
+import com.webapp.model.user.Admin;
+import com.webapp.model.user.User;
+import com.webapp.service.database.dao.UserDao;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
@@ -19,7 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.Arrays;
+import java.util.*;
 import java.util.stream.Stream;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -36,50 +39,78 @@ public class LoginControllerIT {
     WebApplicationContext wac;
     MockMvc mockMvc;
 
+    @Autowired
+    UserDao userDao;
+
+    List<User> users;
+
     static Stream<String> errorUsernameProvider() {
         return Stream.of("1024", "is", "an", "invalid", "website");
     }
 
     static Stream<Arguments> errorUsernamePasswordPairProvider() {
         return Stream.of(
-                Arguments.of("pjt", "'s password is not pjt"),
-                Arguments.of("lsz", "'s password is not lsz"),
-                Arguments.of("gyj", "'s password is not gyj")
+                Arguments.of("username1", "password1-"),
+                Arguments.of("username2", "passwo-rd2"),
+                Arguments.of("username3", "passw-ord3"),
+                Arguments.of("username4", "passwor-d4"),
+                Arguments.of("username5", "passw-ord5")
         );
     }
 
     static Stream<Arguments> errorAdminUsernamePasswordPairProvider() {
         return Stream.of(
-                Arguments.of("root", "'s password is not root"),
-                Arguments.of("admin", "'s password is not admin"),
-                Arguments.of("chairman", "'s password is not chairman")
+                Arguments.of("admin1", "password1-"),
+                Arguments.of("admin2", "password2-"),
+                Arguments.of("admin3", "password3-")
         );
     }
 
     static Stream<Arguments> correctUsernamePasswordPairProvider() {
         return Stream.of(
-                Arguments.of("pjt", "pjt"),
-                Arguments.of("lsz", "lsz"),
-                Arguments.of("gyj", "gyj")
+                Arguments.of("username1", "password1"),
+                Arguments.of("username2", "password2"),
+                Arguments.of("username3", "password3"),
+                Arguments.of("username4", "password4"),
+                Arguments.of("username5", "password5")
         );
     }
 
     static Stream<Arguments> correctAdminUsernamePasswordPairProvider() {
         return Stream.of(
-                Arguments.of("root", "root"),
-                Arguments.of("admin", "admin"),
-                Arguments.of("chairman", "chairman")
+                Arguments.of("admin1", "password1"),
+                Arguments.of("admin2", "password2"),
+                Arguments.of("admin3", "password3")
         );
     }
 
     @BeforeEach
     void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        User user1 = new User("username1", "password1", "name1", "MALE", "tel1");
+        User user2 = new User("username2", "password2", "name2", "FEMALE", "tel2");
+        User user3 = new User("username3", "password3", "name3", "MALE", "tel3");
+        User user4 = new User("username4", "password4", "name4", "FEMALE", "tel4");
+        User user5 = new User("username5", "password5", "name5", "MALE", "tel5");
+        this.userDao.addUser(user1);
+        this.userDao.addUser(user2);
+        this.userDao.addUser(user3);
+        this.userDao.addUser(user4);
+        this.userDao.addUser(user5);
+        Admin admin1 = new Admin("admin1", "password1", "name1", "MALE", "tel1");
+        Admin admin2 = new Admin("admin2", "password2", "name2", "MALE", "tel2");
+        Admin admin3 = new Admin("admin3", "password3", "name3", "MALE", "tel3");
+        this.userDao.addUser(admin1);
+        this.userDao.addUser(admin2);
+        this.userDao.addUser(admin3);
+        this.users = this.userDao.queryAllUsers();
     }
 
     @AfterEach
     void tearDown() {
-
+        for (User user : this.users) {
+            this.userDao.deleteUser(user.getId());
+        }
     }
 
     @ParameterizedTest

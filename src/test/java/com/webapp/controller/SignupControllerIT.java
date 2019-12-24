@@ -46,14 +46,19 @@ public class SignupControllerIT {
     @Autowired
     UserDao userDao;
 
+    User addedUser;
+
     @BeforeEach
     void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        User userToAdd = new User("999", "999", "999", "MALE", "13918300851");
+        this.userDao.addUser(userToAdd);
+        this.addedUser = this.userDao.queryAllUsers().get(0);
     }
 
     @AfterEach
     void tearDown() {
-
+        this.userDao.deleteUser(this.addedUser.getId());
     }
 
     @Test

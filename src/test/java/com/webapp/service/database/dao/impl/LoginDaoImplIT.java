@@ -6,9 +6,12 @@ import com.webapp.model.user.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.sql.Connection;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,6 +23,8 @@ class LoginDaoImplIT {
     LoginDaoImpl loginDao;
     UserDaoImpl userDao;
     Connection connection;
+    User addedUser;
+    Admin addedAdmin;
 
     @BeforeEach
     void init() {
@@ -38,37 +43,51 @@ class LoginDaoImplIT {
         ReflectionTestUtils.setField(this.userDao, "dbPassword", dbPassword);
         ReflectionTestUtils.setField(this.userDao, "dbClassname", dbClassname);
         this.connection = null;
+        this.addedUser = new User("username1", "password1", "name1", "MALE", "tel1");
+        this.addedAdmin = new Admin("admin1", "password1", "name1", "MALE", "tel1");
+        this.userDao.addUser(addedUser);
+        this.userDao.addUser(addedAdmin);
+        List<User> users = this.userDao.queryAllUsers();
+        for (User user : users) {
+            if (user.getPermission() == 0) {
+                this.addedAdmin = (Admin) user;
+            } else {
+                this.addedUser = user;
+            }
+        }
     }
 
     @AfterEach
     void tearDown() {
         this.loginDao.closeConnection(this.connection);
+        this.userDao.deleteUser(addedUser.getId());
+        this.userDao.deleteUser(addedAdmin.getId());
     }
 
     @Test
     void shouldReturnAdminWhenLoginWithAdmin() {
-        User user = this.loginDao.login("root", "root");
+        User user = this.loginDao.login("admin1", "password1");
         assertAll(
                 () -> assertTrue(user instanceof Admin),
-                () -> assertEquals("root", user.getUsername()),
-                () -> assertEquals("root", user.getPassword()),
-                () -> assertEquals("pjt", user.getName()),
+                () -> assertEquals("admin1", user.getUsername()),
+                () -> assertEquals("password1", user.getPassword()),
+                () -> assertEquals("name1", user.getName()),
                 () -> assertEquals(Gender.MALE, user.getSex()),
-                () -> assertEquals(0, user.getId()),
-                () -> assertEquals("999", user.getTel()),
+                () -> assertEquals(addedAdmin.getId(), user.getId()),
+                () -> assertEquals("tel1", user.getTel()),
                 () -> assertEquals(0, user.getPermission()));
     }
 
     @Test
     void shouldReturnUserWhenLoginWithUser() {
-        User user = this.loginDao.login("pjt", "pjt");
+        User user = this.loginDao.login("username1", "password1");
         assertAll(
-                () -> assertEquals("pjt", user.getUsername()),
-                () -> assertEquals("pjt", user.getPassword()),
-                () -> assertEquals("pengjuntao", user.getName()),
+                () -> assertEquals("username1", user.getUsername()),
+                () -> assertEquals("password1", user.getPassword()),
+                () -> assertEquals("name1", user.getName()),
                 () -> assertEquals(Gender.MALE, user.getSex()),
-                () -> assertEquals(4, user.getId()),
-                () -> assertEquals("123123123", user.getTel()),
+                () -> assertEquals(addedUser.getId(), user.getId()),
+                () -> assertEquals("tel1", user.getTel()),
                 () -> assertEquals(1, user.getPermission()));
     }
 

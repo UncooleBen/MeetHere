@@ -41,8 +41,28 @@
                 document.getElementById("error").innerHTML = "用户名不能为空";
                 return false;
             }
+            if (username.length < 5 || username.length > 15) {
+                document.getElementById("error").innerHTML = "用户名必须在5-15个字符之间";
+                return false;
+            }
+            if (username.indexOf(' ') != -1) {
+                document.getElementById("error").innerHTML = "用户名不能含有空格";
+                return false;
+            }
             if (password == null || password == "") {
                 document.getElementById("error").innerHTML = "密码不能为空";
+                return false;
+            }
+            if (password.length < 10 || password.length > 15) {
+                document.getElementById("error").innerHTML = "密码必须在10-15个字符之间";
+                return false;
+            }
+            if (password.indexOf(' ') != -1) {
+                document.getElementById("error").innerHTML = "密码不能含有空格";
+                return false;
+            }
+            if (password == username) {
+                document.getElementById("error").innerHTML = "用户名和密码不能相同";
                 return false;
             }
             if (name == null || name == "") {
@@ -55,6 +75,10 @@
             }
             if (tel == null || tel == "") {
                 document.getElementById("error").innerHTML = "电话不能为空";
+                return false;
+            }
+            if (tel.length != 11 || !tel.match(/1[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/)) {
+                document.getElementById("error").innerHTML = "电话必须为11位数字";
                 return false;
             }
             return true;

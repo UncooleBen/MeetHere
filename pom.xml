@@ -110,6 +110,12 @@
             <version>2.6</version>
         </dependency>
 
+        <dependency>
+            <artifactId>selenium-java</artifactId>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <version>4.0.0-alpha-3</version>
+        </dependency>
+
     </dependencies>
 
     <build>

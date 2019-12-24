@@ -13,19 +13,19 @@
     <script src="resources/bootstrap/js/jQuery.js"></script>
     <script src="resources/bootstrap/js/bootstrap.js"></script>
     <script type="text/javascript">
-        function checkForm() {
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-            if (username == null || username == "") {
-                document.getElementById("error").innerHTML = "用户名不能为空";
-                return false;
-            }
-            if (password == null || password == "") {
-                document.getElementById("error").innerHTML = "密码不能为空";
-                return false;
-            }
-            return true;
+      function checkForm() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        if (username == null || username == "") {
+          document.getElementById("error").innerHTML = "用户名不能为空";
+          return false;
         }
+        if (password == null || password == "") {
+          document.getElementById("error").innerHTML = "密码不能为空";
+          return false;
+        }
+        return true;
+      }
     </script>
 
     <style type="text/css">
@@ -78,22 +78,25 @@
 </head>
 <body>
 <div class="container">
-    <form name="myForm" class="form-signin" action="login" method="post" onsubmit="return checkForm()">
+    <form name="myForm" class="form-signin" action="login" method="post"
+          onsubmit="return checkForm()">
         <h2 class="form-signin-heading"><font color="gray">MeetHere</font></h2>
-        <input id="username" name="username" value="${user.username }" type="text" class="input-block-level"
+        <input id="username" name="username" value="${user.username }" type="text"
+               class="input-block-level"
                placeholder="账号">
-        <input id="password" name="password" value="${user.password }" type="password" class="input-block-level"
+        <input id="password" name="password" value="${user.password }" type="password"
+               class="input-block-level"
                placeholder="密码">
-        <label class="checkbox">
-            <input id="remember" name="remember" type="checkbox" value="remember-me" ${remember==1?'checked':''}>记住我
+        <font id="error" color="red">${error }</font>
+        <div>
+            <button class="btn btn-large btn-primary" type="submit">登录</button>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <font id="error" color="red">${error }</font>
-        </label>
-        <button class="btn btn-large btn-primary" type="submit">登录</button>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <button class="btn btn-large btn-primary" type="reset">重置</button>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <button class="btn btn-large btn-primary" type="button" onclick="window.location.href='signup'">注册</button>
+            <button class="btn btn-large btn-primary" type="reset">重置</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-large btn-primary" type="button"
+                    onclick="window.location.href='signup'">注册
+            </button>
+        </div>
         <p align="center" style="padding-top: 15px;">彭钧涛 李尚真 郭源杰</p>
     </form>
 </div>

@@ -36,7 +36,7 @@
     </div>
     <form action="user?action=save" method="post" onsubmit="return checkForm()">
         <div class="data_form">
-            <input type="hidden" id="id" name="id" value="${user._id }"/>
+            <input type="hidden" id="id" name="id" value="${user.id }"/>
             <table align="center">
                 <tr>
                     <td><font color="red">*</font>用户名：</td>
@@ -45,7 +45,8 @@
                 </tr>
                 <tr>
                     <td><font color="red">*</font>密码：</td>
-                    <td><input type="password" id="password" name="password" value="${user.password }"
+                    <td><input type="password" id="password" name="password"
+                               value="${user.password }"
                                style="margin-top:5px;height:30px;"/></td>
                 </tr>
                 <tr>

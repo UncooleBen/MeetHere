@@ -2,14 +2,13 @@ package com.webapp.controller;
 
 import com.webapp.model.user.User;
 import com.webapp.service.database.dao.UserDao;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 /**
  * @author Shangzhen Li
@@ -38,11 +37,16 @@ public class PasswordController {
         if ("change".equals(action)) {
             mv.addObject("mainPage", "passwordChange.jsp");
         } else if ("save".equals(action)) {
-            System.out.println(request.getParameter("userId"));
-            System.out.println(request.getParameter("newPassword"));
-            userDao.updateUserPassword(
-                    ((User) session.getAttribute("currentUser")).getId(),
+            User currentUser = (User) session.getAttribute("currentUser");
+            String oldPassword = request.getParameter("oldPassword");
+            if (oldPassword.equals(currentUser.getPassword())) {
+                userDao.updateUserPassword(
+                    currentUser.getId(),
                     request.getParameter("newPassword"));
+            } else {
+                mv.addObject("error", "旧密码错误");
+                mv.addObject("mainPage", "passwordChange.jsp");
+            }
         }
         return mv;
     }

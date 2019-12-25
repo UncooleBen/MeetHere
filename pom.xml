@@ -146,6 +146,7 @@
                 <executions>
                     <execution>
                         <phase>integration-test</phase>
+                        <id>integration-test</id>
                         <goals>
                             <goal>test</goal>
                         </goals>
@@ -160,6 +161,7 @@
                     </execution>
                     <execution>
                         <phase>post-integration-test</phase>
+                        <id>system-test</id>
                         <goals>
                             <goal>test</goal>
                         </goals>

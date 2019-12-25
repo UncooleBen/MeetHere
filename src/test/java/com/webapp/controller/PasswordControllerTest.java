@@ -44,10 +44,12 @@ class PasswordControllerTest {
 
         User user = new User();
         user.setId(305);
+        user.setPassword("123456");
         when(session.getAttribute("currentUserType")).thenReturn(usertype);
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute("currentUser")).thenReturn(user);
         when(request.getParameter("newPassword")).thenReturn("123");
+        when(request.getParameter("oldPassword")).thenReturn("123456");
         ModelAndView result = passwordController.service(action, request);
 
         verify(userDao).updateUserPassword(305, "123");
@@ -79,20 +81,46 @@ class PasswordControllerTest {
     @Test
     public void service_WhenUserIsAdmin_ActionIsSave() {
         String action = "save";
-        String usertype = "admin";
+        String userType = "admin";
 
         User user = new User();
         user.setId(305);
-        when(session.getAttribute("currentUserType")).thenReturn(usertype);
+        user.setPassword("123456");
+        when(session.getAttribute("currentUserType")).thenReturn(userType);
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute("currentUser")).thenReturn(user);
         when(request.getParameter("newPassword")).thenReturn("123");
+        when(request.getParameter("oldPassword")).thenReturn("123456");
         ModelAndView result = passwordController.service(action, request);
 
-        verify(userDao).updateUserPassword(305, "123");
 
+        verify(userDao).updateUserPassword(305,"123");
         assertAll(
                 () -> assertEquals(result.getViewName(), "mainAdmin")
+        );
+
+    }
+
+    @Test
+    public void service_ReturnError_WhenUserIsAdmin_ActionIsSave() {
+        String action = "save";
+        String userType = "admin";
+
+        User user = new User();
+        user.setId(305);
+        user.setPassword("123456");
+        when(session.getAttribute("currentUserType")).thenReturn(userType);
+        when(request.getSession()).thenReturn(session);
+        when(session.getAttribute("currentUser")).thenReturn(user);
+        when(request.getParameter("newPassword")).thenReturn("123");
+        when(request.getParameter("oldPassword")).thenReturn("1234567");
+        ModelAndView result = passwordController.service(action, request);
+
+
+        assertAll(
+                () -> assertEquals(result.getViewName(), "mainAdmin"),
+                ()->assertEquals(result.getModelMap().get("error"),"旧密码错误"),
+                ()->assertEquals(result.getModelMap().get("mainPage"),"passwordChange.jsp")
         );
 
     }

@@ -140,6 +140,7 @@
                 <configuration>
                     <excludes>
                         <exclude>**/*IT</exclude>
+                        <exclude>**/*ST</exclude>
                     </excludes>
                 </configuration>
                 <executions>
@@ -154,6 +155,20 @@
                             </excludes>
                             <includes>
                                 <include>**/*IT</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>none</exclude>
+                            </excludes>
+                            <includes>
+                                <include>**/*ST</include>
                             </includes>
                         </configuration>
                     </execution>

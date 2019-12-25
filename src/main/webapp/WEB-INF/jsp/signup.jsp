@@ -32,12 +32,11 @@
     <script src="resources/bootstrap/js/bootstrap.js"></script>
     <script type="text/javascript">
         function checkForm() {
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-            var sex = document.getElementById("sex").value;
-            var tel = document.getElementById("tel").value;
-            var name = document.getElementById("name").value;
-            if (username == null || username == "") {
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            let tel = document.getElementById("tel").value;
+            let name = document.getElementById("name").value;
+            if (username == null || username === "") {
                 document.getElementById("error").innerHTML = "用户名不能为空";
                 return false;
             }
@@ -45,11 +44,11 @@
                 document.getElementById("error").innerHTML = "用户名必须在5-15个字符之间";
                 return false;
             }
-            if (username.indexOf(' ') != -1) {
+            if (username.indexOf(' ') !== -1) {
                 document.getElementById("error").innerHTML = "用户名不能含有空格";
                 return false;
             }
-            if (password == null || password == "") {
+            if (password == null || password === "") {
                 document.getElementById("error").innerHTML = "密码不能为空";
                 return false;
             }
@@ -57,28 +56,24 @@
                 document.getElementById("error").innerHTML = "密码必须在10-15个字符之间";
                 return false;
             }
-            if (password.indexOf(' ') != -1) {
+            if (password.indexOf(' ') !== -1) {
                 document.getElementById("error").innerHTML = "密码不能含有空格";
                 return false;
             }
-            if (password == username) {
+            if (password === username) {
                 document.getElementById("error").innerHTML = "用户名和密码不能相同";
                 return false;
             }
-            if (name == null || name == "") {
+            if (name == null || name === "") {
                 document.getElementById("error").innerHTML = "姓名不能为空";
                 return false;
             }
-            if (sex == null || sex == "") {
-                document.getElementById("error").innerHTML = "性别不能为空";
-                return false;
-            }
-            if (tel == null || tel == "") {
+            if (tel == null || tel === "") {
                 document.getElementById("error").innerHTML = "电话不能为空";
                 return false;
             }
-            if (tel.length != 11 || !tel.match(/1[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/)) {
-                document.getElementById("error").innerHTML = "电话必须为11位数字";
+            if (tel.length !== 11 || !tel.match(/1[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/)) {
+                document.getElementById("error").innerHTML = "电话必须为以1起始的11位数字";
                 return false;
             }
             return true;
@@ -141,10 +136,10 @@
         <input id="name" name="name" value="" type="text" class="input-block-level" placeholder="姓名">
         <input id="password" name="password" value="" type="password" class="input-block-level" placeholder="密码">
         <label class="radio inline">
-            <input id="sex" type="radio" name="sex" value="MALE" checked/> 男
+            <input id="sex_male" type="radio" name="sex" value="MALE" checked/> 男
         </label>
         <label class="radio inline">
-            <input id="sex" type="radio" name="sex" value="FEMALE"/> 女
+            <input id="sex_female" type="radio" name="sex" value="FEMALE"/> 女
         </label>
         <input id="tel" name="tel" value="" type="text" class="input-block-level" placeholder="电话">
         <font id="error" color="red">${error }</font><br>

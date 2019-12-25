@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,100 +14,102 @@ import java.util.Map;
 @Disabled
 public class UserST {
 
-  JavascriptExecutor js;
-  private WebDriver driver;
-  private Map<String, Object> vars;
+    JavascriptExecutor js;
+    private WebDriver driver;
+    private Map<String, Object> vars;
 
-  @BeforeEach
-  public void setUp() {
-    driver = new ChromeDriver();
-    js = (JavascriptExecutor) driver;
-    vars = new HashMap<String, Object>();
-  }
-
-  @AfterEach
-  public void tearDown() {
-    driver.quit();
-  }
-
-  @Test
-  public void showNewsDetail() {
-    // Test name: ShowNewsDetail
-    // Step # | name | target | value | comment
-    // 1 | open | http://localhost:8080/MeetHere_war/news?action=list |  |
-    driver.get("http://localhost:8080/MeetHere_war/news?action=list");
-    // 2 | setWindowSize | 1052x554 |  |
-    driver.manage().window().setSize(new Dimension(1052, 554));
-    // 3 | click | css=.btn |  |
-    driver.findElement(By.cssSelector(".btn")).click();
-  }
-
-  @Test
-  public void addComment() {
-    // Test name: AddComment
-    // Step # | name | target | value | comment
-    // 1 | open | http://localhost:8080/MeetHere_war/comment?action=list |  |
-    driver.get("http://localhost:8080/MeetHere_war/comment?action=list");
-    // 2 | setWindowSize | 1052x554 |  |
-    driver.manage().window().setSize(new Dimension(1052, 554));
-    // 3 | click | css=.btn |  |
-    driver.findElement(By.cssSelector(".btn")).click();
-    // 4 | click | id=content |  |
-    driver.findElement(By.id("content")).click();
-    // 5 | type | id=content | 123 |
-    driver.findElement(By.id("content")).sendKeys("123");
-    // 6 | click | css=.btn:nth-child(1) |  |
-    driver.findElement(By.cssSelector(".btn:nth-child(1)")).click();
-  }
-
-  @Test
-  public void bookBuilding() {
-    // Test name: BookBuilding
-    // Step # | name | target | value | comment
-    // 1 | open | http://localhost:8080/MeetHere_war/building?action=list |  |
-    driver.get("http://localhost:8080/MeetHere_war/building?action=list");
-    // 2 | setWindowSize | 1052x554 |  |
-    driver.manage().window().setSize(new Dimension(1052, 554));
-    // 3 | click | id=buildingId |  |
-    driver.findElement(By.id("buildingId")).click();
-    // 4 | select | id=buildingId | label=building1 |
-    {
-      WebElement dropdown = driver.findElement(By.id("buildingId"));
-      dropdown.findElement(By.xpath("//option[. = 'building1']")).click();
+    @BeforeEach
+    public void setUp() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--verbose");
+        driver = new ChromeDriver(options);
+        js = (JavascriptExecutor) driver;
+        vars = new HashMap<String, Object>();
     }
-    // 5 | click | id=buildingId |  |
-    driver.findElement(By.id("buildingId")).click();
-    // 6 | click | id=startDate |  |
-    driver.findElement(By.id("startDate")).click();
-    // 7 | type | id=startDate | 2020-01-01 |
-    driver.findElement(By.id("startDate")).sendKeys("2020-01-01");
-    // 8 | type | id=duration | 1 |
-    driver.findElement(By.id("duration")).sendKeys("1");
-    // 9 | click | css=.btn |  |
-    driver.findElement(By.cssSelector(".btn")).click();
-  }
 
-  @Test
-  public void clickMenu() {
-    // Test name: ClickMenu
-    // Step # | name | target | value | comment
-    // 1 | open | http://localhost:8080/MeetHere_war/blank |  |
-    driver.get("http://localhost:8080/MeetHere_war/blank");
-    // 2 | setWindowSize | 1052x554 |  |
-    driver.manage().window().setSize(new Dimension(1052, 554));
-    // 3 | click | linkText=首页 |  |
-    driver.findElement(By.linkText("首页")).click();
-    // 4 | click | linkText=新闻 |  |
-    driver.findElement(By.linkText("新闻")).click();
-    // 5 | click | linkText=留言板 |  |
-    driver.findElement(By.linkText("留言板")).click();
-    // 6 | click | linkText=场地预约 |  |
-    driver.findElement(By.linkText("场地预约")).click();
-    // 7 | click | linkText=预约记录 |  |
-    driver.findElement(By.linkText("预约记录")).click();
-    // 8 | click | linkText=修改密码 |  |
-    driver.findElement(By.linkText("修改密码")).click();
-    // 9 | click | linkText=退出系统 |  |
-    driver.findElement(By.linkText("退出系统")).click();
-  }
+    @AfterEach
+    public void tearDown() {
+        driver.quit();
+    }
+
+    @Test
+    public void showNewsDetail() {
+        // Test name: ShowNewsDetail
+        // Step # | name | target | value | comment
+        // 1 | open | http://localhost:8080/MeetHere_war/news?action=list |  |
+        driver.get("http://localhost:8080/MeetHere_war/news?action=list");
+        // 2 | setWindowSize | 1052x554 |  |
+        driver.manage().window().setSize(new Dimension(1052, 554));
+        // 3 | click | css=.btn |  |
+        driver.findElement(By.cssSelector(".btn")).click();
+    }
+
+    @Test
+    public void addComment() {
+        // Test name: AddComment
+        // Step # | name | target | value | comment
+        // 1 | open | http://localhost:8080/MeetHere_war/comment?action=list |  |
+        driver.get("http://localhost:8080/MeetHere_war/comment?action=list");
+        // 2 | setWindowSize | 1052x554 |  |
+        driver.manage().window().setSize(new Dimension(1052, 554));
+        // 3 | click | css=.btn |  |
+        driver.findElement(By.cssSelector(".btn")).click();
+        // 4 | click | id=content |  |
+        driver.findElement(By.id("content")).click();
+        // 5 | type | id=content | 123 |
+        driver.findElement(By.id("content")).sendKeys("123");
+        // 6 | click | css=.btn:nth-child(1) |  |
+        driver.findElement(By.cssSelector(".btn:nth-child(1)")).click();
+    }
+
+    @Test
+    public void bookBuilding() {
+        // Test name: BookBuilding
+        // Step # | name | target | value | comment
+        // 1 | open | http://localhost:8080/MeetHere_war/building?action=list |  |
+        driver.get("http://localhost:8080/MeetHere_war/building?action=list");
+        // 2 | setWindowSize | 1052x554 |  |
+        driver.manage().window().setSize(new Dimension(1052, 554));
+        // 3 | click | id=buildingId |  |
+        driver.findElement(By.id("buildingId")).click();
+        // 4 | select | id=buildingId | label=building1 |
+        {
+            WebElement dropdown = driver.findElement(By.id("buildingId"));
+            dropdown.findElement(By.xpath("//option[. = 'building1']")).click();
+        }
+        // 5 | click | id=buildingId |  |
+        driver.findElement(By.id("buildingId")).click();
+        // 6 | click | id=startDate |  |
+        driver.findElement(By.id("startDate")).click();
+        // 7 | type | id=startDate | 2020-01-01 |
+        driver.findElement(By.id("startDate")).sendKeys("2020-01-01");
+        // 8 | type | id=duration | 1 |
+        driver.findElement(By.id("duration")).sendKeys("1");
+        // 9 | click | css=.btn |  |
+        driver.findElement(By.cssSelector(".btn")).click();
+    }
+
+    @Test
+    public void clickMenu() {
+        // Test name: ClickMenu
+        // Step # | name | target | value | comment
+        // 1 | open | http://localhost:8080/MeetHere_war/blank |  |
+        driver.get("http://localhost:8080/MeetHere_war/blank");
+        // 2 | setWindowSize | 1052x554 |  |
+        driver.manage().window().setSize(new Dimension(1052, 554));
+        // 3 | click | linkText=首页 |  |
+        driver.findElement(By.linkText("首页")).click();
+        // 4 | click | linkText=新闻 |  |
+        driver.findElement(By.linkText("新闻")).click();
+        // 5 | click | linkText=留言板 |  |
+        driver.findElement(By.linkText("留言板")).click();
+        // 6 | click | linkText=场地预约 |  |
+        driver.findElement(By.linkText("场地预约")).click();
+        // 7 | click | linkText=预约记录 |  |
+        driver.findElement(By.linkText("预约记录")).click();
+        // 8 | click | linkText=修改密码 |  |
+        driver.findElement(By.linkText("修改密码")).click();
+        // 9 | click | linkText=退出系统 |  |
+        driver.findElement(By.linkText("退出系统")).click();
+    }
 }

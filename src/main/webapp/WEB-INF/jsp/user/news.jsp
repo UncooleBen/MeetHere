@@ -50,7 +50,7 @@
 </script>
 
 <div class="data_list">
-    <div class="data_list_title">
+    <div class="data_list_title" id="#id_title">
         新闻
     </div>
     <div class="data_box">

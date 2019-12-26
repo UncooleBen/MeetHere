@@ -131,6 +131,7 @@ public class AdminST {
                 Arguments.of("newusername", "newpassword", "newname", "FEMALE", "newtel")
         );
     }
+
     @ParameterizedTest
     @MethodSource("newUserProvider")
     @Order(2)
@@ -143,7 +144,7 @@ public class AdminST {
         // 2 | setWindowSize | 1052x554 |  |
         driver.manage().window().setSize(new Dimension(1052, 554));
         // 3 | click | css=tr:nth-child(1) .btn-info |  |
-        driver.findElement(By.id("#id_modify_button_"+this.user.getId())).click();
+        driver.findElement(By.id("#id_modify_button_" + this.user.getId())).click();
         // 4 | click | css=.row-fluid |  |
         driver.findElement(By.cssSelector(".row-fluid")).click();
         // 5 | type | id=username | 123 |
@@ -252,7 +253,7 @@ public class AdminST {
         driver.manage().window().setSize(new Dimension(1052, 554));
         // 3 | chooseOkOnNextConfirmation |  |  |
         // 4 | click | css=.btn-danger |  |
-        driver.findElement(By.id("#id_delete_button_"+this.building.getId())).click();
+        driver.findElement(By.id("#id_delete_button_" + this.building.getId())).click();
         // 5 | assertConfirmation | 您确定要删除这个楼吗？ |  |
         assertEquals("您确定要删除这个楼吗？", driver.switchTo().alert().getText());
         // 6 | webdriverChooseOkOnVisibleConfirmation |  |  |
@@ -281,7 +282,7 @@ public class AdminST {
         // 2 | setWindowSize | 1052x554 |  |
         driver.manage().window().setSize(new Dimension(1052, 554));
         // 3 | click | css=td > .btn-info |  |
-        driver.findElement(By.id("#id_modify_button_"+this.building.getId())).click();
+        driver.findElement(By.id("#id_modify_button_" + this.building.getId())).click();
         // 5 | type | id=buildingName | 456 |
         driver.findElement(By.id("buildingName")).clear();
         driver.findElement(By.id("buildingName")).sendKeys(newBuildingName);

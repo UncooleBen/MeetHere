@@ -92,7 +92,7 @@ public class BuildingController {
         long currentTime = System.currentTimeMillis();
         try {
             long startDateInLong = this.sdf.parse(startDate).getTime();
-            long endDateInLong = (long) Double.parseDouble(duration) * 60 * 1000 * 24 + startDateInLong;
+            long endDateInLong = (long) Double.parseDouble(duration) * 3600 * 1000 * 24 + startDateInLong;
             Record record = new Record(currentTime, startDateInLong, endDateInLong, userId,
                     Integer.parseInt(buildingId), false);
             this.recordDao.addRecord(record);

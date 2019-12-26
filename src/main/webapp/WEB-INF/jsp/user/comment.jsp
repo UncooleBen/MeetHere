@@ -16,7 +16,7 @@
 </script>
 
 <div class="data_list">
-    <div class="data_list_title">
+    <div class="data_list_title" id="#id_title">
         留言板
     </div>
     <button class="btn btn-mini btn-info" type="button" onclick="window.location='comment?action=add'">我要留言

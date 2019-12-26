@@ -33,7 +33,7 @@
 
 </style>
 <div class="data_list">
-    <div class="data_list_title">
+    <div class="data_list_title" id="#id_title">
         用户管理
     </div>
     <div>
@@ -49,22 +49,24 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach varStatus="i" var="user" items="${userList }">
-                <tr>
-                    <td>${user.id }</td>
-                    <td>${user.username }</td>
-                    <td>${user.name }</td>
-                    <td>${user.sex }</td>
-                    <td>${user.tel }</td>
-                    <td>
-                        <button class="btn btn-mini btn-info" type="button"
-                                onclick="window.location='user?action=modify&id=${user.id }'">修改
-                        </button>&nbsp;
-                        <button class="btn btn-mini btn-danger" type="button" onclick="userDelete(${user.id })">删除
-                        </button>
-                    </td>
-                </tr>
-            </c:forEach>
+                <c:forEach varStatus="i" var="user" items="${userList }">
+                    <c:if test="${user.permission == 1}">
+                        <tr>
+                            <td>${user.id }</td>
+                            <td id="#id_username_'${i}'" >${user.username }</td>
+                            <td>${user.name} </td>
+                            <td>${user.sex }</td>
+                            <td>${user.tel }</td>
+                            <td>
+                                <button class="btn btn-mini btn-info" type="button" id="#id_modify_button_${user.id}"
+                                        onclick="window.location='user?action=modify&id=${user.id }'">修改
+                                </button>&nbsp;
+                                <button class="btn btn-mini btn-danger" id="#id_delete_button_${user.id}" type="button" onclick="userDelete(${user.id })">删除
+                                </button>
+                            </td>
+                        </tr>
+                    </c:if>
+                </c:forEach>
             </tbody>
         </table>
     </div>

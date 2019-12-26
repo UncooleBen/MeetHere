@@ -93,7 +93,7 @@
             &nbsp;&nbsp;&nbsp;&nbsp;
             <button class="btn btn-large btn-primary" type="reset">重置</button>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="btn btn-large btn-primary" type="button"
+            <button class="btn btn-large btn-primary" type="button" id="#id_signup"
                     onclick="window.location.href='signup'">注册
             </button>
         </div>

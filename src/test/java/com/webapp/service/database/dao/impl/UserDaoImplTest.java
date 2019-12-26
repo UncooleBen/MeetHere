@@ -242,9 +242,6 @@ class UserDaoImplTest {
         verify(preparedStatement).setString(1, "PG");
     }
 
-
-    //TODO By Sex
-
     @Test
     void test_throws_sql_exception_when_query_user_by_sex() throws SQLException {
         when(connection.prepareStatement(anyString())).thenThrow(test_sql_exception);

@@ -10,13 +10,13 @@
     }
 </script>
 <div class="data_list">
-    <div class="data_list_title">
+    <div class="data_list_title" id="#id_title">
         场地管理
     </div>
     <div>
         <table class="table table-striped table-bordered table-hover datatable">
             <thead>
-            <button class="btn btn-mini btn-info" type="button"
+            <button class="btn btn-mini btn-info" type="button" id="#id_add_button"
                     onclick="window.location='building?action=add'">添加场地
             </button>
             <tr>
@@ -35,11 +35,11 @@
                     <td>${building.description==null || building.description=="" ? "无":building.description }</td>
                     <td>${building.price==null || building.price=="" ? "无":building.price }</td>
                     <td>
-                        <button class="btn btn-mini btn-info" type="button"
+                        <button class="btn btn-mini btn-info" type="button" id="#id_modify_button_${building.id}"
                                 onclick="window.location='building?action=modify&id=${building.id }'">
                             修改
                         </button>&nbsp;
-                        <button class="btn btn-mini btn-danger" type="button"
+                        <button class="btn btn-mini btn-danger" type="button" id="#id_delete_button_${building.id}"
                                 onclick="buildDelete(${building.id})">删除
                         </button>
                     </td>

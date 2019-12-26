@@ -20,7 +20,7 @@
 </script>
 
 <div class="data_list">
-    <div class="data_list_title">
+    <div class="data_list_title" id="#id_title">
         新闻管理
     </div>
     <div>

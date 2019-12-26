@@ -21,7 +21,7 @@
     });
 </script>
 <div class="data_list">
-    <div class="data_list_title">
+    <div class="data_list_title" id="#id_title">
         修改密码
     </div>
     <form action="password?action=save" method="post" onsubmit="return checkForm()">

@@ -2,6 +2,10 @@
 
 <h5>This is a Software Testing course project of East China Normal University.</h5>
 
+## Testing Results By Now
+<span style="color:red">Below image refreshes automatically according to our jenkins build lifecycle.</span>
+![alt text](http://47.100.94.44:8080/MeetHereTestingStatistic/img/latest "Logo Title Text 1")
+
 ## Instructor:        
 `Haiying Sun`
 ## Contributor:       

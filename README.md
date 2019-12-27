@@ -1,6 +1,6 @@
 # MeetHere
 
-<h5>This is a project Software Testing project of East China Normal University.</h5>
+<h5>This is a Software Testing course project of East China Normal University.</h5>
 
 ## Instructor:        
 `Haiying Sun`

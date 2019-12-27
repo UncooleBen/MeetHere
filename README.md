@@ -1,6 +1,6 @@
 # MeetHere
 
-<h5>This is a project Software Testing project of East China Normal University.</h5>
+<h5>This is a Software Testing course project of East China Normal University.</h5>
 
 ## Instructor:        
 `Haiying Sun`
@@ -8,6 +8,8 @@
 `Juntao Peng`, `Shangzhen Li`, `Yuanjie Guo`
 ## Dev Framework:     
 `Spring MVC`, `Java Development Kit {1.8, 10, 11, 13}`, `MySQL 8.0`
+## Continuous Integration Framework
+`Jenkins`
 ## Testing Framework:
 `JUnit 5`, `Mockito`, `Apache HttpClient`, `Selenium`
 ## Contact

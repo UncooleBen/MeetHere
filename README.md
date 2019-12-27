@@ -4,7 +4,7 @@
 
 ## Testing Results By Now
 <span style="color:red">Below image refreshes automatically according to our jenkins build lifecycle.</span>
-![Testing Result Image](http://47.100.94.44:8080/MeetHereTestingStatistic/img/latest "Testing Result Image")
+![Testing Result Image](http://47.100.94.44:8080/MeetHereTestingStatistic/img/latest0 "Testing Result Image")
 
 ## Instructor:        
 `Haiying Sun`

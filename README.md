@@ -11,11 +11,13 @@
 ## Contributor
 `Juntao Peng`, `Shangzhen Li`, `Yuanjie Guo`
 ## Dev Framework
-`Spring MVC`, `Java Development Kit {1.8, 10, 11, 13}`, `MySQL 8.0`
+`Spring Framework 5.1.5`, `Java Development Kit {1.8, 10, 11, 13}`, `MySQL 8.0`
+## Build Framework
+`Maven 4.0.0`, `maven-compiler-plugin 3.8.1`, `maven-surefire-plugin 3.0.0-M4`
 ## Continuous Integration Framework
-`Jenkins`
+`Jenkins 2.190.3`
 ## Testing Framework
-`JUnit 5`, `Mockito`, `Apache HttpClient`, `Selenium`
+`JUnit 5.5.2`, `Mockito 3.1.0`, `Apache HttpClient 4.5.10`, `Selenium 4.0.0-alpha`
 ## Contact
 { pengjuntao2016@foxmail.com, 798483752@qq.com, 327183023@qq.com }
 ## Legal Concerns

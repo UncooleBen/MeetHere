@@ -3,12 +3,10 @@
 <h5>This is a Software Testing course project of East China Normal University.</h5>
 
 ## Testing Results By Now
-```diff
-- Below image refreshes automatically according to our jenkins build lifecycle.
-```
-Blue - Passed Tests
-Red - Failed Tests
-Yellow - Skipped Tests
+Below image refreshes automatically according to our jenkins build lifecycle.<br>
+`Blue - Passed Tests`<br>
+`Red - Failed Tests`<br>
+`Yellow - Skipped Tests`<br>
 
 ![Right-click and reload me!](http://47.100.94.44:8080/MeetHereTestingStatistic/img/latest0 "Testing Result Image")
 

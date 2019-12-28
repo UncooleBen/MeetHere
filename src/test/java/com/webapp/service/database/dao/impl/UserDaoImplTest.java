@@ -19,8 +19,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class UserDaoImplTest {
@@ -153,9 +152,6 @@ class UserDaoImplTest {
         int permission = 0;
         String tel = "911";
 
-        User user = null;
-
-
         when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
         when(preparedStatement.executeQuery()).thenReturn(rs);
         when(rs.next()).thenReturn(true, false); /* First call returns true, second call returns false */
@@ -167,9 +163,14 @@ class UserDaoImplTest {
         when(rs.getString("sex")).thenReturn(sex);
         when(rs.getString("tel")).thenReturn(tel);
         when(rs.getInt("permission")).thenReturn(permission);
-
-
-        assertEquals(user, this.userDao.queryUserById(5));
+        User admin = this.userDao.queryUserById(5);
+        assertAll(
+                () -> assertEquals(username, admin.getUsername()),
+                () -> assertEquals(password, admin.getPassword()),
+                () -> assertEquals(name, admin.getName()),
+                () -> assertEquals(permission, admin.getPermission()),
+                () -> assertEquals(sex, admin.getSex().toString())
+        );
         verify(preparedStatement).setInt(1, 5);
     }
 

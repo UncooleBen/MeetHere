@@ -200,7 +200,7 @@ class CommentDaoImplTest {
 
         boolean result = this.commentDao.deleteComment(5);
 
-        assertEquals(result, true);
+        assertEquals(true, result);
         verify(preparedStatement).setInt(1, 5);
     }
 
@@ -208,11 +208,11 @@ class CommentDaoImplTest {
     void test_delete_Comment_When_Result_Is_False() throws SQLException {
 
         when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
-        when(preparedStatement.executeUpdate()).thenReturn(0);
+        when(preparedStatement.executeUpdate()).thenThrow(SQLException.class);
 
         boolean result = this.commentDao.deleteComment(5);
 
-        assertEquals(result, false);
+        assertEquals(false, result);
         verify(preparedStatement).setInt(1, 5);
     }
 

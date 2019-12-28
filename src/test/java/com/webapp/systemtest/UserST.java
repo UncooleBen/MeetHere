@@ -29,6 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ContextConfiguration(classes = MvcConfig.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @WebAppConfiguration
+@Disabled
 public class UserST {
 
     JavascriptExecutor js;
@@ -184,7 +185,6 @@ public class UserST {
         assertEquals("注册", driver.findElement(By.id("#id_signup")).getText());
     }
 
-    @Disabled
     //TODO
     @Test
     public void showNewsDetail() {
@@ -198,7 +198,6 @@ public class UserST {
         driver.findElement(By.cssSelector(".btn")).click();
     }
 
-    @Disabled
     //TODO
     @Test
     public void addComment() {

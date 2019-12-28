@@ -29,6 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @WebAppConfiguration
 @ContextConfiguration(classes = MvcConfig.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Disabled
 public class LoginSignUpST {
 
     JavascriptExecutor js;

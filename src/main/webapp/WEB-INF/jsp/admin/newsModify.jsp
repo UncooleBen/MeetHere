@@ -6,15 +6,15 @@
         var title = document.getElementById("title").value;
         var author = document.getElementById("author").value;
         var detail = document.getElementById("detail").value;
-        if (detail == null) {
+        if (detail == null || detail === "") {
             document.getElementById("error").innerHTML = "内容不能为空！";
             return false;
         }
-        if (title == null) {
+        if (title == null || title === "") {
             document.getElementById("error").innerHTML = "标题不能为空！";
             return false;
         }
-        if (author == null) {
+        if (author == null || author === "") {
             document.getElementById("error").innerHTML = "作者不能为空！";
             return false;
         }

@@ -5,11 +5,11 @@
     function checkForm() {
         var content = document.getElementById("content".value;
         var date = document.getElementById("date").value;
-        if (date == null) {
+        if (date == null || date === "") {
             document.getElementById("error").innerHTML = "日期不能为空！";
             return false;
         }
-        if (content == null) {
+        if (content == null || content === "") {
             document.getElementById("error").innerHTML = "日期不能为空！";
             return false;
         }

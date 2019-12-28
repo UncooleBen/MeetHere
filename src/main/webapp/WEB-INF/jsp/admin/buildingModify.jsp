@@ -4,7 +4,7 @@
 <script type="text/javascript">
     function checkForm() {
         var buildingName = document.getElementById("buildingName").value;
-        if (buildingName == null || buildingName == "") {
+        if (buildingName == null || buildingName === "") {
             document.getElementById("error").innerHTML = "名称不能为空！";
             return false;
         }

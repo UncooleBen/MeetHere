@@ -8,7 +8,7 @@
         // var roomName=document.getElementById("roomName").value;
         var startDate = document.getElementById("startDate").value;
         var endDate = document.getElementById("endDate").value;
-        if (buildingName == null || buildingName == "") {
+        if (buildingName == null || buildingName === "") {
             document.getElementById("error").innerHTML = "楼不能为空！";
             return false;
         }

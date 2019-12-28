@@ -51,11 +51,11 @@
                     <td>${news.title }</td>
                     <td>${news.author }</td>
                     <td>
-                        <button class="btn btn-mini btn-info" type="button"
+                        <button class="btn btn-mini btn-info" type="button" id="modify${news.id}"
                                 onclick="window.location='news?action=modify&newsId=${news.id }'">
                             修改
                         </button>&nbsp;
-                        <button class="btn btn-mini btn-danger" type="button"
+                        <button class="btn btn-mini btn-danger" type="button" id="delete${news.id}"
                                 onclick="newsDelete(${news.id })">删除
                         </button>
                     </td>

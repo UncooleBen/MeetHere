@@ -134,10 +134,12 @@
                     </td>
                         <%--						<td>${record.detail }</td>--%>
                     <td>
-                        <button class="btn btn-mini btn-danger" type="button"
+                        <button class="btn btn-mini btn-danger" id="verify${record.id}"
+                                type="button"
                                 onclick="recordApprove(${record.id })">通过
                         </button>
-                        <button class="btn btn-mini btn-danger" type="button"
+                        <button class="btn btn-mini btn-danger" id="delete${record.id}"
+                                type="button"
                                 onclick="recordDelete(${record.id })">取消
                         </button>
                     </td>

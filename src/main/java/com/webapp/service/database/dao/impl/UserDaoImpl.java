@@ -5,7 +5,6 @@ import com.webapp.model.user.Gender;
 import com.webapp.model.user.User;
 import com.webapp.service.database.DatabaseService;
 import com.webapp.service.database.dao.UserDao;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -77,7 +76,7 @@ public class UserDaoImpl extends DatabaseService implements UserDao {
                 String tel = rs.getString("tel");
                 switch (permission) {
                     case 0:
-                        //result = new Admin(id, username, password, name, sex, tel);
+                        result = new Admin(id, username, password, name, sex, tel);
                         break;
                     case 1:
                         result = new User(id, username, password, name, sex, tel);

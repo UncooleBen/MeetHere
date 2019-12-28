@@ -23,40 +23,47 @@ public class Comment {
         this.userId = userId;
     }
 
-    public long getDate() {
-        return date;
-    }
+  public long getDate() {
+    return date;
+  }
 
-    public void setDate(long date) {
-        this.date = date;
-    }
+  public void setDate(long date) {
+    this.date = date;
+  }
 
-    public String getContent() {
-        return content;
-    }
+  public Comment(int userId, long date, String content, boolean verified) {
+    this.userId = userId;
+    this.date = date;
+    this.content = content;
+    this.verified = verified;
+  }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+  public Comment(int id, int userId, long date, String content, boolean verified) {
+    this.id = id;
+    this.userId = userId;
+    this.date = date;
+    this.content = content;
+    this.verified = verified;
+  }
 
-    public Comment(int id, int userId, long date, String content, boolean verified) {
-        this.id = id;
-        this.userId = userId;
-        this.date = date;
-        this.content = content;
-        this.verified = verified;
-    }
+  public String getContent() {
+    return content;
+  }
 
-    public boolean isVerified() {
-        return verified;
-    }
+  public void setContent(String content) {
+    this.content = content;
+  }
 
-    public Comment() {
-    }
+  public boolean isVerified() {
+    return verified;
+  }
 
-    public void setVerified(boolean verified) {
-        this.verified = verified;
-    }
+  public Comment() {
+  }
+
+  public void setVerified(boolean verified) {
+    this.verified = verified;
+  }
 
     public Comment(int userId, long date, String content) {
         this.userId = userId;

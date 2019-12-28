@@ -49,7 +49,7 @@ public class NewsController {
             case "delete": {
                 int newsId = Integer.parseInt(request.getParameter("newsId"));
                 newsDao.deleteNewsById(newsId);
-                listNews(mv, "admin");
+              listNews(mv);
                 break;
             }
             case "modify": {
@@ -72,52 +72,48 @@ public class NewsController {
                     news.setTitle(request.getParameter("title"));
                     news.setAuthor(request.getParameter("author"));
                     news.setDetail(request.getParameter("detail"));
-                    newsDao.updateNews(news);
+                  newsDao.updateNews(news);
                 } else {
-                    news = new News();
-                    news.setCreated(time.getTime());
-                    news.setLastModified(time.getTime());
-                    news.setTitle(request.getParameter("title"));
-                    news.setAuthor(request.getParameter("author"));
-                    news.setDetail(request.getParameter("detail"));
-                    newsDao.insertNews(news);
+                  news = new News();
+                  news.setCreated(time.getTime());
+                  news.setLastModified(time.getTime());
+                  news.setTitle(request.getParameter("title"));
+                  news.setAuthor(request.getParameter("author"));
+                  news.setDetail(request.getParameter("detail"));
+                  newsDao.insertNews(news);
                 }
-                listNews(mv, "admin");
-                break;
+              listNews(mv);
+              break;
             }
-            case "list":
-            default:
-                listNews(mv, "admin");
-                break;
+          case "list":
+          default:
+            mv.addObject("mainPage", "admin/news.jsp");
+            listNews(mv);
+            break;
         }
     }
 
     private void userNewsService(ModelAndView mv, String action, HttpServletRequest request) {
         switch (action) {
-            case "detail": {
-                int newsId = Integer.parseInt(request.getParameter("newsId"));
-                News news = newsDao.queryNewsById(newsId);
-                mv.addObject("news", news);
-                mv.addObject("mainPage", "user/newsDetail.jsp");
-                break;
-            }
-            case "list":
-            default:
-                mv.addObject("mainPage", "user/news.jsp");
-                listNews(mv, "user");
-                break;
+          case "detail": {
+            int newsId = Integer.parseInt(request.getParameter("newsId"));
+            News news = newsDao.queryNewsById(newsId);
+            mv.addObject("news", news);
+            mv.addObject("mainPage", "user/newsDetail.jsp");
+            break;
+          }
+          case "list":
+          default:
+            mv.addObject("mainPage", "user/news.jsp");
+            listNews(mv);
+            break;
         }
     }
 
-    private void listNews(ModelAndView mv, String userType) {
-        if ("user".equals(userType)) {
-            //mv.addObject("mainPage", "user/news.jsp");
-        } else if ("admin".equals(userType)) {
-            mv.addObject("mainPage", "admin/news.jsp");
-        }
-        List<News> newsList = this.newsDao.listNews(20);
-        if (newsList != null) {
-            mv.addObject("newsList", newsList);
-        }
+  private void listNews(ModelAndView mv) {
+    List<News> newsList = this.newsDao.listNews(20);
+    if (newsList != null) {
+      mv.addObject("newsList", newsList);
     }
+  }
 }

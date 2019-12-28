@@ -38,12 +38,15 @@
             <c:forEach varStatus="commentListLoop" var="comment" items="${commentList }">
                 <tr>
                     <td id="commentListLoop${commentListLoop.index}">
-                        <script>convertDate(${comment.date }, "commentListLoop${commentListLoop.index}");</script>
+                        <script>convertDate(${comment.date },
+                            "commentListLoop${commentListLoop.index}");</script>
                     </td>
                     <td>${comment.userId }</td>
                     <td>${comment.content }</td>
                     <td>
-                        <button class="btn btn-mini btn-danger" type="button" onclick="commentDelete(${comment.id })">
+                        <button class="btn btn-mini btn-danger" type="button"
+                                id="deleteVerified${comment.id}"
+                                onclick="commentDelete(${comment.id })">
                             删除
                         </button>
                     </td>
@@ -67,18 +70,23 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach varStatus="unverifiedCommentListLoop" var="comment" items="${unverifiedCommentList }">
+            <c:forEach varStatus="unverifiedCommentListLoop" var="comment"
+                       items="${unverifiedCommentList }">
                 <tr>
                     <td id="unverifiedCommentListLoop${unverifiedCommentListLoop.index}">
-                        <script>convertDate(${comment.date }, "unverifiedCommentListLoop${unverifiedCommentListLoop.index}");</script>
+                        <script>convertDate(${comment.date },
+                            "unverifiedCommentListLoop${unverifiedCommentListLoop.index}");</script>
                     </td>
                     <td>${comment.userId }</td>
                     <td>${comment.content }</td>
                     <td>
-                        <button class="btn btn-mini btn-danger" type="button" onclick="commentApprove(${comment.id })">
+                        <button class="btn btn-mini btn-danger" type="button"
+                                id="verify${comment.id}" onclick="commentApprove(${comment.id })">
                             通过
                         </button>
-                        <button class="btn btn-mini btn-danger" type="button" onclick="commentDelete(${comment.id })">
+                        <button class="btn btn-mini btn-danger" type="button"
+                                id="deleteUnverified${comment.id}"
+                                onclick="commentDelete(${comment.id })">
                             删除
                         </button>
                     </td>

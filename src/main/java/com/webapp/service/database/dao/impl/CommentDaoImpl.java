@@ -90,6 +90,7 @@ public class CommentDaoImpl extends DatabaseService implements CommentDao {
                 comment.setUserId(rs.getInt("userId"));
                 comment.setDate(rs.getLong("date"));
                 comment.setContent(rs.getString("content"));
+                comment.setVerified(rs.getBoolean("verified"));
             }
         } catch (SQLException sqle) {
             sqle.printStackTrace(System.err);
@@ -122,17 +123,19 @@ public class CommentDaoImpl extends DatabaseService implements CommentDao {
     public boolean deleteComment(int commentId) {
         String sql = "DELETE FROM t_comment WHERE id=?";
         Connection connection = getConnection();
-        int result = 0;
+        boolean result;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, commentId);
-            result = preparedStatement.executeUpdate();
+            preparedStatement.executeUpdate();
+            result = true;
         } catch (SQLException sqle) {
             sqle.printStackTrace(System.err);
+            result = false;
         } finally {
             closeConnection(connection);
         }
-        return 0 != result;
+        return result;
     }
 
     @Override

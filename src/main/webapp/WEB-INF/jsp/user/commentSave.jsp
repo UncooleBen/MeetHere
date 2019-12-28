@@ -2,23 +2,23 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script type="text/javascript">
-    function checkForm() {
-        var content = document.getElementById("content".value;
-        var date = document.getElementById("date").value;
-        if (date == null || date === "") {
-            document.getElementById("error").innerHTML = "日期不能为空！";
-            return false;
-        }
-        if (content == null || content === "") {
-            document.getElementById("error").innerHTML = "日期不能为空！";
-            return false;
-        }
-        return true;
+  function checkForm() {
+    var content = document.getElementById("content").value;
+    // var date = document.getElementById("date").value;
+    // if (date == null || date === "") {
+    //     document.getElementById("error").innerHTML = "日期不能为空！";
+    //     return false;
+    // }
+    if (content == null || content === "") {
+      document.getElementById("error").innerHTML = "内容不能为空！";
+      return false;
     }
+    return true;
+  }
 
-    $(document).ready(function () {
-        $("ul li:eq(2)").addClass("active");
-    });
+  $(document).ready(function () {
+    $("ul li:eq(2)").addClass("active");
+  });
 </script>
 <div class="data_list">
     <div class="data_list_title">

@@ -71,7 +71,7 @@
                             <script>convertDate(${news.created }, "createdTime${i.index}")</script>
                         </p>
                     </div>
-                    <div class="btn" onclick=newsDetail(${news.id })>查看</div>
+                    <div class="btn" id="detail${news.id}" onclick=newsDetail(${news.id })>查看</div>
                 </div>
             </div>
         </c:forEach>

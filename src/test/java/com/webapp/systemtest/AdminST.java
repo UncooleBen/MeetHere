@@ -584,6 +584,7 @@ public class AdminST {
       tempNewsIdSet.removeAll(this.originNewsIdSet);
       assertEquals(1, tempNewsIdSet.size());
       for (int newsId : tempNewsIdSet) {
+        //Track added news
         this.addedNewsIdSet.add(newsId);
         News temp = this.newsDao.queryNewsById(newsId);
         assertAll(

@@ -19,98 +19,101 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class NewsController {
 
-    private NewsDao newsDao;
+  private NewsDao newsDao;
 
-    @Autowired
-    public NewsController(NewsDao newsDao) {
-        this.newsDao = newsDao;
+  @Autowired
+  public NewsController(NewsDao newsDao) {
+    this.newsDao = newsDao;
+  }
+
+  @RequestMapping("/news")
+  public ModelAndView service(@RequestParam("action") String action, HttpServletRequest request) {
+    ModelAndView mv = new ModelAndView();
+    HttpSession session = request.getSession();
+    String currentUserType = (String) session.getAttribute("currentUserType");
+    if ("admin".equals(currentUserType)) {
+      mv.setViewName("mainAdmin");
+      adminNewsService(mv, action, request);
+    } else if ("user".equals(currentUserType)) {
+      mv.setViewName("mainUser");
+      userNewsService(mv, action, request);
     }
+    return mv;
+  }
 
-    @RequestMapping("/news")
-    public ModelAndView service(@RequestParam("action") String action, HttpServletRequest request) {
-        ModelAndView mv = new ModelAndView();
-        HttpSession session = request.getSession();
-        String currentUserType = (String) session.getAttribute("currentUserType");
-        if ("admin".equals(currentUserType)) {
-            mv.setViewName("mainAdmin");
-            adminNewsService(mv, action, request);
-        } else if ("user".equals(currentUserType)) {
-            mv.setViewName("mainUser");
-            userNewsService(mv, action, request);
+  private void adminNewsService(ModelAndView mv, String action, HttpServletRequest request) {
+    switch (action) {
+      case "add":
+        mv.addObject("mainPage", "admin/newsModify.jsp");
+        break;
+      case "delete": {
+        int newsId = Integer.parseInt(request.getParameter("newsId"));
+        newsDao.deleteNewsById(newsId);
+        listNews(mv, true);
+        break;
+      }
+      case "modify": {
+        int newsId = Integer.parseInt(request.getParameter("newsId"));
+        News news = newsDao.queryNewsById(newsId);
+        mv.addObject("news", news);
+        mv.addObject("mainPage", "admin/newsModify.jsp");
+        break;
+      }
+      case "save": {
+        String strNewsId = request.getParameter("newsId");
+        News news;
+        Date time = new Date();
+        if (!"".equals(strNewsId)) {
+          // Save action for a modified news
+          int id = Integer.parseInt(strNewsId);
+          news = newsDao.queryNewsById(id);
+          news.setLastModified(time.getTime());
+          news.setId(id);
+          news.setTitle(request.getParameter("title"));
+          news.setAuthor(request.getParameter("author"));
+          news.setDetail(request.getParameter("detail"));
+          newsDao.updateNews(news);
+        } else {
+          news = new News();
+          news.setCreated(time.getTime());
+          news.setLastModified(time.getTime());
+          news.setTitle(request.getParameter("title"));
+          news.setAuthor(request.getParameter("author"));
+          news.setDetail(request.getParameter("detail"));
+          newsDao.insertNews(news);
         }
-        return mv;
+        listNews(mv, true);
+        break;
+      }
+      case "list":
+      default:
+        listNews(mv, true);
+        break;
     }
+  }
 
-    private void adminNewsService(ModelAndView mv, String action, HttpServletRequest request) {
-        switch (action) {
-            case "add":
-                mv.addObject("mainPage", "admin/newsModify.jsp");
-                break;
-            case "delete": {
-                int newsId = Integer.parseInt(request.getParameter("newsId"));
-                newsDao.deleteNewsById(newsId);
-              listNews(mv);
-                break;
-            }
-            case "modify": {
-                int newsId = Integer.parseInt(request.getParameter("newsId"));
-                News news = newsDao.queryNewsById(newsId);
-                mv.addObject("news", news);
-                mv.addObject("mainPage", "admin/newsModify.jsp");
-                break;
-            }
-            case "save": {
-                String strNewsId = request.getParameter("newsId");
-                News news;
-                Date time = new Date();
-                if (!"".equals(strNewsId)) {
-                    // Save action for a modified news
-                    int id = Integer.parseInt(strNewsId);
-                    news = newsDao.queryNewsById(id);
-                    news.setLastModified(time.getTime());
-                    news.setId(id);
-                    news.setTitle(request.getParameter("title"));
-                    news.setAuthor(request.getParameter("author"));
-                    news.setDetail(request.getParameter("detail"));
-                  newsDao.updateNews(news);
-                } else {
-                  news = new News();
-                  news.setCreated(time.getTime());
-                  news.setLastModified(time.getTime());
-                  news.setTitle(request.getParameter("title"));
-                  news.setAuthor(request.getParameter("author"));
-                  news.setDetail(request.getParameter("detail"));
-                  newsDao.insertNews(news);
-                }
-              listNews(mv);
-              break;
-            }
-          case "list":
-          default:
-            mv.addObject("mainPage", "admin/news.jsp");
-            listNews(mv);
-            break;
-        }
+  private void userNewsService(ModelAndView mv, String action, HttpServletRequest request) {
+    switch (action) {
+      case "detail": {
+        int newsId = Integer.parseInt(request.getParameter("newsId"));
+        News news = newsDao.queryNewsById(newsId);
+        mv.addObject("news", news);
+        mv.addObject("mainPage", "user/newsDetail.jsp");
+        break;
+      }
+      case "list":
+      default:
+        listNews(mv, false);
+        break;
     }
+  }
 
-    private void userNewsService(ModelAndView mv, String action, HttpServletRequest request) {
-        switch (action) {
-          case "detail": {
-            int newsId = Integer.parseInt(request.getParameter("newsId"));
-            News news = newsDao.queryNewsById(newsId);
-            mv.addObject("news", news);
-            mv.addObject("mainPage", "user/newsDetail.jsp");
-            break;
-          }
-          case "list":
-          default:
-            mv.addObject("mainPage", "user/news.jsp");
-            listNews(mv);
-            break;
-        }
+  private void listNews(ModelAndView mv, boolean isAdmin) {
+    if (isAdmin) {
+      mv.addObject("mainPage", "admin/news.jsp");
+    } else {
+      mv.addObject("mainPage", "user/news.jsp");
     }
-
-  private void listNews(ModelAndView mv) {
     List<News> newsList = this.newsDao.listNews(20);
     if (newsList != null) {
       mv.addObject("newsList", newsList);

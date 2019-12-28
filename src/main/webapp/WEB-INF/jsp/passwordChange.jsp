@@ -6,10 +6,10 @@
         var oldPassword = document.getElementById("oldPassword").value;
         var newPassword = document.getElementById("newPassword").value;
         var rPassword = document.getElementById("rPassword").value;
-        if (oldPassword == "" || newPassword == "" || rPassword == "") {
+        if (oldPassword === "" || newPassword === "" || rPassword === "") {
             document.getElementById("error").innerHTML = "信息填写不完整！";
             return false;
-        } else if (newPassword != rPassword) {
+        } else if (newPassword !== rPassword) {
             document.getElementById("error").innerHTML = "密码填写不一致！";
             return false;
         }

@@ -8,7 +8,7 @@
         // var roomName=document.getElementById("roomName").value;
         var startDate = document.getElementById("startDate").value;
         var endDate = document.getElementById("endDate").value;
-        if (buildingName == null || buildingName == "") {
+        if (buildingName == null || buildingName === "") {
             document.getElementById("error").innerHTML = "楼不能为空！";
             return false;
         }
@@ -16,11 +16,11 @@
         //     document.getElementById("error").innerHTML="房间不能为空！";
         //     return false;
         // }
-        if (startDate == null) {
+        if (startDate == null || startDate === "") {
             document.getElementById("error").innerHTML = "起始日期不能为空！";
             return false;
         }
-        if (endDate == null) {
+        if (endDate == null || endDate === "") {
             document.getElementById("error").innerHTML = "结束日期不能为空！";
             return false;
         }

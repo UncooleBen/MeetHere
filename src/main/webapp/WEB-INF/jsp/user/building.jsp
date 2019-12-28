@@ -35,11 +35,11 @@
     function checkForm() {
         var startDate = document.getElementById("startDate").value;
         var duration = document.getElementById("duration").value;
-        if (startDate == null || startDate == "") {
+        if (startDate == null || startDate === "") {
             document.getElementById("error").innerHTML = "起始日期不能为空！";
             return false;
         }
-        if (duration == null || duration == "") {
+        if (duration == null || duration === "") {
             document.getElementById("error").innerHTML = "天数不能为空！";
             return false;
         }

@@ -13,19 +13,19 @@
     <script src="resources/bootstrap/js/jQuery.js"></script>
     <script src="resources/bootstrap/js/bootstrap.js"></script>
     <script type="text/javascript">
-      function checkForm() {
-        var username = document.getElementById("username").value;
-        var password = document.getElementById("password").value;
-        if (username == null || username == "") {
-          document.getElementById("error").innerHTML = "用户名不能为空";
-          return false;
+        function checkForm() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            if (username == null || username === "") {
+                document.getElementById("error").innerHTML = "用户名不能为空";
+                return false;
+            }
+            if (password == null || password === "") {
+                document.getElementById("error").innerHTML = "密码不能为空";
+                return false;
+            }
+            return true;
         }
-        if (password == null || password == "") {
-          document.getElementById("error").innerHTML = "密码不能为空";
-          return false;
-        }
-        return true;
-      }
     </script>
 
     <style type="text/css">

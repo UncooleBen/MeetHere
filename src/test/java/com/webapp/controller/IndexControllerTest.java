@@ -2,7 +2,10 @@ package com.webapp.controller;
 
 import org.junit.jupiter.api.Test;
 
+import javax.servlet.http.HttpServletRequest;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
 
 class IndexControllerTest {
 
@@ -11,7 +14,8 @@ class IndexControllerTest {
 
     @Test
     public void service_test() {
-        assertEquals(indexController.service(), "index");
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        assertEquals(indexController.service(request), "index");
     }
 
 }

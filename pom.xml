@@ -10,7 +10,19 @@
     <packaging>war</packaging>
     <name>MeetHere Maven Webapp</name>
     <url>http://maven.apache.org</url>
+
+    <properties>
+        <aspectj.version>1.8.10</aspectj.version>
+            <!-- 文件拷贝时的编码 -->
+            <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+            <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+            <!-- 编译时的编码 -->
+            <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+
+    </properties>
+
     <dependencies>
+
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -116,6 +128,19 @@
             <version>4.0.0-alpha-3</version>
         </dependency>
 
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>2.6.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -138,6 +163,24 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M4</version>
                 <configuration>
+                    <!--设置参数命令行-->
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+                    <systemPropertyVariables>
+                        <!--是否忽略html，解释见下图。与之后在reportNg报告上显示截图相关。当前已经使用allure了，这里可以直接去掉啦-->
+                        <org.uncommons.reportng.escape-output>false</org.uncommons.reportng.escape-output>
+                    </systemPropertyVariables>
+                    <!--测试失败后，是否忽略并继续测试-->
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <argLine>
+                        -Dfile.encoding=UTF-8
+                    </argLine>
+
+                    <suiteXmlFiles>
+                        <!--代表的是要执行的测试套件名称-->
+                        <suiteXmlFile>src/test/resources/testNG.xml</suiteXmlFile>
+                    </suiteXmlFiles>
                     <excludes>
                         <exclude>**/*IT</exclude>
                         <exclude>**/*ST</exclude>

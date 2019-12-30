@@ -13,16 +13,19 @@
 
     <properties>
         <aspectj.version>1.8.10</aspectj.version>
-            <!-- 文件拷贝时的编码 -->
-            <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-            <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-            <!-- 编译时的编码 -->
-            <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
-
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
     </properties>
 
     <dependencies>
 
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit5</artifactId>
+            <version>2.13.0</version>
+            <scope>test</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -128,19 +131,6 @@
             <version>4.0.0-alpha-3</version>
         </dependency>
 
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-testng</artifactId>
-            <version>2.6.0</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>${aspectj.version}</version>
-        </dependency>
-
     </dependencies>
 
     <build>
@@ -161,26 +151,18 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M4</version>
+                <version>2.21.0</version>
                 <configuration>
-                    <!--设置参数命令行-->
+                    <testFailureIgnore>false</testFailureIgnore>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
-                    <systemPropertyVariables>
-                        <!--是否忽略html，解释见下图。与之后在reportNg报告上显示截图相关。当前已经使用allure了，这里可以直接去掉啦-->
-                        <org.uncommons.reportng.escape-output>false</org.uncommons.reportng.escape-output>
-                    </systemPropertyVariables>
-                    <!--测试失败后，是否忽略并继续测试-->
-                    <testFailureIgnore>true</testFailureIgnore>
-                    <argLine>
-                        -Dfile.encoding=UTF-8
-                    </argLine>
-
-                    <suiteXmlFiles>
-                        <!--代表的是要执行的测试套件名称-->
-                        <suiteXmlFile>src/test/resources/testNG.xml</suiteXmlFile>
-                    </suiteXmlFiles>
+                    <systemProperties>
+                        <property>
+                            <name>junit.jupiter.extensions.autodetection.enabled</name>
+                            <value>true</value>
+                        </property>
+                    </systemProperties>
                     <excludes>
                         <exclude>**/*IT</exclude>
                         <exclude>**/*ST</exclude>
@@ -202,7 +184,42 @@
                             </includes>
                         </configuration>
                     </execution>
+                    <execution>
+                        <phase>post-integration-test</phase>
+                        <id>system-test</id>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>none</exclude>
+                            </excludes>
+                            <includes>
+                                <include>**/*ST</include>
+                            </includes>
+                        </configuration>
+                    </execution>
                 </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-surefire-provider</artifactId>
+                        <version>1.2.0</version>
+                    </dependency>
+                    <dependency>
+                    <groupId>org.aspectj</groupId>
+                    <artifactId>aspectjweaver</artifactId>
+                    <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.9</version>
+                <configuration>
+                    <reportVersion>2.4.1</reportVersion>
+                </configuration>
             </plugin>
         </plugins>
     </build>

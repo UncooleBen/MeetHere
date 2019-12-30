@@ -1,0 +1,1 @@
+locust -f XXX.py --host=http://localhost:8080/MeetHere_war/

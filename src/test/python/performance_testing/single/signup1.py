@@ -6,16 +6,13 @@ class WebsiteTasks(TaskSet):
     lowercase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'
     , 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
-    def on_start(self):
-        self.client.post("/signup")
+    username = ''.join(random.choice(self.lowercase) for x in range(10))
+    password = ''.join(random.choice(self.lowercase) for x in range(15))
+    name =  ''.join(random.choice(self.lowercase) for x in range(5))
+    sex = 'FEMALE'
+    tel = '13000000000'
 
-    @task
-    def signup(self):
-        username = ''.join(random.choice(self.lowercase) for x in range(10))
-        password = ''.join(random.choice(self.lowercase) for x in range(15))
-        name =  ''.join(random.choice(self.lowercase) for x in range(5))
-        sex = 'FEMALE'
-        tel = '13000000000'
+    def on_start(self):
         self.client.post("/signupSubmit",
             {
                 'username' : username,
@@ -24,6 +21,20 @@ class WebsiteTasks(TaskSet):
                 'sex' : sex,
                 'tel' : tel
             })
+
+    @task
+    def login(self):
+        self.client.post("/login",
+        {
+            'username' : username,
+            'password' : password,
+        })
+
+    @task
+    def logout(self):
+        self.client.get("/index")
+
+
 
 class WebsiteUser(HttpLocust):
     task_set = WebsiteTasks

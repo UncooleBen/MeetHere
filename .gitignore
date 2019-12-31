@@ -1,4 +1,6 @@
 /.idea/*
 /target/*
-*.iml
+/*.iml
 /src/main/resources/application.properties
+**/*.pyc
+/pom.xml

@@ -1,0 +1,6 @@
+"Type","Name","# requests","# failures","Median response time","Average response time","Min response time","Max response time","Average Content Size","Requests/s","Requests Failed/s","50%","66%","75%","80%","90%","95%","98%","99%","99.9%","99.99%","99.999","100%"
+"POST","/MeetHere_war//login",200,0,31,31,0,112,5218,0.01,0.00,31,31,41,46,62,80,94,100,110,110,110,110
+"GET","/MeetHere_war//news?action=list",11355,0,15,2217,0,24904762,22721,0.44,0.00,15,31,31,31,46,49,78,130,200,250,24905000,24905000
+"GET","/MeetHere_war//signup",1,0,15,15,15,15,5635,0.00,0.00,15,15,15,15,15,15,15,15,15,15,15,15
+"POST","/MeetHere_war//signupSubmit",1,0,0,0,0,0,5656,0.00,0.00,0,0,0,0,0,0,0,0,0,0,0,0
+"None","Aggregated",11557,0,15,2179,0,24904762,22415,0.45,0.00,15,31,31,31,46,50,78,120,200,250,24905000,24905000

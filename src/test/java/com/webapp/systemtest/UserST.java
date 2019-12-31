@@ -191,7 +191,7 @@ public class UserST {
     // 1 | open | http://localhost:8080/MeetHere_war/ |  |
     driver.get("http://localhost:8080/MeetHere_war/");
     // 2 | setWindowSize | 1052x554 |  |
-    driver.manage().window().setSize(new Dimension(1052, 554));
+    driver.manage().window().setSize(new Dimension(1920, 1080));
     // 3 | click | id=username |  |
     driver.findElement(By.id("username")).click();
     // 4 | type | id=username | root |
@@ -215,7 +215,7 @@ public class UserST {
     // 1 | open | http://localhost:8080/MeetHere_war/building?action=list |  |
     driver.get("http://localhost:8080/MeetHere_war/building?action=list");
     // 2 | setWindowSize | 1052x554 |  |
-    driver.manage().window().setSize(new Dimension(1052, 554));
+    driver.manage().window().setSize(new Dimension(1920, 1080));
     // 3 | click | id=buildingId |  |
     driver.findElement(By.id("buildingId")).click();
     // 4 | select | id=buildingId | label=building1 |
@@ -282,7 +282,7 @@ public class UserST {
     // Test name: ShowNewsDetail
     // Step # | name | target | value | comment
     // 1 | open | http://localhost:8080/MeetHere_war/news?action=list |  |
-    driver.manage().window().setSize(new Dimension(1052, 554));
+    driver.manage().window().setSize(new Dimension(1920, 1080));
     for (int id : this.addedNewsIdSet) {
       driver.get("http://localhost:8080/MeetHere_war/news?action=list");
       driver.findElement(By.id("detail" + id)).click();

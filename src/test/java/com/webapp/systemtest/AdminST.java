@@ -263,7 +263,7 @@ public class AdminST {
     // 1 | open | http://localhost:8080/MeetHere_war/ |  |
     driver.get("http://localhost:8080/MeetHere_war/");
     // 2 | setWindowSize | 1052x554 |  |
-    driver.manage().window().setSize(new Dimension(1052, 554));
+    driver.manage().window().setSize(new Dimension(1920, 1080));
     // 3 | click | id=username |  |
     driver.findElement(By.id("username")).click();
     // 4 | type | id=username | root |
@@ -282,7 +282,7 @@ public class AdminST {
     // 1 | open | http://localhost:8080/MeetHere_war/user?action=list |  |
     driver.get("http://localhost:8080/MeetHere_war/user?action=list");
     // 2 | setWindowSize | 1052x554 |  |
-    driver.manage().window().setSize(new Dimension(1052, 554));
+    driver.manage().window().setSize(new Dimension(1920, 1080));
     // 3 | chooseOkOnNextConfirmation |  |  |
     // 4 | click | css=tr:nth-child(1) .btn-danger |  |
     driver.findElement(By.id("#id_delete_button_" + this.user.getId())).click();
@@ -304,7 +304,7 @@ public class AdminST {
     // 1 | open | http://localhost:8080/MeetHere_war/user?action=list |  |
     driver.get("http://localhost:8080/MeetHere_war/user?action=list");
     // 2 | setWindowSize | 1052x554 |  |
-    driver.manage().window().setSize(new Dimension(1052, 554));
+    driver.manage().window().setSize(new Dimension(1920, 1080));
     // 3 | click | css=tr:nth-child(1) .btn-info |  |
     driver.findElement(By.id("#id_modify_button_" + this.user.getId())).click();
     // 4 | click | css=.row-fluid |  |
@@ -356,7 +356,7 @@ public class AdminST {
     // 1 | open | http://localhost:8080/MeetHere_war/blank |  |
     driver.get("http://localhost:8080/MeetHere_war/blank");
     // 2 | setWindowSize | 1052x554 |  |
-    driver.manage().window().setSize(new Dimension(1052, 554));
+    driver.manage().window().setSize(new Dimension(1920, 1080));
     // 3 | click | linkText=首页 |  |
     driver.findElement(By.linkText("首页")).click();
     assertEquals("欢迎您,系统管理员!", driver.findElement(By.id("welcome")).getText());
@@ -400,7 +400,7 @@ public class AdminST {
     // 1 | open | http://localhost:8080/MeetHere_war/building?action=list |  |
     driver.get("http://localhost:8080/MeetHere_war/building?action=list");
     // 2 | setWindowSize | 1052x554 |  |
-    driver.manage().window().setSize(new Dimension(1052, 554));
+    driver.manage().window().setSize(new Dimension(1920, 1080));
     // 3 | chooseOkOnNextConfirmation |  |  |
     // 4 | click | css=.btn-danger |  |
     driver.findElement(By.id("#id_delete_button_" + this.building.getId())).click();
@@ -423,7 +423,7 @@ public class AdminST {
     // 1 | open | http://localhost:8080/MeetHere_war/building?action=list |  |
     driver.get("http://localhost:8080/MeetHere_war/building?action=list");
     // 2 | setWindowSize | 1052x554 |  |
-    driver.manage().window().setSize(new Dimension(1052, 554));
+    driver.manage().window().setSize(new Dimension(1920, 1080));
     // 3 | click | css=td > .btn-info |  |
     driver.findElement(By.id("#id_modify_button_" + this.building.getId())).click();
     // 5 | type | id=buildingName | 456 |
@@ -453,7 +453,7 @@ public class AdminST {
     // 1 | open | http://localhost:8080/MeetHere_war/blank |  |
     driver.get("http://localhost:8080/MeetHere_war/blank");
     // 2 | setWindowSize | 1052x554 |  |
-    driver.manage().window().setSize(new Dimension(1052, 554));
+    driver.manage().window().setSize(new Dimension(1920, 1080));
     // 3 | click | linkText=首页 |  |
     driver.findElement(By.linkText("首页")).click();
     assertEquals("欢迎您,系统管理员!", driver.findElement(By.id("welcome")).getText());
@@ -490,7 +490,7 @@ public class AdminST {
     // 1 | open | http://localhost:8080/MeetHere_war/news?action=list |  |
 
     // 2 | setWindowSize | 1052x554 |  |
-    driver.manage().window().setSize(new Dimension(1052, 554));
+    driver.manage().window().setSize(new Dimension(1920, 1080));
     // 3 | click | css=td > .btn-info |  |
     for (int newsId : this.addedNewsIdSet) {
       driver.get("http://localhost:8080/MeetHere_war/news?action=list");
@@ -529,7 +529,7 @@ public class AdminST {
     // 1 | open | http://localhost:8080/MeetHere_war/news?action=list |  |
 
     // 2 | setWindowSize | 1052x554 |  |
-    driver.manage().window().setSize(new Dimension(1052, 554));
+    driver.manage().window().setSize(new Dimension(1920, 1080));
 
     // 3 | chooseOkOnNextConfirmation |  |  |
     // 4 | click | css=.btn-danger |  |
@@ -603,7 +603,7 @@ public class AdminST {
     // 1 | open | http://localhost:8080/MeetHere_war/comment?action=list |  |
 
     // 2 | setWindowSize | 1052x554 |  |
-    driver.manage().window().setSize(new Dimension(1052, 554));
+    driver.manage().window().setSize(new Dimension(1920, 1080));
     // 3 | chooseOkOnNextConfirmation |  |  |
     // 4 | click | css=.btn:nth-child(2) |  |
     for (int id : this.addedUnverifiedCommentIdSet) {
@@ -630,7 +630,7 @@ public class AdminST {
     // 1 | open | http://localhost:8080/MeetHere_war/comment?action=list |  |
 
     // 2 | setWindowSize | 1052x554 |  |
-    driver.manage().window().setSize(new Dimension(1052, 554));
+    driver.manage().window().setSize(new Dimension(1920, 1080));
     // 3 | chooseOkOnNextConfirmation |  |  |
     // 4 | click | css=div:nth-child(2) > .table .btn |  |
     for (int id : this.addedVerifiedCommentIdSet) {
@@ -656,7 +656,7 @@ public class AdminST {
     // 1 | open | http://localhost:8080/MeetHere_war/comment?action=list |  |
 
     // 2 | setWindowSize | 1052x554 |  |
-    driver.manage().window().setSize(new Dimension(1052, 554));
+    driver.manage().window().setSize(new Dimension(1920, 1080));
     // 3 | chooseOkOnNextConfirmation |  |  |
     // 4 | click | css=tr:nth-child(1) .btn:nth-child(1) |  |
     for (int id : this.addedUnverifiedCommentIdSet) {
@@ -681,7 +681,7 @@ public class AdminST {
     // Test name: DeleteUnverifiedRecord
     // Step # | name | target | value | comment
     // 1 | open | http://localhost:8080/MeetHere_war/record?action=list |  |
-    driver.manage().window().setSize(new Dimension(1052, 554));
+    driver.manage().window().setSize(new Dimension(1920, 1080));
     for (int id : this.addedUnverifiedRecordIdSet) {
       driver.get("http://localhost:8080/MeetHere_war/record?action=list");
       driver.findElement(By.id("delete" + id)).click();
@@ -710,7 +710,7 @@ public class AdminST {
     // 1 | open | http://localhost:8080/MeetHere_war/record?action=list |  |
 
     // 2 | setWindowSize | 1052x554 |  |
-    driver.manage().window().setSize(new Dimension(1052, 554));
+    driver.manage().window().setSize(new Dimension(1920, 1080));
     for (int id : this.addedUnverifiedRecordIdSet) {
       driver.get("http://localhost:8080/MeetHere_war/record?action=list");
       driver.findElement(By.id("verify" + id)).click();
@@ -743,7 +743,7 @@ public class AdminST {
     // 1 | open | http://localhost:8080/MeetHere_war/password?action=change |  |
     driver.get("http://localhost:8080/MeetHere_war/password?action=change");
     // 2 | setWindowSize | 1052x554 |  |
-    driver.manage().window().setSize(new Dimension(1052, 554));
+    driver.manage().window().setSize(new Dimension(1920, 1080));
     // 3 | click | id=oldPassword |  |
     driver.findElement(By.id("oldPassword")).click();
     // 4 | type | id=oldPassword | root |

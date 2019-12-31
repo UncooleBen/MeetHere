@@ -1,0 +1,54 @@
+{
+  "uid" : "1787910744fa4096",
+  "name" : "[3] 5",
+  "fullName" : "com.webapp.controller.CommentControllerIT.givenAdminWhenActionIsDeleteThenDeleteComment",
+  "historyId" : "157adba96668c4afedb421f0458b05ce",
+  "time" : {
+    "start" : 1577755709483,
+    "stop" : 1577755709683,
+    "duration" : 200
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "15680@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.CommentControllerIT"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.CommentControllerIT"
+  }, {
+    "name" : "testMethod",
+    "value" : "givenAdminWhenActionIsDeleteThenDeleteComment"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.CommentControllerIT"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "1787910744fa4096.json",
+  "parameterValues" : [ ]
+}

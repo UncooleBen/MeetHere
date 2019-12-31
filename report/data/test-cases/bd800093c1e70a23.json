@@ -1,0 +1,54 @@
+{
+  "uid" : "bd800093c1e70a23",
+  "name" : "[12] 1234512345, 1 34567890, name1, MALE, 13000000000, 密码不能含有空格",
+  "fullName" : "com.webapp.systemtest.LoginSignUpST.failSignup",
+  "historyId" : "14942162991e1bde0ba0e4bfb9071c25",
+  "time" : {
+    "start" : 1577757826990,
+    "stop" : 1577757832152,
+    "duration" : 5162
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "17520@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.systemtest.LoginSignUpST"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.systemtest.LoginSignUpST"
+  }, {
+    "name" : "testMethod",
+    "value" : "failSignup"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.systemtest.LoginSignUpST"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "bd800093c1e70a23.json",
+  "parameterValues" : [ ]
+}

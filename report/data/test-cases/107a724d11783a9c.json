@@ -1,0 +1,88 @@
+{
+  "uid" : "107a724d11783a9c",
+  "name" : "test_query_Record_By_Id()",
+  "fullName" : "com.webapp.service.database.dao.impl.RecordDaoImplTest.test_query_Record_By_Id",
+  "historyId" : "73730345f1295aed8baccc9b576b997f",
+  "time" : {
+    "start" : 1577758378091,
+    "stop" : 1577758378093,
+    "duration" : 2
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "11156@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.service.database.dao.impl.RecordDaoImplTest"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.service.database.dao.impl.RecordDaoImplTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "test_query_Record_By_Id"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.service.database.dao.impl.RecordDaoImplTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "a5a6844f3ccf68d5",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757422229,
+        "stop" : 1577757422230,
+        "duration" : 1
+      }
+    }, {
+      "uid" : "be123270e1f5d233",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755689404,
+        "stop" : 1577755689406,
+        "duration" : 2
+      }
+    }, {
+      "uid" : "5e67d2eb42168f0f",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755181141,
+        "stop" : 1577755181142,
+        "duration" : 1
+      }
+    }, {
+      "uid" : "700800347827e962",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755104594,
+        "stop" : 1577755104595,
+        "duration" : 1
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "107a724d11783a9c.json",
+  "parameterValues" : [ ]
+}

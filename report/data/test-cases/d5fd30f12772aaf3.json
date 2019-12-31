@@ -1,0 +1,72 @@
+{
+  "uid" : "d5fd30f12772aaf3",
+  "name" : "[2] 3",
+  "fullName" : "com.webapp.controller.RecordControllerIT.givenAdminWhenActionIsVerifyThenVerify",
+  "historyId" : "5f56f20c59cc3ae165825f2486fca7b2",
+  "time" : {
+    "start" : 1577758406027,
+    "stop" : 1577758406220,
+    "duration" : 193
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "17000@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.RecordControllerIT"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.RecordControllerIT"
+  }, {
+    "name" : "testMethod",
+    "value" : "givenAdminWhenActionIsVerifyThenVerify"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.RecordControllerIT"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "f9c22812108ffc9b",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757449629,
+        "stop" : 1577757449834,
+        "duration" : 205
+      }
+    }, {
+      "uid" : "84c00706323c41e3",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755721652,
+        "stop" : 1577755721881,
+        "duration" : 229
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "d5fd30f12772aaf3.json",
+  "parameterValues" : [ ]
+}

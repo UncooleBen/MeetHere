@@ -1,0 +1,81 @@
+{
+  "uid" : "3ce98077c86e60d4",
+  "name" : "shouldGoToModify_whenCurrentUserIsAdmin_andActionIsModify()",
+  "fullName" : "com.webapp.controller.BuildingControllerIT.shouldGoToModify_whenCurrentUserIsAdmin_andActionIsModify",
+  "historyId" : "6b5d2be5116c517620f944ce9cb0970c",
+  "time" : {
+    "start" : 1577758391007,
+    "stop" : 1577758392474,
+    "duration" : 1467
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : true,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "17000@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.BuildingControllerIT"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.BuildingControllerIT"
+  }, {
+    "name" : "testMethod",
+    "value" : "shouldGoToModify_whenCurrentUserIsAdmin_andActionIsModify"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.BuildingControllerIT"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "709ae0691b3b86ea",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757434325,
+        "stop" : 1577757435781,
+        "duration" : 1456
+      }
+    }, {
+      "uid" : "e9c2ddb3bd448891",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755703694,
+        "stop" : 1577755705326,
+        "duration" : 1632
+      }
+    }, {
+      "uid" : "2096986094816cb2",
+      "status" : "broken",
+      "statusDetails" : "java.lang.NullPointerException",
+      "time" : {
+        "start" : 1577755196001,
+        "stop" : 1577755197363,
+        "duration" : 1362
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "3ce98077c86e60d4.json",
+  "parameterValues" : [ ]
+}

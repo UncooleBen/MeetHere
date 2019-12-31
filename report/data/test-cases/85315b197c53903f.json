@@ -1,0 +1,72 @@
+{
+  "uid" : "85315b197c53903f",
+  "name" : "[2] is",
+  "fullName" : "com.webapp.controller.LoginControllerIT.shouldPromptErrorMessage_WhenUsernameError",
+  "historyId" : "3eb61bc5eaeef99f3cd4d61b954b81e9",
+  "time" : {
+    "start" : 1577758400505,
+    "stop" : 1577758400672,
+    "duration" : 167
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "17000@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.LoginControllerIT"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.LoginControllerIT"
+  }, {
+    "name" : "testMethod",
+    "value" : "shouldPromptErrorMessage_WhenUsernameError"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.LoginControllerIT"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "268a708c1c25230e",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757443811,
+        "stop" : 1577757443986,
+        "duration" : 175
+      }
+    }, {
+      "uid" : "cffa32911aaf5ad9",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755713791,
+        "stop" : 1577755714021,
+        "duration" : 230
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "85315b197c53903f.json",
+  "parameterValues" : [ ]
+}

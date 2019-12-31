@@ -1,0 +1,81 @@
+{
+  "uid" : "26d36e3e95115e8e",
+  "name" : "[3] UCB, University of California, Berkeley, 3",
+  "fullName" : "com.webapp.controller.BuildingControllerIT.deleteUserAsAdmin",
+  "historyId" : "e7ffb8a4eba1e662c2c3d59213cab883",
+  "time" : {
+    "start" : 1577758393670,
+    "stop" : 1577758393793,
+    "duration" : 123
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : true,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "17000@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.BuildingControllerIT"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.BuildingControllerIT"
+  }, {
+    "name" : "testMethod",
+    "value" : "deleteUserAsAdmin"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.BuildingControllerIT"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "894429953357fa88",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757436999,
+        "stop" : 1577757437100,
+        "duration" : 101
+      }
+    }, {
+      "uid" : "3f524262bdd75270",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755706737,
+        "stop" : 1577755706836,
+        "duration" : 99
+      }
+    }, {
+      "uid" : "721dea04974ff3b3",
+      "status" : "broken",
+      "statusDetails" : "java.lang.NullPointerException",
+      "time" : {
+        "start" : 1577755197914,
+        "stop" : 1577755197954,
+        "duration" : 40
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "26d36e3e95115e8e.json",
+  "parameterValues" : [ ]
+}

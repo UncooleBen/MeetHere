@@ -1,0 +1,54 @@
+{
+  "uid" : "23d199e55614553e",
+  "name" : "service_WhenActionIsBook_UserIsAdmin()",
+  "fullName" : "com.webapp.controller.BuildingControllerTest.service_WhenActionIsBook_UserIsAdmin",
+  "historyId" : "834828bae1a9fdc067044d1aa76c1566",
+  "time" : {
+    "start" : 1577757420190,
+    "stop" : 1577757420229,
+    "duration" : 39
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "17232@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.BuildingControllerTest"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.BuildingControllerTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "service_WhenActionIsBook_UserIsAdmin"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.BuildingControllerTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "23d199e55614553e.json",
+  "parameterValues" : [ ]
+}

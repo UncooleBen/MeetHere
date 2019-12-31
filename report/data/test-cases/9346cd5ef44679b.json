@@ -1,0 +1,72 @@
+{
+  "uid" : "9346cd5ef44679b",
+  "name" : "testGetConnection()",
+  "fullName" : "com.webapp.service.database.DatabaseServiceIT.testGetConnection",
+  "historyId" : "3a9b26e584e251f2d801e4daed67e4e7",
+  "time" : {
+    "start" : 1577758418850,
+    "stop" : 1577758418859,
+    "duration" : 9
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "17000@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.service.database.DatabaseServiceIT"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.service.database.DatabaseServiceIT"
+  }, {
+    "name" : "testMethod",
+    "value" : "testGetConnection"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.service.database.DatabaseServiceIT"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "ef05e31e2b1fd579",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757462215,
+        "stop" : 1577757462224,
+        "duration" : 9
+      }
+    }, {
+      "uid" : "7b2d79f800524239",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755735091,
+        "stop" : 1577755735097,
+        "duration" : 6
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "9346cd5ef44679b.json",
+  "parameterValues" : [ ]
+}

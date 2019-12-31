@@ -1,0 +1,81 @@
+{
+  "uid" : "ab6bf99efcd13ee5",
+  "name" : "[1] ECNU, East China Normal University, 1",
+  "fullName" : "com.webapp.controller.BuildingControllerIT.saveBuildingAsAdmin",
+  "historyId" : "372735db041bf40c998349f65a6b6e7e",
+  "time" : {
+    "start" : 1577758392518,
+    "stop" : 1577758392742,
+    "duration" : 224
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : true,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "17000@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.BuildingControllerIT"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.BuildingControllerIT"
+  }, {
+    "name" : "testMethod",
+    "value" : "saveBuildingAsAdmin"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.BuildingControllerIT"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "379949ac25e7a838",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757435824,
+        "stop" : 1577757436042,
+        "duration" : 218
+      }
+    }, {
+      "uid" : "f9e7c87fd6882371",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755705381,
+        "stop" : 1577755705628,
+        "duration" : 247
+      }
+    }, {
+      "uid" : "38b4711b3f711ade",
+      "status" : "broken",
+      "statusDetails" : "java.lang.NullPointerException",
+      "time" : {
+        "start" : 1577755197440,
+        "stop" : 1577755197489,
+        "duration" : 49
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "ab6bf99efcd13ee5.json",
+  "parameterValues" : [ ]
+}

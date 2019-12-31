@@ -1,0 +1,73 @@
+{
+  "uid" : "e25e70b5c389fe60",
+  "name" : "verifyRecord()",
+  "fullName" : "com.webapp.systemtest.AdminST.verifyRecord",
+  "historyId" : "e60b13c7a85df7d182bc2fd15cec9ff5",
+  "time" : {
+    "start" : 1577758490080,
+    "stop" : 1577758495926,
+    "duration" : 5846
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : true,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "16452@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.systemtest.AdminST"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.systemtest.AdminST"
+  }, {
+    "name" : "testMethod",
+    "value" : "verifyRecord"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.systemtest.AdminST"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "b972e6352b80593d",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757535224,
+        "stop" : 1577757540957,
+        "duration" : 5733
+      }
+    }, {
+      "uid" : "2412734bf54e3a34",
+      "status" : "failed",
+      "statusDetails" : "expected: <2> but was: <1>",
+      "time" : {
+        "start" : 1577755758977,
+        "stop" : 1577755759074,
+        "duration" : 97
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "e25e70b5c389fe60.json",
+  "parameterValues" : [ ]
+}

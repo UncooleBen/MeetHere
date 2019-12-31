@@ -1,0 +1,88 @@
+{
+  "uid" : "ebb4c1acf48bef78",
+  "name" : "service_WhenActionIsDelete_UserIsAdmin()",
+  "fullName" : "com.webapp.controller.BuildingControllerTest.service_WhenActionIsDelete_UserIsAdmin",
+  "historyId" : "9bd8659e0cddce5bd2f69778314a8e65",
+  "time" : {
+    "start" : 1577758376131,
+    "stop" : 1577758376133,
+    "duration" : 2
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "11156@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.BuildingControllerTest"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.BuildingControllerTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "service_WhenActionIsDelete_UserIsAdmin"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.BuildingControllerTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "af8f7b763ae9a259",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757420255,
+        "stop" : 1577757420260,
+        "duration" : 5
+      }
+    }, {
+      "uid" : "96697cca17227056",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755687472,
+        "stop" : 1577755687475,
+        "duration" : 3
+      }
+    }, {
+      "uid" : "859a05bc16a29073",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755179322,
+        "stop" : 1577755179325,
+        "duration" : 3
+      }
+    }, {
+      "uid" : "45fe5756db477729",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755102450,
+        "stop" : 1577755102454,
+        "duration" : 4
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "ebb4c1acf48bef78.json",
+  "parameterValues" : [ ]
+}

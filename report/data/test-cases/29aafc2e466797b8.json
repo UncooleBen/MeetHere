@@ -1,0 +1,54 @@
+{
+  "uid" : "29aafc2e466797b8",
+  "name" : "test_when_list_comment()",
+  "fullName" : "com.webapp.service.database.dao.impl.CommentDaoImplTest.test_when_list_comment",
+  "historyId" : "90002f26f80c51c9916b58bc9fa2d75",
+  "time" : {
+    "start" : 1577755104227,
+    "stop" : 1577755104230,
+    "duration" : 3
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "13244@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.service.database.dao.impl.CommentDaoImplTest"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.service.database.dao.impl.CommentDaoImplTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "test_when_list_comment"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.service.database.dao.impl.CommentDaoImplTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "29aafc2e466797b8.json",
+  "parameterValues" : [ ]
+}

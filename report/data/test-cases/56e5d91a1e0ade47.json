@@ -1,0 +1,81 @@
+{
+  "uid" : "56e5d91a1e0ade47",
+  "name" : "[3] UCB, University of California, Berkeley, 3",
+  "fullName" : "com.webapp.controller.BuildingControllerIT.saveBuildingAsAdmin",
+  "historyId" : "aa54ab4dc793f68df48ee128befb7519",
+  "time" : {
+    "start" : 1577758392911,
+    "stop" : 1577758393052,
+    "duration" : 141
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : true,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "17000@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.BuildingControllerIT"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.BuildingControllerIT"
+  }, {
+    "name" : "testMethod",
+    "value" : "saveBuildingAsAdmin"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.BuildingControllerIT"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "5279a69e156846ee",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757436234,
+        "stop" : 1577757436384,
+        "duration" : 150
+      }
+    }, {
+      "uid" : "1ad86c18933c3371",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755705800,
+        "stop" : 1577755705949,
+        "duration" : 149
+      }
+    }, {
+      "uid" : "946b5e89d73c80c0",
+      "status" : "broken",
+      "statusDetails" : "java.lang.NullPointerException",
+      "time" : {
+        "start" : 1577755197577,
+        "stop" : 1577755197616,
+        "duration" : 39
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "56e5d91a1e0ade47.json",
+  "parameterValues" : [ ]
+}

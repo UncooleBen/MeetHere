@@ -1,0 +1,88 @@
+{
+  "uid" : "866badf2b24351e7",
+  "name" : "service_WhenUserIsAdmin_ActionIsSave()",
+  "fullName" : "com.webapp.controller.PasswordControllerTest.service_WhenUserIsAdmin_ActionIsSave",
+  "historyId" : "7bf12f07eecb53cdd46940df68efa33",
+  "time" : {
+    "start" : 1577758376631,
+    "stop" : 1577758376634,
+    "duration" : 3
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "11156@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.PasswordControllerTest"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.PasswordControllerTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "service_WhenUserIsAdmin_ActionIsSave"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.PasswordControllerTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "7b492d38d41d7c47",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757420707,
+        "stop" : 1577757420709,
+        "duration" : 2
+      }
+    }, {
+      "uid" : "e66de393c00385bb",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755687911,
+        "stop" : 1577755687913,
+        "duration" : 2
+      }
+    }, {
+      "uid" : "ceab66651721a1db",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755179704,
+        "stop" : 1577755179707,
+        "duration" : 3
+      }
+    }, {
+      "uid" : "18e5d48093ecf74e",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755102882,
+        "stop" : 1577755102885,
+        "duration" : 3
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "866badf2b24351e7.json",
+  "parameterValues" : [ ]
+}

@@ -1,0 +1,114 @@
+{
+  "total" : 35,
+  "items" : [ {
+    "uid" : "0a9c29866a00c0b9a7c6d783c0d38445",
+    "name" : "com.webapp.systemtest.LoginSignUpST",
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 37,
+      "unknown" : 0,
+      "total" : 37
+    }
+  }, {
+    "uid" : "202d472eae05fb6df24fec5a0eed2c7f",
+    "name" : "com.webapp.controller.UserControllerIT",
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 34,
+      "unknown" : 0,
+      "total" : 34
+    }
+  }, {
+    "uid" : "3b6796e972617c5c1676a748d1843308",
+    "name" : "com.webapp.systemtest.AdminST",
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 33,
+      "unknown" : 0,
+      "total" : 33
+    }
+  }, {
+    "uid" : "2db796bc41adca30b941266efa0269e6",
+    "name" : "com.webapp.controller.BuildingControllerIT",
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 23,
+      "unknown" : 0,
+      "total" : 23
+    }
+  }, {
+    "uid" : "d891037284f529347fc1a593778a6cee",
+    "name" : "com.webapp.controller.LoginControllerIT",
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 21,
+      "unknown" : 0,
+      "total" : 21
+    }
+  }, {
+    "uid" : "7cbefe04de88fe75fd2daa7382b92edb",
+    "name" : "com.webapp.controller.CommentControllerIT",
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 1,
+      "passed" : 19,
+      "unknown" : 0,
+      "total" : 20
+    }
+  }, {
+    "uid" : "23844854095e421b4e5abbc06e2f38b5",
+    "name" : "com.webapp.service.database.dao.impl.UserDaoImplTest",
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 16,
+      "unknown" : 0,
+      "total" : 16
+    }
+  }, {
+    "uid" : "0bfdf5d6760e368a7946d7e1ef45e024",
+    "name" : "com.webapp.controller.RecordControllerIT",
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 16,
+      "unknown" : 0,
+      "total" : 16
+    }
+  }, {
+    "uid" : "34e1802a6f44041e517f8b0ae709950f",
+    "name" : "com.webapp.controller.NewsControllerIT",
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 15,
+      "unknown" : 0,
+      "total" : 15
+    }
+  }, {
+    "uid" : "e38a78e4fbdc84155002e8f7fc78d84a",
+    "name" : "com.webapp.controller.BuildingControllerTest",
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 13,
+      "unknown" : 0,
+      "total" : 13
+    }
+  } ]
+}

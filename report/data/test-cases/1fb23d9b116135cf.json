@@ -1,0 +1,54 @@
+{
+  "uid" : "1fb23d9b116135cf",
+  "name" : "service_WhenUserIsAdmin_ActionIsOther()",
+  "fullName" : "com.webapp.controller.NewsControllerTest.service_WhenUserIsAdmin_ActionIsOther",
+  "historyId" : "2f26513b318a012964623393fbd5fe71",
+  "time" : {
+    "start" : 1577755687806,
+    "stop" : 1577755687808,
+    "duration" : 2
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "6388@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.NewsControllerTest"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.NewsControllerTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "service_WhenUserIsAdmin_ActionIsOther"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.NewsControllerTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "1fb23d9b116135cf.json",
+  "parameterValues" : [ ]
+}

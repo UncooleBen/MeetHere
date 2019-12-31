@@ -1,0 +1,54 @@
+{
+  "uid" : "a3fe4bb76204a93e",
+  "name" : "[1] 1024",
+  "fullName" : "com.webapp.controller.LoginControllerIT.shouldPromptErrorMessage_WhenUsernameError",
+  "historyId" : "1e3a69702737e5328c8eaac0ada8698a",
+  "time" : {
+    "start" : 1577755713605,
+    "stop" : 1577755713784,
+    "duration" : 179
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "15680@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.LoginControllerIT"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.LoginControllerIT"
+  }, {
+    "name" : "testMethod",
+    "value" : "shouldPromptErrorMessage_WhenUsernameError"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.LoginControllerIT"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "a3fe4bb76204a93e.json",
+  "parameterValues" : [ ]
+}

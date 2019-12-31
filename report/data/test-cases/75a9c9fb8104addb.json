@@ -1,0 +1,88 @@
+{
+  "uid" : "75a9c9fb8104addb",
+  "name" : "signUpSubmit_WhenUserIsNull()",
+  "fullName" : "com.webapp.controller.SignupControllerTest.signUpSubmit_WhenUserIsNull",
+  "historyId" : "ab2b5be189ce3a77a54fa5d0ab6b5a97",
+  "time" : {
+    "start" : 1577758376944,
+    "stop" : 1577758376948,
+    "duration" : 4
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "11156@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.SignupControllerTest"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.SignupControllerTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "signUpSubmit_WhenUserIsNull"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.SignupControllerTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "736c2ee2c527ec10",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757420933,
+        "stop" : 1577757420936,
+        "duration" : 3
+      }
+    }, {
+      "uid" : "a741b976f08d124e",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755688168,
+        "stop" : 1577755688176,
+        "duration" : 8
+      }
+    }, {
+      "uid" : "486ed896e538347",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755179931,
+        "stop" : 1577755179935,
+        "duration" : 4
+      }
+    }, {
+      "uid" : "6c235d283a042428",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755103167,
+        "stop" : 1577755103173,
+        "duration" : 6
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "75a9c9fb8104addb.json",
+  "parameterValues" : [ ]
+}

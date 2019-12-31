@@ -1,0 +1,72 @@
+{
+  "uid" : "2ee82c81c72463c1",
+  "name" : "givenUserWhenActionIsSaveThenSave()",
+  "fullName" : "com.webapp.controller.CommentControllerIT.givenUserWhenActionIsSaveThenSave",
+  "historyId" : "e3197a67161d197a57be9bca8b5275d5",
+  "time" : {
+    "start" : 1577758399006,
+    "stop" : 1577758399216,
+    "duration" : 210
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "17000@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.CommentControllerIT"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.CommentControllerIT"
+  }, {
+    "name" : "testMethod",
+    "value" : "givenUserWhenActionIsSaveThenSave"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.CommentControllerIT"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "d1e6e86488ca0fb1",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757442373,
+        "stop" : 1577757442581,
+        "duration" : 208
+      }
+    }, {
+      "uid" : "814afd452287d04",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755712218,
+        "stop" : 1577755712452,
+        "duration" : 234
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "2ee82c81c72463c1.json",
+  "parameterValues" : [ ]
+}

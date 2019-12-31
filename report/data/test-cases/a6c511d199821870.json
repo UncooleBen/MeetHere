@@ -1,0 +1,72 @@
+{
+  "uid" : "a6c511d199821870",
+  "name" : "userShouldNotBeServedByUserController()",
+  "fullName" : "com.webapp.controller.UserControllerIT.userShouldNotBeServedByUserController",
+  "historyId" : "b4a341cb1de8ab621dd1f6569492ef28",
+  "time" : {
+    "start" : 1577758409160,
+    "stop" : 1577758409260,
+    "duration" : 100
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "17000@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.UserControllerIT"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.UserControllerIT"
+  }, {
+    "name" : "testMethod",
+    "value" : "userShouldNotBeServedByUserController"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.UserControllerIT"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "176734490d975008",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757452740,
+        "stop" : 1577757452854,
+        "duration" : 114
+      }
+    }, {
+      "uid" : "13944bafb30a5240",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755724964,
+        "stop" : 1577755725065,
+        "duration" : 101
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "a6c511d199821870.json",
+  "parameterValues" : [ ]
+}

@@ -1,0 +1,54 @@
+{
+  "uid" : "d5fd1dd378802bc4",
+  "name" : "homePage()",
+  "fullName" : "com.webapp.systemtest.AdminST.homePage",
+  "historyId" : "a68fcf3a9c43f5a0f1e1b4ab0beb26a1",
+  "time" : {
+    "start" : 1577757492306,
+    "stop" : 1577757497722,
+    "duration" : 5416
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "17520@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.systemtest.AdminST"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.systemtest.AdminST"
+  }, {
+    "name" : "testMethod",
+    "value" : "homePage"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.systemtest.AdminST"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "d5fd1dd378802bc4.json",
+  "parameterValues" : [ ]
+}

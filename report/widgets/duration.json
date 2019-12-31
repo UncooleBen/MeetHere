@@ -1,0 +1,3851 @@
+[ {
+  "uid" : "a0dbeb72ae43ddfe",
+  "name" : "test_delete_Building_When_Result_Is_True()",
+  "time" : {
+    "start" : 1577758377580,
+    "stop" : 1577758377581,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "381a37042549d2",
+  "name" : "[8] other, 3",
+  "time" : {
+    "start" : 1577758398619,
+    "stop" : 1577758398813,
+    "duration" : 194
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "18032d0a74e901e0",
+  "name" : "[2] Allston Way, aw, 999",
+  "time" : {
+    "start" : 1577758394234,
+    "stop" : 1577758394372,
+    "duration" : 138
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "1456d1e964ca5470",
+  "name" : "[6] verify, 5",
+  "time" : {
+    "start" : 1577758398226,
+    "stop" : 1577758398427,
+    "duration" : 201
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e5abf32e90fb4a95",
+  "name" : "[1] other",
+  "time" : {
+    "start" : 1577758404471,
+    "stop" : 1577758404655,
+    "duration" : 184
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "53505365ee321ceb",
+  "name" : "service_WhenActionIsAdd_UserIsAdmin()",
+  "time" : {
+    "start" : 1577758376144,
+    "stop" : 1577758376146,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c6d5cb395bf2edbd",
+  "name" : "test_query_Comment_By_Id()",
+  "time" : {
+    "start" : 1577758377697,
+    "stop" : 1577758377700,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "bd70e56364feb4b2",
+  "name" : "[1] user",
+  "time" : {
+    "start" : 1577758404295,
+    "stop" : 1577758404342,
+    "duration" : 47
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "1e10ad988619cc2b",
+  "name" : "[2] usernameusername2, passwordpassword2",
+  "time" : {
+    "start" : 1577758689685,
+    "stop" : 1577758694566,
+    "duration" : 4881
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "1b1a47dc3c9479b1",
+  "name" : "[3] usernameusername1, , 密码不能为空",
+  "time" : {
+    "start" : 1577758645616,
+    "stop" : 1577758650268,
+    "duration" : 4652
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a09e28d251b5d1ba",
+  "name" : "test_throws_sql_exception_when_add_Building()",
+  "time" : {
+    "start" : 1577758377648,
+    "stop" : 1577758377650,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "39d10893321cc9b8",
+  "name" : "service_When_ActionIsDelete()",
+  "time" : {
+    "start" : 1577758377129,
+    "stop" : 1577758377132,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "daf379daa0208da",
+  "name" : "service_WhenActionIsBook_UserIsUser()",
+  "time" : {
+    "start" : 1577758376116,
+    "stop" : 1577758376119,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "f396ee4fc65f8e3",
+  "name" : "[6] passwordpassword1, root, , false, 信息填写不完整！",
+  "time" : {
+    "start" : 1577758538190,
+    "stop" : 1577758544852,
+    "duration" : 6662
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ce71b9c118b1fbf1",
+  "name" : "[1] username1, password1, name1, MALE, tel1",
+  "time" : {
+    "start" : 1577758410581,
+    "stop" : 1577758410714,
+    "duration" : 133
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "61eb155042f5cdb",
+  "name" : "[2] admin",
+  "time" : {
+    "start" : 1577758404350,
+    "stop" : 1577758404382,
+    "duration" : 32
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "afccb28a2b23a1fd",
+  "name" : "shouldReturnList_whenAdminActionIsNull()",
+  "time" : {
+    "start" : 1577758395064,
+    "stop" : 1577758395160,
+    "duration" : 96
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "fac90f37bac7432c",
+  "name" : "test_insert_News_When_Result_Is_True()",
+  "time" : {
+    "start" : 1577758377928,
+    "stop" : 1577758377930,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "1144753a59aa4e3f",
+  "name" : "[3] 8",
+  "time" : {
+    "start" : 1577758409550,
+    "stop" : 1577758409657,
+    "duration" : 107
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e3f20cbee1833c9b",
+  "name" : "test_throws_sql_exception_when_query_record_by_id()",
+  "time" : {
+    "start" : 1577758378009,
+    "stop" : 1577758378012,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5ed149c02f6ceeb3",
+  "name" : "signUpSubmit_WhenUserIsNotNull()",
+  "time" : {
+    "start" : 1577758376984,
+    "stop" : 1577758376987,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "4630554179df903e",
+  "name" : "[16] 1234512345, 1234567890, name1, MALE, 1234567890, 电话必须为以1起始的11位数字",
+  "time" : {
+    "start" : 1577758804053,
+    "stop" : 1577758809176,
+    "duration" : 5123
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c2bbe9e6207fa168",
+  "name" : "[4] correct title, correct author, , false, 内容不能为空！",
+  "time" : {
+    "start" : 1577758617338,
+    "stop" : 1577758623670,
+    "duration" : 6332
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "8bd6cd48fceb8762",
+  "name" : "service_WhenUserTypeIsAdmin_ActionIsOther()",
+  "time" : {
+    "start" : 1577758376833,
+    "stop" : 1577758376835,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d7f8754ffb66a7ac",
+  "name" : "[14] 1234512345, 1234567890, name1, MALE, , 电话不能为空",
+  "time" : {
+    "start" : 1577758793824,
+    "stop" : 1577758798936,
+    "duration" : 5112
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "9c83db0acaedd3db",
+  "name" : "[1] 1, 2019-12-31, 5",
+  "time" : {
+    "start" : 1577758394600,
+    "stop" : 1577758394708,
+    "duration" : 108
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ebe331c4e62b7c4a",
+  "name" : "[1] user",
+  "time" : {
+    "start" : 1577758404170,
+    "stop" : 1577758404223,
+    "duration" : 53
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "2b1f12b05dc6cc9",
+  "name" : "[4] username4, password4, name4, FEMALE, tel4",
+  "time" : {
+    "start" : 1577758407882,
+    "stop" : 1577758407933,
+    "duration" : 51
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "93ecdae88d9df045",
+  "name" : "test_query_user_by_name_WhenPermissionIs_1()",
+  "time" : {
+    "start" : 1577758378171,
+    "stop" : 1577758378173,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "61bb9ab94471f23d",
+  "name" : "[1] username1, password1, name1, MALE, tel1",
+  "time" : {
+    "start" : 1577758409790,
+    "stop" : 1577758409897,
+    "duration" : 107
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a271c5613f160ec0",
+  "name" : "[2] username2, password2, name2, FEMALE, tel2",
+  "time" : {
+    "start" : 1577758412168,
+    "stop" : 1577758412312,
+    "duration" : 144
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a47dc77c493bb284",
+  "name" : "service_When_UsersIsEmpty()",
+  "time" : {
+    "start" : 1577758377083,
+    "stop" : 1577758377085,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "1e3a47b0a8abd29a",
+  "name" : "[4] username4, password4, name4, FEMALE, tel4",
+  "time" : {
+    "start" : 1577758412465,
+    "stop" : 1577758412600,
+    "duration" : 135
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "80bc47daf0fa0924",
+  "name" : "[1] newbuildingname1, 300, newbuildingdescription1",
+  "time" : {
+    "start" : 1577758471048,
+    "stop" : 1577758477228,
+    "duration" : 6180
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e0d5b3c6a3d534a4",
+  "name" : "givenUserWhenActionIsListThenList()",
+  "time" : {
+    "start" : 1577758403554,
+    "stop" : 1577758403592,
+    "duration" : 38
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e0d5150af67a6d22",
+  "name" : "add20NewsAndQueryByList()",
+  "time" : {
+    "start" : 1577758413482,
+    "stop" : 1577758413900,
+    "duration" : 418
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "f4cf98a11b2d2fc6",
+  "name" : "[6] admin, detail",
+  "time" : {
+    "start" : 1577758403963,
+    "stop" : 1577758403994,
+    "duration" : 31
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a392e9fa1b89627f",
+  "name" : "[1] buildingname1, 2021-01-01, 2",
+  "time" : {
+    "start" : 1577758825129,
+    "stop" : 1577758831153,
+    "duration" : 6024
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "17b897e7606a7d72",
+  "name" : "[3] 3",
+  "time" : {
+    "start" : 1577758408525,
+    "stop" : 1577758408631,
+    "duration" : 106
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d0ddf6eb7ff95a2a",
+  "name" : "[1] newusername, newpassword, newname, MALE, newtel",
+  "time" : {
+    "start" : 1577758434657,
+    "stop" : 1577758441403,
+    "duration" : 6746
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "70bab5e5b93cb515",
+  "name" : "test_when_list_news()",
+  "time" : {
+    "start" : 1577758377940,
+    "stop" : 1577758377942,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "113b95b037e7a183",
+  "name" : "[3] an",
+  "time" : {
+    "start" : 1577758400681,
+    "stop" : 1577758400859,
+    "duration" : 178
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "4a8b1d7dd8a3da7f",
+  "name" : "[2] save",
+  "time" : {
+    "start" : 1577758406634,
+    "stop" : 1577758406821,
+    "duration" : 187
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5817a1f29b02f117",
+  "name" : "addAVerifiedRecordAndQueryItByList()",
+  "time" : {
+    "start" : 1577758416489,
+    "stop" : 1577758416519,
+    "duration" : 30
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "80ff712952e5406",
+  "name" : "[5] username5, password5, name5, MALE, tel5",
+  "time" : {
+    "start" : 1577758410352,
+    "stop" : 1577758410467,
+    "duration" : 115
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5479ef5b1866abd1",
+  "name" : "service_WhenActionIsSave_UserIsAdmin_IDStrIsNotNull()",
+  "time" : {
+    "start" : 1577758376161,
+    "stop" : 1577758376164,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d9bdfc16a75c578a",
+  "name" : "givenUserWhenActionIsDetailThenRedirectToNewsDetail()",
+  "time" : {
+    "start" : 1577758403646,
+    "stop" : 1577758403680,
+    "duration" : 34
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "f7f56157d6114419",
+  "name" : "test_throws_sql_exception_when_add_Comment()",
+  "time" : {
+    "start" : 1577758377712,
+    "stop" : 1577758377715,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "7d75db8e450a9996",
+  "name" : "test_throws_sql_exception_when_query_user_by_name()",
+  "time" : {
+    "start" : 1577758378125,
+    "stop" : 1577758378128,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "936b25c5823aa574",
+  "name" : "[2] , correct author, correct detail, false, 标题不能为空！",
+  "time" : {
+    "start" : 1577758604245,
+    "stop" : 1577758610602,
+    "duration" : 6357
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b2d8347f672d4e75",
+  "name" : "[2] wrongOldPassword, root, root, false, 旧密码错误",
+  "time" : {
+    "start" : 1577758513614,
+    "stop" : 1577758519642,
+    "duration" : 6028
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "61f94d444b3bc1d3",
+  "name" : "test_throws_sql_exception_when_query_user_by_sex()",
+  "time" : {
+    "start" : 1577758378202,
+    "stop" : 1577758378203,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "860db9040866a11a",
+  "name" : "[4] user, save",
+  "time" : {
+    "start" : 1577758403872,
+    "stop" : 1577758403916,
+    "duration" : 44
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "706b157dc8c0260d",
+  "name" : "[4] invalid",
+  "time" : {
+    "start" : 1577758400867,
+    "stop" : 1577758401056,
+    "duration" : 189
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "cd21e017a9be2b59",
+  "name" : "add20UserAndUpdate()",
+  "time" : {
+    "start" : 1577758417199,
+    "stop" : 1577758417718,
+    "duration" : 519
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b5202de46a98adf9",
+  "name" : "[7] , , , false, 信息填写不完整！",
+  "time" : {
+    "start" : 1577758544862,
+    "stop" : 1577758550868,
+    "duration" : 6006
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "9859e38ea477f660",
+  "name" : "[2] username2, password2, name2, FEMALE, tel2",
+  "time" : {
+    "start" : 1577758410723,
+    "stop" : 1577758410860,
+    "duration" : 137
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "7430e6fcd1ee842c",
+  "name" : "[7] usernameusername4, password4, 用户名或密码错误",
+  "time" : {
+    "start" : 1577758664781,
+    "stop" : 1577758670236,
+    "duration" : 5455
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "fb2f90db8a7eacde",
+  "name" : "service_WhenUserIsAdmin_ActionIsSave_IdIsNull()",
+  "time" : {
+    "start" : 1577758376548,
+    "stop" : 1577758376551,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c76c69cd979fa098",
+  "name" : "[3] usernameusername3, passwordpassword3",
+  "time" : {
+    "start" : 1577758694575,
+    "stop" : 1577758699960,
+    "duration" : 5385
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "3ce98077c86e60d4",
+  "name" : "shouldGoToModify_whenCurrentUserIsAdmin_andActionIsModify()",
+  "time" : {
+    "start" : 1577758391007,
+    "stop" : 1577758392474,
+    "duration" : 1467
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "3524bd42eaf496ca",
+  "name" : "[1] new content, true, ",
+  "time" : {
+    "start" : 1577758843359,
+    "stop" : 1577758849058,
+    "duration" : 5699
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a26b8473215ee397",
+  "name" : "[5] user, other",
+  "time" : {
+    "start" : 1577758403926,
+    "stop" : 1577758403954,
+    "duration" : 28
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "83f55ebc0b000c4",
+  "name" : "[2] MALE",
+  "time" : {
+    "start" : 1577758409044,
+    "stop" : 1577758409152,
+    "duration" : 108
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5b9f3d1fcedb1204",
+  "name" : "testCloseConnection()",
+  "time" : {
+    "start" : 1577758418838,
+    "stop" : 1577758418843,
+    "duration" : 5
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e7649e828c44d048",
+  "name" : "test_throws_sql_exception_when_list_building()",
+  "time" : {
+    "start" : 1577758377547,
+    "stop" : 1577758377549,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c672541ce9d3d8ba",
+  "name" : "test_throws_sql_exception_when_add_User()",
+  "time" : {
+    "start" : 1577758378224,
+    "stop" : 1577758378226,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "11a66471b0c0979f",
+  "name" : "[7] other, 0",
+  "time" : {
+    "start" : 1577758398435,
+    "stop" : 1577758398611,
+    "duration" : 176
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "7721f062eff1b050",
+  "name" : "[1] username1, password1-",
+  "time" : {
+    "start" : 1577758399254,
+    "stop" : 1577758399518,
+    "duration" : 264
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "fe927a9a67c3a5aa",
+  "name" : "shouldGoToModify_whenCurrentUserIsAdmin_andActionIsAdd()",
+  "time" : {
+    "start" : 1577758394510,
+    "stop" : 1577758394590,
+    "duration" : 80
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "cc3fe841c866f3be",
+  "name" : "[7] admin, other",
+  "time" : {
+    "start" : 1577758404002,
+    "stop" : 1577758404033,
+    "duration" : 31
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "291cc433b2af5f37",
+  "name" : "[12] 1234512345, 1 34567890, name1, MALE, 13000000000, 密码不能含有空格",
+  "time" : {
+    "start" : 1577758783426,
+    "stop" : 1577758788680,
+    "duration" : 5254
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "83007e117630ea11",
+  "name" : "[1] ECNU, East China Normal University, 1",
+  "time" : {
+    "start" : 1577758393410,
+    "stop" : 1577758393534,
+    "duration" : 124
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "8150b4e2ea231af6",
+  "name" : "deleteVerifiedComment()",
+  "time" : {
+    "start" : 1577758501769,
+    "stop" : 1577758507609,
+    "duration" : 5840
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a6abb198ee27028f",
+  "name" : "[2] newusername, newpassword, newname, FEMALE, newtel",
+  "time" : {
+    "start" : 1577758441418,
+    "stop" : 1577758448241,
+    "duration" : 6823
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "f78898596fb4e392",
+  "name" : "test_throws_sql_exception_when_deleteNews()",
+  "time" : {
+    "start" : 1577758377907,
+    "stop" : 1577758377910,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "8538b1ce9f4ccfd0",
+  "name" : "[3] admin3, password3",
+  "time" : {
+    "start" : 1577758402212,
+    "stop" : 1577758402436,
+    "duration" : 224
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ac0c2a98bbd915b8",
+  "name" : "[1] pengjuntao",
+  "time" : {
+    "start" : 1577758411547,
+    "stop" : 1577758411653,
+    "duration" : 106
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5de66307bef22e94",
+  "name" : "[13] 1234512345, 1234567890, , MALE, 13000000000, 姓名不能为空",
+  "time" : {
+    "start" : 1577758788693,
+    "stop" : 1577758793815,
+    "duration" : 5122
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "90f77fcd606f579d",
+  "name" : "[1] usernameusername1, passwordpassword1",
+  "time" : {
+    "start" : 1577758684706,
+    "stop" : 1577758689672,
+    "duration" : 4966
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "6db0d5243751c6c0",
+  "name" : "test_throws_sql_exception_when_list_record()",
+  "time" : {
+    "start" : 1577758378050,
+    "stop" : 1577758378051,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c7196ea4f6251905",
+  "name" : "[3] Golden Gate Park, ggp, 999",
+  "time" : {
+    "start" : 1577758394381,
+    "stop" : 1577758394501,
+    "duration" : 120
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "87bfa9f283baf717",
+  "name" : "[1] Sather Gate, sg, 999",
+  "time" : {
+    "start" : 1577758394117,
+    "stop" : 1577758394224,
+    "duration" : 107
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "4e2ba12dfbb44644",
+  "name" : "[1] username1, password1, name1, MALE, tel1",
+  "time" : {
+    "start" : 1577758412024,
+    "stop" : 1577758412161,
+    "duration" : 137
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "2a1d6e8f9cb4f3e8",
+  "name" : "add20UserAndQueryByList()",
+  "time" : {
+    "start" : 1577758417725,
+    "stop" : 1577758418126,
+    "duration" : 401
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "2fd3d5b6a2016a91",
+  "name" : "[4] usernameusername1-, passwordpassword1, 用户名或密码错误",
+  "time" : {
+    "start" : 1577758650277,
+    "stop" : 1577758655155,
+    "duration" : 4878
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b4df8c47446968cb",
+  "name" : "test_query_user_by_sex_WhenPermissionIs_1()",
+  "time" : {
+    "start" : 1577758378136,
+    "stop" : 1577758378138,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "f4bc993363150176",
+  "name" : "test_delete_Comment_When_Result_Is_True()",
+  "time" : {
+    "start" : 1577758377774,
+    "stop" : 1577758377776,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "62fc6dd00498a9b7",
+  "name" : "service_WhenUserIsUser_ActionIsList()",
+  "time" : {
+    "start" : 1577758376561,
+    "stop" : 1577758376564,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "26c18e6976134319",
+  "name" : "service_WhenUserIsAdmin_ActionIsDelete()",
+  "time" : {
+    "start" : 1577758376483,
+    "stop" : 1577758376485,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ebb4c1acf48bef78",
+  "name" : "service_WhenActionIsDelete_UserIsAdmin()",
+  "time" : {
+    "start" : 1577758376131,
+    "stop" : 1577758376133,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "4f974ae5bcb2be89",
+  "name" : "service_test()",
+  "time" : {
+    "start" : 1577758376311,
+    "stop" : 1577758376312,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "128847bae6da50a3",
+  "name" : "givenUserWhenActionIsAddThenRedirectToRecordAdd()",
+  "time" : {
+    "start" : 1577758407236,
+    "stop" : 1577758407406,
+    "duration" : 170
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "1f48b63c7177fc84",
+  "name" : "addAnUnverifiedRecordAndQueryItById()",
+  "time" : {
+    "start" : 1577758415743,
+    "stop" : 1577758415773,
+    "duration" : 30
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5fc1ea89e9f5d1ec",
+  "name" : "[3] user, modify",
+  "time" : {
+    "start" : 1577758403830,
+    "stop" : 1577758403865,
+    "duration" : 35
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b3b9ee5fa40c2385",
+  "name" : "service_When_ActionIsSave_IdstrIsNull()",
+  "time" : {
+    "start" : 1577758377004,
+    "stop" : 1577758377008,
+    "duration" : 4
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "571f31abbf751eb7",
+  "name" : "[2] addbuildingname1, 500, addbuildingdescription2",
+  "time" : {
+    "start" : 1577758459825,
+    "stop" : 1577758465595,
+    "duration" : 5770
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c3ff6230269ab40c",
+  "name" : "[2] username2, password2, name2, FEMALE, tel2",
+  "time" : {
+    "start" : 1577758409905,
+    "stop" : 1577758410058,
+    "duration" : 153
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "1a3dd133f0636847",
+  "name" : "[2] lishangzhen",
+  "time" : {
+    "start" : 1577758411662,
+    "stop" : 1577758411773,
+    "duration" : 111
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "45803329089f11a5",
+  "name" : "add3CommentsAndList5ShouldGet3UnverifiedComments()",
+  "time" : {
+    "start" : 1577758413187,
+    "stop" : 1577758413258,
+    "duration" : 71
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "4becfc2d3974397f",
+  "name" : "[2] 999, ---, 999, MALE, 13918300851",
+  "time" : {
+    "start" : 1577758408096,
+    "stop" : 1577758408131,
+    "duration" : 35
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "f585733d34964719",
+  "name" : "[2] 2",
+  "time" : {
+    "start" : 1577758408400,
+    "stop" : 1577758408516,
+    "duration" : 116
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a63759bf0561713b",
+  "name" : "service_When_ActionIsModify()",
+  "time" : {
+    "start" : 1577758377156,
+    "stop" : 1577758377157,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "7e0417ddaf021c48",
+  "name" : "test_update_Comment_When_Result_Is_False()",
+  "time" : {
+    "start" : 1577758377807,
+    "stop" : 1577758377809,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "898b179eaf413e7e",
+  "name" : "givenAdminWhenActionIsDeleteThenDelete()",
+  "time" : {
+    "start" : 1577758403601,
+    "stop" : 1577758403637,
+    "duration" : 36
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c5acecb68f2cd5b5",
+  "name" : "service_WhenUserIsAdmin_ActionIsSave_IdIsNotNull()",
+  "time" : {
+    "start" : 1577758376534,
+    "stop" : 1577758376537,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "9fc3f4f7b1f1ec24",
+  "name" : "[11] 1234567890, 12345678901234567890, name1, MALE, 13000000000, 密码必须在10-15个字符之间",
+  "time" : {
+    "start" : 1577758778236,
+    "stop" : 1577758783416,
+    "duration" : 5180
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c4f115851064332b",
+  "name" : "test_throws_sql_exception_when_query_news_by_id()",
+  "time" : {
+    "start" : 1577758377968,
+    "stop" : 1577758377969,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ce1b0b56fdcac229",
+  "name" : "shouldForwardToIndex_WhenURLIsSlash()",
+  "time" : {
+    "start" : 1577758399228,
+    "stop" : 1577758399236,
+    "duration" : 8
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a26f09f19757dc37",
+  "name" : "test_throws_sql_exception_when_add_Record()",
+  "time" : {
+    "start" : 1577758377998,
+    "stop" : 1577758377999,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "1722065d6167e972",
+  "name" : "[5] username5, password5, name5, MALE, tel5",
+  "time" : {
+    "start" : 1577758412606,
+    "stop" : 1577758412738,
+    "duration" : 132
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "7530f40bcfe8dd5e",
+  "name" : "service_When_ActionIsOther()",
+  "time" : {
+    "start" : 1577758377095,
+    "stop" : 1577758377097,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "f0639add11745866",
+  "name" : "add1BuildingAndQueryById()",
+  "time" : {
+    "start" : 1577758412954,
+    "stop" : 1577758412991,
+    "duration" : 37
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b27144a87b33a3b2",
+  "name" : "service_When_ActionIsSearch_KeyWordEqualSex()",
+  "time" : {
+    "start" : 1577758377021,
+    "stop" : 1577758377025,
+    "duration" : 4
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "6fd0efc3fdee0d87",
+  "name" : "test_queryAllUsers_WhenPermissionIs_0()",
+  "time" : {
+    "start" : 1577758378255,
+    "stop" : 1577758378257,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "bc43ae644cd6b29",
+  "name" : "test_throws_sql_exception_when_updateRecord()",
+  "time" : {
+    "start" : 1577758378024,
+    "stop" : 1577758378026,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e8bbc70ad4c458f",
+  "name" : "[5] username5, password5",
+  "time" : {
+    "start" : 1577758403262,
+    "stop" : 1577758403466,
+    "duration" : 204
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "9f32964e1843b8b4",
+  "name" : "[3] admin3, password3-",
+  "time" : {
+    "start" : 1577758401640,
+    "stop" : 1577758401829,
+    "duration" : 189
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "64b3abd164cf55f8",
+  "name" : "add1BuildingAndUpdateName()",
+  "time" : {
+    "start" : 1577758412748,
+    "stop" : 1577758412801,
+    "duration" : 53
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "dc35d5f67587646c",
+  "name" : "service_WhenUserIsUser_ActionIsChange()",
+  "time" : {
+    "start" : 1577758376703,
+    "stop" : 1577758376704,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "307b39438d824869",
+  "name" : "test_throws_sql_exception_when_query_user_by_id()",
+  "time" : {
+    "start" : 1577758378234,
+    "stop" : 1577758378235,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "15676dcd1fd3b72d",
+  "name" : "test_when_list_record()",
+  "time" : {
+    "start" : 1577758378102,
+    "stop" : 1577758378104,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "df69034a3ab50c74",
+  "name" : "shouldGoToMainUser_whenCurrentUserIsUser_andActionIsDelete()",
+  "time" : {
+    "start" : 1577758393210,
+    "stop" : 1577758393291,
+    "duration" : 81
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "8cbf1f26794e7c05",
+  "name" : "[3] delete, 5",
+  "time" : {
+    "start" : 1577758397693,
+    "stop" : 1577758397853,
+    "duration" : 160
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e6ff36af3501f349",
+  "name" : "[5] 12345678901234567890, 1234567890, name1, MALE, 13000000000, 用户名必须在5-15个字符之间",
+  "time" : {
+    "start" : 1577758746864,
+    "stop" : 1577758752035,
+    "duration" : 5171
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "85315b197c53903f",
+  "name" : "[2] is",
+  "time" : {
+    "start" : 1577758400505,
+    "stop" : 1577758400672,
+    "duration" : 167
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5b3af294682e4139",
+  "name" : "test_signup()",
+  "time" : {
+    "start" : 1577758377861,
+    "stop" : 1577758377863,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b0cecdcb21aadb16",
+  "name" : "[4] , root, root, false, 信息填写不完整！",
+  "time" : {
+    "start" : 1577758525887,
+    "stop" : 1577758531971,
+    "duration" : 6084
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "2523d1ade37ad9be",
+  "name" : "shouldReturnList_whenAdminActionIsList()",
+  "time" : {
+    "start" : 1577758394967,
+    "stop" : 1577758395053,
+    "duration" : 86
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "2fb11e1d70d3b939",
+  "name" : "[2] SJTU, Shanghai Jiao Tong University, 2",
+  "time" : {
+    "start" : 1577758392758,
+    "stop" : 1577758392899,
+    "duration" : 141
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a39edde948eb3988",
+  "name" : "[3] passwordpassword1, root, root1, false, 密码填写不一致！",
+  "time" : {
+    "start" : 1577758519651,
+    "stop" : 1577758525872,
+    "duration" : 6221
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b7806e89d90106f6",
+  "name" : "[2] admin2, password2",
+  "time" : {
+    "start" : 1577758675035,
+    "stop" : 1577758679850,
+    "duration" : 4815
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "77f52b3618910eb1",
+  "name" : "[5] 999, 999, 999, MALE, ---",
+  "time" : {
+    "start" : 1577758408218,
+    "stop" : 1577758408249,
+    "duration" : 31
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ccb56907932ecdaa",
+  "name" : "[4] usernameusername4, passwordpassword4",
+  "time" : {
+    "start" : 1577758699968,
+    "stop" : 1577758704774,
+    "duration" : 4806
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e2dde71882f1e17c",
+  "name" : "[1] admin1, password1",
+  "time" : {
+    "start" : 1577758401837,
+    "stop" : 1577758402022,
+    "duration" : 185
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "bf49532c09c9db69",
+  "name" : "test_update_Building_When_Result_Is_True()",
+  "time" : {
+    "start" : 1577758377623,
+    "stop" : 1577758377626,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "f0862ea539f99505",
+  "name" : "shouldForwardToIndex_WhenNotLogin_AndRequestIsBlank()",
+  "time" : {
+    "start" : 1577758390984,
+    "stop" : 1577758390986,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "7a7c5f3ab9500dc1",
+  "name" : "[17] 1234512345, 1234567890, name1, MALE, 123456789012, 电话必须为以1起始的11位数字",
+  "time" : {
+    "start" : 1577758809187,
+    "stop" : 1577758814426,
+    "duration" : 5239
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "34f3e7b34c6b224d",
+  "name" : "[5] username5, password5, name5, MALE, tel5",
+  "time" : {
+    "start" : 1577758407942,
+    "stop" : 1577758408000,
+    "duration" : 58
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d843e8bd7e513369",
+  "name" : "test_list_record_with_UserId()",
+  "time" : {
+    "start" : 1577758377986,
+    "stop" : 1577758377989,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b427547597abd241",
+  "name" : "[3] 4, 1234567890, name1, MALE, 13000000000, 用户名必须在5-15个字符之间",
+  "time" : {
+    "start" : 1577758736373,
+    "stop" : 1577758741601,
+    "duration" : 5228
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "3d64020be72b6c5b",
+  "name" : "[3] username3, password3",
+  "time" : {
+    "start" : 1577758402847,
+    "stop" : 1577758403016,
+    "duration" : 169
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e3e9e12f773390ec",
+  "name" : "[2] , passwordpassword1, 用户名不能为空",
+  "time" : {
+    "start" : 1577758640871,
+    "stop" : 1577758645607,
+    "duration" : 4736
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "7735bdf024f8a51",
+  "name" : "service_whenUserIsNull()",
+  "time" : {
+    "start" : 1577758376348,
+    "stop" : 1577758376353,
+    "duration" : 5
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d53e35addef95dbd",
+  "name" : "[4] verify, 0",
+  "time" : {
+    "start" : 1577758397862,
+    "stop" : 1577758398039,
+    "duration" : 177
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a1633186b80682dc",
+  "name" : "[4] MIT, Massachusetts Institute of Technology, 4",
+  "time" : {
+    "start" : 1577758393064,
+    "stop" : 1577758393198,
+    "duration" : 134
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "8d6de48996d9ce02",
+  "name" : "service_WhenActionIsSave_UserIsAdmin_IDStrIsNull()",
+  "time" : {
+    "start" : 1577758376252,
+    "stop" : 1577758376256,
+    "duration" : 4
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "eadf62e9e4777bd7",
+  "name" : "[2] username2, passwo-rd2",
+  "time" : {
+    "start" : 1577758399527,
+    "stop" : 1577758399697,
+    "duration" : 170
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "9698f5b169758843",
+  "name" : "givenAdminWhenActionIsSaveModifiedNewsThenSave()",
+  "time" : {
+    "start" : 1577758403479,
+    "stop" : 1577758403544,
+    "duration" : 65
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b427429ceb8b604a",
+  "name" : "test_add_Building_When_Result_Is_True()",
+  "time" : {
+    "start" : 1577758377590,
+    "stop" : 1577758377592,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "778d61884da2feda",
+  "name" : "givenAdminWhenIllegalActionThenReturnToBlank(String)",
+  "time" : {
+    "start" : 1577758395252,
+    "stop" : 1577758395252,
+    "duration" : 0
+  },
+  "status" : "skipped",
+  "severity" : "normal"
+}, {
+  "uid" : "12c1fb5d2cf0b686",
+  "name" : "test_add_Comment_When_Result_Is_False()",
+  "time" : {
+    "start" : 1577758377766,
+    "stop" : 1577758377767,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5bb18081864b754c",
+  "name" : "deleteUnverifiedComment()",
+  "time" : {
+    "start" : 1577758591726,
+    "stop" : 1577758597558,
+    "duration" : 5832
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "3c305c105e336066",
+  "name" : "service_WhenUserTypeIsAdmin_ActionIsList()",
+  "time" : {
+    "start" : 1577758376912,
+    "stop" : 1577758376915,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "1ac371fd8d9d7fcc",
+  "name" : "[4] 999, 999, 999, FEMALE, 13918300851",
+  "time" : {
+    "start" : 1577758408182,
+    "stop" : 1577758408210,
+    "duration" : 28
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "69d49fdeee848cbc",
+  "name" : "service_When_IsNotAuthorized_ThenReturn_mv()",
+  "time" : {
+    "start" : 1577758377073,
+    "stop" : 1577758377074,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "385a70488b15af38",
+  "name" : "shouldReturnUserWhenSignupANewUser()",
+  "time" : {
+    "start" : 1577758413413,
+    "stop" : 1577758413474,
+    "duration" : 61
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "bf7cfee05a780503",
+  "name" : "service_WhenUserTypeIsUser_ActionIsList()",
+  "time" : {
+    "start" : 1577758376849,
+    "stop" : 1577758376852,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "9f46fc466c27d07e",
+  "name" : "service_When_ActionIsSave_IdstrIsNotNull()",
+  "time" : {
+    "start" : 1577758377106,
+    "stop" : 1577758377109,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "9ea6f0c0ea1a28f4",
+  "name" : "test_update_Record_When_Result_Is_True()",
+  "time" : {
+    "start" : 1577758378112,
+    "stop" : 1577758378114,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "4b3114f41e4335aa",
+  "name" : "[9] 1234567890, 123456789, name1, MALE, 13000000000, 密码必须在10-15个字符之间",
+  "time" : {
+    "start" : 1577758767704,
+    "stop" : 1577758772801,
+    "duration" : 5097
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a0a759f12ac56ac9",
+  "name" : "test_delete_Building_When_Result_Is_False()",
+  "time" : {
+    "start" : 1577758377669,
+    "stop" : 1577758377670,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "bbf1d4799b71ad6f",
+  "name" : "test_add_Comment_When_Result_Is_True()",
+  "time" : {
+    "start" : 1577758377681,
+    "stop" : 1577758377684,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b880c8c49d536ba8",
+  "name" : "addAnUnverifiedRecordAndQueryItByList()",
+  "time" : {
+    "start" : 1577758416528,
+    "stop" : 1577758416561,
+    "duration" : 33
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e25e70b5c389fe60",
+  "name" : "verifyRecord()",
+  "time" : {
+    "start" : 1577758490080,
+    "stop" : 1577758495926,
+    "duration" : 5846
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e8450710ced070b3",
+  "name" : "shouldGoToMainUser_whenCurrentUserIsUser_andActionIsAdd()",
+  "time" : {
+    "start" : 1577758393930,
+    "stop" : 1577758394006,
+    "duration" : 76
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "26d36e3e95115e8e",
+  "name" : "[3] UCB, University of California, Berkeley, 3",
+  "time" : {
+    "start" : 1577758393670,
+    "stop" : 1577758393793,
+    "duration" : 123
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5903cc9ab74c82c4",
+  "name" : "[6] username3, passwordpassword3, 用户名或密码错误",
+  "time" : {
+    "start" : 1577758659982,
+    "stop" : 1577758664770,
+    "duration" : 4788
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "6d3220908d4f18f8",
+  "name" : "shouldReturnList_whenUserActionIsList()",
+  "time" : {
+    "start" : 1577758394016,
+    "stop" : 1577758394102,
+    "duration" : 86
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c01702aa6f3e91e6",
+  "name" : "[1] username1, password1, name1, MALE, tel1",
+  "time" : {
+    "start" : 1577758407645,
+    "stop" : 1577758407741,
+    "duration" : 96
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ceed896aa7e81bf8",
+  "name" : "service_RequestIsOther_ReturnAdminBlank()",
+  "time" : {
+    "start" : 1577758375934,
+    "stop" : 1577758375937,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e5a158b225913805",
+  "name" : "test_throws_sql_exception_when_deleteBuilding()",
+  "time" : {
+    "start" : 1577758377635,
+    "stop" : 1577758377637,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "eeaffe438df5bb87",
+  "name" : "add20VerifiedRecordAndUpdateToUnverified()",
+  "time" : {
+    "start" : 1577758416568,
+    "stop" : 1577758417193,
+    "duration" : 625
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "533070f46b20c7de",
+  "name" : "[3] admin3, password3",
+  "time" : {
+    "start" : 1577758679866,
+    "stop" : 1577758684697,
+    "duration" : 4831
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a86999afe6165258",
+  "name" : "test_add_User_When_Result_Is_True()",
+  "time" : {
+    "start" : 1577758378278,
+    "stop" : 1577758378281,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "8346bb13e008c461",
+  "name" : "add20NewsAndUpdate()",
+  "time" : {
+    "start" : 1577758413908,
+    "stop" : 1577758414560,
+    "duration" : 652
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "f6e7458da82d6f88",
+  "name" : "[1] 0",
+  "time" : {
+    "start" : 1577758395929,
+    "stop" : 1577758396138,
+    "duration" : 209
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "708d09844b4519d",
+  "name" : "test_delete_Comment_When_Result_Is_False()",
+  "time" : {
+    "start" : 1577758377755,
+    "stop" : 1577758377758,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "98b67db43a2b146f",
+  "name" : "[1] 0",
+  "time" : {
+    "start" : 1577758396584,
+    "stop" : 1577758396789,
+    "duration" : 205
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "40024b1a4a509ce2",
+  "name" : "shouldReturnListUser_whenAdminActionList()",
+  "time" : {
+    "start" : 1577758411261,
+    "stop" : 1577758411425,
+    "duration" : 164
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "14726f6bdc9e2f3e",
+  "name" : "service_WhenUserTypeIsAdmin_ActionIsDelete()",
+  "time" : {
+    "start" : 1577758376882,
+    "stop" : 1577758376884,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d1a5d8274b94d528",
+  "name" : "service_When_ActionIsSearch_KeyWordEqualId()",
+  "time" : {
+    "start" : 1577758377143,
+    "stop" : 1577758377146,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "176f894600b6f704",
+  "name" : "test_query_Building_By_Id()",
+  "time" : {
+    "start" : 1577758377613,
+    "stop" : 1577758377615,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d5fd30f12772aaf3",
+  "name" : "[2] 3",
+  "time" : {
+    "start" : 1577758406027,
+    "stop" : 1577758406220,
+    "duration" : 193
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "3c9f66f287ffd155",
+  "name" : "givenUserWhenActionIsListThenListVerifiedComments()",
+  "time" : {
+    "start" : 1577758395717,
+    "stop" : 1577758395918,
+    "duration" : 201
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5fd00314165a2cee",
+  "name" : "test_query_User_By_Id_WhenPermissionIs_0()",
+  "time" : {
+    "start" : 1577758378147,
+    "stop" : 1577758378151,
+    "duration" : 4
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a6cc733d537d097d",
+  "name" : "[2] buildingname2, 2021-01-01, 2",
+  "time" : {
+    "start" : 1577758831161,
+    "stop" : 1577758837004,
+    "duration" : 5843
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "8f0de6c46f721274",
+  "name" : "givenAdminWhenActionIsListThenListAllComments()",
+  "time" : {
+    "start" : 1577758395264,
+    "stop" : 1577758395481,
+    "duration" : 217
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "87f1119f6af5f117",
+  "name" : "givenUserWhenActionIsAddThenRedirectToCommentSave()",
+  "time" : {
+    "start" : 1577758395490,
+    "stop" : 1577758395709,
+    "duration" : 219
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "7b50074a2c645bae",
+  "name" : "test_throws_sql_exception_when_deleteRecord()",
+  "time" : {
+    "start" : 1577758378037,
+    "stop" : 1577758378039,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ed78847901e18cef",
+  "name" : "[3] username3, password3, name3, MALE, tel3",
+  "time" : {
+    "start" : 1577758410068,
+    "stop" : 1577758410192,
+    "duration" : 124
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "79da43f1dca9bcb8",
+  "name" : "[15] 1234512345, 1234567890, name1, MALE, 22345678901, 电话必须为以1起始的11位数字",
+  "time" : {
+    "start" : 1577758798947,
+    "stop" : 1577758804044,
+    "duration" : 5097
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e3e73108d92268d",
+  "name" : "[3] 1234512345, 123456789012, name1, MALE, 13000000000",
+  "time" : {
+    "start" : 1577758720816,
+    "stop" : 1577758726175,
+    "duration" : 5359
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "4a1511f85ea8f08",
+  "name" : "givenAdminWhenActionIsModifyThenRedirectToNewsModify()",
+  "time" : {
+    "start" : 1577758404119,
+    "stop" : 1577758404154,
+    "duration" : 35
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "7ea6f44051466092",
+  "name" : "shouldForwardToBlankJsp_WhenLoginAsAdmin_AndRequestIsBlank()",
+  "time" : {
+    "start" : 1577758390968,
+    "stop" : 1577758390971,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c1885ab0ecedef44",
+  "name" : "[1] , 1234567890, name1, MALE, 13000000000, 用户名不能为空",
+  "time" : {
+    "start" : 1577758726183,
+    "stop" : 1577758731232,
+    "duration" : 5049
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e380e936a4efde32",
+  "name" : "service_WhenUserTypeIsUser_ActionIsAdd()",
+  "time" : {
+    "start" : 1577758376817,
+    "stop" : 1577758376819,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "f7cafbcb9d448cfa",
+  "name" : "givenAdminWhenActionIsAddThenRedirectToNewsModify()",
+  "time" : {
+    "start" : 1577758404082,
+    "stop" : 1577758404112,
+    "duration" : 30
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "2fbf74e286a5ca6c",
+  "name" : "[1] 0",
+  "time" : {
+    "start" : 1577758405817,
+    "stop" : 1577758406018,
+    "duration" : 201
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "def46898203bcaa8",
+  "name" : "deleteNews()",
+  "time" : {
+    "start" : 1577758629949,
+    "stop" : 1577758636223,
+    "duration" : 6274
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b293fdd5b9cfecf6",
+  "name" : "[1] add",
+  "time" : {
+    "start" : 1577758406438,
+    "stop" : 1577758406627,
+    "duration" : 189
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "fb07bf8961f173a4",
+  "name" : "[4] 1234567890123456, 1234567890, name1, MALE, 13000000000, 用户名必须在5-15个字符之间",
+  "time" : {
+    "start" : 1577758741610,
+    "stop" : 1577758746854,
+    "duration" : 5244
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "39ddb88828e6979e",
+  "name" : "givenUserWhenActionIsDeleteThenDelete()",
+  "time" : {
+    "start" : 1577758405033,
+    "stop" : 1577758405220,
+    "duration" : 187
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a247014c928d60d3",
+  "name" : "[1] correct title, correct author, correct detail, true, ",
+  "time" : {
+    "start" : 1577758556685,
+    "stop" : 1577758564904,
+    "duration" : 8219
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "de9d4815327d8e8b",
+  "name" : "[2] 3",
+  "time" : {
+    "start" : 1577758396799,
+    "stop" : 1577758397061,
+    "duration" : 262
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "77239e5797e76970",
+  "name" : "test_delete_Record_When_Result_Is_True()",
+  "time" : {
+    "start" : 1577758378063,
+    "stop" : 1577758378064,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "7516ecce1b1f3868",
+  "name" : "shouldForwardToModify_whenActionIsAdd()",
+  "time" : {
+    "start" : 1577758410475,
+    "stop" : 1577758410573,
+    "duration" : 98
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "8b35cd7f66c23541",
+  "name" : "[2] admin2, password2",
+  "time" : {
+    "start" : 1577758402033,
+    "stop" : 1577758402204,
+    "duration" : 171
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ee5f5c17c6bf439a",
+  "name" : "[2] username2, password2",
+  "time" : {
+    "start" : 1577758402661,
+    "stop" : 1577758402838,
+    "duration" : 177
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "f8dd0f433e70cda",
+  "name" : "test_throws_sql_exception_when_insert_News()",
+  "time" : {
+    "start" : 1577758377919,
+    "stop" : 1577758377920,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "21e4f82548af846a",
+  "name" : "[1] 12345, 1234567890, name1, MALE, 13000000000",
+  "time" : {
+    "start" : 1577758710208,
+    "stop" : 1577758715489,
+    "duration" : 5281
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "dede7c5196773649",
+  "name" : "[2] admin2, password2-",
+  "time" : {
+    "start" : 1577758401466,
+    "stop" : 1577758401632,
+    "duration" : 166
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "acfecc5001a1c5ff",
+  "name" : "givenUserWhenActionIsSaveThenSave()",
+  "time" : {
+    "start" : 1577758407414,
+    "stop" : 1577758407632,
+    "duration" : 218
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b5bc8ee59237c7d0",
+  "name" : "service_WhenActionIsBook_UserIsAdmin()",
+  "time" : {
+    "start" : 1577758376048,
+    "stop" : 1577758376103,
+    "duration" : 55
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "51f99b0a28293886",
+  "name" : "[4] username4, password4, name4, FEMALE, tel4",
+  "time" : {
+    "start" : 1577758410199,
+    "stop" : 1577758410345,
+    "duration" : 146
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "507b93355e2d793e",
+  "name" : "addAVerifiedRecordAndQueryItById()",
+  "time" : {
+    "start" : 1577758415244,
+    "stop" : 1577758415276,
+    "duration" : 32
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "107a724d11783a9c",
+  "name" : "test_query_Record_By_Id()",
+  "time" : {
+    "start" : 1577758378091,
+    "stop" : 1577758378093,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "416ba5864b8a0711",
+  "name" : "test_throws_sql_exception_when_query_comment_by_id()",
+  "time" : {
+    "start" : 1577758377724,
+    "stop" : 1577758377726,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "cd7daada888bdc78",
+  "name" : "service_WhenUserIsAdmin_ActionIsModify()",
+  "time" : {
+    "start" : 1577758376496,
+    "stop" : 1577758376498,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "2c60e43ccb462203",
+  "name" : "[5] username5, passw-ord5",
+  "time" : {
+    "start" : 1577758400123,
+    "stop" : 1577758400306,
+    "duration" : 183
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "65248df235dbf84a",
+  "name" : "givenAdminWhenActionIsListThenList()",
+  "time" : {
+    "start" : 1577758404041,
+    "stop" : 1577758404075,
+    "duration" : 34
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "9cd1060f623e153a",
+  "name" : "[1] passwordpassword1, root, root, true, ",
+  "time" : {
+    "start" : 1577758507618,
+    "stop" : 1577758513605,
+    "duration" : 5987
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "aec1b7129300b040",
+  "name" : "[2] 3",
+  "time" : {
+    "start" : 1577758405446,
+    "stop" : 1577758405621,
+    "duration" : 175
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "95f5454db5ceb63b",
+  "name" : "[1] admin1, password1-",
+  "time" : {
+    "start" : 1577758401261,
+    "stop" : 1577758401457,
+    "duration" : 196
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d1965ecd2f94efd9",
+  "name" : "deleteUnverifiedRecord()",
+  "time" : {
+    "start" : 1577758495938,
+    "stop" : 1577758501755,
+    "duration" : 5817
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "410ab226e82c077e",
+  "name" : "deleteBuilding()",
+  "time" : {
+    "start" : 1577758465604,
+    "stop" : 1577758471036,
+    "duration" : 5432
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "8a08d8263d574ab",
+  "name" : "service_ReturnError_WhenUserIsAdmin_ActionIsSave()",
+  "time" : {
+    "start" : 1577758376666,
+    "stop" : 1577758376669,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "7cebb34fbf0ed88b",
+  "name" : "signUpPage_test()",
+  "time" : {
+    "start" : 1577758376967,
+    "stop" : 1577758376968,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ace47da6824630df",
+  "name" : "test_throws_sql_exception_when_updateNews()",
+  "time" : {
+    "start" : 1577758377978,
+    "stop" : 1577758377979,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "81fb7e7fb2ff166",
+  "name" : "[3] other",
+  "time" : {
+    "start" : 1577758406830,
+    "stop" : 1577758407040,
+    "duration" : 210
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b8330fccba5e3ae4",
+  "name" : "[2] user, delete",
+  "time" : {
+    "start" : 1577758403789,
+    "stop" : 1577758403822,
+    "duration" : 33
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "3077ed8ee7cea411",
+  "name" : "[3] correct title, , correct detail, false, 作者不能为空！",
+  "time" : {
+    "start" : 1577758610613,
+    "stop" : 1577758617328,
+    "duration" : 6715
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ca1c165790a3f798",
+  "name" : "[3] 5",
+  "time" : {
+    "start" : 1577758406228,
+    "stop" : 1577758406429,
+    "duration" : 201
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "56e5d91a1e0ade47",
+  "name" : "[3] UCB, University of California, Berkeley, 3",
+  "time" : {
+    "start" : 1577758392911,
+    "stop" : 1577758393052,
+    "duration" : 141
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b0415083cdaacfb6",
+  "name" : "service_whenUserIsAdmin()",
+  "time" : {
+    "start" : 1577758376398,
+    "stop" : 1577758376402,
+    "duration" : 4
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "3a2294f397e29fde",
+  "name" : "[2] delete, 3",
+  "time" : {
+    "start" : 1577758397503,
+    "stop" : 1577758397684,
+    "duration" : 181
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "86d8293037b46b62",
+  "name" : "[1] 4",
+  "time" : {
+    "start" : 1577758409268,
+    "stop" : 1577758409402,
+    "duration" : 134
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d9a5d5ed8f824d53",
+  "name" : "[4] username4, password4",
+  "time" : {
+    "start" : 1577758403024,
+    "stop" : 1577758403253,
+    "duration" : 229
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "3ffb7687f1605184",
+  "name" : "test_throws_sql_exception_when_updateComment()",
+  "time" : {
+    "start" : 1577758377817,
+    "stop" : 1577758377818,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "cb124d83d796c8f9",
+  "name" : "[3] 3, 2020-2-29, 5",
+  "time" : {
+    "start" : 1577758394842,
+    "stop" : 1577758394958,
+    "duration" : 116
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "1c56d12815e7351c",
+  "name" : "test_update_Comment_When_Result_Is_True()",
+  "time" : {
+    "start" : 1577758377746,
+    "stop" : 1577758377747,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "f505159bae132aed",
+  "name" : "[3] 5",
+  "time" : {
+    "start" : 1577758397070,
+    "stop" : 1577758397270,
+    "duration" : 200
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "858b89d6d52bdeac",
+  "name" : "[1] 1024",
+  "time" : {
+    "start" : 1577758400315,
+    "stop" : 1577758400497,
+    "duration" : 182
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "fc53c838ebc48c4",
+  "name" : "[5] username5, password5, name5, MALE, tel5",
+  "time" : {
+    "start" : 1577758411131,
+    "stop" : 1577758411253,
+    "duration" : 122
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5bad6aefb04d5263",
+  "name" : "[3] username3, passw-ord3",
+  "time" : {
+    "start" : 1577758399706,
+    "stop" : 1577758399924,
+    "duration" : 218
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "4918903c8371c734",
+  "name" : "[5] usernameusername2, passwordpassword2-, 用户名或密码错误",
+  "time" : {
+    "start" : 1577758655165,
+    "stop" : 1577758659974,
+    "duration" : 4809
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "69e3803fd8630a98",
+  "name" : "showNewsDetail()",
+  "time" : {
+    "start" : 1577758854462,
+    "stop" : 1577758860125,
+    "duration" : 5663
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "fd89192b2e7d48bc",
+  "name" : "test_update_News_When_Result_Is_True()",
+  "time" : {
+    "start" : 1577758377949,
+    "stop" : 1577758377950,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "f27487ad452b47a5",
+  "name" : "test_throws_sql_exception_when_deleteUser()",
+  "time" : {
+    "start" : 1577758378181,
+    "stop" : 1577758378183,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a6c511d199821870",
+  "name" : "userShouldNotBeServedByUserController()",
+  "time" : {
+    "start" : 1577758409160,
+    "stop" : 1577758409260,
+    "duration" : 100
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "f546509fff145a65",
+  "name" : "shouldForwardToBlankJsp_WhenLoginAsUser_AndRequestIsBlank()",
+  "time" : {
+    "start" : 1577758390659,
+    "stop" : 1577758390848,
+    "duration" : 189
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "98827c2f6b32d1ea",
+  "name" : "addAUserAndQueryItByList()",
+  "time" : {
+    "start" : 1577758418134,
+    "stop" : 1577758418161,
+    "duration" : 27
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a3ef2d0e605ab647",
+  "name" : "test_add_Record_When_Result_Is_True()",
+  "time" : {
+    "start" : 1577758378081,
+    "stop" : 1577758378083,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "dbaa96042da01b8f",
+  "name" : "[2] 7",
+  "time" : {
+    "start" : 1577758409411,
+    "stop" : 1577758409542,
+    "duration" : 131
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "7deb05ed727c83dc",
+  "name" : "[4] 999",
+  "time" : {
+    "start" : 1577758409664,
+    "stop" : 1577758409781,
+    "duration" : 117
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d3fdcceadb62eb0",
+  "name" : "shouldGoToMainUser_whenCurrentUserIsUser_andActionIsSave()",
+  "time" : {
+    "start" : 1577758395168,
+    "stop" : 1577758395237,
+    "duration" : 69
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "38c10c4279249b6c",
+  "name" : "test_throws_sql_exception_when_updateBuilding()",
+  "time" : {
+    "start" : 1577758377601,
+    "stop" : 1577758377603,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "bc2fd221ee8d6141",
+  "name" : "test_when_list_comment()",
+  "time" : {
+    "start" : 1577758377796,
+    "stop" : 1577758377798,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e41b3cdc8ff88b24",
+  "name" : "[3] guoyuanjie",
+  "time" : {
+    "start" : 1577758411782,
+    "stop" : 1577758411888,
+    "duration" : 106
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "3c085c3015dc5adf",
+  "name" : "service_WhenUserIsUser_ActionIsOther()",
+  "time" : {
+    "start" : 1577758376463,
+    "stop" : 1577758376466,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ce4d062eff4283f4",
+  "name" : "service_WhenUserIsAdmin_ActionIsChange()",
+  "time" : {
+    "start" : 1577758376648,
+    "stop" : 1577758376651,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "9f1a3332e5753ee8",
+  "name" : "add20UserAndUpdatePassword()",
+  "time" : {
+    "start" : 1577758418208,
+    "stop" : 1577758418831,
+    "duration" : 623
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b629abe37d409901",
+  "name" : "test_delete_News_When_Result_Is_True()",
+  "time" : {
+    "start" : 1577758377883,
+    "stop" : 1577758377885,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "7164c11182db4395",
+  "name" : "test_throws_sql_exception_when_query_All_Users()",
+  "time" : {
+    "start" : 1577758378192,
+    "stop" : 1577758378193,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "8eac8de2c7d4dace",
+  "name" : "test_queryAllUsers_WhenPermissionIs_1()",
+  "time" : {
+    "start" : 1577758378267,
+    "stop" : 1577758378268,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "1f67778641642668",
+  "name" : "[5] 5",
+  "time" : {
+    "start" : 1577758408744,
+    "stop" : 1577758408904,
+    "duration" : 160
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b4ceb6f2dae96bb9",
+  "name" : "add3BuildingsAndGet5BuildingsShouldGet3Buildings()",
+  "time" : {
+    "start" : 1577758412884,
+    "stop" : 1577758412948,
+    "duration" : 64
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "6f55fe9af40117e4",
+  "name" : "[3] username3, password3, name3, MALE, tel3",
+  "time" : {
+    "start" : 1577758407819,
+    "stop" : 1577758407873,
+    "duration" : 54
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "1387a0a4786a2c85",
+  "name" : "test_add_Building_When_Result_Is_False()",
+  "time" : {
+    "start" : 1577758377560,
+    "stop" : 1577758377562,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e5c19268eccc0e71",
+  "name" : "service_WhenUserTypeIsUser_ActionIsDefault()",
+  "time" : {
+    "start" : 1577758376926,
+    "stop" : 1577758376929,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "1eab34f9af481300",
+  "name" : "service_When_ActionIsList()",
+  "time" : {
+    "start" : 1577758377062,
+    "stop" : 1577758377064,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a22c3eae28f78a3d",
+  "name" : "[4] username4, password4, name4, FEMALE, tel4",
+  "time" : {
+    "start" : 1577758411000,
+    "stop" : 1577758411124,
+    "duration" : 124
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d3aafbf589ab1dd9",
+  "name" : "[2] newbuildingname1, 500, newbuildingdescription2",
+  "time" : {
+    "start" : 1577758477238,
+    "stop" : 1577758483335,
+    "duration" : 6097
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "65f3513cd8eaf275",
+  "name" : "service_When_ActionIsAdd()",
+  "time" : {
+    "start" : 1577758377036,
+    "stop" : 1577758377037,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "9212756dbcaf706e",
+  "name" : "[4] paul.n.hilfinger",
+  "time" : {
+    "start" : 1577758411897,
+    "stop" : 1577758412014,
+    "duration" : 117
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "9e5d40712a318510",
+  "name" : "add3BuildingsAndGet2BuildingsShouldGet2Buildings()",
+  "time" : {
+    "start" : 1577758412811,
+    "stop" : 1577758412876,
+    "duration" : 65
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "656e4ef726e7a72f",
+  "name" : "[6] 1 34567890, 1234567890, name1, MALE, 13000000000, 用户名不能含有空格",
+  "time" : {
+    "start" : 1577758752044,
+    "stop" : 1577758757196,
+    "duration" : 5152
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "7fd24fed4efc340e",
+  "name" : "service_RequestIsUser_ReturnUserBlank()",
+  "time" : {
+    "start" : 1577758374182,
+    "stop" : 1577758375741,
+    "duration" : 1559
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "cd17510441070aeb",
+  "name" : "service_WhenUserIsAdmin_ActionIsOther()",
+  "time" : {
+    "start" : 1577758376509,
+    "stop" : 1577758376511,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a7b83b2f1bc79153",
+  "name" : "[2] SJTU, Shanghai Jiao Tong University, 2",
+  "time" : {
+    "start" : 1577758393546,
+    "stop" : 1577758393661,
+    "duration" : 115
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "3c31b099eb085a07",
+  "name" : "[4] 4",
+  "time" : {
+    "start" : 1577758408637,
+    "stop" : 1577758408737,
+    "duration" : 100
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "44879696d1b43ac0",
+  "name" : "[3] 5",
+  "time" : {
+    "start" : 1577758396388,
+    "stop" : 1577758396574,
+    "duration" : 186
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e74d2ea7265b20c3",
+  "name" : "service_WhenUserIsUser_ActionIsDetail()",
+  "time" : {
+    "start" : 1577758376577,
+    "stop" : 1577758376582,
+    "duration" : 5
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "40e6e894083f99f4",
+  "name" : "service_WhenUserTypeIsAdmin_ActionIsVetify()",
+  "time" : {
+    "start" : 1577758376895,
+    "stop" : 1577758376898,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "6596a91f3df9313a",
+  "name" : "[4] username4, passwor-d4",
+  "time" : {
+    "start" : 1577758399934,
+    "stop" : 1577758400114,
+    "duration" : 180
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "aaabc3559a92f7fc",
+  "name" : "[3] username3, password3, name3, MALE, tel3",
+  "time" : {
+    "start" : 1577758410867,
+    "stop" : 1577758410993,
+    "duration" : 126
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "bfe3ed4d381bba6c",
+  "name" : "add20UnverifiedRecordAndQueryByList()",
+  "time" : {
+    "start" : 1577758415283,
+    "stop" : 1577758415735,
+    "duration" : 452
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c2542b5e4cf22d40",
+  "name" : "test_throws_sql_exception_when_deleteComment()",
+  "time" : {
+    "start" : 1577758377735,
+    "stop" : 1577758377736,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "68e6bda20fa960d4",
+  "name" : "[1] user",
+  "time" : {
+    "start" : 1577758404391,
+    "stop" : 1577758404423,
+    "duration" : 32
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "2ee82c81c72463c1",
+  "name" : "givenUserWhenActionIsSaveThenSave()",
+  "time" : {
+    "start" : 1577758399006,
+    "stop" : 1577758399216,
+    "duration" : 210
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5b8fcc3c15f773ec",
+  "name" : "[5] usernameusername5, passwordpassword5",
+  "time" : {
+    "start" : 1577758704783,
+    "stop" : 1577758710197,
+    "duration" : 5414
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "73a7a4dc2522f149",
+  "name" : "test_throws_sql_exception_query_Building_By_Id()",
+  "time" : {
+    "start" : 1577758377433,
+    "stop" : 1577758377535,
+    "duration" : 102
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "544e633c84bdc2ef",
+  "name" : "test_login_when_PermissionIs_0()",
+  "time" : {
+    "start" : 1577758377840,
+    "stop" : 1577758377843,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "910ebbc0ce4ee486",
+  "name" : "test_delete_User_When_Result_Is_True()",
+  "time" : {
+    "start" : 1577758378213,
+    "stop" : 1577758378215,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "cd2d32ead8cc838f",
+  "name" : "[10] 1234567890, 1234567890123456, name1, MALE, 13000000000, 密码必须在10-15个字符之间",
+  "time" : {
+    "start" : 1577758772809,
+    "stop" : 1577758778223,
+    "duration" : 5414
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "171480b46732947a",
+  "name" : "addANewsAndQueryItByList()",
+  "time" : {
+    "start" : 1577758414568,
+    "stop" : 1577758414593,
+    "duration" : 25
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c9ea8fdcfde18c1",
+  "name" : "[2] 123451234512345, 123456789012345, name1, MALE, 13000000000",
+  "time" : {
+    "start" : 1577758715499,
+    "stop" : 1577758720806,
+    "duration" : 5307
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "672e4f7631e3e33d",
+  "name" : "service_WhenUserTypeIsUser_ActionIsSave()",
+  "time" : {
+    "start" : 1577758376865,
+    "stop" : 1577758376869,
+    "duration" : 4
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "87d009ee4bc5540",
+  "name" : "test_throws_sql_exception_when_list_news()",
+  "time" : {
+    "start" : 1577758377897,
+    "stop" : 1577758377898,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "de2b2ee5dc894d49",
+  "name" : "shouldReturnListUser_whenAdminActionNull()",
+  "time" : {
+    "start" : 1577758411432,
+    "stop" : 1577758411539,
+    "duration" : 107
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c5c9a0e1d29e79f2",
+  "name" : "[1] 1",
+  "time" : {
+    "start" : 1577758408261,
+    "stop" : 1577758408391,
+    "duration" : 130
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "96db6f0e2038ad17",
+  "name" : "[2] 2, 2020-1-31, 5",
+  "time" : {
+    "start" : 1577758394718,
+    "stop" : 1577758394833,
+    "duration" : 115
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c8c5159537bfa1e7",
+  "name" : "[3] list",
+  "time" : {
+    "start" : 1577758404854,
+    "stop" : 1577758405025,
+    "duration" : 171
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a385556a32c2aec5",
+  "name" : "[1] 999, 999, 999, MALE, 13918300851",
+  "time" : {
+    "start" : 1577758408051,
+    "stop" : 1577758408087,
+    "duration" : 36
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d8fcb0bc227b358a",
+  "name" : "homePage()",
+  "time" : {
+    "start" : 1577758448254,
+    "stop" : 1577758453739,
+    "duration" : 5485
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "efa42dda25fcab9d",
+  "name" : "test_query_User_By_Id_WhenPermissionIs_1()",
+  "time" : {
+    "start" : 1577758378161,
+    "stop" : 1577758378163,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "9616a366555f0baf",
+  "name" : "add20UnverifiedRecordAndUpdateToVerified()",
+  "time" : {
+    "start" : 1577758414638,
+    "stop" : 1577758415236,
+    "duration" : 598
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "7818c8272d85c66f",
+  "name" : "service_WhenActionIsModify_UserIsAdmin()",
+  "time" : {
+    "start" : 1577758376271,
+    "stop" : 1577758376274,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "8402c7df60e82b7f",
+  "name" : "[2] admin",
+  "time" : {
+    "start" : 1577758404233,
+    "stop" : 1577758404283,
+    "duration" : 50
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d50abc27c7c19100",
+  "name" : "test_throws_sql_exception_when_list_comment()",
+  "time" : {
+    "start" : 1577758377785,
+    "stop" : 1577758377787,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "14bf397fdf71ed1b",
+  "name" : "[5] website",
+  "time" : {
+    "start" : 1577758401065,
+    "stop" : 1577758401250,
+    "duration" : 185
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b80dd6dca4d26c70",
+  "name" : "service_When_ActionIsSearch_ArgumentIsEmpty()",
+  "time" : {
+    "start" : 1577758377050,
+    "stop" : 1577758377052,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "6e02a8584d9ed48d",
+  "name" : "[19] username6, password1212345, name5, MALE, 13000000000, 该用户名已存在",
+  "time" : {
+    "start" : 1577758819903,
+    "stop" : 1577758825113,
+    "duration" : 5210
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ba397aa3114e5e8a",
+  "name" : "[3] 5",
+  "time" : {
+    "start" : 1577758405630,
+    "stop" : 1577758405809,
+    "duration" : 179
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "7521327a3039acbd",
+  "name" : "[4] correct title, correct author, , false, 内容不能为空！",
+  "time" : {
+    "start" : 1577758578301,
+    "stop" : 1577758585193,
+    "duration" : 6892
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "4581d804dce21d34",
+  "name" : "[3] 999, 999, ---, MALE, 13918300851",
+  "time" : {
+    "start" : 1577758408139,
+    "stop" : 1577758408173,
+    "duration" : 34
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c7dd8e33fbdff8c3",
+  "name" : "service_WhenUserIsAdmin_ActionIsAdd()",
+  "time" : {
+    "start" : 1577758376520,
+    "stop" : 1577758376522,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "9f742721314fa050",
+  "name" : "add3CommentsAndList2ShouldGet2UnverifiedComments()",
+  "time" : {
+    "start" : 1577758412999,
+    "stop" : 1577758413081,
+    "duration" : 82
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c0591dd2b2600eaf",
+  "name" : "[1] user, add",
+  "time" : {
+    "start" : 1577758403746,
+    "stop" : 1577758403781,
+    "duration" : 35
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "7ce564364c02a190",
+  "name" : "shouldReturnUserWhenLoginWithUser()",
+  "time" : {
+    "start" : 1577758413357,
+    "stop" : 1577758413406,
+    "duration" : 49
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "cf084fe00a8403ec",
+  "name" : "test_when_list_building()",
+  "time" : {
+    "start" : 1577758377657,
+    "stop" : 1577758377660,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "cf1733bdeed4765a",
+  "name" : "test_login_when_PermissionIs_1()",
+  "time" : {
+    "start" : 1577758377850,
+    "stop" : 1577758377853,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "9796835aa07d7533",
+  "name" : "shouldGoToSignupPage_WhenRequestIsSignup()",
+  "time" : {
+    "start" : 1577758408009,
+    "stop" : 1577758408039,
+    "duration" : 30
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b5bd0881a90ad47e",
+  "name" : "test_throws_sql_exception_when_signup()",
+  "time" : {
+    "start" : 1577758377871,
+    "stop" : 1577758377873,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "8546939a724db625",
+  "name" : "add20VerifiedRecordAndQueryByList()",
+  "time" : {
+    "start" : 1577758415782,
+    "stop" : 1577758416482,
+    "duration" : 700
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d07a801a10cd9d71",
+  "name" : "[18] 1234567890, 1234567890, name1, MALE, 12345678901, 用户名和密码不能相同",
+  "time" : {
+    "start" : 1577758814435,
+    "stop" : 1577758819894,
+    "duration" : 5459
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "1d7ef5aa3d1039d",
+  "name" : "shouldGoToMainUser_whenCurrentUserIsUser_andActionIsModify()",
+  "time" : {
+    "start" : 1577758393302,
+    "stop" : 1577758393397,
+    "duration" : 95
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "7adec42236a86f1b",
+  "name" : "[7] 1234567890, , name1, MALE, 13000000000, 密码不能为空",
+  "time" : {
+    "start" : 1577758757209,
+    "stop" : 1577758762625,
+    "duration" : 5416
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "65c703f7e71f50ad",
+  "name" : "[5] verify, 3",
+  "time" : {
+    "start" : 1577758398048,
+    "stop" : 1577758398217,
+    "duration" : 169
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "bb70bb792c57d468",
+  "name" : "[1] delete, 0",
+  "time" : {
+    "start" : 1577758397281,
+    "stop" : 1577758397491,
+    "duration" : 210
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "9346cd5ef44679b",
+  "name" : "testGetConnection()",
+  "time" : {
+    "start" : 1577758418850,
+    "stop" : 1577758418859,
+    "duration" : 9
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ac63a5c4eef0ddbf",
+  "name" : "test_throws_sql_exception_when_login()",
+  "time" : {
+    "start" : 1577758377829,
+    "stop" : 1577758377831,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "f4665e81c2ae7390",
+  "name" : "add1CommentAndQueryById()",
+  "time" : {
+    "start" : 1577758413146,
+    "stop" : 1577758413180,
+    "duration" : 34
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "182e8a21f2e1cf1d",
+  "name" : "[2] 1, 1234567890, name1, MALE, 13000000000, 用户名必须在5-15个字符之间",
+  "time" : {
+    "start" : 1577758731241,
+    "stop" : 1577758736360,
+    "duration" : 5119
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d97372870f4172b3",
+  "name" : "[1] correct title, correct author, correct detail, true, ",
+  "time" : {
+    "start" : 1577758597567,
+    "stop" : 1577758604233,
+    "duration" : 6666
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a8e344b2c041c505",
+  "name" : "service_WhenUserTypeIsUser_ActionIsDelete()",
+  "time" : {
+    "start" : 1577758376719,
+    "stop" : 1577758376803,
+    "duration" : 84
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5d8a3ab5531ac240",
+  "name" : "service_WhenActionIsNotListAndBook()",
+  "time" : {
+    "start" : 1577758376289,
+    "stop" : 1577758376289,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "68263b045f9f54fe",
+  "name" : "verifyComment()",
+  "time" : {
+    "start" : 1577758550880,
+    "stop" : 1577758556672,
+    "duration" : 5792
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a35a0a2e37346b13",
+  "name" : "[8] 1234567890, 1, name1, MALE, 13000000000, 密码必须在10-15个字符之间",
+  "time" : {
+    "start" : 1577758762634,
+    "stop" : 1577758767693,
+    "duration" : 5059
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "4e61a7faf39c8889",
+  "name" : "add1CommentAndUpdate()",
+  "time" : {
+    "start" : 1577758413088,
+    "stop" : 1577758413136,
+    "duration" : 48
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "8abae3a01e1d96a3",
+  "name" : "shouldReturnAdminWhenLoginWithAdmin()",
+  "time" : {
+    "start" : 1577758413265,
+    "stop" : 1577758413349,
+    "duration" : 84
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "47c33709789df820",
+  "name" : "[1] admin1, password1",
+  "time" : {
+    "start" : 1577758670251,
+    "stop" : 1577758675022,
+    "duration" : 4771
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e2db57fd4fa08373",
+  "name" : "service_WhenUserIsAdmin_ActionIsList()",
+  "time" : {
+    "start" : 1577758376445,
+    "stop" : 1577758376448,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "8edce7f7b5a22137",
+  "name" : "givenAdminWhenActionIsSaveNewNewsThenSave()",
+  "time" : {
+    "start" : 1577758403688,
+    "stop" : 1577758403736,
+    "duration" : 48
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "2c5321533241efcb",
+  "name" : "[2] username2, password2, name2, FEMALE, tel2",
+  "time" : {
+    "start" : 1577758407750,
+    "stop" : 1577758407811,
+    "duration" : 61
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "9d8077c8413ae47d",
+  "name" : "[2] 3",
+  "time" : {
+    "start" : 1577758396149,
+    "stop" : 1577758396378,
+    "duration" : 229
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c439372da79cb70e",
+  "name" : "[3] username3, password3, name3, MALE, tel3",
+  "time" : {
+    "start" : 1577758412319,
+    "stop" : 1577758412456,
+    "duration" : 137
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c095d1dd62f59980",
+  "name" : "service_RequestIsAdmin_ReturnAdminBlank()",
+  "time" : {
+    "start" : 1577758375956,
+    "stop" : 1577758375960,
+    "duration" : 4
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "4b4ae6712aa2b843",
+  "name" : "[5] passwordpassword1, , root, false, 信息填写不完整！",
+  "time" : {
+    "start" : 1577758531982,
+    "stop" : 1577758538178,
+    "duration" : 6196
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b10a9836c18f1380",
+  "name" : "[1] addbuildingname1, 300, addbuildingdescription1",
+  "time" : {
+    "start" : 1577758453752,
+    "stop" : 1577758459809,
+    "duration" : 6057
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "f26e889c549642ce",
+  "name" : "[5] , , , false, 内容不能为空！",
+  "time" : {
+    "start" : 1577758585202,
+    "stop" : 1577758591713,
+    "duration" : 6511
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "fa7cdfc69b3cba58",
+  "name" : "[1] 0",
+  "time" : {
+    "start" : 1577758405231,
+    "stop" : 1577758405439,
+    "duration" : 208
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "279e6e353aa2d7a7",
+  "name" : "service_WhenActionIsList_UserIsUser()",
+  "time" : {
+    "start" : 1577758376179,
+    "stop" : 1577758376181,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "26e76e556db8f4d9",
+  "name" : "test_query_News_By_Id()",
+  "time" : {
+    "start" : 1577758377958,
+    "stop" : 1577758377960,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e74c79c25d92fc9b",
+  "name" : "[2] admin",
+  "time" : {
+    "start" : 1577758404432,
+    "stop" : 1577758404458,
+    "duration" : 26
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "546d0deba4fd16c5",
+  "name" : "test_throws_sql_exception_when_list_record_with_UserId()",
+  "time" : {
+    "start" : 1577758378071,
+    "stop" : 1577758378073,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "aff95ad8d4938eb7",
+  "name" : "service_WhenActionIsOther_UserIsAdmin()",
+  "time" : {
+    "start" : 1577758376192,
+    "stop" : 1577758376195,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "286bc3940b804dbc",
+  "name" : "[9] other, 5",
+  "time" : {
+    "start" : 1577758398822,
+    "stop" : 1577758398998,
+    "duration" : 176
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "74f9e4f6cf02c444",
+  "name" : "service_When_ActionIsSearch_KeyWordEqualName()",
+  "time" : {
+    "start" : 1577758377117,
+    "stop" : 1577758377120,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b5a8887e54ed8122",
+  "name" : "deleteUser()",
+  "time" : {
+    "start" : 1577758425281,
+    "stop" : 1577758434499,
+    "duration" : 9218
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d9bb7ee063168a01",
+  "name" : "[4] list",
+  "time" : {
+    "start" : 1577758407049,
+    "stop" : 1577758407228,
+    "duration" : 179
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "76cb7759c1a18f9a",
+  "name" : "[5] , , , false, 内容不能为空！",
+  "time" : {
+    "start" : 1577758623679,
+    "stop" : 1577758629939,
+    "duration" : 6260
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "8f977b6c56b8fbe6",
+  "name" : "[2] , correct author, correct detail, false, 标题不能为空！",
+  "time" : {
+    "start" : 1577758564914,
+    "stop" : 1577758571621,
+    "duration" : 6707
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c0ee97b93cf2abb8",
+  "name" : "addANewsAndQueryItById()",
+  "time" : {
+    "start" : 1577758414601,
+    "stop" : 1577758414629,
+    "duration" : 28
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "8f6d04c0a22e302",
+  "name" : "[3] correct title, , correct detail, false, 作者不能为空！",
+  "time" : {
+    "start" : 1577758571631,
+    "stop" : 1577758578293,
+    "duration" : 6662
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a9c241b1106b0686",
+  "name" : "[2] , false, 内容不能为空！",
+  "time" : {
+    "start" : 1577758849068,
+    "stop" : 1577758854452,
+    "duration" : 5384
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5a2ef0081cb1ef1c",
+  "name" : "service_whenUserIsUser()",
+  "time" : {
+    "start" : 1577758376373,
+    "stop" : 1577758376378,
+    "duration" : 5
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5ee39325cbf014cf",
+  "name" : "service_Try_Throws_Parse_Exception_WhenActionIsBook_UserIsAdmin()",
+  "time" : {
+    "start" : 1577758376232,
+    "stop" : 1577758376239,
+    "duration" : 7
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "75a9c9fb8104addb",
+  "name" : "signUpSubmit_WhenUserIsNull()",
+  "time" : {
+    "start" : 1577758376944,
+    "stop" : 1577758376948,
+    "duration" : 4
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "42461392b195c4fd",
+  "name" : "service_WhenIsAuthorized()",
+  "time" : {
+    "start" : 1577758376219,
+    "stop" : 1577758376221,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "1238e6e64a66bacf",
+  "name" : "test_throws_sql_exception_when_updateUser()",
+  "time" : {
+    "start" : 1577758378245,
+    "stop" : 1577758378246,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ab6bf99efcd13ee5",
+  "name" : "[1] ECNU, East China Normal University, 1",
+  "time" : {
+    "start" : 1577758392518,
+    "stop" : 1577758392742,
+    "duration" : 224
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5f6156cb9ae36eba",
+  "name" : "[2] verify",
+  "time" : {
+    "start" : 1577758404664,
+    "stop" : 1577758404846,
+    "duration" : 182
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "715ab921c75eb69b",
+  "name" : "[1] , , 用户名不能为空",
+  "time" : {
+    "start" : 1577758636238,
+    "stop" : 1577758640863,
+    "duration" : 4625
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a6620435005ad864",
+  "name" : "test_update_Building_When_Result_Is_False()",
+  "time" : {
+    "start" : 1577758377570,
+    "stop" : 1577758377571,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b6f47ab03d335ca8",
+  "name" : "clickMenu()",
+  "time" : {
+    "start" : 1577758837013,
+    "stop" : 1577758843351,
+    "duration" : 6338
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "85fcbe7bd23abb02",
+  "name" : "[1] FEMALE",
+  "time" : {
+    "start" : 1577758408914,
+    "stop" : 1577758409034,
+    "duration" : 120
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "12d5d95fa085cf93",
+  "name" : "addAUserAndQueryItById()",
+  "time" : {
+    "start" : 1577758418168,
+    "stop" : 1577758418201,
+    "duration" : 33
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "faf531cf8df2f531",
+  "name" : "service_WhenUserIsUser_ActionIsSave()",
+  "time" : {
+    "start" : 1577758376681,
+    "stop" : 1577758376683,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "4ed58cfe9a41ab61",
+  "name" : "clickMenu()",
+  "time" : {
+    "start" : 1577758483345,
+    "stop" : 1577758490069,
+    "duration" : 6724
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "3d1d10fe61f02fc5",
+  "name" : "service_WhenActionIsList_UserIsAdmin()",
+  "time" : {
+    "start" : 1577758376207,
+    "stop" : 1577758376209,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "866badf2b24351e7",
+  "name" : "service_WhenUserIsAdmin_ActionIsSave()",
+  "time" : {
+    "start" : 1577758376631,
+    "stop" : 1577758376634,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "31c930349f105e14",
+  "name" : "[4] MIT, Massachusetts Institute of Technology, 4",
+  "time" : {
+    "start" : 1577758393802,
+    "stop" : 1577758393920,
+    "duration" : 118
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5813ae050290cb24",
+  "name" : "[1] username1, password1",
+  "time" : {
+    "start" : 1577758402447,
+    "stop" : 1577758402650,
+    "duration" : 203
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "715e5c25bae6b22b",
+  "name" : "test_update_User_When_Result_Is_True()",
+  "time" : {
+    "start" : 1577758378290,
+    "stop" : 1577758378294,
+    "duration" : 4
+  },
+  "status" : "passed",
+  "severity" : "normal"
+} ]

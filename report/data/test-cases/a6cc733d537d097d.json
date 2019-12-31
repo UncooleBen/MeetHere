@@ -1,0 +1,135 @@
+{
+  "uid" : "a6cc733d537d097d",
+  "name" : "[2] buildingname2, 2021-01-01, 2",
+  "fullName" : "com.webapp.systemtest.UserST.bookBuilding",
+  "historyId" : "b56c2bed339826de87fcdd3d8e4c0722",
+  "time" : {
+    "start" : 1577758831161,
+    "stop" : 1577758837004,
+    "duration" : 5843
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : true,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "16452@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.systemtest.UserST"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.systemtest.UserST"
+  }, {
+    "name" : "testMethod",
+    "value" : "bookBuilding"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.systemtest.UserST"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "84bc131e3eab2ddd",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757874881,
+        "stop" : 1577757880522,
+        "duration" : 5641
+      }
+    }, {
+      "uid" : "3a89fa8ae91c241b",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757336334,
+        "stop" : 1577757342960,
+        "duration" : 6626
+      }
+    }, {
+      "uid" : "a55a2ce3ccbc071e",
+      "status" : "broken",
+      "statusDetails" : "no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\"#username\"}\n  (Session info: chrome=79.0.3945.88)\nFor documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html\nBuild info: version: '4.0.0-alpha-3', revision: '8c567de6dc'\nSystem info: host: 'DESKTOP-LFKTAAU', ip: '10.0.0.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '10.0.1'\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nCapabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 79.0.3945.88, chrome: {chromedriverVersion: 79.0.3945.36 (3582db32b3389..., userDataDir: C:\\Users\\Dell\\AppData\\Local...}, goog:chromeOptions: {debuggerAddress: localhost:58914}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}\nSession ID: f1286e9606f8689f58b9e8587472705a\n*** Element info: {Using=id, value=username}",
+      "time" : {
+        "start" : 1577757064635,
+        "stop" : 1577757069508,
+        "duration" : 4873
+      }
+    }, {
+      "uid" : "eb92d624c7a6f5f4",
+      "status" : "failed",
+      "statusDetails" : "expected: <2> but was: <1>",
+      "time" : {
+        "start" : 1577756687013,
+        "stop" : 1577756687153,
+        "duration" : 140
+      }
+    }, {
+      "uid" : "269397ec8490be7a",
+      "status" : "failed",
+      "statusDetails" : "expected: <2> but was: <1>",
+      "time" : {
+        "start" : 1577756419400,
+        "stop" : 1577756419517,
+        "duration" : 117
+      }
+    }, {
+      "uid" : "3f0d8c192a7ab7c6",
+      "status" : "failed",
+      "statusDetails" : "expected: <2> but was: <1>",
+      "time" : {
+        "start" : 1577756311240,
+        "stop" : 1577756311356,
+        "duration" : 116
+      }
+    }, {
+      "uid" : "50060ff09c0ff7be",
+      "status" : "failed",
+      "statusDetails" : "expected: <2> but was: <1>",
+      "time" : {
+        "start" : 1577756103706,
+        "stop" : 1577756103818,
+        "duration" : 112
+      }
+    }, {
+      "uid" : "698ed4de053ef45c",
+      "status" : "failed",
+      "statusDetails" : "expected: <2> but was: <0>",
+      "time" : {
+        "start" : 1577755870219,
+        "stop" : 1577755870351,
+        "duration" : 132
+      }
+    }, {
+      "uid" : "49e104a2a5e3841a",
+      "status" : "failed",
+      "statusDetails" : "expected: <2> but was: <0>",
+      "time" : {
+        "start" : 1577755805715,
+        "stop" : 1577755805777,
+        "duration" : 62
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "a6cc733d537d097d.json",
+  "parameterValues" : [ ]
+}

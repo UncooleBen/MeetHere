@@ -1,0 +1,54 @@
+{
+  "uid" : "5ec4aaf50034ac97",
+  "name" : "test_throws_sql_exception_when_deleteRecord()",
+  "fullName" : "com.webapp.service.database.dao.impl.RecordDaoImplTest.test_throws_sql_exception_when_deleteRecord",
+  "historyId" : "e96451e4a64b04f0653a8b7ee1a757ee",
+  "time" : {
+    "start" : 1577757422166,
+    "stop" : 1577757422168,
+    "duration" : 2
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "17232@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.service.database.dao.impl.RecordDaoImplTest"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.service.database.dao.impl.RecordDaoImplTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "test_throws_sql_exception_when_deleteRecord"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.service.database.dao.impl.RecordDaoImplTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "5ec4aaf50034ac97.json",
+  "parameterValues" : [ ]
+}

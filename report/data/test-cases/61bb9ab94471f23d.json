@@ -1,0 +1,72 @@
+{
+  "uid" : "61bb9ab94471f23d",
+  "name" : "[1] username1, password1, name1, MALE, tel1",
+  "fullName" : "com.webapp.controller.UserControllerIT.deleteUsers",
+  "historyId" : "e25bb636c22e700f1c8496790a47c53d",
+  "time" : {
+    "start" : 1577758409790,
+    "stop" : 1577758409897,
+    "duration" : 107
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "17000@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.UserControllerIT"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.UserControllerIT"
+  }, {
+    "name" : "testMethod",
+    "value" : "deleteUsers"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.UserControllerIT"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "eefe97f19bb1f707",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757453363,
+        "stop" : 1577757453494,
+        "duration" : 131
+      }
+    }, {
+      "uid" : "1f87f4e6f4b00747",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755725628,
+        "stop" : 1577755725751,
+        "duration" : 123
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "61bb9ab94471f23d.json",
+  "parameterValues" : [ ]
+}

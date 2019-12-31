@@ -1,0 +1,88 @@
+{
+  "uid" : "cd7daada888bdc78",
+  "name" : "service_WhenUserIsAdmin_ActionIsModify()",
+  "fullName" : "com.webapp.controller.NewsControllerTest.service_WhenUserIsAdmin_ActionIsModify",
+  "historyId" : "36232aae6d37875a64d269c00ebd1984",
+  "time" : {
+    "start" : 1577758376496,
+    "stop" : 1577758376498,
+    "duration" : 2
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "11156@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.NewsControllerTest"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.NewsControllerTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "service_WhenUserIsAdmin_ActionIsModify"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.NewsControllerTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "fed622a233baa961",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757420597,
+        "stop" : 1577757420599,
+        "duration" : 2
+      }
+    }, {
+      "uid" : "d4a4ba2e4aeaf996",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755687791,
+        "stop" : 1577755687794,
+        "duration" : 3
+      }
+    }, {
+      "uid" : "4c023fb4ce078843",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755179614,
+        "stop" : 1577755179616,
+        "duration" : 2
+      }
+    }, {
+      "uid" : "ab5ac7e9e88e7ccc",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755102776,
+        "stop" : 1577755102778,
+        "duration" : 2
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "cd7daada888bdc78.json",
+  "parameterValues" : [ ]
+}

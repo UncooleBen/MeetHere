@@ -1,0 +1,72 @@
+{
+  "uid" : "171480b46732947a",
+  "name" : "addANewsAndQueryItByList()",
+  "fullName" : "com.webapp.service.database.dao.impl.NewsDaoImplIT.addANewsAndQueryItByList",
+  "historyId" : "268547b9d082e2e4d5bc11b5133a5db6",
+  "time" : {
+    "start" : 1577758414568,
+    "stop" : 1577758414593,
+    "duration" : 25
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "17000@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.service.database.dao.impl.NewsDaoImplIT"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.service.database.dao.impl.NewsDaoImplIT"
+  }, {
+    "name" : "testMethod",
+    "value" : "addANewsAndQueryItByList"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.service.database.dao.impl.NewsDaoImplIT"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "f1a8b199f655603a",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757458146,
+        "stop" : 1577757458169,
+        "duration" : 23
+      }
+    }, {
+      "uid" : "73e501815c11217a",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755730894,
+        "stop" : 1577755730942,
+        "duration" : 48
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "171480b46732947a.json",
+  "parameterValues" : [ ]
+}

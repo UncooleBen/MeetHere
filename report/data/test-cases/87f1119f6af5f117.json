@@ -1,0 +1,81 @@
+{
+  "uid" : "87f1119f6af5f117",
+  "name" : "givenUserWhenActionIsAddThenRedirectToCommentSave()",
+  "fullName" : "com.webapp.controller.CommentControllerIT.givenUserWhenActionIsAddThenRedirectToCommentSave",
+  "historyId" : "2277859dc24c85bcaf8e893e6eba58a6",
+  "time" : {
+    "start" : 1577758395490,
+    "stop" : 1577758395709,
+    "duration" : 219
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : true,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "17000@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.CommentControllerIT"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.CommentControllerIT"
+  }, {
+    "name" : "testMethod",
+    "value" : "givenUserWhenActionIsAddThenRedirectToCommentSave"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.CommentControllerIT"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "2b03d6152eea09bf",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757438808,
+        "stop" : 1577757439015,
+        "duration" : 207
+      }
+    }, {
+      "uid" : "edfe38ef2dc96a7b",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755708597,
+        "stop" : 1577755708812,
+        "duration" : 215
+      }
+    }, {
+      "uid" : "7319b0c79c056b01",
+      "status" : "broken",
+      "statusDetails" : "java.lang.NullPointerException",
+      "time" : {
+        "start" : 1577755200429,
+        "stop" : 1577755201273,
+        "duration" : 844
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "87f1119f6af5f117.json",
+  "parameterValues" : [ ]
+}

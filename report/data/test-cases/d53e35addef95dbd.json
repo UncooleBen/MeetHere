@@ -1,0 +1,72 @@
+{
+  "uid" : "d53e35addef95dbd",
+  "name" : "[4] verify, 0",
+  "fullName" : "com.webapp.controller.CommentControllerIT.givenUserWhenIllegalActionThenReturnToBlank",
+  "historyId" : "b2cce2dbb8bd01ff8e9f6dbb306269ed",
+  "time" : {
+    "start" : 1577758397862,
+    "stop" : 1577758398039,
+    "duration" : 177
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "17000@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.CommentControllerIT"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.CommentControllerIT"
+  }, {
+    "name" : "testMethod",
+    "value" : "givenUserWhenIllegalActionThenReturnToBlank"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.CommentControllerIT"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "f0fb1bf73bb50748",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757441187,
+        "stop" : 1577757441384,
+        "duration" : 197
+      }
+    }, {
+      "uid" : "4ca6fc06514bf67e",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755711066,
+        "stop" : 1577755711230,
+        "duration" : 164
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "d53e35addef95dbd.json",
+  "parameterValues" : [ ]
+}

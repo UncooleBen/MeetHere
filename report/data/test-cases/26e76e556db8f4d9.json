@@ -1,0 +1,88 @@
+{
+  "uid" : "26e76e556db8f4d9",
+  "name" : "test_query_News_By_Id()",
+  "fullName" : "com.webapp.service.database.dao.impl.NewsDaoImplTest.test_query_News_By_Id",
+  "historyId" : "78d5f159c1a15ee7689839d2da7cd6e3",
+  "time" : {
+    "start" : 1577758377958,
+    "stop" : 1577758377960,
+    "duration" : 2
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "11156@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.service.database.dao.impl.NewsDaoImplTest"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.service.database.dao.impl.NewsDaoImplTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "test_query_News_By_Id"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.service.database.dao.impl.NewsDaoImplTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "5b221b861f409f64",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757422070,
+        "stop" : 1577757422073,
+        "duration" : 3
+      }
+    }, {
+      "uid" : "6c226472a48717ae",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755689266,
+        "stop" : 1577755689269,
+        "duration" : 3
+      }
+    }, {
+      "uid" : "1d7d19ea47230232",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755180980,
+        "stop" : 1577755180984,
+        "duration" : 4
+      }
+    }, {
+      "uid" : "81b540efa7e90dbe",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755104439,
+        "stop" : 1577755104441,
+        "duration" : 2
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "26e76e556db8f4d9.json",
+  "parameterValues" : [ ]
+}

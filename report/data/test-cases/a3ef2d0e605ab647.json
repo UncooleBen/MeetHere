@@ -1,0 +1,88 @@
+{
+  "uid" : "a3ef2d0e605ab647",
+  "name" : "test_add_Record_When_Result_Is_True()",
+  "fullName" : "com.webapp.service.database.dao.impl.RecordDaoImplTest.test_add_Record_When_Result_Is_True",
+  "historyId" : "d37e646db6bc3cb7d44d66392542e89",
+  "time" : {
+    "start" : 1577758378081,
+    "stop" : 1577758378083,
+    "duration" : 2
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "11156@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.service.database.dao.impl.RecordDaoImplTest"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.service.database.dao.impl.RecordDaoImplTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "test_add_Record_When_Result_Is_True"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.service.database.dao.impl.RecordDaoImplTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "62fa32963aa67ca7",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757422214,
+        "stop" : 1577757422216,
+        "duration" : 2
+      }
+    }, {
+      "uid" : "ab0184c68e3d3f49",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755689394,
+        "stop" : 1577755689396,
+        "duration" : 2
+      }
+    }, {
+      "uid" : "259d42d1570f9995",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755181129,
+        "stop" : 1577755181131,
+        "duration" : 2
+      }
+    }, {
+      "uid" : "112c5847706ab6c2",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755104585,
+        "stop" : 1577755104587,
+        "duration" : 2
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "a3ef2d0e605ab647.json",
+  "parameterValues" : [ ]
+}

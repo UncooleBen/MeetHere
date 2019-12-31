@@ -1,0 +1,73 @@
+{
+  "uid" : "d0ddf6eb7ff95a2a",
+  "name" : "[1] newusername, newpassword, newname, MALE, newtel",
+  "fullName" : "com.webapp.systemtest.AdminST.modifyUser",
+  "historyId" : "f5ac9ea3d4c7d6c5c2733c16b1c85cd9",
+  "time" : {
+    "start" : 1577758434657,
+    "stop" : 1577758441403,
+    "duration" : 6746
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : true,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "16452@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.systemtest.AdminST"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.systemtest.AdminST"
+  }, {
+    "name" : "testMethod",
+    "value" : "modifyUser"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.systemtest.AdminST"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "926594ca0f52cf91",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757478911,
+        "stop" : 1577757485744,
+        "duration" : 6833
+      }
+    }, {
+      "uid" : "35c757f0ec2f7813",
+      "status" : "broken",
+      "statusDetails" : "session not created: This version of ChromeDriver only supports Chrome version 77\nBuild info: version: '4.0.0-alpha-3', revision: '8c567de6dc'\nSystem info: host: 'DESKTOP-LFKTAAU', ip: '10.0.0.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_211'\nDriver info: driver.version: ChromeDriver\nremote stacktrace: Backtrace:\n\tOrdinal0 [0x00D2EB13+1501971]\n\tOrdinal0 [0x00CAF6D1+980689]\n\tOrdinal0 [0x00C3765F+489055]\n\tOrdinal0 [0x00BCF2F4+62196]\n\tOrdinal0 [0x00BCBCDA+48346]\n\tOrdinal0 [0x00BE9800+169984]\n\tOrdinal0 [0x00BE942D+169005]\n\tOrdinal0 [0x00BE78EB+162027]\n\tOrdinal0 [0x00BD0AC7+68295]\n\tOrdinal0 [0x00BD1B40+72512]\n\tOrdinal0 [0x00BD1AD9+72409]\n\tOrdinal0 [0x00CC8F37+1085239]\n\tGetHandleVerifier [0x00DCD7ED+503293]\n\tGetHandleVerifier [0x00DCD580+502672]\n\tGetHandleVerifier [0x00DD46AC+531644]\n\tGetHandleVerifier [0x00DCDFFA+505354]\n\tOrdinal0 [0x00CC0606+1050118]\n\tOrdinal0 [0x00CC047F+1049727]\n\tOrdinal0 [0x00CCAF9B+1093531]\n\tOrdinal0 [0x00CCB103+1093891]\n\tOrdinal0 [0x00CCA095+1089685]\n\tBaseThreadInitThunk [0x76056359+25]\n\tRtlGetAppContainerNamedObjectPath [0x77287B74+228]\n\tRtlGetAppContainerNamedObjectPath [0x77287B44+180]\n",
+      "time" : {
+        "start" : 1577755746386,
+        "stop" : 1577755747827,
+        "duration" : 1441
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "d0ddf6eb7ff95a2a.json",
+  "parameterValues" : [ ]
+}

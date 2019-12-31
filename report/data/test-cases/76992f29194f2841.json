@@ -1,0 +1,54 @@
+{
+  "uid" : "76992f29194f2841",
+  "name" : "clickMenu()",
+  "fullName" : "com.webapp.systemtest.UserST.clickMenu",
+  "historyId" : "75059435ef9487b80fd65d4b43cab6e",
+  "time" : {
+    "start" : 1577757880530,
+    "stop" : 1577757886957,
+    "duration" : 6427
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "17520@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.systemtest.UserST"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.systemtest.UserST"
+  }, {
+    "name" : "testMethod",
+    "value" : "clickMenu"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.systemtest.UserST"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "76992f29194f2841.json",
+  "parameterValues" : [ ]
+}

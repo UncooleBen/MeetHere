@@ -1,0 +1,54 @@
+{
+  "uid" : "f46e33a0d2ea2019",
+  "name" : "[4] 4",
+  "fullName" : "com.webapp.controller.UserControllerIT.shouldForwardToModify_whenActionIsModify",
+  "historyId" : "4e3baf3a005fa1d39348ac5716743048",
+  "time" : {
+    "start" : 1577757452228,
+    "stop" : 1577757452368,
+    "duration" : 140
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "7300@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.UserControllerIT"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.UserControllerIT"
+  }, {
+    "name" : "testMethod",
+    "value" : "shouldForwardToModify_whenActionIsModify"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.UserControllerIT"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "f46e33a0d2ea2019.json",
+  "parameterValues" : [ ]
+}

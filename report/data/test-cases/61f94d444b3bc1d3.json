@@ -1,0 +1,88 @@
+{
+  "uid" : "61f94d444b3bc1d3",
+  "name" : "test_throws_sql_exception_when_query_user_by_sex()",
+  "fullName" : "com.webapp.service.database.dao.impl.UserDaoImplTest.test_throws_sql_exception_when_query_user_by_sex",
+  "historyId" : "f70c74e579c63edf6668351ed4080c28",
+  "time" : {
+    "start" : 1577758378202,
+    "stop" : 1577758378203,
+    "duration" : 1
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "11156@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.service.database.dao.impl.UserDaoImplTest"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.service.database.dao.impl.UserDaoImplTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "test_throws_sql_exception_when_query_user_by_sex"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.service.database.dao.impl.UserDaoImplTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "fa56a02e883e627c",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757422339,
+        "stop" : 1577757422340,
+        "duration" : 1
+      }
+    }, {
+      "uid" : "edcaf533fdc03a71",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755689531,
+        "stop" : 1577755689532,
+        "duration" : 1
+      }
+    }, {
+      "uid" : "58c3510066103e5",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755181259,
+        "stop" : 1577755181261,
+        "duration" : 2
+      }
+    }, {
+      "uid" : "25ad5c9f0a8bf410",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755104700,
+        "stop" : 1577755104701,
+        "duration" : 1
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "61f94d444b3bc1d3.json",
+  "parameterValues" : [ ]
+}

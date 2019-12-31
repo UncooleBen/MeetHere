@@ -1,0 +1,54 @@
+{
+  "uid" : "bc4d0d0d15c89c60",
+  "name" : "givenUserWhenActionIsSaveThenSave()",
+  "fullName" : "com.webapp.controller.RecordControllerIT.givenUserWhenActionIsSaveThenSave",
+  "historyId" : "3b0c09492c34bb916752cdaef8bf7797",
+  "time" : {
+    "start" : 1577757451010,
+    "stop" : 1577757451241,
+    "duration" : 231
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "7300@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.RecordControllerIT"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.RecordControllerIT"
+  }, {
+    "name" : "testMethod",
+    "value" : "givenUserWhenActionIsSaveThenSave"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.RecordControllerIT"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "bc4d0d0d15c89c60.json",
+  "parameterValues" : [ ]
+}

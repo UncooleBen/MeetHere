@@ -1,0 +1,54 @@
+{
+  "uid" : "c2a4199aa3086c9a",
+  "name" : "service_When_ActionIsAdd()",
+  "fullName" : "com.webapp.controller.UserControllerTest.service_When_ActionIsAdd",
+  "historyId" : "138300178b365f63bcd0dbad2f2e515",
+  "time" : {
+    "start" : 1577755688272,
+    "stop" : 1577755688273,
+    "duration" : 1
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "6388@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.UserControllerTest"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.UserControllerTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "service_When_ActionIsAdd"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.UserControllerTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "c2a4199aa3086c9a.json",
+  "parameterValues" : [ ]
+}

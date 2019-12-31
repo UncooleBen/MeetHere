@@ -1,0 +1,88 @@
+{
+  "uid" : "69d49fdeee848cbc",
+  "name" : "service_When_IsNotAuthorized_ThenReturn_mv()",
+  "fullName" : "com.webapp.controller.UserControllerTest.service_When_IsNotAuthorized_ThenReturn_mv",
+  "historyId" : "6e69f503b188e3d0c4ce5d006b043388",
+  "time" : {
+    "start" : 1577758377073,
+    "stop" : 1577758377074,
+    "duration" : 1
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "11156@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.UserControllerTest"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.UserControllerTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "service_When_IsNotAuthorized_ThenReturn_mv"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.UserControllerTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "e947a51067f192c8",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757421045,
+        "stop" : 1577757421046,
+        "duration" : 1
+      }
+    }, {
+      "uid" : "db5a0970161197c8",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755688318,
+        "stop" : 1577755688319,
+        "duration" : 1
+      }
+    }, {
+      "uid" : "3d27e41c6d3a91eb",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755180038,
+        "stop" : 1577755180039,
+        "duration" : 1
+      }
+    }, {
+      "uid" : "266b48e7be8e89d7",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755103321,
+        "stop" : 1577755103322,
+        "duration" : 1
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "69d49fdeee848cbc.json",
+  "parameterValues" : [ ]
+}

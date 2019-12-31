@@ -1,0 +1,88 @@
+{
+  "uid" : "e3f20cbee1833c9b",
+  "name" : "test_throws_sql_exception_when_query_record_by_id()",
+  "fullName" : "com.webapp.service.database.dao.impl.RecordDaoImplTest.test_throws_sql_exception_when_query_record_by_id",
+  "historyId" : "bc14d894aec7e38d81e6a6331de34736",
+  "time" : {
+    "start" : 1577758378009,
+    "stop" : 1577758378012,
+    "duration" : 3
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "11156@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.service.database.dao.impl.RecordDaoImplTest"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.service.database.dao.impl.RecordDaoImplTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "test_throws_sql_exception_when_query_record_by_id"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.service.database.dao.impl.RecordDaoImplTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "72117a5f6640418a",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757422133,
+        "stop" : 1577757422136,
+        "duration" : 3
+      }
+    }, {
+      "uid" : "a7dfca5a3500260a",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755689322,
+        "stop" : 1577755689324,
+        "duration" : 2
+      }
+    }, {
+      "uid" : "424b780dfe0bfba5",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755181049,
+        "stop" : 1577755181052,
+        "duration" : 3
+      }
+    }, {
+      "uid" : "c157791e129fd2dd",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755104514,
+        "stop" : 1577755104518,
+        "duration" : 4
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "e3f20cbee1833c9b.json",
+  "parameterValues" : [ ]
+}

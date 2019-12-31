@@ -1,0 +1,88 @@
+{
+  "uid" : "53505365ee321ceb",
+  "name" : "service_WhenActionIsAdd_UserIsAdmin()",
+  "fullName" : "com.webapp.controller.BuildingControllerTest.service_WhenActionIsAdd_UserIsAdmin",
+  "historyId" : "c1faa73363af87a75e626acfc2cb420e",
+  "time" : {
+    "start" : 1577758376144,
+    "stop" : 1577758376146,
+    "duration" : 2
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "11156@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.BuildingControllerTest"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.BuildingControllerTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "service_WhenActionIsAdd_UserIsAdmin"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.BuildingControllerTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "68cb6c43bae264d1",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757420277,
+        "stop" : 1577757420280,
+        "duration" : 3
+      }
+    }, {
+      "uid" : "2ef0654d0dd3cd3e",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755687487,
+        "stop" : 1577755687489,
+        "duration" : 2
+      }
+    }, {
+      "uid" : "79eff3a0e46cc71",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755179337,
+        "stop" : 1577755179339,
+        "duration" : 2
+      }
+    }, {
+      "uid" : "21da03fd9b9a55d2",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755102466,
+        "stop" : 1577755102469,
+        "duration" : 3
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "53505365ee321ceb.json",
+  "parameterValues" : [ ]
+}

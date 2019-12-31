@@ -1,0 +1,72 @@
+{
+  "uid" : "5bad6aefb04d5263",
+  "name" : "[3] username3, passw-ord3",
+  "fullName" : "com.webapp.controller.LoginControllerIT.shouldPromptErrorMessage_WhenPasswordError_OnUserType",
+  "historyId" : "6ba40519e0533519afd8dde20ca2adf8",
+  "time" : {
+    "start" : 1577758399706,
+    "stop" : 1577758399924,
+    "duration" : 218
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "17000@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.LoginControllerIT"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.LoginControllerIT"
+  }, {
+    "name" : "testMethod",
+    "value" : "shouldPromptErrorMessage_WhenPasswordError_OnUserType"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.LoginControllerIT"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "be1bbc4153121476",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757443053,
+        "stop" : 1577757443229,
+        "duration" : 176
+      }
+    }, {
+      "uid" : "f37cba75cf2a6cda",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755712991,
+        "stop" : 1577755713173,
+        "duration" : 182
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "5bad6aefb04d5263.json",
+  "parameterValues" : [ ]
+}

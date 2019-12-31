@@ -1,0 +1,54 @@
+{
+  "uid" : "11d6882873472c87",
+  "name" : "test_queryAllUsers_WhenPermissionIs_1()",
+  "fullName" : "com.webapp.service.database.dao.impl.UserDaoImplTest.test_queryAllUsers_WhenPermissionIs_1",
+  "historyId" : "ecfe804091893d61cf25afda063e6106",
+  "time" : {
+    "start" : 1577755689594,
+    "stop" : 1577755689596,
+    "duration" : 2
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "6388@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.service.database.dao.impl.UserDaoImplTest"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.service.database.dao.impl.UserDaoImplTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "test_queryAllUsers_WhenPermissionIs_1"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.service.database.dao.impl.UserDaoImplTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "11d6882873472c87.json",
+  "parameterValues" : [ ]
+}

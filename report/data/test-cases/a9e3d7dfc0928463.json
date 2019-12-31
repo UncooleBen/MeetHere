@@ -1,0 +1,54 @@
+{
+  "uid" : "a9e3d7dfc0928463",
+  "name" : "shouldReturnList_whenAdminActionIsNull()",
+  "fullName" : "com.webapp.controller.BuildingControllerIT.shouldReturnList_whenAdminActionIsNull",
+  "historyId" : "30a5db3c59160da5d44b23ed3b99543a",
+  "time" : {
+    "start" : 1577755708166,
+    "stop" : 1577755708245,
+    "duration" : 79
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "15680@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.BuildingControllerIT"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.BuildingControllerIT"
+  }, {
+    "name" : "testMethod",
+    "value" : "shouldReturnList_whenAdminActionIsNull"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.BuildingControllerIT"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "a9e3d7dfc0928463.json",
+  "parameterValues" : [ ]
+}

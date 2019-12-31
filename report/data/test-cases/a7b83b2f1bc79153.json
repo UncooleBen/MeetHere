@@ -1,0 +1,81 @@
+{
+  "uid" : "a7b83b2f1bc79153",
+  "name" : "[2] SJTU, Shanghai Jiao Tong University, 2",
+  "fullName" : "com.webapp.controller.BuildingControllerIT.deleteUserAsAdmin",
+  "historyId" : "db80ae1b022f37b01e77aff179dba9bd",
+  "time" : {
+    "start" : 1577758393546,
+    "stop" : 1577758393661,
+    "duration" : 115
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : true,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "17000@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.BuildingControllerIT"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.BuildingControllerIT"
+  }, {
+    "name" : "testMethod",
+    "value" : "deleteUserAsAdmin"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.BuildingControllerIT"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "de39266554deaf21",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757436866,
+        "stop" : 1577757436989,
+        "duration" : 123
+      }
+    }, {
+      "uid" : "59fbf195fd220760",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755706612,
+        "stop" : 1577755706729,
+        "duration" : 117
+      }
+    }, {
+      "uid" : "daad650f9b419fb5",
+      "status" : "broken",
+      "statusDetails" : "java.lang.NullPointerException",
+      "time" : {
+        "start" : 1577755197860,
+        "stop" : 1577755197896,
+        "duration" : 36
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "a7b83b2f1bc79153.json",
+  "parameterValues" : [ ]
+}

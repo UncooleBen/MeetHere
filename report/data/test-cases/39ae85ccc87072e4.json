@@ -1,0 +1,54 @@
+{
+  "uid" : "39ae85ccc87072e4",
+  "name" : "deleteUnverifiedComment()",
+  "fullName" : "com.webapp.systemtest.AdminST.deleteUnverifiedComment",
+  "historyId" : "3a486be92606511381da7f96ab89f28c",
+  "time" : {
+    "start" : 1577757635195,
+    "stop" : 1577757640880,
+    "duration" : 5685
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "17520@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.systemtest.AdminST"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.systemtest.AdminST"
+  }, {
+    "name" : "testMethod",
+    "value" : "deleteUnverifiedComment"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.systemtest.AdminST"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "39ae85ccc87072e4.json",
+  "parameterValues" : [ ]
+}

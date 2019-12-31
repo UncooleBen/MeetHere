@@ -1,0 +1,54 @@
+{
+  "uid" : "e66de393c00385bb",
+  "name" : "service_WhenUserIsAdmin_ActionIsSave()",
+  "fullName" : "com.webapp.controller.PasswordControllerTest.service_WhenUserIsAdmin_ActionIsSave",
+  "historyId" : "7bf12f07eecb53cdd46940df68efa33",
+  "time" : {
+    "start" : 1577755687911,
+    "stop" : 1577755687913,
+    "duration" : 2
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "6388@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.PasswordControllerTest"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.PasswordControllerTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "service_WhenUserIsAdmin_ActionIsSave"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.PasswordControllerTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "e66de393c00385bb.json",
+  "parameterValues" : [ ]
+}

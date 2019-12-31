@@ -1,0 +1,54 @@
+{
+  "uid" : "2f2bfcbe45463116",
+  "name" : "[5] user, other",
+  "fullName" : "com.webapp.controller.NewsControllerIT.givenUserTypeWhenActionIsIllegalThenList",
+  "historyId" : "d47a6f5fee5ad71f9faf367156c2db0",
+  "time" : {
+    "start" : 1577755719133,
+    "stop" : 1577755719173,
+    "duration" : 40
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "15680@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.NewsControllerIT"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.NewsControllerIT"
+  }, {
+    "name" : "testMethod",
+    "value" : "givenUserTypeWhenActionIsIllegalThenList"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.NewsControllerIT"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "2f2bfcbe45463116.json",
+  "parameterValues" : [ ]
+}

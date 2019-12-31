@@ -1,0 +1,88 @@
+{
+  "uid" : "7164c11182db4395",
+  "name" : "test_throws_sql_exception_when_query_All_Users()",
+  "fullName" : "com.webapp.service.database.dao.impl.UserDaoImplTest.test_throws_sql_exception_when_query_All_Users",
+  "historyId" : "6a4dbd833b5768955fdebae5ecefbc37",
+  "time" : {
+    "start" : 1577758378192,
+    "stop" : 1577758378193,
+    "duration" : 1
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "11156@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.service.database.dao.impl.UserDaoImplTest"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.service.database.dao.impl.UserDaoImplTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "test_throws_sql_exception_when_query_All_Users"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.service.database.dao.impl.UserDaoImplTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "6117b0af7087a31c",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757422330,
+        "stop" : 1577757422331,
+        "duration" : 1
+      }
+    }, {
+      "uid" : "8dd8b6ee63317393",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755689521,
+        "stop" : 1577755689521,
+        "duration" : 0
+      }
+    }, {
+      "uid" : "70ecb5797cbe2877",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755181248,
+        "stop" : 1577755181250,
+        "duration" : 2
+      }
+    }, {
+      "uid" : "ac6e44e3570dae78",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755104692,
+        "stop" : 1577755104693,
+        "duration" : 1
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "7164c11182db4395.json",
+  "parameterValues" : [ ]
+}

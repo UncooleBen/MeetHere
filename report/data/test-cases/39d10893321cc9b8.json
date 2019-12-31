@@ -1,0 +1,88 @@
+{
+  "uid" : "39d10893321cc9b8",
+  "name" : "service_When_ActionIsDelete()",
+  "fullName" : "com.webapp.controller.UserControllerTest.service_When_ActionIsDelete",
+  "historyId" : "cdc9211d04a686e33afaedf41420824a",
+  "time" : {
+    "start" : 1577758377129,
+    "stop" : 1577758377132,
+    "duration" : 3
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "11156@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.UserControllerTest"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.UserControllerTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "service_When_ActionIsDelete"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.UserControllerTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "2ac60ffc5db43cf1",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757421109,
+        "stop" : 1577757421113,
+        "duration" : 4
+      }
+    }, {
+      "uid" : "126822c24d9ae6c7",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755688376,
+        "stop" : 1577755688378,
+        "duration" : 2
+      }
+    }, {
+      "uid" : "fab41121667fa5e1",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755180100,
+        "stop" : 1577755180103,
+        "duration" : 3
+      }
+    }, {
+      "uid" : "e9eb10b08aec64f2",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755103389,
+        "stop" : 1577755103391,
+        "duration" : 2
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "39d10893321cc9b8.json",
+  "parameterValues" : [ ]
+}

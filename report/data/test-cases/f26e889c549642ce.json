@@ -1,0 +1,73 @@
+{
+  "uid" : "f26e889c549642ce",
+  "name" : "[5] , , , false, 内容不能为空！",
+  "fullName" : "com.webapp.systemtest.AdminST.modifyNews",
+  "historyId" : "ee9119b1d207b1dbafeee568118c927f",
+  "time" : {
+    "start" : 1577758585202,
+    "stop" : 1577758591713,
+    "duration" : 6511
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : true,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "16452@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.systemtest.AdminST"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.systemtest.AdminST"
+  }, {
+    "name" : "testMethod",
+    "value" : "modifyNews"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.systemtest.AdminST"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "eaab96802c2279c4",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757628560,
+        "stop" : 1577757635183,
+        "duration" : 6623
+      }
+    }, {
+      "uid" : "74143e41f519c20b",
+      "status" : "failed",
+      "statusDetails" : "expected: <2> but was: <0>",
+      "time" : {
+        "start" : 1577755760537,
+        "stop" : 1577755760631,
+        "duration" : 94
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "f26e889c549642ce.json",
+  "parameterValues" : [ ]
+}

@@ -1,0 +1,54 @@
+{
+  "uid" : "f4901237571b9195",
+  "name" : "[2] 2, 2020-1-31, 5",
+  "fullName" : "com.webapp.controller.BuildingControllerIT.bookBuilding_whenUserIsUser",
+  "historyId" : "1bfaa3a8c5e1851d74bfdbc2ba2939c5",
+  "time" : {
+    "start" : 1577755707813,
+    "stop" : 1577755707940,
+    "duration" : 127
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "15680@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.BuildingControllerIT"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.BuildingControllerIT"
+  }, {
+    "name" : "testMethod",
+    "value" : "bookBuilding_whenUserIsUser"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.BuildingControllerIT"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "f4901237571b9195.json",
+  "parameterValues" : [ ]
+}

@@ -1,0 +1,73 @@
+{
+  "uid" : "f396ee4fc65f8e3",
+  "name" : "[6] passwordpassword1, root, , false, 信息填写不完整！",
+  "fullName" : "com.webapp.systemtest.AdminST.changePassword",
+  "historyId" : "fcf4323c29db865f4f5bd4e2c83ca5e2",
+  "time" : {
+    "start" : 1577758538190,
+    "stop" : 1577758544852,
+    "duration" : 6662
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : true,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "16452@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.systemtest.AdminST"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.systemtest.AdminST"
+  }, {
+    "name" : "testMethod",
+    "value" : "changePassword"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.systemtest.AdminST"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "de2d395d5ea4a7d0",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757582910,
+        "stop" : 1577757588814,
+        "duration" : 5904
+      }
+    }, {
+      "uid" : "c16c895fc54049b0",
+      "status" : "failed",
+      "statusDetails" : "expected: <2> but was: <1>",
+      "time" : {
+        "start" : 1577755759830,
+        "stop" : 1577755759910,
+        "duration" : 80
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "f396ee4fc65f8e3.json",
+  "parameterValues" : [ ]
+}

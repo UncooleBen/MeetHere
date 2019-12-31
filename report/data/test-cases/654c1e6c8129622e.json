@@ -1,0 +1,54 @@
+{
+  "uid" : "654c1e6c8129622e",
+  "name" : "[2] Allston Way, aw, 999",
+  "fullName" : "com.webapp.controller.BuildingControllerIT.updateBuildingThenRestore",
+  "historyId" : "a2e3cfa95e13d2255f8d8414a6d0920a",
+  "time" : {
+    "start" : 1577757437581,
+    "stop" : 1577757437687,
+    "duration" : 106
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "7300@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.BuildingControllerIT"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.BuildingControllerIT"
+  }, {
+    "name" : "testMethod",
+    "value" : "updateBuildingThenRestore"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.BuildingControllerIT"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "654c1e6c8129622e.json",
+  "parameterValues" : [ ]
+}

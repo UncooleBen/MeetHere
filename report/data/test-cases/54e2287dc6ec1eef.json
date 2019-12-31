@@ -1,0 +1,54 @@
+{
+  "uid" : "54e2287dc6ec1eef",
+  "name" : "test_throws_sql_exception_query_Building_By_Id()",
+  "fullName" : "com.webapp.service.database.dao.impl.BuildingDaoImplTest.test_throws_sql_exception_query_Building_By_Id",
+  "historyId" : "d80cb8a8b6152f2e4400e89167b91662",
+  "time" : {
+    "start" : 1577755688686,
+    "stop" : 1577755688790,
+    "duration" : 104
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "6388@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.service.database.dao.impl.BuildingDaoImplTest"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.service.database.dao.impl.BuildingDaoImplTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "test_throws_sql_exception_query_Building_By_Id"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.service.database.dao.impl.BuildingDaoImplTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "54e2287dc6ec1eef.json",
+  "parameterValues" : [ ]
+}

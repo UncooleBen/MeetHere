@@ -1,0 +1,72 @@
+{
+  "uid" : "1ac371fd8d9d7fcc",
+  "name" : "[4] 999, 999, 999, FEMALE, 13918300851",
+  "fullName" : "com.webapp.controller.SignupControllerIT.shouldErrorMessage_WhenSignupFailed",
+  "historyId" : "89314bbb739010891c8c467c945514e4",
+  "time" : {
+    "start" : 1577758408182,
+    "stop" : 1577758408210,
+    "duration" : 28
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "17000@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.controller.SignupControllerIT"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.controller.SignupControllerIT"
+  }, {
+    "name" : "testMethod",
+    "value" : "shouldErrorMessage_WhenSignupFailed"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.controller.SignupControllerIT"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "706d117114d7c9b4",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757451764,
+        "stop" : 1577757451794,
+        "duration" : 30
+      }
+    }, {
+      "uid" : "cb7795f699cf0d97",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755723978,
+        "stop" : 1577755724010,
+        "duration" : 32
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "1ac371fd8d9d7fcc.json",
+  "parameterValues" : [ ]
+}

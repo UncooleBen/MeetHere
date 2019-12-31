@@ -1,0 +1,88 @@
+{
+  "uid" : "416ba5864b8a0711",
+  "name" : "test_throws_sql_exception_when_query_comment_by_id()",
+  "fullName" : "com.webapp.service.database.dao.impl.CommentDaoImplTest.test_throws_sql_exception_when_query_comment_by_id",
+  "historyId" : "29860ca68465ddf1f64872994a72074e",
+  "time" : {
+    "start" : 1577758377724,
+    "stop" : 1577758377726,
+    "duration" : 2
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "DESKTOP-LFKTAAU"
+  }, {
+    "name" : "thread",
+    "value" : "11156@DESKTOP-LFKTAAU.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "com.webapp.service.database.dao.impl.CommentDaoImplTest"
+  }, {
+    "name" : "testClass",
+    "value" : "com.webapp.service.database.dao.impl.CommentDaoImplTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "test_throws_sql_exception_when_query_comment_by_id"
+  }, {
+    "name" : "suite",
+    "value" : "com.webapp.service.database.dao.impl.CommentDaoImplTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "56520fea00b96dee",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577757421781,
+        "stop" : 1577757421782,
+        "duration" : 1
+      }
+    }, {
+      "uid" : "201076d8430b46a",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755688996,
+        "stop" : 1577755688997,
+        "duration" : 1
+      }
+    }, {
+      "uid" : "3f864d60a603cd01",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755180700,
+        "stop" : 1577755180702,
+        "duration" : 2
+      }
+    }, {
+      "uid" : "da0e59c2b416f2ce",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577755104003,
+        "stop" : 1577755104005,
+        "duration" : 2
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "416ba5864b8a0711.json",
+  "parameterValues" : [ ]
+}

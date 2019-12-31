@@ -184,7 +184,7 @@
                             </includes>
                         </configuration>
                     </execution>
-                    <!--execution>
+                    <execution>
                         <phase>post-integration-test</phase>
                         <id>system-test</id>
                         <goals>
@@ -198,7 +198,7 @@
                                 <include>**/*ST</include>
                             </includes>
                         </configuration>
-                    </execution-->
+                    </execution>
                 </executions>
                 <dependencies>
                     <dependency>

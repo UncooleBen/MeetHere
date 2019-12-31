@@ -39,18 +39,18 @@
 
     function recordDelete(recordId) {
         if (confirm("您确定要取消本次预约吗？")) {
-            window.location = "record?action=delete&recordId=" + recordId;
+          window.location = "record?action=delete&recordId=" + recordId;
         }
     }
 
     function convertDate(millisecond, id) {
-        date = new Date(millisecond);
-        document.getElementById(id).innerText = date.toDateString();
+      date = new Date(millisecond);
+      document.getElementById(id).innerText = date.toDateString();
     }
 
     function convertTime(millisecond, id) {
-        var day = millisecond / (86400) + 1;
-        document.getElementById(id).innerText = day.toString() + "天";
+      var day = millisecond / (86400) / 1000;
+      document.getElementById(id).innerText = day.toString() + "天";
     }
 </script>
 
@@ -82,7 +82,8 @@
                     <td>${record.userId }</td>
                     <td>${record.buildingId==null?"无":record.buildingId }</td>
                     <td id="verifiedInterval${i.index}">
-                        <script>convertTime(${record.time }, "verifiedInterval${i.index}")</script>
+                        <script>convertTime(${record.endDate }-${record.startDate},
+                            "verifiedInterval${i.index}")</script>
                     </td>
                 </tr>
             </c:forEach>
@@ -133,7 +134,7 @@
                     <td>${record.userId }</td>
                     <td>${record.buildingId==null?"无":record.buildingId }</td>
                     <td id="unverifiedInterval${i.index}">
-                        <script>convertTime(${record.time },
+                        <script>convertTime(${record.endDate }-${record.startDate},
                             "unverifiedInterval${i.index}")</script>
                     </td>
                     <td>

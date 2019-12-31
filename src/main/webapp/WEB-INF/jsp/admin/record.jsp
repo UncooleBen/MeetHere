@@ -46,18 +46,18 @@
 
     function recordApprove(recordId) {
         if (confirm("您确定审核通过这条记录吗？")) {
-            window.location = "record?action=verify&recordId=" + recordId;
+          window.location = "record?action=verify&recordId=" + recordId;
         }
     }
 
     function convertDate(millisecond, id) {
-        date = new Date(millisecond);
-        document.getElementById(id).innerText = date.toDateString();
+      date = new Date(millisecond);
+      document.getElementById(id).innerText = date.toDateString();
     }
 
     function convertTime(millisecond, id) {
-        var day = millisecond / (86400) + 1;
-        document.getElementById(id).innerText = day.toString() + "天";
+      var day = millisecond / (86400) / 1000;
+      document.getElementById(id).innerText = day.toString() + "天";
     }
 </script>
 
@@ -89,7 +89,8 @@
                     <td>${record.userId }</td>
                     <td>${record.buildingId==null?"无":record.buildingId }</td>
                     <td id="verifiedInterval${i.index}">
-                        <script>convertTime(${record.time }, "verifiedInterval${i.index}")</script>
+                        <script>convertTime(${record.endDate }-${record.startDate},
+                            "verifiedInterval${i.index}")</script>
                     </td>
                     <!-- see user/comment.jsp function convertDate(millisecond, id) for time conversion
                         Usage at line 39.
@@ -129,7 +130,7 @@
                     <td>${record.userId }</td>
                     <td>${record.buildingId==null?"无":record.buildingId }</td>
                     <td id="unverifiedInterval${i.index}">
-                        <script>convertTime(${record.time },
+                        <script>convertTime(${record.endDate }-${record.startDate},
                             "unverifiedInterval${i.index}")</script>
                     </td>
                         <%--						<td>${record.detail }</td>--%>

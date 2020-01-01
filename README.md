@@ -7,8 +7,8 @@ Below image refreshes automatically according to our jenkins build lifecycle.<br
 `Blue - Passed Tests`<br>
 `Red - Failed Tests`<br>
 `Yellow - Skipped Tests`<br>
-`Includes {Unit, Integration} Tests`<br>
 ![Right-click and reload me!](http://47.100.94.44:8080/MeetHereTestingStatistic/img/latest0 "Testing Result Image")
+**Only includes {Unit, Integration} tests, for {System, Performance} tests, please refer to test reports in `documents/`.** <br>
 
 ## Instructor        
 `Haiying Sun`

@@ -485,28 +485,17 @@ public class AdminST {
   public void modifyNews(
       String title, String author, String detail, boolean success, String errorMessage)
       throws Exception {
-    // Test name: ModifyNews
-    // Step # | name | target | value | comment
-    // 1 | open | http://localhost:8080/MeetHere_war/news?action=list |  |
-
-    // 2 | setWindowSize | 1052x554 |  |
     driver.manage().window().setSize(new Dimension(1920, 1080));
-    // 3 | click | css=td > .btn-info |  |
     for (int newsId : this.addedNewsIdSet) {
       driver.get("http://localhost:8080/MeetHere_war/news?action=list");
       driver.findElement(By.id("modify" + newsId)).click();
-      // 4 | click | css=.data_form |  |
       driver.findElement(By.cssSelector(".data_form")).click();
-      // 5 | type | id=title | 456 |
       driver.findElement(By.id("title")).clear();
       driver.findElement(By.id("title")).sendKeys(title);
-      // 6 | type | id=author | 456 |
       driver.findElement(By.id("author")).clear();
       driver.findElement(By.id("author")).sendKeys(author);
-      // 7 | type | id=detail | 456 |
       driver.findElement(By.id("detail")).clear();
       driver.findElement(By.id("detail")).sendKeys(detail);
-      // 8 | click | css=.btn:nth-child(1) |  |
       driver.findElement(By.cssSelector(".btn:nth-child(1)")).click();
       if (success) {
         Thread.sleep(500);

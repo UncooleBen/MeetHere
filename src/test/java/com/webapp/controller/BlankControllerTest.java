@@ -14,6 +14,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+/**
+ * @author Guoyuanjie
+ */
+
 class BlankControllerTest {
     @Test
     public void service_RequestIsAdmin_ReturnAdminBlank() throws ServletException, IOException {
@@ -28,8 +32,8 @@ class BlankControllerTest {
         ModelAndView result = blankcontroller.service(request, response);
 
         assertAll(
-                () -> assertEquals(result.getViewName(), "mainAdmin"),
-                () -> assertEquals(result.getModelMap().get("mainPage"), "admin/blank.jsp")
+                () -> assertEquals("mainAdmin",result.getViewName()),
+                () -> assertEquals("admin/blank.jsp",result.getModelMap().get("mainPage") )
         );
     }
 

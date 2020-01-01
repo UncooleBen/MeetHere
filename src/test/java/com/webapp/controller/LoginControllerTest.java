@@ -16,6 +16,11 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
+
+/**
+ * @author Guoyuanjie
+ */
+
 class LoginControllerTest {
     private LoginDao loginDao = mock(LoginDao.class);
     private LoginController loginController = new LoginController(loginDao);

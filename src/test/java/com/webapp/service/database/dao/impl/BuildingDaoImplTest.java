@@ -21,7 +21,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
+/**
+ * @author Yuanjie Guo
+ */
+
 class BuildingDaoImplTest {
+
     private BuildingDao buildingDao;
     private Connection connection = mock(Connection.class);
     private PreparedStatement preparedStatement = mock(PreparedStatement.class);

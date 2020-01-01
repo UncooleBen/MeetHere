@@ -189,9 +189,9 @@ class NewsControllerTest {
         ModelAndView result = newsController.service(action, request);
 
         assertAll(
-                () -> assertEquals(result.getViewName(), "mainUser"),
-                () -> assertEquals(result.getModelMap().get("mainPage"), "user/newsDetail.jsp"),
-                () -> assertEquals(result.getModelMap().get("news"), news)
+                () -> assertEquals("mainUser",result.getViewName()),
+                () -> assertEquals("user/newsDetail.jsp",result.getModelMap().get("mainPage")),
+                () -> assertEquals(news,result.getModelMap().get("news"))
         );
     }
 

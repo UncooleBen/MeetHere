@@ -24,6 +24,11 @@ import java.text.SimpleDateFormat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+
+/**
+ * @author Guoyuanjie
+ */
+
 class BuildingControllerTest {
 
         private BuildingDao buildingDao = mock(BuildingDao.class);
@@ -76,8 +81,8 @@ class BuildingControllerTest {
                 verify(buildingDao).deleteBuilding(305);
 
                 assertAll(
-                        ()->assertEquals(result.getViewName(),"mainAdmin"),
-                        ()->assertEquals(result.getModelMap().get("mainPage"),"admin/building.jsp"),
+                        ()->assertEquals("mainAdmin",result.getViewName()),
+                        ()->assertEquals("admin/building.jsp",result.getModelMap().get("mainPage")),
                         ()->assertEquals(result.getModelMap().get("buildingList"),buildingList)
                 );
         }

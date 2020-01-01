@@ -21,6 +21,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
+
+/**
+ * @author Guoyuanjie
+ */
 class CommentDaoImplTest {
     private CommentDao commentDao;
     private Connection connection = mock(Connection.class);

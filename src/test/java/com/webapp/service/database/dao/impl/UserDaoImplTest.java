@@ -22,6 +22,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+
+/**
+ * @author Guoyuanjie
+ */
 class UserDaoImplTest {
     private UserDao userDao;
     private Connection connection = mock(Connection.class);

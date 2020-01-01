@@ -14,6 +14,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+/**
+ * @author Guoyuanjie
+ */
+
 class UserControllerTest {
 
     private UserDao userDao = mock(UserDao.class);

@@ -21,6 +21,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
+
+/**
+ * @author Guoyuanjie
+ */
 class RecordDaoImplTest {
     private RecordDao recordDao;
     private Connection connection = mock(Connection.class);

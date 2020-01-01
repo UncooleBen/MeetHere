@@ -21,7 +21,7 @@ Members of group 12: `Juntao Peng`, `Shangzhen Li`, `Yuanjie Guo`
 ## Continuous Integration Framework
 `Jenkins 2.190.3`
 ## Testing Framework
-`JUnit 5.5.2`, `Mockito 3.1.0`, `Apache HttpClient 4.5.10`, `Selenium 4.0.0-alpha`
+`JUnit 5.5.2`, `Mockito 3.1.0`, `Apache HttpClient 4.5.10`, `Selenium 4.0.0-alpha`, `ChromeDriver 79.0.3945.36`, `locust 0.13.5`, `Python 3.7`
 ## Contact
 { pengjuntao2016@foxmail.com, 798483752@qq.com, 327183023@qq.com }
 ## Legal Concerns

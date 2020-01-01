@@ -6,9 +6,9 @@ class WebsiteTasks(TaskSet):
             "username": "user",
             "password": "user"
         })
-    
+
     @task
-    def showNewsDetail(self):
+    def change_password(self):
         self.client.post("/password?action=save",{
             "userId":"2241",
             "oldPassword":"wrongOldPassword",

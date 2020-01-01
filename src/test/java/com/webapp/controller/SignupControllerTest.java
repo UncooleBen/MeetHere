@@ -14,6 +14,9 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
+/**
+ * @author Guoyuanjie
+ */
 
 class SignupControllerTest {
     private LoginDao loginDao = mock(LoginDao.class);

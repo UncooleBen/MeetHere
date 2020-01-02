@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RecordController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.controller</a> &gt; <span class="el_source">RecordController.java</span></div><h1>RecordController.java</h1><pre class="source lang-java linenums">package com.webapp.controller;
+
+import com.webapp.model.Record;
+import com.webapp.model.user.User;
+import com.webapp.service.database.dao.RecordDao;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+/**
+ * @author Shangzhen Li
+ */
+@Controller
+public class RecordController {
+
+  RecordDao recordDao;
+
+  @Autowired
+<span class="fc" id="L24">  public RecordController(RecordDao recordDao) {</span>
+<span class="fc" id="L25">    this.recordDao = recordDao;</span>
+<span class="fc" id="L26">  }</span>
+
+  @RequestMapping(&quot;/record&quot;)
+  public ModelAndView service(
+      HttpServletRequest request, @RequestParam(value = &quot;action&quot;) String action) {
+<span class="fc" id="L31">    ModelAndView mv = new ModelAndView();</span>
+<span class="fc" id="L32">    HttpSession session = request.getSession();</span>
+<span class="fc" id="L33">    String userType = (String) session.getAttribute(&quot;currentUserType&quot;);</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">    if (&quot;user&quot;.equals(userType)) {</span>
+<span class="fc" id="L35">      mv.setViewName(&quot;mainUser&quot;);</span>
+<span class="fc" id="L36">      userRecordService(mv, action, request);</span>
+<span class="pc bpc" id="L37" title="1 of 2 branches missed.">    } else if (&quot;admin&quot;.equals(userType)) {</span>
+<span class="fc" id="L38">      mv.setViewName(&quot;mainAdmin&quot;);</span>
+<span class="fc" id="L39">      adminRecordService(mv, action, request);</span>
+    }
+<span class="fc" id="L41">    return mv;</span>
+  }
+
+  private void adminRecordService(ModelAndView mv, String action, HttpServletRequest request) {
+<span class="fc bfc" id="L45" title="All 3 branches covered.">    switch (action) {</span>
+      case &quot;verify&quot;:
+<span class="fc" id="L47">        int id = Integer.parseInt(request.getParameter(&quot;recordId&quot;));</span>
+<span class="fc" id="L48">        Record record = recordDao.queryRecordById(id);</span>
+<span class="fc" id="L49">        record.setVerified(true);</span>
+<span class="fc" id="L50">        recordDao.updateRecord(record);</span>
+<span class="fc" id="L51">        listRecord(mv, true, -1);</span>
+<span class="fc" id="L52">        mv.addObject(&quot;mainPage&quot;, &quot;admin/record.jsp&quot;);</span>
+<span class="fc" id="L53">        break;</span>
+      case &quot;delete&quot;:
+<span class="fc" id="L55">        int recordId = Integer.parseInt(request.getParameter(&quot;recordId&quot;));</span>
+<span class="fc" id="L56">        recordDao.deleteRecord(recordId);</span>
+<span class="fc" id="L57">        listRecord(mv, true, -1);</span>
+<span class="fc" id="L58">        mv.addObject(&quot;mainPage&quot;, &quot;admin/record.jsp&quot;);</span>
+<span class="fc" id="L59">        break;</span>
+      case &quot;list&quot;:
+      default:
+<span class="fc" id="L62">        listRecord(mv, true, -1);</span>
+<span class="fc" id="L63">        mv.addObject(&quot;mainPage&quot;, &quot;admin/record.jsp&quot;);</span>
+        break;
+    }
+<span class="fc" id="L66">  }</span>
+
+  private void userRecordService(ModelAndView mv, String action, HttpServletRequest request) {
+
+<span class="fc bfc" id="L70" title="All 4 branches covered.">    switch (action) {</span>
+      case &quot;add&quot;:
+<span class="fc" id="L72">        mv.addObject(&quot;mainPage&quot;, &quot;user/recordAdd.jsp&quot;);</span>
+<span class="fc" id="L73">        break;</span>
+      case &quot;save&quot;: {
+<span class="fc" id="L75">        Record record = new Record();</span>
+<span class="fc" id="L76">        record.setBuildingId(Integer.parseInt(request.getParameter(&quot;buildingId&quot;)));</span>
+<span class="fc" id="L77">        HttpSession session = request.getSession();</span>
+<span class="fc" id="L78">        User user = (User) session.getAttribute(&quot;currentUser&quot;);</span>
+<span class="fc" id="L79">        int userId = user.getId();</span>
+<span class="fc" id="L80">        record.setUserId(userId);</span>
+<span class="fc" id="L81">        long startDate = Long.parseLong(request.getParameter(&quot;startDate&quot;));</span>
+<span class="fc" id="L82">        long endDate = Long.parseLong(request.getParameter(&quot;endDate&quot;));</span>
+<span class="fc" id="L83">        record.setStartDate(startDate);</span>
+<span class="fc" id="L84">        record.setEndDate(endDate);</span>
+<span class="fc" id="L85">        record.setTime(endDate - startDate);</span>
+<span class="fc" id="L86">        record.setVerified(false);</span>
+<span class="fc" id="L87">        recordDao.addRecord(record);</span>
+<span class="fc" id="L88">        listRecord(mv, false, userId);</span>
+<span class="fc" id="L89">        mv.addObject(&quot;mainPage&quot;, &quot;user/record.jsp&quot;);</span>
+<span class="fc" id="L90">        break;</span>
+      }
+      case &quot;delete&quot;: {
+<span class="fc" id="L93">        int recordId = Integer.parseInt(request.getParameter(&quot;recordId&quot;));</span>
+<span class="fc" id="L94">        recordDao.deleteRecord(recordId);</span>
+<span class="fc" id="L95">        HttpSession session = request.getSession();</span>
+<span class="fc" id="L96">        User user = (User) session.getAttribute(&quot;currentUser&quot;);</span>
+<span class="fc" id="L97">        int userId = user.getId();</span>
+<span class="fc" id="L98">        listRecord(mv, false, userId);</span>
+<span class="fc" id="L99">        mv.addObject(&quot;mainPage&quot;, &quot;user/record.jsp&quot;);</span>
+<span class="fc" id="L100">        break;</span>
+      }
+      case &quot;list&quot;:
+      default: {
+<span class="fc" id="L104">        HttpSession session = request.getSession();</span>
+<span class="fc" id="L105">        User user = (User) session.getAttribute(&quot;currentUser&quot;);</span>
+<span class="fc" id="L106">        int userId = user.getId();</span>
+<span class="fc" id="L107">        listRecord(mv, false, userId);</span>
+<span class="fc" id="L108">        mv.addObject(&quot;mainPage&quot;, &quot;user/record.jsp&quot;);</span>
+      }
+      break;
+    }
+<span class="fc" id="L112">  }</span>
+
+  private void listRecord(ModelAndView mv, boolean isAdmin, int userId) {
+<span class="fc" id="L115">    List&lt;Record&gt; verifiedRecordList = recordDao.listRecord(20, true);</span>
+<span class="fc bfc" id="L116" title="All 2 branches covered.">    if (isAdmin) {</span>
+<span class="fc" id="L117">      List&lt;Record&gt; unverifiedRecordList = recordDao.listRecord(20, false);</span>
+<span class="fc" id="L118">      mv.addObject(&quot;verifiedRecordList&quot;, verifiedRecordList);</span>
+<span class="fc" id="L119">      mv.addObject(&quot;unverifiedRecordList&quot;, unverifiedRecordList);</span>
+<span class="fc" id="L120">    } else {</span>
+<span class="fc" id="L121">      mv.addObject(&quot;verifiedRecordList&quot;, verifiedRecordList);</span>
+<span class="pc bpc" id="L122" title="1 of 2 branches missed.">      if (userId &gt;= 0) {</span>
+<span class="fc" id="L123">        List&lt;Record&gt; unverifiedRecordList = recordDao.listRecordWithUserId(20, userId, false);</span>
+<span class="fc" id="L124">        mv.addObject(&quot;unverifiedRecordList&quot;, unverifiedRecordList);</span>
+      }
+    }
+<span class="fc" id="L127">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

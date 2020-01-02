@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LoginDaoImplTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.service.database.dao.impl</a> &gt; <span class="el_source">LoginDaoImplTest.java</span></div><h1>LoginDaoImplTest.java</h1><pre class="source lang-java linenums">package com.webapp.service.database.dao.impl;
+
+import com.webapp.model.user.Admin;
+import com.webapp.model.user.User;
+import com.webapp.service.database.dao.LoginDao;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
+
+
+/**
+ * @author Guoyuanjie
+ */
+<span class="fc" id="L27">class LoginDaoImplTest {</span>
+
+    private LoginDao loginDao;
+<span class="fc" id="L30">    private Connection connection = mock(Connection.class);</span>
+<span class="fc" id="L31">    private PreparedStatement preparedStatement = mock(PreparedStatement.class);</span>
+    private SQLException test_sql_exception;
+<span class="fc" id="L33">    private ResultSet rs = mock(ResultSet.class);</span>
+    private ByteArrayOutputStream outContent;
+    private ByteArrayOutputStream errContent;
+    private PrintStream originalOut;
+    private PrintStream originalErr;
+
+
+<span class="fc" id="L40">    class TestableLoginDaoImpl extends LoginDaoImpl {</span>
+        @Override
+        public Connection getConnection() {
+<span class="fc" id="L43">            return connection;</span>
+        }
+    }
+
+    @BeforeEach
+    void init() {
+<span class="fc" id="L49">        this.loginDao = new LoginDaoImplTest.TestableLoginDaoImpl();</span>
+<span class="fc" id="L50">        this.test_sql_exception = new SQLException();</span>
+<span class="fc" id="L51">        this.outContent = new ByteArrayOutputStream();</span>
+<span class="fc" id="L52">        this.errContent = new ByteArrayOutputStream();</span>
+<span class="fc" id="L53">        this.originalOut = System.out;</span>
+<span class="fc" id="L54">        this.originalErr = System.err;</span>
+<span class="fc" id="L55">        System.setOut(new PrintStream(outContent));</span>
+<span class="fc" id="L56">        System.setErr(new PrintStream(errContent));</span>
+<span class="fc" id="L57">    }</span>
+
+    @AfterEach
+    void tear_down() throws IOException {
+<span class="fc" id="L61">        System.setErr(this.originalErr);</span>
+<span class="fc" id="L62">        System.setOut(this.originalOut);</span>
+<span class="fc" id="L63">        this.outContent.close();</span>
+<span class="fc" id="L64">        this.errContent.close();</span>
+<span class="fc" id="L65">    }</span>
+
+
+    @Test
+    void test_throws_sql_exception_when_login() throws SQLException {
+<span class="fc" id="L70">        when(connection.prepareStatement(anyString())).thenThrow(test_sql_exception);</span>
+<span class="fc" id="L71">        this.loginDao.login(&quot;PG&quot;, &quot;123456&quot;);</span>
+<span class="fc" id="L72">        assertTrue(errContent.toString().contains(&quot;java.sql.SQLException&quot;));</span>
+<span class="fc" id="L73">    }</span>
+
+    @Test
+    void test_throws_sql_exception_when_signup() throws SQLException {
+<span class="fc" id="L77">        when(connection.prepareStatement(anyString())).thenThrow(test_sql_exception);</span>
+<span class="fc" id="L78">        this.loginDao.signup(new User());</span>
+<span class="fc" id="L79">        assertTrue(errContent.toString().contains(&quot;java.sql.SQLException&quot;));</span>
+<span class="fc" id="L80">    }</span>
+
+    @Test
+    void test_login_when_PermissionIs_0() throws SQLException {
+<span class="fc" id="L84">        int id = 305;</span>
+<span class="fc" id="L85">        String username = &quot;PG&quot;;</span>
+<span class="fc" id="L86">        String password = &quot;123466&quot;;</span>
+<span class="fc" id="L87">        String name = &quot;pengge&quot;;</span>
+<span class="fc" id="L88">        String sex = &quot;FEMALE&quot;;</span>
+<span class="fc" id="L89">        int permission = 0;</span>
+<span class="fc" id="L90">        String tel = &quot;911&quot;;</span>
+
+<span class="fc" id="L92">        Admin user = new Admin(id, username, password, name, sex, tel);</span>
+<span class="fc" id="L93">        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);</span>
+<span class="fc" id="L94">        when(preparedStatement.executeQuery()).thenReturn(rs);</span>
+<span class="fc" id="L95">        when(rs.next()).thenReturn(true, false); /* First call returns true, second call returns false */</span>
+
+<span class="fc" id="L97">        when(rs.getInt(&quot;id&quot;)).thenReturn(id);</span>
+<span class="fc" id="L98">        when(rs.getString(&quot;username&quot;)).thenReturn(username);</span>
+<span class="fc" id="L99">        when(rs.getString(&quot;password&quot;)).thenReturn(password);</span>
+<span class="fc" id="L100">        when(rs.getString(&quot;name&quot;)).thenReturn(name);</span>
+<span class="fc" id="L101">        when(rs.getString(&quot;sex&quot;)).thenReturn(sex);</span>
+<span class="fc" id="L102">        when(rs.getString(&quot;tel&quot;)).thenReturn(tel);</span>
+<span class="fc" id="L103">        when(rs.getInt(&quot;permission&quot;)).thenReturn(permission);</span>
+
+<span class="fc" id="L105">        assertEquals(this.loginDao.login(&quot;PG&quot;, &quot;123456&quot;), user);</span>
+<span class="fc" id="L106">        verify(preparedStatement).setString(1, &quot;PG&quot;);</span>
+<span class="fc" id="L107">        verify(preparedStatement).setString(2, &quot;123456&quot;);</span>
+
+<span class="fc" id="L109">    }</span>
+
+    @Test
+    void test_login_when_PermissionIs_1() throws SQLException {
+<span class="fc" id="L113">        int id = 305;</span>
+<span class="fc" id="L114">        String username = &quot;PG&quot;;</span>
+<span class="fc" id="L115">        String password = &quot;123466&quot;;</span>
+<span class="fc" id="L116">        String name = &quot;pengge&quot;;</span>
+<span class="fc" id="L117">        String sex = &quot;FEMALE&quot;;</span>
+<span class="fc" id="L118">        int permission = 1;</span>
+<span class="fc" id="L119">        String tel = &quot;911&quot;;</span>
+
+<span class="fc" id="L121">        User user = new User(id, username, password, name, sex, tel);</span>
+<span class="fc" id="L122">        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);</span>
+<span class="fc" id="L123">        when(preparedStatement.executeQuery()).thenReturn(rs);</span>
+<span class="fc" id="L124">        when(rs.next()).thenReturn(true, false); /* First call returns true, second call returns false */</span>
+
+<span class="fc" id="L126">        when(rs.getInt(&quot;id&quot;)).thenReturn(id);</span>
+<span class="fc" id="L127">        when(rs.getString(&quot;username&quot;)).thenReturn(username);</span>
+<span class="fc" id="L128">        when(rs.getString(&quot;password&quot;)).thenReturn(password);</span>
+<span class="fc" id="L129">        when(rs.getString(&quot;name&quot;)).thenReturn(name);</span>
+<span class="fc" id="L130">        when(rs.getString(&quot;sex&quot;)).thenReturn(sex);</span>
+<span class="fc" id="L131">        when(rs.getString(&quot;tel&quot;)).thenReturn(tel);</span>
+<span class="fc" id="L132">        when(rs.getInt(&quot;permission&quot;)).thenReturn(permission);</span>
+
+<span class="fc" id="L134">        assertEquals(this.loginDao.login(&quot;PG&quot;, &quot;123456&quot;), user);</span>
+<span class="fc" id="L135">        verify(preparedStatement).setString(1, &quot;PG&quot;);</span>
+<span class="fc" id="L136">        verify(preparedStatement).setString(2, &quot;123456&quot;);</span>
+
+<span class="fc" id="L138">    }</span>
+
+    @Test
+    void test_signup() throws SQLException {
+<span class="fc" id="L142">        int id = 305;</span>
+<span class="fc" id="L143">        String username = &quot;PG&quot;;</span>
+<span class="fc" id="L144">        String password = &quot;123466&quot;;</span>
+<span class="fc" id="L145">        String name = &quot;pengge&quot;;</span>
+<span class="fc" id="L146">        String sex = &quot;FEMALE&quot;;</span>
+<span class="fc" id="L147">        int permission = 1;</span>
+<span class="fc" id="L148">        String tel = &quot;911&quot;;</span>
+
+<span class="fc" id="L150">        User user = new User(id, username, password, name, sex, tel);</span>
+
+<span class="fc" id="L152">        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);</span>
+<span class="fc" id="L153">        when(preparedStatement.executeQuery()).thenReturn(rs);</span>
+<span class="fc" id="L154">        when(rs.next()).thenReturn(false, true);</span>
+
+<span class="fc" id="L156">        User result = this.loginDao.signup(user);</span>
+<span class="fc" id="L157">        assertEquals(result, user);</span>
+<span class="fc" id="L158">        verify(preparedStatement, times(2)).setString(1, username);</span>
+<span class="fc" id="L159">        verify(preparedStatement).setString(2, password);</span>
+<span class="fc" id="L160">        verify(preparedStatement).setString(3, name);</span>
+<span class="fc" id="L161">        verify(preparedStatement).setString(4, sex);</span>
+<span class="fc" id="L162">        verify(preparedStatement).setInt(5, 1);</span>
+<span class="fc" id="L163">        verify(preparedStatement).setString(6, tel);</span>
+<span class="fc" id="L164">        verify(preparedStatement).execute();</span>
+<span class="fc" id="L165">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

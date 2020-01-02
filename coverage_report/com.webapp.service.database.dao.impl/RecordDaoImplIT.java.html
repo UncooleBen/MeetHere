@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RecordDaoImplIT.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.service.database.dao.impl</a> &gt; <span class="el_source">RecordDaoImplIT.java</span></div><h1>RecordDaoImplIT.java</h1><pre class="source lang-java linenums">package com.webapp.service.database.dao.impl;
+
+import com.webapp.model.Record;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.test.util.ReflectionTestUtils;
+
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+/**
+ * @author Juntao Peng
+ */
+<span class="fc" id="L19">class RecordDaoImplIT {</span>
+    RecordDaoImpl recordDao;
+    Connection connection;
+
+    @BeforeEach
+    void init() {
+<span class="fc" id="L25">        this.recordDao = new RecordDaoImpl();</span>
+<span class="fc" id="L26">        String dbUrl = &quot;jdbc:mysql://localhost:3306/meethere?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=GMT%2B8&quot;;</span>
+<span class="fc" id="L27">        String dbUsername = &quot;root&quot;;</span>
+<span class="fc" id="L28">        String dbPassword = &quot;root&quot;;</span>
+<span class="fc" id="L29">        String dbClassname = &quot;com.mysql.jdbc.Driver&quot;;</span>
+<span class="fc" id="L30">        ReflectionTestUtils.setField(this.recordDao, &quot;dbUrl&quot;, dbUrl);</span>
+<span class="fc" id="L31">        ReflectionTestUtils.setField(this.recordDao, &quot;dbUsername&quot;, dbUsername);</span>
+<span class="fc" id="L32">        ReflectionTestUtils.setField(this.recordDao, &quot;dbPassword&quot;, dbPassword);</span>
+<span class="fc" id="L33">        ReflectionTestUtils.setField(this.recordDao, &quot;dbClassname&quot;, dbClassname);</span>
+<span class="fc" id="L34">        this.connection = null;</span>
+<span class="fc" id="L35">    }</span>
+
+    @AfterEach
+    void tearDown() {
+<span class="fc" id="L39">        this.recordDao.closeConnection(this.connection);</span>
+<span class="fc" id="L40">    }</span>
+
+    @Test
+    void addAVerifiedRecordAndQueryItByList() {
+<span class="fc" id="L44">        long time = System.currentTimeMillis();</span>
+<span class="fc" id="L45">        Record record = new Record(time, time, time, 1, 1, true);</span>
+<span class="fc" id="L46">        this.recordDao.addRecord(record);</span>
+<span class="fc" id="L47">        Record insertedRecord = this.recordDao.listRecord(1, true).get(0);</span>
+<span class="fc" id="L48">        assertAll(</span>
+<span class="fc" id="L49">                () -&gt; assertEquals(record.getTime(), insertedRecord.getTime()),</span>
+<span class="fc" id="L50">                () -&gt; assertEquals(record.getStartDate(), insertedRecord.getStartDate()),</span>
+<span class="fc" id="L51">                () -&gt; assertEquals(record.getEndDate(), insertedRecord.getEndDate()),</span>
+<span class="fc" id="L52">                () -&gt; assertEquals(record.getUserId(), insertedRecord.getUserId()),</span>
+<span class="fc" id="L53">                () -&gt; assertEquals(record.getBuildingId(), insertedRecord.getBuildingId()));</span>
+<span class="fc" id="L54">        this.recordDao.deleteRecord(insertedRecord.getId());</span>
+<span class="fc" id="L55">    }</span>
+
+    @Test
+    void addAnUnverifiedRecordAndQueryItByList() {
+<span class="fc" id="L59">        long time = System.currentTimeMillis();</span>
+<span class="fc" id="L60">        Record record = new Record(time, time, time, 1, 1, false);</span>
+<span class="fc" id="L61">        this.recordDao.addRecord(record);</span>
+<span class="fc" id="L62">        Record insertedRecord = this.recordDao.listRecord(1, false).get(0);</span>
+<span class="fc" id="L63">        assertAll(</span>
+<span class="fc" id="L64">                () -&gt; assertEquals(record.getTime(), insertedRecord.getTime()),</span>
+<span class="fc" id="L65">                () -&gt; assertEquals(record.getStartDate(), insertedRecord.getStartDate()),</span>
+<span class="fc" id="L66">                () -&gt; assertEquals(record.getEndDate(), insertedRecord.getEndDate()),</span>
+<span class="fc" id="L67">                () -&gt; assertEquals(record.getUserId(), insertedRecord.getUserId()),</span>
+<span class="fc" id="L68">                () -&gt; assertEquals(record.getBuildingId(), insertedRecord.getBuildingId()));</span>
+<span class="fc" id="L69">        this.recordDao.deleteRecord(insertedRecord.getId());</span>
+<span class="fc" id="L70">    }</span>
+
+    @Test
+    void addAVerifiedRecordAndQueryItById() {
+<span class="fc" id="L74">        long time = System.currentTimeMillis();</span>
+<span class="fc" id="L75">        Record record = new Record(time, time, time, 1, 1, true);</span>
+<span class="fc" id="L76">        this.recordDao.addRecord(record);</span>
+<span class="fc" id="L77">        Record insertedRecord = this.recordDao.queryRecordById(this.recordDao.listRecord(1, true).get(0).getId());</span>
+<span class="fc" id="L78">        assertAll(</span>
+<span class="fc" id="L79">                () -&gt; assertEquals(record.getTime(), insertedRecord.getTime()),</span>
+<span class="fc" id="L80">                () -&gt; assertEquals(record.getStartDate(), insertedRecord.getStartDate()),</span>
+<span class="fc" id="L81">                () -&gt; assertEquals(record.getEndDate(), insertedRecord.getEndDate()),</span>
+<span class="fc" id="L82">                () -&gt; assertEquals(record.getUserId(), insertedRecord.getUserId()),</span>
+<span class="fc" id="L83">                () -&gt; assertEquals(record.getBuildingId(), insertedRecord.getBuildingId()));</span>
+<span class="fc" id="L84">        this.recordDao.deleteRecord(insertedRecord.getId());</span>
+<span class="fc" id="L85">    }</span>
+
+    @Test
+    void addAnUnverifiedRecordAndQueryItById() {
+<span class="fc" id="L89">        long time = System.currentTimeMillis();</span>
+<span class="fc" id="L90">        Record record = new Record(time, time, time, 1, 1, false);</span>
+<span class="fc" id="L91">        this.recordDao.addRecord(record);</span>
+<span class="fc" id="L92">        Record insertedRecord = this.recordDao.queryRecordById(this.recordDao.listRecord(1, false).get(0).getId());</span>
+<span class="fc" id="L93">        assertAll(() -&gt; assertEquals(record.getTime(), insertedRecord.getTime()),</span>
+<span class="fc" id="L94">                () -&gt; assertEquals(record.getStartDate(), insertedRecord.getStartDate()),</span>
+<span class="fc" id="L95">                () -&gt; assertEquals(record.getEndDate(), insertedRecord.getEndDate()),</span>
+<span class="fc" id="L96">                () -&gt; assertEquals(record.getUserId(), insertedRecord.getUserId()),</span>
+<span class="fc" id="L97">                () -&gt; assertEquals(record.getBuildingId(), insertedRecord.getBuildingId()));</span>
+<span class="fc" id="L98">        this.recordDao.deleteRecord(insertedRecord.getId());</span>
+<span class="fc" id="L99">    }</span>
+
+    @Test
+    void add20VerifiedRecordAndQueryByList() {
+<span class="fc" id="L103">        List&lt;Record&gt; recordList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L104">        long time = System.currentTimeMillis();</span>
+<span class="fc bfc" id="L105" title="All 2 branches covered.">        for (int i = 19; i &gt;= 0; i--) {</span>
+<span class="fc" id="L106">            recordList.add(new Record(time + i, time + i, time + i, 1 + i, 1 + i, true));</span>
+        }
+<span class="fc bfc" id="L108" title="All 2 branches covered.">        for (Record record : recordList) {</span>
+<span class="fc" id="L109">            this.recordDao.addRecord(record);</span>
+<span class="fc" id="L110">        }</span>
+<span class="fc" id="L111">        List&lt;Record&gt; resultList = this.recordDao.listRecord(20, true);</span>
+<span class="fc bfc" id="L112" title="All 2 branches covered.">        for (int i = 0; i &lt; 20; i++) {</span>
+<span class="fc" id="L113">            Record record = recordList.get(i);</span>
+<span class="fc" id="L114">            Record insertedRecord = resultList.get(i);</span>
+<span class="fc" id="L115">            assertAll(</span>
+<span class="fc" id="L116">                    () -&gt; assertEquals(record.getTime(), insertedRecord.getTime()),</span>
+<span class="fc" id="L117">                    () -&gt; assertEquals(record.getStartDate(), insertedRecord.getStartDate()),</span>
+<span class="fc" id="L118">                    () -&gt; assertEquals(record.getEndDate(), insertedRecord.getEndDate()),</span>
+<span class="fc" id="L119">                    () -&gt; assertEquals(record.getUserId(), insertedRecord.getUserId()),</span>
+<span class="fc" id="L120">                    () -&gt; assertEquals(record.getBuildingId(), insertedRecord.getBuildingId()));</span>
+        }
+<span class="fc bfc" id="L122" title="All 2 branches covered.">        for (int i = 0; i &lt; 20; i++) {</span>
+<span class="fc" id="L123">            Record record = resultList.get(i);</span>
+<span class="fc" id="L124">            this.recordDao.deleteRecord(record.getId());</span>
+        }
+<span class="fc" id="L126">    }</span>
+
+    @Test
+    void add20UnverifiedRecordAndQueryByList() {
+<span class="fc" id="L130">        List&lt;Record&gt; recordList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L131">        long time = System.currentTimeMillis();</span>
+<span class="fc bfc" id="L132" title="All 2 branches covered.">        for (int i = 19; i &gt;= 0; i--) {</span>
+<span class="fc" id="L133">            recordList.add(new Record(time + i, time + i, time + i, 1 + i, 1 + i, false));</span>
+        }
+<span class="fc bfc" id="L135" title="All 2 branches covered.">        for (Record record : recordList) {</span>
+<span class="fc" id="L136">            this.recordDao.addRecord(record);</span>
+<span class="fc" id="L137">        }</span>
+<span class="fc" id="L138">        List&lt;Record&gt; resultList = this.recordDao.listRecord(20, false);</span>
+<span class="fc bfc" id="L139" title="All 2 branches covered.">        for (int i = 0; i &lt; 20; i++) {</span>
+<span class="fc" id="L140">            Record record = recordList.get(i);</span>
+<span class="fc" id="L141">            Record insertedRecord = resultList.get(i);</span>
+<span class="fc" id="L142">            assertAll(</span>
+<span class="fc" id="L143">                    () -&gt; assertEquals(record.getTime(), insertedRecord.getTime()),</span>
+<span class="fc" id="L144">                    () -&gt; assertEquals(record.getStartDate(), insertedRecord.getStartDate()),</span>
+<span class="fc" id="L145">                    () -&gt; assertEquals(record.getEndDate(), insertedRecord.getEndDate()),</span>
+<span class="fc" id="L146">                    () -&gt; assertEquals(record.getUserId(), insertedRecord.getUserId()),</span>
+<span class="fc" id="L147">                    () -&gt; assertEquals(record.getBuildingId(), insertedRecord.getBuildingId()));</span>
+        }
+<span class="fc bfc" id="L149" title="All 2 branches covered.">        for (int i = 0; i &lt; 20; i++) {</span>
+<span class="fc" id="L150">            Record record = resultList.get(i);</span>
+<span class="fc" id="L151">            this.recordDao.deleteRecord(record.getId());</span>
+        }
+<span class="fc" id="L153">    }</span>
+
+    @Test
+    void add20VerifiedRecordAndUpdateToUnverified() {
+<span class="fc" id="L157">        List&lt;Record&gt; recordList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L158">        long time = System.currentTimeMillis();</span>
+<span class="fc bfc" id="L159" title="All 2 branches covered.">        for (int i = 19; i &gt;= 0; i--) {</span>
+<span class="fc" id="L160">            recordList.add(new Record(time + i, time + i, time + i, 1 + i, 1 + i, true));</span>
+        }
+<span class="fc bfc" id="L162" title="All 2 branches covered.">        for (Record record : recordList) {</span>
+<span class="fc" id="L163">            this.recordDao.addRecord(record);</span>
+<span class="fc" id="L164">        }</span>
+<span class="fc" id="L165">        List&lt;Record&gt; resultList = this.recordDao.listRecord(20, true);</span>
+<span class="fc bfc" id="L166" title="All 2 branches covered.">        for (int i = 0; i &lt; 20; i++) {</span>
+<span class="fc" id="L167">            Record record = resultList.get(i);</span>
+<span class="fc" id="L168">            record.setTime(time * 2 + i);</span>
+<span class="fc" id="L169">            record.setStartDate(time * 2 + i);</span>
+<span class="fc" id="L170">            record.setEndDate(time * 2 + i);</span>
+<span class="fc" id="L171">            record.setVerified(false);</span>
+<span class="fc" id="L172">            record.setBuildingId(2 + i);</span>
+<span class="fc" id="L173">            record.setUserId(2 + i);</span>
+<span class="fc" id="L174">            this.recordDao.updateRecord(record);</span>
+        }
+<span class="fc" id="L176">        List&lt;Record&gt; updatedResultList = this.recordDao.listRecord(20, false);</span>
+<span class="fc bfc" id="L177" title="All 2 branches covered.">        for (int i = 0; i &lt; 20; i++) {</span>
+<span class="fc" id="L178">            Record record = resultList.get(20 - i - 1);</span>
+<span class="fc" id="L179">            Record insertedRecord = updatedResultList.get(i);</span>
+<span class="fc" id="L180">            assertAll(</span>
+<span class="fc" id="L181">                    () -&gt; assertEquals(record.getTime(), insertedRecord.getTime()),</span>
+<span class="fc" id="L182">                    () -&gt; assertEquals(record.getStartDate(), insertedRecord.getStartDate()),</span>
+<span class="fc" id="L183">                    () -&gt; assertEquals(record.getEndDate(), insertedRecord.getEndDate()),</span>
+<span class="fc" id="L184">                    () -&gt; assertEquals(record.getUserId(), insertedRecord.getUserId()),</span>
+<span class="fc" id="L185">                    () -&gt; assertEquals(record.getBuildingId(), insertedRecord.getBuildingId()));</span>
+        }
+<span class="fc bfc" id="L187" title="All 2 branches covered.">        for (int i = 0; i &lt; 20; i++) {</span>
+<span class="fc" id="L188">            Record record = updatedResultList.get(i);</span>
+<span class="fc" id="L189">            this.recordDao.deleteRecord(record.getId());</span>
+        }
+<span class="fc" id="L191">    }</span>
+
+    @Test
+    void add20UnverifiedRecordAndUpdateToVerified() {
+<span class="fc" id="L195">        List&lt;Record&gt; recordList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L196">        long time = System.currentTimeMillis();</span>
+<span class="fc bfc" id="L197" title="All 2 branches covered.">        for (int i = 19; i &gt;= 0; i--) {</span>
+<span class="fc" id="L198">            recordList.add(new Record(time + i, time + i, time + i, 1 + i, 1 + i, false));</span>
+        }
+<span class="fc bfc" id="L200" title="All 2 branches covered.">        for (Record record : recordList) {</span>
+<span class="fc" id="L201">            this.recordDao.addRecord(record);</span>
+<span class="fc" id="L202">        }</span>
+<span class="fc" id="L203">        List&lt;Record&gt; resultList = this.recordDao.listRecord(20, false);</span>
+<span class="fc bfc" id="L204" title="All 2 branches covered.">        for (int i = 0; i &lt; 20; i++) {</span>
+<span class="fc" id="L205">            Record record = resultList.get(i);</span>
+<span class="fc" id="L206">            record.setTime(time * 2 + i);</span>
+<span class="fc" id="L207">            record.setStartDate(time * 2 + i);</span>
+<span class="fc" id="L208">            record.setEndDate(time * 2 + i);</span>
+<span class="fc" id="L209">            record.setVerified(true);</span>
+<span class="fc" id="L210">            record.setBuildingId(2 + i);</span>
+<span class="fc" id="L211">            record.setUserId(2 + i);</span>
+<span class="fc" id="L212">            this.recordDao.updateRecord(record);</span>
+        }
+<span class="fc" id="L214">        List&lt;Record&gt; updatedResultList = this.recordDao.listRecord(20, true);</span>
+<span class="fc bfc" id="L215" title="All 2 branches covered.">        for (int i = 0; i &lt; 20; i++) {</span>
+<span class="fc" id="L216">            Record record = resultList.get(20 - i - 1);</span>
+<span class="fc" id="L217">            Record insertedRecord = updatedResultList.get(i);</span>
+<span class="fc" id="L218">            assertAll(</span>
+<span class="fc" id="L219">                    () -&gt; assertEquals(record.getTime(), insertedRecord.getTime()),</span>
+<span class="fc" id="L220">                    () -&gt; assertEquals(record.getStartDate(), insertedRecord.getStartDate()),</span>
+<span class="fc" id="L221">                    () -&gt; assertEquals(record.getEndDate(), insertedRecord.getEndDate()),</span>
+<span class="fc" id="L222">                    () -&gt; assertEquals(record.getUserId(), insertedRecord.getUserId()),</span>
+<span class="fc" id="L223">                    () -&gt; assertEquals(record.getBuildingId(), insertedRecord.getBuildingId()));</span>
+        }
+<span class="fc bfc" id="L225" title="All 2 branches covered.">        for (int i = 0; i &lt; 20; i++) {</span>
+<span class="fc" id="L226">            Record record = updatedResultList.get(i);</span>
+<span class="fc" id="L227">            this.recordDao.deleteRecord(record.getId());</span>
+        }
+<span class="fc" id="L229">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

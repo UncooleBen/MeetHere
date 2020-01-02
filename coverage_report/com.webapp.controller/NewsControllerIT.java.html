@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NewsControllerIT.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.controller</a> &gt; <span class="el_source">NewsControllerIT.java</span></div><h1>NewsControllerIT.java</h1><pre class="source lang-java linenums">package com.webapp.controller;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+
+import com.webapp.config.MvcConfig;
+import com.webapp.model.News;
+import com.webapp.service.database.dao.NewsDao;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
+/**
+ * @author Shangzhen Li
+ */
+@ExtendWith(SpringExtension.class)
+@WebAppConfiguration
+@ContextConfiguration(classes = MvcConfig.class)
+<span class="fc" id="L44">public class NewsControllerIT {</span>
+
+<span class="fc" id="L46">  final String urlPrefix = &quot;/WEB-INF/jsp/&quot;;</span>
+  MockMvc mockMvc;
+  @Autowired
+  NewsDao newsDao;
+  @Autowired
+  WebApplicationContext wac;
+  News testNews;
+
+  static Stream&lt;Arguments&gt; illegalUserTypeAndActionProvider() {
+<span class="fc" id="L55">    return Stream.of(</span>
+<span class="fc" id="L56">        arguments(&quot;user&quot;, &quot;add&quot;),</span>
+<span class="fc" id="L57">        arguments(&quot;user&quot;, &quot;delete&quot;),</span>
+<span class="fc" id="L58">        arguments(&quot;user&quot;, &quot;modify&quot;),</span>
+<span class="fc" id="L59">        arguments(&quot;user&quot;, &quot;save&quot;),</span>
+<span class="fc" id="L60">        arguments(&quot;user&quot;, &quot;other&quot;),</span>
+<span class="fc" id="L61">        arguments(&quot;admin&quot;, &quot;detail&quot;),</span>
+<span class="fc" id="L62">        arguments(&quot;admin&quot;, &quot;other&quot;));</span>
+  }
+
+  @BeforeEach
+  void init() {
+<span class="fc" id="L67">    this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();</span>
+<span class="fc" id="L68">    final String TEST_TITLE = &quot;test title&quot;;</span>
+<span class="fc" id="L69">    final long TEST_CREATED = 1000000;</span>
+<span class="fc" id="L70">    final long TEST_LAST_MODIFIED = 2000000;</span>
+<span class="fc" id="L71">    final String TEST_AUTHOR = &quot;test author&quot;;</span>
+<span class="fc" id="L72">    final String TEST_DETAIL = &quot;test detail&quot;;</span>
+<span class="fc" id="L73">    this.testNews =</span>
+        new News(TEST_TITLE, TEST_CREATED, TEST_LAST_MODIFIED, TEST_AUTHOR, TEST_DETAIL);
+<span class="fc" id="L75">    assertTrue(this.newsDao.insertNews(this.testNews));</span>
+<span class="fc" id="L76">    List&lt;News&gt; newsList = this.newsDao.listNews(20);</span>
+<span class="pc bpc" id="L77" title="1 of 2 branches missed.">    for (News news : newsList) {</span>
+<span class="pc bpc" id="L78" title="1 of 2 branches missed.">      if (TEST_TITLE.equals(news.getTitle())) {</span>
+<span class="fc" id="L79">        this.testNews.setId(news.getId());</span>
+<span class="fc" id="L80">        break;</span>
+      }
+<span class="nc" id="L82">    }</span>
+<span class="fc" id="L83">  }</span>
+
+  @AfterEach
+  void restore() {
+<span class="fc" id="L87">    assertTrue(this.newsDao.deleteNewsById(this.testNews.getId()));</span>
+<span class="fc" id="L88">  }</span>
+
+  @ParameterizedTest
+  @MethodSource(&quot;illegalUserTypeAndActionProvider&quot;)
+  void givenUserTypeWhenActionIsIllegalThenList(String userType, String action)
+      throws Exception {
+<span class="fc" id="L94">    Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L95">    sessionAttrs.put(&quot;currentUserType&quot;, userType);</span>
+    final String viewName;
+<span class="fc bfc" id="L97" title="All 2 branches covered.">    if (&quot;admin&quot;.equals(userType)) {</span>
+<span class="fc" id="L98">      viewName = &quot;mainAdmin&quot;;</span>
+    } else {
+<span class="fc" id="L100">      viewName = &quot;mainUser&quot;;</span>
+    }
+<span class="fc" id="L102">    this.mockMvc</span>
+<span class="fc" id="L103">        .perform(get(&quot;/news?action=&quot; + action).sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L104">        .andExpect(status().isOk())</span>
+<span class="fc" id="L105">        .andExpect(view().name(viewName))</span>
+<span class="fc" id="L106">        .andExpect(forwardedUrl(this.urlPrefix + viewName + &quot;.jsp&quot;))</span>
+<span class="fc" id="L107">        .andExpect(model().attribute(&quot;mainPage&quot;, userType + &quot;/news.jsp&quot;))</span>
+<span class="fc" id="L108">        .andReturn();</span>
+<span class="fc" id="L109">  }</span>
+
+  @Test
+  void givenUserWhenActionIsDetailThenRedirectToNewsDetail() throws Exception {
+<span class="fc" id="L113">    Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L114">    sessionAttrs.put(&quot;currentUserType&quot;, &quot;user&quot;);</span>
+<span class="fc" id="L115">    MvcResult result =</span>
+        this.mockMvc
+<span class="fc" id="L117">            .perform(</span>
+<span class="fc" id="L118">                get(&quot;/news?action=detail&amp;newsId=&quot; + this.testNews.getId())</span>
+<span class="fc" id="L119">                    .sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L120">            .andExpect(status().isOk())</span>
+<span class="fc" id="L121">            .andExpect(view().name(&quot;mainUser&quot;))</span>
+<span class="fc" id="L122">            .andExpect(forwardedUrl(this.urlPrefix + &quot;mainUser.jsp&quot;))</span>
+<span class="fc" id="L123">            .andExpect(model().attribute(&quot;mainPage&quot;, &quot;user/newsDetail.jsp&quot;))</span>
+<span class="fc" id="L124">            .andReturn();</span>
+<span class="fc" id="L125">    News news = (News) result.getModelAndView().getModelMap().get(&quot;news&quot;);</span>
+<span class="fc" id="L126">    assertAll(() -&gt; assertEquals(this.testNews, news));</span>
+<span class="fc" id="L127">  }</span>
+
+  @Test
+  void givenUserWhenActionIsListThenList() throws Exception {
+<span class="fc" id="L131">    Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L132">    sessionAttrs.put(&quot;currentUserType&quot;, &quot;user&quot;);</span>
+<span class="fc" id="L133">    MvcResult result =</span>
+        this.mockMvc
+<span class="fc" id="L135">            .perform(get(&quot;/news?action=list&quot;).sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L136">            .andExpect(status().isOk())</span>
+<span class="fc" id="L137">            .andExpect(view().name(&quot;mainUser&quot;))</span>
+<span class="fc" id="L138">            .andExpect(forwardedUrl(this.urlPrefix + &quot;mainUser.jsp&quot;))</span>
+<span class="fc" id="L139">            .andExpect(model().attribute(&quot;mainPage&quot;, &quot;user/news.jsp&quot;))</span>
+<span class="fc" id="L140">            .andReturn();</span>
+<span class="fc" id="L141">    List&lt;News&gt; newsList = (List&lt;News&gt;) result.getModelAndView().getModelMap().get(&quot;newsList&quot;);</span>
+<span class="fc" id="L142">    assertAll(</span>
+<span class="fc" id="L143">        () -&gt; assertEquals(1, newsList.size()), () -&gt; assertEquals(this.testNews, newsList.get(0)));</span>
+<span class="fc" id="L144">  }</span>
+
+  @Test
+  void givenAdminWhenActionIsAddThenRedirectToNewsModify() throws Exception {
+<span class="fc" id="L148">    Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L149">    sessionAttrs.put(&quot;currentUserType&quot;, &quot;admin&quot;);</span>
+<span class="fc" id="L150">    MvcResult result =</span>
+        this.mockMvc
+<span class="fc" id="L152">            .perform(get(&quot;/news?action=add&quot;).sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L153">            .andExpect(status().isOk())</span>
+<span class="fc" id="L154">            .andExpect(view().name(&quot;mainAdmin&quot;))</span>
+<span class="fc" id="L155">            .andExpect(forwardedUrl(this.urlPrefix + &quot;mainAdmin.jsp&quot;))</span>
+<span class="fc" id="L156">            .andExpect(model().attribute(&quot;mainPage&quot;, &quot;admin/newsModify.jsp&quot;))</span>
+<span class="fc" id="L157">            .andReturn();</span>
+<span class="fc" id="L158">    assertAll(() -&gt; assertNull(result.getModelAndView().getModelMap().get(&quot;news&quot;)));</span>
+<span class="fc" id="L159">  }</span>
+
+  @Test
+  void givenAdminWhenActionIsModifyThenRedirectToNewsModify() throws Exception {
+<span class="fc" id="L163">    Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L164">    sessionAttrs.put(&quot;currentUserType&quot;, &quot;admin&quot;);</span>
+<span class="fc" id="L165">    MvcResult result =</span>
+        this.mockMvc
+<span class="fc" id="L167">            .perform(</span>
+<span class="fc" id="L168">                get(&quot;/news?action=modify&amp;newsId=&quot; + this.testNews.getId())</span>
+<span class="fc" id="L169">                    .sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L170">            .andExpect(status().isOk())</span>
+<span class="fc" id="L171">            .andExpect(view().name(&quot;mainAdmin&quot;))</span>
+<span class="fc" id="L172">            .andExpect(forwardedUrl(this.urlPrefix + &quot;mainAdmin.jsp&quot;))</span>
+<span class="fc" id="L173">            .andExpect(model().attribute(&quot;mainPage&quot;, &quot;admin/newsModify.jsp&quot;))</span>
+<span class="fc" id="L174">            .andReturn();</span>
+<span class="fc" id="L175">    assertAll(</span>
+<span class="fc" id="L176">        () -&gt; assertEquals(this.testNews, result.getModelAndView().getModelMap().get(&quot;news&quot;)));</span>
+<span class="fc" id="L177">  }</span>
+
+  @Test
+  void givenAdminWhenActionIsDeleteThenDelete() throws Exception {
+<span class="fc" id="L181">    Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L182">    sessionAttrs.put(&quot;currentUserType&quot;, &quot;admin&quot;);</span>
+<span class="fc" id="L183">    MvcResult result =</span>
+        this.mockMvc
+<span class="fc" id="L185">            .perform(</span>
+<span class="fc" id="L186">                get(&quot;/news?action=delete&amp;newsId=&quot; + this.testNews.getId())</span>
+<span class="fc" id="L187">                    .sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L188">            .andExpect(status().isOk())</span>
+<span class="fc" id="L189">            .andExpect(view().name(&quot;mainAdmin&quot;))</span>
+<span class="fc" id="L190">            .andExpect(forwardedUrl(this.urlPrefix + &quot;mainAdmin.jsp&quot;))</span>
+<span class="fc" id="L191">            .andExpect(model().attribute(&quot;mainPage&quot;, &quot;admin/news.jsp&quot;))</span>
+<span class="fc" id="L192">            .andReturn();</span>
+<span class="fc" id="L193">    List&lt;News&gt; newsList = (List&lt;News&gt;) result.getModelAndView().getModelMap().get(&quot;newsList&quot;);</span>
+<span class="fc" id="L194">    assertAll(() -&gt; assertEquals(0, newsList.size()));</span>
+<span class="fc" id="L195">  }</span>
+
+  @Test
+  void givenAdminWhenActionIsSaveNewNewsThenSave() throws Exception {
+<span class="fc" id="L199">    Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L200">    sessionAttrs.put(&quot;currentUserType&quot;, &quot;admin&quot;);</span>
+<span class="fc" id="L201">    final String TEST_TITLE = &quot;test new title&quot;;</span>
+<span class="fc" id="L202">    final String TEST_AUTHOR = &quot;test new author&quot;;</span>
+<span class="fc" id="L203">    final String TEST_DETAIL = &quot;test new detail&quot;;</span>
+<span class="fc" id="L204">    MvcResult result =</span>
+        this.mockMvc
+<span class="fc" id="L206">            .perform(</span>
+<span class="fc" id="L207">                post(&quot;/news?action=save&quot;)</span>
+<span class="fc" id="L208">                    .sessionAttrs(sessionAttrs)</span>
+<span class="fc" id="L209">                    .param(&quot;newsId&quot;, &quot;&quot;)</span>
+<span class="fc" id="L210">                    .param(&quot;title&quot;, TEST_TITLE)</span>
+<span class="fc" id="L211">                    .param(&quot;author&quot;, TEST_AUTHOR)</span>
+<span class="fc" id="L212">                    .param(&quot;detail&quot;, TEST_DETAIL))</span>
+<span class="fc" id="L213">            .andExpect(status().isOk())</span>
+<span class="fc" id="L214">            .andExpect(view().name(&quot;mainAdmin&quot;))</span>
+<span class="fc" id="L215">            .andExpect(forwardedUrl(this.urlPrefix + &quot;mainAdmin.jsp&quot;))</span>
+<span class="fc" id="L216">            .andExpect(model().attribute(&quot;mainPage&quot;, &quot;admin/news.jsp&quot;))</span>
+<span class="fc" id="L217">            .andReturn();</span>
+<span class="fc" id="L218">    List&lt;News&gt; newsList = (List&lt;News&gt;) result.getModelAndView().getModelMap().get(&quot;newsList&quot;);</span>
+<span class="fc" id="L219">    assertAll(</span>
+<span class="fc" id="L220">        () -&gt; assertEquals(2, newsList.size()),</span>
+<span class="fc" id="L221">        () -&gt; assertEquals(this.testNews, newsList.get(0)),</span>
+<span class="fc" id="L222">        () -&gt; assertEquals(TEST_TITLE, newsList.get(1).getTitle()),</span>
+<span class="fc" id="L223">        () -&gt; assertEquals(TEST_AUTHOR, newsList.get(1).getAuthor()),</span>
+<span class="fc" id="L224">        () -&gt; assertEquals(TEST_DETAIL, newsList.get(1).getDetail()),</span>
+        // Delete added data from database
+<span class="fc" id="L226">        () -&gt; assertTrue(this.newsDao.deleteNewsById(newsList.get(1).getId())));</span>
+<span class="fc" id="L227">  }</span>
+
+  @Test
+  void givenAdminWhenActionIsSaveModifiedNewsThenSave() throws Exception {
+<span class="fc" id="L231">    Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L232">    sessionAttrs.put(&quot;currentUserType&quot;, &quot;admin&quot;);</span>
+<span class="fc" id="L233">    final String TEST_TITLE = &quot;test new title&quot;;</span>
+<span class="fc" id="L234">    final String TEST_AUTHOR = &quot;test new author&quot;;</span>
+<span class="fc" id="L235">    final String TEST_DETAIL = &quot;test new detail&quot;;</span>
+<span class="fc" id="L236">    MvcResult result =</span>
+        this.mockMvc
+<span class="fc" id="L238">            .perform(</span>
+<span class="fc" id="L239">                post(&quot;/news?action=save&quot;)</span>
+<span class="fc" id="L240">                    .sessionAttrs(sessionAttrs)</span>
+<span class="fc" id="L241">                    .param(&quot;newsId&quot;, String.valueOf(this.testNews.getId()))</span>
+<span class="fc" id="L242">                    .param(&quot;title&quot;, TEST_TITLE)</span>
+<span class="fc" id="L243">                    .param(&quot;author&quot;, TEST_AUTHOR)</span>
+<span class="fc" id="L244">                    .param(&quot;detail&quot;, TEST_DETAIL))</span>
+<span class="fc" id="L245">            .andExpect(status().isOk())</span>
+<span class="fc" id="L246">            .andExpect(view().name(&quot;mainAdmin&quot;))</span>
+<span class="fc" id="L247">            .andExpect(forwardedUrl(this.urlPrefix + &quot;mainAdmin.jsp&quot;))</span>
+<span class="fc" id="L248">            .andExpect(model().attribute(&quot;mainPage&quot;, &quot;admin/news.jsp&quot;))</span>
+<span class="fc" id="L249">            .andReturn();</span>
+<span class="fc" id="L250">    List&lt;News&gt; newsList = (List&lt;News&gt;) result.getModelAndView().getModelMap().get(&quot;newsList&quot;);</span>
+<span class="fc" id="L251">    assertAll(</span>
+<span class="fc" id="L252">        () -&gt; assertEquals(1, newsList.size()),</span>
+<span class="fc" id="L253">        () -&gt; assertEquals(TEST_TITLE, newsList.get(0).getTitle()),</span>
+<span class="fc" id="L254">        () -&gt; assertEquals(TEST_AUTHOR, newsList.get(0).getAuthor()),</span>
+<span class="fc" id="L255">        () -&gt; assertEquals(TEST_DETAIL, newsList.get(0).getDetail()));</span>
+<span class="fc" id="L256">  }</span>
+
+  @Test
+  void givenAdminWhenActionIsListThenList() throws Exception {
+<span class="fc" id="L260">    Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L261">    sessionAttrs.put(&quot;currentUserType&quot;, &quot;admin&quot;);</span>
+<span class="fc" id="L262">    MvcResult result =</span>
+        this.mockMvc
+<span class="fc" id="L264">            .perform(get(&quot;/news?action=list&quot;).sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L265">            .andExpect(status().isOk())</span>
+<span class="fc" id="L266">            .andExpect(view().name(&quot;mainAdmin&quot;))</span>
+<span class="fc" id="L267">            .andExpect(forwardedUrl(this.urlPrefix + &quot;mainAdmin.jsp&quot;))</span>
+<span class="fc" id="L268">            .andExpect(model().attribute(&quot;mainPage&quot;, &quot;admin/news.jsp&quot;))</span>
+<span class="fc" id="L269">            .andReturn();</span>
+<span class="fc" id="L270">    List&lt;News&gt; newsList = (List&lt;News&gt;) result.getModelAndView().getModelMap().get(&quot;newsList&quot;);</span>
+<span class="fc" id="L271">    assertAll(</span>
+<span class="fc" id="L272">        () -&gt; assertEquals(1, newsList.size()), () -&gt; assertEquals(this.testNews, newsList.get(0)));</span>
+<span class="fc" id="L273">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

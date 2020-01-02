@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>User.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.model.user</a> &gt; <span class="el_source">User.java</span></div><h1>User.java</h1><pre class="source lang-java linenums">package com.webapp.model.user;
+
+public class User {
+
+  private int id;
+  private String username;
+  private String password;
+  private String name;
+  private Gender sex;
+  private int permission;
+  private String tel;
+
+<span class="fc" id="L13">  public User() {</span>
+<span class="fc" id="L14">  }</span>
+
+  public User(String username, String password, String name, String sex, int permission, String tel) {
+<span class="fc" id="L17">    super();</span>
+<span class="fc" id="L18">    this.id = 0;</span>
+<span class="fc" id="L19">    this.username = username;</span>
+<span class="fc" id="L20">    this.password = password;</span>
+<span class="fc" id="L21">    this.name = name;</span>
+<span class="fc" id="L22">    this.sex = Gender.valueOf(sex);</span>
+<span class="fc" id="L23">    this.permission = permission;</span>
+<span class="fc" id="L24">    this.tel = tel;</span>
+<span class="fc" id="L25">  }</span>
+
+  public User(String username, String password, String name, String sex, String tel) {
+<span class="fc" id="L28">    super();</span>
+<span class="fc" id="L29">    this.id = 0;</span>
+<span class="fc" id="L30">    this.username = username;</span>
+<span class="fc" id="L31">    this.password = password;</span>
+<span class="fc" id="L32">    this.name = name;</span>
+<span class="fc" id="L33">    this.sex = Gender.valueOf(sex);</span>
+<span class="fc" id="L34">    this.permission = 1;</span>
+<span class="fc" id="L35">    this.tel = tel;</span>
+<span class="fc" id="L36">  }</span>
+
+  public User(int id, String username, String password, String name, String sex, String tel) {
+<span class="fc" id="L39">    super();</span>
+<span class="fc" id="L40">    this.id = id;</span>
+<span class="fc" id="L41">    this.username = username;</span>
+<span class="fc" id="L42">    this.password = password;</span>
+<span class="fc" id="L43">    this.name = name;</span>
+<span class="fc" id="L44">    this.sex = Gender.valueOf(sex);</span>
+<span class="fc" id="L45">    this.permission = 1;</span>
+<span class="fc" id="L46">    this.tel = tel;</span>
+<span class="fc" id="L47">  }</span>
+
+  public User(
+      int id,
+      String username,
+      String password,
+      String name,
+      String sex,
+      String tel,
+      int permission) {
+<span class="fc" id="L57">    super();</span>
+<span class="fc" id="L58">    this.id = id;</span>
+<span class="fc" id="L59">    this.username = username;</span>
+<span class="fc" id="L60">    this.password = password;</span>
+<span class="fc" id="L61">    this.name = name;</span>
+<span class="fc" id="L62">    this.sex = Gender.valueOf(sex);</span>
+<span class="fc" id="L63">    this.permission = permission;</span>
+<span class="fc" id="L64">    this.tel = tel;</span>
+<span class="fc" id="L65">  }</span>
+
+<span class="fc" id="L67">  public User(int id) {</span>
+<span class="fc" id="L68">    this.id = id;</span>
+<span class="fc" id="L69">  }</span>
+
+  /**
+   * @return the username
+   */
+  public String getUsername() {
+<span class="fc" id="L75">    return username;</span>
+  }
+
+  /**
+   * @param username
+   *     the username to set
+   */
+  public void setUsername(String username) {
+<span class="fc" id="L83">    this.username = username;</span>
+<span class="fc" id="L84">  }</span>
+
+  /**
+   * @return the password
+   */
+  public String getPassword() {
+<span class="fc" id="L90">    return password;</span>
+  }
+
+  /**
+   * @param password
+   *     the password to set
+   */
+  public void setPassword(String password) {
+<span class="fc" id="L98">    this.password = password;</span>
+<span class="fc" id="L99">  }</span>
+
+  /**
+   * @return the name
+   */
+  public String getName() {
+<span class="fc" id="L105">    return name;</span>
+  }
+
+  /**
+   * @param name
+   *     the name to set
+   */
+  public void setName(String name) {
+<span class="fc" id="L113">    this.name = name;</span>
+<span class="fc" id="L114">  }</span>
+
+  /**
+   * @return the sex
+   */
+  public Gender getSex() {
+<span class="fc" id="L120">    return sex;</span>
+  }
+
+  /**
+   * @param sex
+   *     the sex to set
+   */
+  public void setSex(String sex) {
+<span class="fc" id="L128">    this.sex = Gender.valueOf(sex);</span>
+<span class="fc" id="L129">  }</span>
+
+  /**
+   * @return the tel
+   */
+  public String getTel() {
+<span class="fc" id="L135">    return tel;</span>
+  }
+
+  /**
+   * @param tel
+   *     the tel to set
+   */
+  public void setTel(String tel) {
+<span class="fc" id="L143">    this.tel = tel;</span>
+<span class="fc" id="L144">  }</span>
+
+  /**
+   * @return the id
+   */
+  public int getId() {
+<span class="fc" id="L150">    return id;</span>
+  }
+
+  public void setId(int id) {
+<span class="fc" id="L154">    this.id = id;</span>
+<span class="fc" id="L155">  }</span>
+
+  /**
+   * @return the permission
+   */
+  public int getPermission() {
+<span class="fc" id="L161">    return permission;</span>
+  }
+
+  @Override
+  public boolean equals(Object o) {
+<span class="fc bfc" id="L166" title="All 2 branches covered.">    if (this == o) {</span>
+<span class="fc" id="L167">      return true;</span>
+    }
+<span class="pc bpc" id="L169" title="2 of 4 branches missed.">    if (o == null || getClass() != o.getClass()) {</span>
+<span class="nc" id="L170">      return false;</span>
+    }
+
+<span class="fc" id="L173">    User user = (User) o;</span>
+
+<span class="pc bpc" id="L175" title="1 of 2 branches missed.">    if (id != user.id) {</span>
+<span class="nc" id="L176">      return false;</span>
+    }
+<span class="pc bpc" id="L178" title="1 of 2 branches missed.">    if (permission != user.permission) {</span>
+<span class="nc" id="L179">      return false;</span>
+    }
+<span class="pc bpc" id="L181" title="1 of 2 branches missed.">    if (!username.equals(user.username)) {</span>
+<span class="nc" id="L182">      return false;</span>
+    }
+<span class="pc bpc" id="L184" title="1 of 2 branches missed.">    if (!password.equals(user.password)) {</span>
+<span class="nc" id="L185">      return false;</span>
+    }
+<span class="pc bpc" id="L187" title="1 of 2 branches missed.">    if (!name.equals(user.name)) {</span>
+<span class="nc" id="L188">      return false;</span>
+    }
+<span class="pc bpc" id="L190" title="1 of 2 branches missed.">    if (sex != user.sex) {</span>
+<span class="nc" id="L191">      return false;</span>
+    }
+<span class="fc" id="L193">    return tel.equals(user.tel);</span>
+  }
+
+  @Override
+  public int hashCode() {
+<span class="nc" id="L198">    int result = id;</span>
+<span class="nc" id="L199">    result = 31 * result + username.hashCode();</span>
+<span class="nc" id="L200">    result = 31 * result + password.hashCode();</span>
+<span class="nc" id="L201">    result = 31 * result + name.hashCode();</span>
+<span class="nc" id="L202">    result = 31 * result + sex.hashCode();</span>
+<span class="nc" id="L203">    result = 31 * result + permission;</span>
+<span class="nc" id="L204">    result = 31 * result + tel.hashCode();</span>
+<span class="nc" id="L205">    return result;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

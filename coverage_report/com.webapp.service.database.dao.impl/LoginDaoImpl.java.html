@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LoginDaoImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.service.database.dao.impl</a> &gt; <span class="el_source">LoginDaoImpl.java</span></div><h1>LoginDaoImpl.java</h1><pre class="source lang-java linenums">package com.webapp.service.database.dao.impl;
+
+import com.webapp.model.user.Admin;
+import com.webapp.model.user.User;
+import com.webapp.service.database.DatabaseService;
+import com.webapp.service.database.dao.LoginDao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+/**
+ * @author Juntao Peng
+ */
+<span class="pc bpc" id="L16" title="1 of 2 branches missed.">public class LoginDaoImpl extends DatabaseService implements LoginDao {</span>
+
+    @Override
+    public User login(String loginUsername, String loginPassword) {
+<span class="fc" id="L20">        Connection connection = getConnection();</span>
+<span class="pc bpc" id="L21" title="2 of 4 branches missed.">        assert connection != null;</span>
+<span class="pc bpc" id="L22" title="2 of 4 branches missed.">        assert loginUsername != null;</span>
+<span class="pc bpc" id="L23" title="2 of 4 branches missed.">        assert loginPassword != null;</span>
+
+<span class="fc" id="L25">        User resultUser = null;</span>
+<span class="fc" id="L26">        String SELECT = &quot;SELECT * FROM t_user WHERE username=(?) AND password=(?)&quot;;</span>
+        try {
+<span class="fc" id="L28">            PreparedStatement pstmt = connection.prepareStatement(SELECT);</span>
+<span class="fc" id="L29">            pstmt.setString(1, loginUsername);</span>
+<span class="fc" id="L30">            pstmt.setString(2, loginPassword);</span>
+<span class="fc" id="L31">            ResultSet rs = pstmt.executeQuery();</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">            if (rs.next()) {</span>
+<span class="fc" id="L33">                int id = rs.getInt(&quot;id&quot;);</span>
+<span class="fc" id="L34">                String username = rs.getString(&quot;username&quot;);</span>
+<span class="fc" id="L35">                String password = rs.getString(&quot;password&quot;);</span>
+<span class="fc" id="L36">                String name = rs.getString(&quot;name&quot;);</span>
+<span class="fc" id="L37">                String sex = rs.getString(&quot;sex&quot;);</span>
+<span class="fc" id="L38">                int permission = rs.getInt(&quot;permission&quot;);</span>
+<span class="fc" id="L39">                String tel = rs.getString(&quot;tel&quot;);</span>
+<span class="pc bpc" id="L40" title="1 of 3 branches missed.">                switch (permission) {</span>
+                    case 0:
+<span class="fc" id="L42">                        resultUser = new Admin(id, username, password, name, sex, tel);</span>
+<span class="fc" id="L43">                        break;</span>
+                    case 1:
+<span class="fc" id="L45">                        resultUser = new User(id, username, password, name, sex, tel);</span>
+<span class="fc" id="L46">                        break;</span>
+                    default:
+                        // Empty
+                }
+            }
+<span class="fc" id="L51">            closeConnection(connection);</span>
+<span class="fc" id="L52">        } catch (SQLException sqlException) {</span>
+<span class="fc" id="L53">            sqlException.printStackTrace(System.err);</span>
+<span class="fc" id="L54">        }</span>
+<span class="fc" id="L55">        return resultUser;</span>
+    }
+
+    @Override
+    public User signup(User user) {
+<span class="fc" id="L60">        Connection connection = getConnection();</span>
+
+<span class="fc" id="L62">        User resultUser = null;</span>
+<span class="fc" id="L63">        String SELECT = &quot;SELECT * FROM t_user WHERE username = ?&quot;;</span>
+<span class="fc" id="L64">        String INSERT = &quot;INSERT INTO t_user (username, password, name, sex, permission, tel) &quot; +</span>
+                &quot;VALUES(?,?,?,?,?,?)&quot;;
+        try {
+<span class="fc" id="L67">            PreparedStatement pstmt = connection.prepareStatement(SELECT);</span>
+<span class="fc" id="L68">            pstmt.setString(1, user.getUsername());</span>
+<span class="fc" id="L69">            ResultSet rs = pstmt.executeQuery();</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">            if (!rs.next()) {</span>
+<span class="fc" id="L71">                pstmt = connection.prepareStatement(INSERT);</span>
+<span class="fc" id="L72">                pstmt.setString(1, user.getUsername());</span>
+<span class="fc" id="L73">                pstmt.setString(2, user.getPassword());</span>
+<span class="fc" id="L74">                pstmt.setString(3, user.getName());</span>
+<span class="fc" id="L75">                pstmt.setString(4, user.getSex().toString());</span>
+<span class="fc" id="L76">                pstmt.setInt(5, 1);</span>
+<span class="fc" id="L77">                pstmt.setString(6, user.getTel());</span>
+<span class="fc" id="L78">                pstmt.execute();</span>
+<span class="fc" id="L79">                resultUser = user;</span>
+            }
+<span class="fc" id="L81">            closeConnection(connection);</span>
+<span class="fc" id="L82">        } catch (SQLException sqlException) {</span>
+<span class="fc" id="L83">            sqlException.printStackTrace(System.err);</span>
+<span class="fc" id="L84">        }</span>
+<span class="fc" id="L85">        return resultUser;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

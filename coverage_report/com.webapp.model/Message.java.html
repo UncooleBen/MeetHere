@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Message.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.model</a> &gt; <span class="el_source">Message.java</span></div><h1>Message.java</h1><pre class="source lang-java linenums">package com.webapp.model;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.UUID;
+
+public class Message {
+
+    private String _username;
+    private String _content;
+    private Date _time;
+    private UUID _uuid;
+    private String _ago;
+<span class="nc" id="L14">    private static SimpleDateFormat format = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
+    private String _path;
+    private String _uuidstr;
+
+<span class="nc" id="L18">    public Message(String username, String content, Date time) {</span>
+<span class="nc" id="L19">        this._content = content;</span>
+<span class="nc" id="L20">        this._username = username;</span>
+<span class="nc" id="L21">        this._time = time;</span>
+<span class="nc" id="L22">        this._uuid = UUID.randomUUID();</span>
+<span class="nc" id="L23">        this._uuidstr = this._uuid.toString();</span>
+<span class="nc" id="L24">        this._ago = &quot;Error&quot;;</span>
+<span class="nc" id="L25">        this._path = null;</span>
+<span class="nc" id="L26">    }</span>
+
+<span class="nc" id="L28">    public Message(UUID uuid, String username, String content, Date time, String path) {</span>
+<span class="nc" id="L29">        this._username = username;</span>
+<span class="nc" id="L30">        this._content = content;</span>
+<span class="nc" id="L31">        this._time = time;</span>
+<span class="nc" id="L32">        this._uuid = uuid;</span>
+<span class="nc" id="L33">        this._uuidstr = uuid.toString();</span>
+<span class="nc" id="L34">        this._path = path;</span>
+<span class="nc" id="L35">    }</span>
+
+<span class="nc" id="L37">    public Message(UUID uuid, String username, String content, Date time) {</span>
+<span class="nc" id="L38">        this._content = content;</span>
+<span class="nc" id="L39">        this._username = username;</span>
+<span class="nc" id="L40">        this._time = time;</span>
+<span class="nc" id="L41">        this._uuid = uuid;</span>
+<span class="nc" id="L42">        this._uuidstr = uuid.toString();</span>
+<span class="nc" id="L43">        this._path = null;</span>
+<span class="nc" id="L44">    }</span>
+
+    public String get_username() {
+<span class="nc" id="L47">        return _username;</span>
+    }
+
+    public String get_content() {
+<span class="nc" id="L51">        return _content;</span>
+    }
+
+    public Date get_time() {
+<span class="nc" id="L55">        return _time;</span>
+    }
+
+    public UUID get_uuid() {
+<span class="nc" id="L59">        return this._uuid;</span>
+    }
+
+    public String get_path() {
+<span class="nc" id="L63">        return this._path;</span>
+    }
+
+    public String get_uuidstr() {
+<span class="nc" id="L67">        return this._uuidstr;</span>
+    }
+
+    public void set_ago(long millisec) {
+<span class="nc" id="L71">        long duration = millisec - this._time.getTime();</span>
+<span class="nc" id="L72">        duration /= 1000;</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">        if (duration &lt; 1) {</span>
+<span class="nc" id="L74">            this._ago = &quot;Just Now&quot;;</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">        } else if (duration &lt; 60) {</span>
+<span class="nc" id="L76">            this._ago = duration + &quot; Second(s) Ago&quot;;</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">        } else if (duration &lt; 3600) {</span>
+<span class="nc" id="L78">            this._ago = duration / 60 + &quot; Minute(s) Ago&quot;;</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">        } else if (duration &lt; 3600 * 24) {</span>
+<span class="nc" id="L80">            this._ago = duration / 3600 + &quot; Hours(s) Ago&quot;;</span>
+        } else {
+<span class="nc" id="L82">            this._ago = format.format(this._time);</span>
+        }
+<span class="nc" id="L84">    }</span>
+
+    public String get_ago() {
+<span class="nc" id="L87">        return this._ago;</span>
+    }
+
+    public void set_path(String _path) {
+<span class="nc" id="L91">        this._path = _path;</span>
+<span class="nc" id="L92">    }</span>
+
+    @Override
+    public String toString() {
+<span class="nc" id="L96">        return &quot;Message { username : &quot; + this._username + &quot; content : &quot; + this._content + &quot; date : &quot; + this._time</span>
+                + &quot; }&quot;;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+<span class="nc bnc" id="L102" title="All 2 branches missed.">        if (obj == null)</span>
+<span class="nc" id="L103">            return false;</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">        if (!Message.class.isAssignableFrom(obj.getClass()))</span>
+<span class="nc" id="L105">            return false;</span>
+<span class="nc" id="L106">        final Message target = (Message) obj;</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">        if (!this.get_uuid().equals(target.get_uuid())) {</span>
+<span class="nc" id="L108">            return false;</span>
+        }
+
+<span class="nc bnc" id="L111" title="All 2 branches missed.">        if (!this.get_time().toString().equals(target.get_time().toString())) {</span>
+<span class="nc" id="L112">            return false;</span>
+        }
+
+<span class="nc bnc" id="L115" title="All 2 branches missed.">        if (!this.get_username().equals(target.get_username())) {</span>
+<span class="nc" id="L116">            return false;</span>
+        }
+<span class="nc" id="L118">        return this.get_content().equals(target.get_content());</span>
+
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

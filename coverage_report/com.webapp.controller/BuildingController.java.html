@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BuildingController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.controller</a> &gt; <span class="el_source">BuildingController.java</span></div><h1>BuildingController.java</h1><pre class="source lang-java linenums">package com.webapp.controller;
+
+import com.webapp.filter.LoginFilter;
+import com.webapp.model.Building;
+import com.webapp.model.Record;
+import com.webapp.model.user.User;
+import com.webapp.service.database.dao.BuildingDao;
+import com.webapp.service.database.dao.RecordDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
+
+
+/**
+ * @author Juntao Peng
+ */
+@Controller
+public class BuildingController {
+
+    BuildingDao buildingDao;
+    RecordDao recordDao;
+    SimpleDateFormat sdf;
+
+    @Autowired
+<span class="fc" id="L33">    public BuildingController(BuildingDao buildingDao, RecordDao recordDao) {</span>
+<span class="fc" id="L34">        this.buildingDao = buildingDao;</span>
+<span class="fc" id="L35">        this.recordDao = recordDao;</span>
+<span class="fc" id="L36">        this.sdf = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);</span>
+<span class="fc" id="L37">    }</span>
+
+    @RequestMapping(&quot;/building&quot;)
+    public ModelAndView service(@RequestParam(&quot;action&quot;) String action, HttpServletRequest request,
+                                HttpSession session) {
+<span class="fc" id="L42">        ModelAndView mv = new ModelAndView();</span>
+<span class="fc" id="L43">        String currentUserType = (String) session.getAttribute(&quot;currentUserType&quot;);</span>
+<span class="fc" id="L44">        boolean isAuthorized = LoginFilter.isAuthorized(currentUserType, &quot;user&quot;, mv); /* Filter not login*/</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        if (!isAuthorized) {</span>
+<span class="fc" id="L46">            return mv;</span>
+        }
+<span class="fc bfc" id="L48" title="All 4 branches covered.">        if (!&quot;list&quot;.equals(action) &amp;&amp; !&quot;book&quot;.equals(action)) {</span>
+<span class="fc" id="L49">            isAuthorized = LoginFilter.isAuthorized(currentUserType, &quot;admin&quot;, mv); /* Filter not login*/</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">            if (!isAuthorized) {</span>
+<span class="fc" id="L51">                return mv;</span>
+            }
+        }
+<span class="fc" id="L54">        String idStr = request.getParameter(&quot;id&quot;);</span>
+<span class="fc" id="L55">        int id = 0;</span>
+<span class="pc bpc" id="L56" title="1 of 4 branches missed.">        if (idStr != null &amp;&amp; idStr.length() != 0) {</span>
+<span class="fc" id="L57">            id = Integer.parseInt(idStr);</span>
+        }
+<span class="fc" id="L59">        mv.setViewName(&quot;mainAdmin&quot;);</span>
+<span class="fc bfc" id="L60" title="All 6 branches covered.">        switch (action) {</span>
+            case &quot;delete&quot;:
+<span class="fc" id="L62">                deleteBuilding(mv, id);</span>
+<span class="fc" id="L63">                listBuildings(mv, currentUserType);</span>
+<span class="fc" id="L64">                break;</span>
+            case &quot;modify&quot;:
+<span class="fc" id="L66">                modifyBuilding(mv, id);</span>
+<span class="fc" id="L67">                break;</span>
+            case &quot;add&quot;:
+<span class="fc" id="L69">                addBuilding(mv);</span>
+<span class="fc" id="L70">                break;</span>
+            case &quot;save&quot;:
+<span class="fc" id="L72">                saveBuilding(mv, request);</span>
+<span class="fc" id="L73">                listBuildings(mv, currentUserType);</span>
+<span class="fc" id="L74">                break;</span>
+            case &quot;book&quot;:
+<span class="fc" id="L76">                bookBuilding(mv, request, session);</span>
+<span class="fc" id="L77">                listBuildings(mv, currentUserType);</span>
+<span class="fc" id="L78">                break;</span>
+            case &quot;list&quot;:
+            default:
+<span class="fc" id="L81">                listBuildings(mv, currentUserType);</span>
+        }
+<span class="fc" id="L83">        return mv;</span>
+    }
+
+    private void bookBuilding(ModelAndView mv, HttpServletRequest request, HttpSession session) {
+<span class="fc" id="L87">        User currentUser = (User) session.getAttribute(&quot;currentUser&quot;);</span>
+<span class="fc" id="L88">        String buildingId = request.getParameter(&quot;buildingId&quot;);</span>
+<span class="fc" id="L89">        String startDate = request.getParameter(&quot;startDate&quot;);</span>
+<span class="fc" id="L90">        String duration = request.getParameter(&quot;duration&quot;);</span>
+<span class="fc" id="L91">        int userId = currentUser.getId();</span>
+<span class="fc" id="L92">        long currentTime = System.currentTimeMillis();</span>
+        try {
+<span class="fc" id="L94">            long startDateInLong = this.sdf.parse(startDate).getTime();</span>
+<span class="fc" id="L95">            long endDateInLong = (long) Double.parseDouble(duration) * 3600 * 1000 * 24 + startDateInLong;</span>
+<span class="fc" id="L96">            Record record = new Record(currentTime, startDateInLong, endDateInLong, userId,</span>
+<span class="fc" id="L97">                    Integer.parseInt(buildingId), false);</span>
+<span class="fc" id="L98">            this.recordDao.addRecord(record);</span>
+<span class="fc" id="L99">        } catch (ParseException pe) {</span>
+<span class="fc" id="L100">            pe.printStackTrace(System.err);</span>
+<span class="fc" id="L101">        }</span>
+<span class="fc" id="L102">    }</span>
+
+    private void listBuildings(ModelAndView mv, String currentUserType) {
+<span class="fc" id="L105">        List&lt;Building&gt; buildingList = this.buildingDao.listBuilding(20);</span>
+<span class="fc bfc" id="L106" title="All 2 branches covered.">        if (&quot;admin&quot;.equals(currentUserType)) {</span>
+<span class="fc" id="L107">            mv.setViewName(&quot;mainAdmin&quot;);</span>
+<span class="fc" id="L108">            mv.addObject(&quot;mainPage&quot;, &quot;admin/building.jsp&quot;);</span>
+        } else {
+<span class="fc" id="L110">            mv.setViewName(&quot;mainUser&quot;);</span>
+<span class="fc" id="L111">            mv.addObject(&quot;mainPage&quot;, &quot;user/building.jsp&quot;);</span>
+        }
+<span class="fc" id="L113">        mv.addObject(&quot;buildingList&quot;, buildingList);</span>
+<span class="fc" id="L114">    }</span>
+
+    private void deleteBuilding(ModelAndView mv, int id) {
+<span class="fc" id="L117">        this.buildingDao.deleteBuilding(id);</span>
+<span class="fc" id="L118">    }</span>
+
+    private void modifyBuilding(ModelAndView mv, int id) {
+<span class="fc" id="L121">        Building building = this.buildingDao.queryBuildingById(id);</span>
+<span class="fc" id="L122">        mv.addObject(&quot;mainPage&quot;, &quot;admin/buildingModify.jsp&quot;);</span>
+<span class="fc" id="L123">        mv.addObject(&quot;id&quot;, String.valueOf(id));</span>
+<span class="fc" id="L124">        mv.addObject(&quot;building&quot;, building);</span>
+<span class="fc" id="L125">    }</span>
+
+    private void addBuilding(ModelAndView mv) {
+<span class="fc" id="L128">        mv.addObject(&quot;mainPage&quot;, &quot;admin/buildingModify.jsp&quot;);</span>
+<span class="fc" id="L129">        mv.addObject(&quot;id&quot;, null);</span>
+<span class="fc" id="L130">        mv.addObject(&quot;building&quot;, null);</span>
+<span class="fc" id="L131">    }</span>
+
+    private void saveBuilding(ModelAndView mv, HttpServletRequest request) {
+<span class="fc" id="L134">        String name = request.getParameter(&quot;buildingName&quot;);</span>
+<span class="fc" id="L135">        String description = request.getParameter(&quot;buildingDescription&quot;);</span>
+<span class="fc" id="L136">        String price = request.getParameter(&quot;buildingPrice&quot;);</span>
+<span class="fc" id="L137">        String idStr = request.getParameter(&quot;buildingId&quot;);</span>
+<span class="fc" id="L138">        Building building = new Building(name, description, price);</span>
+<span class="fc bfc" id="L139" title="All 4 branches covered.">        if (idStr != null &amp;&amp; idStr.length() != 0) {</span>
+<span class="fc" id="L140">            int id = Integer.valueOf(idStr);</span>
+<span class="fc" id="L141">            building.setId(id);</span>
+<span class="fc" id="L142">            this.buildingDao.updateBuilding(building);</span>
+<span class="fc" id="L143">        } else {</span>
+<span class="fc" id="L144">            this.buildingDao.addBuilding(building);</span>
+        }
+<span class="fc" id="L146">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

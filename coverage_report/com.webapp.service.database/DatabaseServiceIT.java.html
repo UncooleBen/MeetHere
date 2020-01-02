@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DatabaseServiceIT.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.service.database</a> &gt; <span class="el_source">DatabaseServiceIT.java</span></div><h1>DatabaseServiceIT.java</h1><pre class="source lang-java linenums">package com.webapp.service.database;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.test.util.ReflectionTestUtils;
+
+import java.sql.Connection;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * @author Juntao Peng
+ */
+<span class="fc" id="L15">class DatabaseServiceIT {</span>
+
+    DatabaseService databaseService;
+    Connection connection;
+
+    @BeforeEach
+    void init() {
+<span class="fc" id="L22">        String dbUrl = &quot;jdbc:mysql://localhost:3306/meethere?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=GMT%2B8&quot;;</span>
+<span class="fc" id="L23">        String dbUsername = &quot;root&quot;;</span>
+<span class="fc" id="L24">        String dbPassword = &quot;root&quot;;</span>
+<span class="fc" id="L25">        String dbClassname = &quot;com.mysql.jdbc.Driver&quot;;</span>
+<span class="fc" id="L26">        this.databaseService = new DatabaseService();</span>
+<span class="fc" id="L27">        ReflectionTestUtils.setField(this.databaseService, &quot;dbUrl&quot;, dbUrl);</span>
+<span class="fc" id="L28">        ReflectionTestUtils.setField(this.databaseService, &quot;dbUsername&quot;, dbUsername);</span>
+<span class="fc" id="L29">        ReflectionTestUtils.setField(this.databaseService, &quot;dbPassword&quot;, dbPassword);</span>
+<span class="fc" id="L30">        ReflectionTestUtils.setField(this.databaseService, &quot;dbClassname&quot;, dbClassname);</span>
+<span class="fc" id="L31">        this.connection = null;</span>
+<span class="fc" id="L32">    }</span>
+
+    @AfterEach
+    void tearDown() {
+<span class="fc" id="L36">        this.databaseService.closeConnection(this.connection);</span>
+<span class="fc" id="L37">    }</span>
+
+    @Test
+    void testGetConnection() throws Throwable {
+<span class="fc" id="L41">        connection = databaseService.getConnection();</span>
+<span class="fc" id="L42">        assertAll(</span>
+<span class="fc" id="L43">                () -&gt; assertNotNull(connection),</span>
+<span class="fc" id="L44">                () -&gt; assertFalse(connection.isClosed())</span>
+        );
+<span class="fc" id="L46">    }</span>
+
+    @Test
+    void testCloseConnection() throws Throwable {
+<span class="fc" id="L50">        connection = databaseService.getConnection();</span>
+<span class="fc" id="L51">        databaseService.closeConnection(connection);</span>
+<span class="fc" id="L52">        assertTrue(connection.isClosed());</span>
+<span class="fc" id="L53">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

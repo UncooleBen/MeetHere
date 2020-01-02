@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserControllerIT.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.controller</a> &gt; <span class="el_source">UserControllerIT.java</span></div><h1>UserControllerIT.java</h1><pre class="source lang-java linenums">package com.webapp.controller;
+
+import com.webapp.config.MvcConfig;
+import com.webapp.model.user.User;
+import com.webapp.service.database.dao.UserDao;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+/**
+ * @author Juntao Peng
+ */
+@ExtendWith(SpringExtension.class)
+@WebAppConfiguration
+@ContextConfiguration(classes = MvcConfig.class)
+<span class="fc" id="L39">public class UserControllerIT {</span>
+    @Autowired
+    UserDao userDao;
+    @Autowired
+    WebApplicationContext wac;
+    MockMvc mockMvc;
+
+    List&lt;User&gt; users;
+    Map&lt;String, User&gt; userMap;
+
+    static Stream&lt;Arguments&gt; userProvider() {
+<span class="fc" id="L50">        return Stream.of(</span>
+<span class="fc" id="L51">                Arguments.of(&quot;username1&quot;, &quot;password1&quot;, &quot;name1&quot;, &quot;MALE&quot;, &quot;tel1&quot;),</span>
+<span class="fc" id="L52">                Arguments.of(&quot;username2&quot;, &quot;password2&quot;, &quot;name2&quot;, &quot;FEMALE&quot;, &quot;tel2&quot;),</span>
+<span class="fc" id="L53">                Arguments.of(&quot;username3&quot;, &quot;password3&quot;, &quot;name3&quot;, &quot;MALE&quot;, &quot;tel3&quot;),</span>
+<span class="fc" id="L54">                Arguments.of(&quot;username4&quot;, &quot;password4&quot;, &quot;name4&quot;, &quot;FEMALE&quot;, &quot;tel4&quot;),</span>
+<span class="fc" id="L55">                Arguments.of(&quot;username5&quot;, &quot;password5&quot;, &quot;name5&quot;, &quot;MALE&quot;, &quot;tel5&quot;)</span>
+        );
+    }
+
+    static Stream&lt;Integer&gt; idProvider() {
+<span class="fc" id="L60">        return Stream.of(1, 2, 3, 4, 5);</span>
+    }
+
+    static Stream&lt;String&gt; sexProvider() {
+<span class="fc" id="L64">        return Stream.of(&quot;FEMALE&quot;, &quot;MALE&quot;);</span>
+    }
+
+    static Stream&lt;String&gt; nameProvider() {
+<span class="fc" id="L68">        return Stream.of(&quot;pengjuntao&quot;, &quot;lishangzhen&quot;, &quot;guoyuanjie&quot;, &quot;paul.n.hilfinger&quot;);</span>
+    }
+
+    static Stream&lt;Integer&gt; searchIdProvider() {
+<span class="fc" id="L72">        return Stream.of(4, 7, 8, 999);</span>
+    }
+
+    @BeforeEach
+    void setup() {
+<span class="fc" id="L77">        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();</span>
+<span class="fc" id="L78">        User user1 = new User(&quot;username1&quot;, &quot;password1&quot;, &quot;name1&quot;, &quot;MALE&quot;, &quot;tel1&quot;);</span>
+<span class="fc" id="L79">        User user2 = new User(&quot;username2&quot;, &quot;password2&quot;, &quot;name2&quot;, &quot;FEMALE&quot;, &quot;tel2&quot;);</span>
+<span class="fc" id="L80">        User user3 = new User(&quot;username3&quot;, &quot;password3&quot;, &quot;name3&quot;, &quot;MALE&quot;, &quot;tel3&quot;);</span>
+<span class="fc" id="L81">        User user4 = new User(&quot;username4&quot;, &quot;password4&quot;, &quot;name4&quot;, &quot;FEMALE&quot;, &quot;tel4&quot;);</span>
+<span class="fc" id="L82">        User user5 = new User(&quot;username5&quot;, &quot;password5&quot;, &quot;name5&quot;, &quot;MALE&quot;, &quot;tel5&quot;);</span>
+<span class="fc" id="L83">        this.userDao.addUser(user1);</span>
+<span class="fc" id="L84">        this.userDao.addUser(user2);</span>
+<span class="fc" id="L85">        this.userDao.addUser(user3);</span>
+<span class="fc" id="L86">        this.userDao.addUser(user4);</span>
+<span class="fc" id="L87">        this.userDao.addUser(user5);</span>
+<span class="fc" id="L88">        this.users = this.userDao.queryAllUsers();</span>
+<span class="fc" id="L89">        this.userMap = new HashMap&lt;&gt;();</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">        for (User user : this.users) {</span>
+<span class="fc" id="L91">            this.userMap.put(user.getUsername(), user);</span>
+<span class="fc" id="L92">        }</span>
+<span class="fc" id="L93">    }</span>
+
+    @AfterEach
+    void tearDown() {
+<span class="fc bfc" id="L97" title="All 2 branches covered.">        for (User user : this.users) {</span>
+<span class="fc" id="L98">            this.userDao.deleteUser(user.getId());</span>
+<span class="fc" id="L99">        }</span>
+<span class="fc" id="L100">    }</span>
+
+    @Test
+    void shouldReturnListUser_whenAdminActionList() throws Throwable {
+<span class="fc" id="L104">        List&lt;String&gt; usernames = Arrays.asList(&quot;username5&quot;, &quot;username4&quot;, &quot;username3&quot;, &quot;username2&quot;, &quot;username1&quot;);</span>
+<span class="fc" id="L105">        Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L106">        sessionAttrs.put(&quot;currentUserType&quot;, &quot;admin&quot;);</span>
+<span class="fc" id="L107">        MvcResult result = this.mockMvc.perform(get(&quot;/user?action=list&quot;).sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L108">                .andExpect(status().isOk())</span>
+<span class="fc" id="L109">                .andExpect(view().name(&quot;mainAdmin&quot;))</span>
+<span class="fc" id="L110">                .andExpect(forwardedUrl(&quot;/WEB-INF/jsp/mainAdmin.jsp&quot;))</span>
+<span class="fc" id="L111">                .andExpect(model().attribute(&quot;mainPage&quot;, &quot;admin/user.jsp&quot;))</span>
+<span class="fc" id="L112">                .andReturn();</span>
+<span class="fc" id="L113">        List&lt;User&gt; resultUsers = (List&lt;User&gt;) result.getModelAndView().getModelMap().get(&quot;userList&quot;);</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">        for (int i = 0; i &lt; usernames.size(); i++) {</span>
+<span class="fc" id="L115">            String expected = usernames.get(i);</span>
+<span class="fc" id="L116">            String actual = resultUsers.get(i).getUsername();</span>
+<span class="fc" id="L117">            assertEquals(expected, actual);</span>
+        }
+<span class="fc" id="L119">    }</span>
+
+    @Test
+    void shouldReturnListUser_whenAdminActionNull() throws Throwable {
+<span class="fc" id="L123">        List&lt;String&gt; usernames = Arrays.asList(&quot;username5&quot;, &quot;username4&quot;, &quot;username3&quot;, &quot;username2&quot;, &quot;username1&quot;);</span>
+<span class="fc" id="L124">        Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L125">        sessionAttrs.put(&quot;currentUserType&quot;, &quot;admin&quot;);</span>
+<span class="fc" id="L126">        MvcResult result = this.mockMvc.perform(get(&quot;/user?action=&quot;).sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L127">                .andExpect(status().isOk())</span>
+<span class="fc" id="L128">                .andExpect(view().name(&quot;mainAdmin&quot;))</span>
+<span class="fc" id="L129">                .andExpect(forwardedUrl(&quot;/WEB-INF/jsp/mainAdmin.jsp&quot;))</span>
+<span class="fc" id="L130">                .andExpect(model().attribute(&quot;mainPage&quot;, &quot;admin/user.jsp&quot;))</span>
+<span class="fc" id="L131">                .andReturn();</span>
+<span class="fc" id="L132">        List&lt;User&gt; resultUsers = (List&lt;User&gt;) result.getModelAndView().getModelMap().get(&quot;userList&quot;);</span>
+<span class="fc bfc" id="L133" title="All 2 branches covered.">        for (int i = 0; i &lt; usernames.size(); i++) {</span>
+<span class="fc" id="L134">            String expected = usernames.get(i);</span>
+<span class="fc" id="L135">            String actual = resultUsers.get(i).getUsername();</span>
+<span class="fc" id="L136">            assertEquals(expected, actual);</span>
+        }
+<span class="fc" id="L138">    }</span>
+
+    @ParameterizedTest
+    @MethodSource(&quot;userProvider&quot;)
+    void deleteUsers(String username, String password, String name, String sex, String tel) throws Throwable {
+<span class="fc" id="L143">        User expectedUser = this.userMap.get(username);</span>
+<span class="fc" id="L144">        Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L145">        sessionAttrs.put(&quot;currentUserType&quot;, &quot;admin&quot;);</span>
+<span class="fc" id="L146">        MvcResult result = this.mockMvc.perform(get(&quot;/user?action=delete&amp;id=&quot; + expectedUser.getId()).sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L147">                .andExpect(status().isOk())</span>
+<span class="fc" id="L148">                .andExpect(view().name(&quot;mainAdmin&quot;))</span>
+<span class="fc" id="L149">                .andExpect(forwardedUrl(&quot;/WEB-INF/jsp/mainAdmin.jsp&quot;))</span>
+<span class="fc" id="L150">                .andExpect(model().attribute(&quot;mainPage&quot;, &quot;admin/user.jsp&quot;))</span>
+<span class="fc" id="L151">                .andReturn();</span>
+<span class="fc" id="L152">        List&lt;User&gt; resultUsers = (List&lt;User&gt;) result.getModelAndView().getModelMap().get(&quot;userList&quot;);</span>
+<span class="fc bfc" id="L153" title="All 2 branches covered.">        for (int i = 0; i &lt; resultUsers.size(); i++) {</span>
+<span class="fc" id="L154">            String expected = resultUsers.get(i).getUsername();</span>
+<span class="fc" id="L155">            assertNotEquals(expected, username);</span>
+        }
+<span class="fc" id="L157">    }</span>
+
+    @ParameterizedTest
+    @MethodSource(&quot;userProvider&quot;)
+    void saveUsersThenDelete(String username, String password, String name, String sex, String tel) throws Throwable {
+<span class="fc" id="L162">        Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L163">        sessionAttrs.put(&quot;currentUserType&quot;, &quot;admin&quot;);</span>
+<span class="fc" id="L164">        this.mockMvc.perform(post(&quot;/user?action=save&quot;)</span>
+<span class="fc" id="L165">                .param(&quot;username&quot;, username)</span>
+<span class="fc" id="L166">                .param(&quot;password&quot;, password)</span>
+<span class="fc" id="L167">                .param(&quot;name&quot;, name)</span>
+<span class="fc" id="L168">                .param(&quot;sex&quot;, sex)</span>
+<span class="fc" id="L169">                .param(&quot;tel&quot;, tel)</span>
+<span class="fc" id="L170">                .sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L171">                .andExpect(status().isOk())</span>
+<span class="fc" id="L172">                .andExpect(view().name(&quot;mainAdmin&quot;))</span>
+<span class="fc" id="L173">                .andExpect(forwardedUrl(&quot;/WEB-INF/jsp/mainAdmin.jsp&quot;))</span>
+<span class="fc" id="L174">                .andExpect(model().attribute(&quot;mainPage&quot;, &quot;admin/user.jsp&quot;));</span>
+<span class="fc" id="L175">        User addedUser = this.userDao.queryAllUsers().get(0);</span>
+<span class="fc" id="L176">        assertAll(</span>
+<span class="fc" id="L177">                () -&gt; assertEquals(username, addedUser.getUsername()),</span>
+<span class="fc" id="L178">                () -&gt; assertEquals(password, addedUser.getPassword()),</span>
+<span class="fc" id="L179">                () -&gt; assertEquals(name, addedUser.getName()),</span>
+<span class="fc" id="L180">                () -&gt; assertEquals(sex, addedUser.getSex().toString()),</span>
+<span class="fc" id="L181">                () -&gt; assertEquals(tel, addedUser.getTel())</span>
+        );
+<span class="fc" id="L183">        this.userDao.deleteUser(addedUser.getId());</span>
+<span class="fc" id="L184">    }</span>
+
+    @ParameterizedTest
+    @MethodSource(&quot;userProvider&quot;)
+    void updateUsers(String username, String password, String name, String sex, String tel) throws Throwable {
+<span class="fc" id="L189">        User addedUser = this.userMap.get(username);</span>
+<span class="fc" id="L190">        int id = addedUser.getId();</span>
+<span class="fc" id="L191">        String newPassword = &quot;clandestine password&quot;;</span>
+<span class="fc" id="L192">        Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L193">        sessionAttrs.put(&quot;currentUserType&quot;, &quot;admin&quot;);</span>
+<span class="fc" id="L194">        this.mockMvc.perform(post(&quot;/user?action=save&quot;)</span>
+<span class="fc" id="L195">                .param(&quot;username&quot;, username)</span>
+<span class="fc" id="L196">                .param(&quot;password&quot;, newPassword)</span>
+<span class="fc" id="L197">                .param(&quot;name&quot;, name)</span>
+<span class="fc" id="L198">                .param(&quot;sex&quot;, sex)</span>
+<span class="fc" id="L199">                .param(&quot;tel&quot;, tel)</span>
+<span class="fc" id="L200">                .param(&quot;id&quot;, String.valueOf(id))</span>
+<span class="fc" id="L201">                .sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L202">                .andExpect(status().isOk())</span>
+<span class="fc" id="L203">                .andExpect(view().name(&quot;mainAdmin&quot;))</span>
+<span class="fc" id="L204">                .andExpect(forwardedUrl(&quot;/WEB-INF/jsp/mainAdmin.jsp&quot;))</span>
+<span class="fc" id="L205">                .andExpect(model().attribute(&quot;mainPage&quot;, &quot;admin/user.jsp&quot;));</span>
+<span class="fc" id="L206">        User updatedUser = this.userDao.queryUserByName(name).get(0);</span>
+<span class="fc" id="L207">        assertAll(</span>
+<span class="fc" id="L208">                () -&gt; assertEquals(username, updatedUser.getUsername()),</span>
+<span class="fc" id="L209">                () -&gt; assertEquals(newPassword, updatedUser.getPassword()),</span>
+<span class="fc" id="L210">                () -&gt; assertEquals(name, updatedUser.getName()),</span>
+<span class="fc" id="L211">                () -&gt; assertEquals(sex, updatedUser.getSex().toString()),</span>
+<span class="fc" id="L212">                () -&gt; assertEquals(tel, updatedUser.getTel())</span>
+        );
+<span class="fc" id="L214">    }</span>
+
+    @ParameterizedTest
+    @MethodSource(&quot;idProvider&quot;)
+    void shouldForwardToModify_whenActionIsModify(int id) throws Throwable {
+<span class="fc" id="L219">        Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L220">        sessionAttrs.put(&quot;currentUserType&quot;, &quot;admin&quot;);</span>
+<span class="fc" id="L221">        this.mockMvc.perform(post(&quot;/user?action=modify&amp;id=&quot; + id)</span>
+<span class="fc" id="L222">                .sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L223">                .andExpect(status().isOk())</span>
+<span class="fc" id="L224">                .andExpect(view().name(&quot;mainAdmin&quot;))</span>
+<span class="fc" id="L225">                .andExpect(forwardedUrl(&quot;/WEB-INF/jsp/mainAdmin.jsp&quot;))</span>
+<span class="fc" id="L226">                .andExpect(model().attribute(&quot;mainPage&quot;, &quot;admin/userModify.jsp&quot;))</span>
+<span class="fc" id="L227">                .andExpect(model().attribute(&quot;id&quot;, String.valueOf(id)));</span>
+<span class="fc" id="L228">    }</span>
+
+    @Test
+    void shouldForwardToModify_whenActionIsAdd() throws Throwable {
+<span class="fc" id="L232">        Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L233">        sessionAttrs.put(&quot;currentUserType&quot;, &quot;admin&quot;);</span>
+<span class="fc" id="L234">        this.mockMvc.perform(post(&quot;/user?action=add&quot;)</span>
+<span class="fc" id="L235">                .sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L236">                .andExpect(status().isOk())</span>
+<span class="fc" id="L237">                .andExpect(view().name(&quot;mainAdmin&quot;))</span>
+<span class="fc" id="L238">                .andExpect(forwardedUrl(&quot;/WEB-INF/jsp/mainAdmin.jsp&quot;))</span>
+<span class="fc" id="L239">                .andExpect(model().attribute(&quot;mainPage&quot;, &quot;admin/userModify.jsp&quot;));</span>
+<span class="fc" id="L240">    }</span>
+
+    @ParameterizedTest
+    @MethodSource(&quot;sexProvider&quot;)
+    void shouldReturnUserofSearchedSex(String sex) throws Throwable {
+<span class="fc" id="L245">        Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L246">        sessionAttrs.put(&quot;currentUserType&quot;, &quot;admin&quot;);</span>
+<span class="fc" id="L247">        MvcResult result = this.mockMvc.perform(post(&quot;/user?action=search&quot;)</span>
+<span class="fc" id="L248">                .sessionAttrs(sessionAttrs)</span>
+<span class="fc" id="L249">                .param(&quot;searchType&quot;, &quot;sex&quot;)</span>
+<span class="fc" id="L250">                .param(&quot;searchUser_text&quot;, sex))</span>
+<span class="fc" id="L251">                .andExpect(status().isOk())</span>
+<span class="fc" id="L252">                .andExpect(view().name(&quot;mainAdmin&quot;))</span>
+<span class="fc" id="L253">                .andExpect(forwardedUrl(&quot;/WEB-INF/jsp/mainAdmin.jsp&quot;))</span>
+<span class="fc" id="L254">                .andExpect(model().attribute(&quot;mainPage&quot;, &quot;admin/user.jsp&quot;))</span>
+<span class="fc" id="L255">                .andReturn();</span>
+<span class="fc" id="L256">        List&lt;User&gt; resultUsers = (List&lt;User&gt;) result.getModelAndView().getModelMap().get(&quot;userList&quot;);</span>
+<span class="fc bfc" id="L257" title="All 2 branches covered.">        for (User user : resultUsers) {</span>
+<span class="fc" id="L258">            assertEquals(sex, user.getSex().toString());</span>
+<span class="fc" id="L259">        }</span>
+<span class="fc" id="L260">    }</span>
+
+    @ParameterizedTest
+    @MethodSource(&quot;nameProvider&quot;)
+    void shouldReturnUserofSearchedName(String name) throws Throwable {
+<span class="fc" id="L265">        Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L266">        sessionAttrs.put(&quot;currentUserType&quot;, &quot;admin&quot;);</span>
+<span class="fc" id="L267">        MvcResult result = this.mockMvc.perform(post(&quot;/user?action=search&quot;)</span>
+<span class="fc" id="L268">                .sessionAttrs(sessionAttrs)</span>
+<span class="fc" id="L269">                .param(&quot;searchType&quot;, &quot;name&quot;)</span>
+<span class="fc" id="L270">                .param(&quot;searchUser_text&quot;, name))</span>
+<span class="fc" id="L271">                .andExpect(status().isOk())</span>
+<span class="fc" id="L272">                .andExpect(view().name(&quot;mainAdmin&quot;))</span>
+<span class="fc" id="L273">                .andExpect(forwardedUrl(&quot;/WEB-INF/jsp/mainAdmin.jsp&quot;))</span>
+<span class="fc" id="L274">                .andExpect(model().attribute(&quot;mainPage&quot;, &quot;admin/user.jsp&quot;))</span>
+<span class="fc" id="L275">                .andReturn();</span>
+<span class="fc" id="L276">        List&lt;User&gt; resultUsers = (List&lt;User&gt;) result.getModelAndView().getModelMap().get(&quot;userList&quot;);</span>
+<span class="pc bpc" id="L277" title="1 of 2 branches missed.">        for (User user : resultUsers) {</span>
+<span class="nc" id="L278">            assertEquals(name, user.getName());</span>
+<span class="nc" id="L279">        }</span>
+<span class="fc" id="L280">    }</span>
+
+    @ParameterizedTest
+    @MethodSource(&quot;searchIdProvider&quot;)
+    void shouldReturnUserofSearchedId(int id) throws Throwable {
+<span class="fc" id="L285">        Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L286">        sessionAttrs.put(&quot;currentUserType&quot;, &quot;admin&quot;);</span>
+<span class="fc" id="L287">        MvcResult result = this.mockMvc.perform(post(&quot;/user?action=search&quot;)</span>
+<span class="fc" id="L288">                .sessionAttrs(sessionAttrs)</span>
+<span class="fc" id="L289">                .param(&quot;searchType&quot;, &quot;id&quot;)</span>
+<span class="fc" id="L290">                .param(&quot;searchUser_text&quot;, String.valueOf(id)))</span>
+<span class="fc" id="L291">                .andExpect(status().isOk())</span>
+<span class="fc" id="L292">                .andExpect(view().name(&quot;mainAdmin&quot;))</span>
+<span class="fc" id="L293">                .andExpect(forwardedUrl(&quot;/WEB-INF/jsp/mainAdmin.jsp&quot;))</span>
+<span class="fc" id="L294">                .andExpect(model().attribute(&quot;mainPage&quot;, &quot;admin/user.jsp&quot;))</span>
+<span class="fc" id="L295">                .andReturn();</span>
+<span class="fc" id="L296">        List&lt;User&gt; resultUsers = (List&lt;User&gt;) result.getModelAndView().getModelMap().get(&quot;userList&quot;);</span>
+<span class="pc bpc" id="L297" title="1 of 2 branches missed.">        for (User user : resultUsers) {</span>
+<span class="nc" id="L298">            assertEquals(id, user.getId());</span>
+<span class="nc" id="L299">        }</span>
+<span class="fc" id="L300">    }</span>
+
+    @Test
+    void userShouldNotBeServedByUserController() throws Throwable {
+<span class="fc" id="L304">        Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L305">        sessionAttrs.put(&quot;currentUserType&quot;, &quot;user&quot;);</span>
+<span class="fc" id="L306">        this.mockMvc.perform(post(&quot;/user?action=search&quot;)</span>
+<span class="fc" id="L307">                .sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L308">                .andExpect(status().isOk())</span>
+<span class="fc" id="L309">                .andExpect(view().name(&quot;mainUser&quot;))</span>
+<span class="fc" id="L310">                .andExpect(forwardedUrl(&quot;/WEB-INF/jsp/mainUser.jsp&quot;));</span>
+<span class="fc" id="L311">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

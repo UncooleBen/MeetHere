@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BlankControllerIT.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.controller</a> &gt; <span class="el_source">BlankControllerIT.java</span></div><h1>BlankControllerIT.java</h1><pre class="source lang-java linenums">package com.webapp.controller;
+
+import com.webapp.config.MvcConfig;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+
+/**
+ * @author Juntao Peng
+ */
+@ExtendWith(SpringExtension.class)
+@WebAppConfiguration
+@ContextConfiguration(classes = MvcConfig.class)
+<span class="fc" id="L29">public class BlankControllerIT {</span>
+    @Autowired
+    WebApplicationContext wac;
+    MockMvc mockMvc;
+
+    @BeforeEach
+    void setup() {
+<span class="fc" id="L36">        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();</span>
+<span class="fc" id="L37">    }</span>
+
+    @AfterEach
+    void tearDown() {
+
+<span class="fc" id="L42">    }</span>
+
+    @Test
+    void shouldForwardToBlankJsp_WhenLoginAsUser_AndRequestIsBlank() throws Throwable {
+<span class="fc" id="L46">        Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L47">        sessionAttrs.put(&quot;currentUserType&quot;, &quot;user&quot;);</span>
+<span class="fc" id="L48">        this.mockMvc.perform(get(&quot;/blank&quot;).sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L49">                .andExpect(status().isOk())</span>
+<span class="fc" id="L50">                .andExpect(view().name(&quot;mainUser&quot;))</span>
+<span class="fc" id="L51">                .andExpect(forwardedUrl(&quot;/WEB-INF/jsp/mainUser.jsp&quot;))</span>
+<span class="fc" id="L52">                .andExpect(model().attribute(&quot;mainPage&quot;, &quot;user/blank.jsp&quot;));</span>
+<span class="fc" id="L53">    }</span>
+
+    @Test
+    void shouldForwardToBlankJsp_WhenLoginAsAdmin_AndRequestIsBlank() throws Throwable {
+<span class="fc" id="L57">        Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L58">        sessionAttrs.put(&quot;currentUserType&quot;, &quot;admin&quot;);</span>
+<span class="fc" id="L59">        this.mockMvc.perform(get(&quot;/blank&quot;).sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L60">                .andExpect(status().isOk())</span>
+<span class="fc" id="L61">                .andExpect(view().name(&quot;mainAdmin&quot;))</span>
+<span class="fc" id="L62">                .andExpect(forwardedUrl(&quot;/WEB-INF/jsp/mainAdmin.jsp&quot;))</span>
+<span class="fc" id="L63">                .andExpect(model().attribute(&quot;mainPage&quot;, &quot;admin/blank.jsp&quot;));</span>
+<span class="fc" id="L64">    }</span>
+
+    @Test
+    void shouldForwardToIndex_WhenNotLogin_AndRequestIsBlank() throws Throwable {
+<span class="fc" id="L68">        Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L69">        sessionAttrs.put(&quot;currentUserType&quot;, &quot;&quot;);</span>
+<span class="fc" id="L70">        this.mockMvc.perform(get(&quot;/blank&quot;).sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L71">                .andExpect(status().isOk())</span>
+<span class="fc" id="L72">                .andExpect(view().name(&quot;index&quot;))</span>
+<span class="fc" id="L73">                .andExpect(forwardedUrl(&quot;/WEB-INF/jsp/index.jsp&quot;));</span>
+<span class="fc" id="L74">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

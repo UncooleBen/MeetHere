@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DispatcherServlet.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.config</a> &gt; <span class="el_source">DispatcherServlet.java</span></div><h1>DispatcherServlet.java</h1><pre class="source lang-java linenums">package com.webapp.config;
+
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletRegistration;
+
+/**
+ * This class is a part of Software-Testing lab02 timeline.
+ *
+ * &lt;p&gt;
+ * This is the front controller class for SpringMVC.
+ *
+ * @author Juntao Peng
+ */
+<span class="nc" id="L16">public class DispatcherServlet extends AbstractAnnotationConfigDispatcherServletInitializer {</span>
+
+    @Override
+    protected Class&lt;?&gt;[] getRootConfigClasses() {
+<span class="nc" id="L20">        return new Class[]{MvcConfig.class};</span>
+    }
+
+    @Override
+    protected Class&lt;?&gt;[] getServletConfigClasses() {
+<span class="nc" id="L25">        return null;</span>
+    }
+
+    @Override
+    protected String[] getServletMappings() {
+<span class="nc" id="L30">        return new String[]{&quot;/&quot;};</span>
+    }
+
+    @Override
+    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+        //上传，文件大小为2M，整个请求不超过4M，而且所有文件都要写入磁盘
+<span class="nc" id="L36">        registration.setMultipartConfig(new MultipartConfigElement(&quot;/&quot;, 2097152, 4194304, 0));</span>
+<span class="nc" id="L37">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BlankControllerTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.controller</a> &gt; <span class="el_source">BlankControllerTest.java</span></div><h1>BlankControllerTest.java</h1><pre class="source lang-java linenums">package com.webapp.controller;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+/**
+ * @author Guoyuanjie
+ */
+
+<span class="fc" id="L21">class BlankControllerTest {</span>
+    @Test
+    public void service_RequestIsAdmin_ReturnAdminBlank() throws ServletException, IOException {
+<span class="fc" id="L24">        BlankController blankcontroller = new BlankController();</span>
+<span class="fc" id="L25">        HttpServletRequest request = mock(HttpServletRequest.class);</span>
+<span class="fc" id="L26">        HttpServletResponse response = mock(HttpServletResponse.class);</span>
+<span class="fc" id="L27">        HttpSession session = mock(HttpSession.class);</span>
+<span class="fc" id="L28">        Object type = &quot;admin&quot;;</span>
+
+<span class="fc" id="L30">        when(request.getSession()).thenReturn(session);</span>
+<span class="fc" id="L31">        when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(type);</span>
+<span class="fc" id="L32">        ModelAndView result = blankcontroller.service(request, response);</span>
+
+<span class="fc" id="L34">        assertAll(</span>
+<span class="fc" id="L35">                () -&gt; assertEquals(&quot;mainAdmin&quot;,result.getViewName()),</span>
+<span class="fc" id="L36">                () -&gt; assertEquals(&quot;admin/blank.jsp&quot;,result.getModelMap().get(&quot;mainPage&quot;) )</span>
+        );
+<span class="fc" id="L38">    }</span>
+
+    @Test
+    public void service_RequestIsUser_ReturnUserBlank() throws ServletException, IOException {
+<span class="fc" id="L42">        BlankController blankcontroller = new BlankController();</span>
+<span class="fc" id="L43">        HttpServletRequest request = mock(HttpServletRequest.class);</span>
+<span class="fc" id="L44">        HttpServletResponse response = mock(HttpServletResponse.class);</span>
+<span class="fc" id="L45">        HttpSession session = mock(HttpSession.class);</span>
+<span class="fc" id="L46">        Object type = &quot;user&quot;;</span>
+
+<span class="fc" id="L48">        when(request.getSession()).thenReturn(session);</span>
+<span class="fc" id="L49">        when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(type);</span>
+<span class="fc" id="L50">        ModelAndView result = blankcontroller.service(request, response);</span>
+
+<span class="fc" id="L52">        assertAll(</span>
+<span class="fc" id="L53">                () -&gt; assertEquals(result.getViewName(), &quot;mainUser&quot;),</span>
+<span class="fc" id="L54">                () -&gt; assertEquals(result.getModelMap().get(&quot;mainPage&quot;), &quot;user/blank.jsp&quot;)</span>
+        );
+<span class="fc" id="L56">    }</span>
+
+    @Test
+    public void service_RequestIsOther_ReturnAdminBlank() throws ServletException, IOException {
+<span class="fc" id="L60">        BlankController blankcontroller = new BlankController();</span>
+<span class="fc" id="L61">        HttpServletRequest request = mock(HttpServletRequest.class);</span>
+<span class="fc" id="L62">        HttpServletResponse response = mock(HttpServletResponse.class);</span>
+<span class="fc" id="L63">        HttpSession session = mock(HttpSession.class);</span>
+<span class="fc" id="L64">        Object type = &quot;other&quot;;</span>
+
+<span class="fc" id="L66">        when(request.getSession()).thenReturn(session);</span>
+<span class="fc" id="L67">        when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(type);</span>
+<span class="fc" id="L68">        ModelAndView result = blankcontroller.service(request, response);</span>
+
+
+<span class="fc" id="L71">        assertEquals(result.getViewName(), &quot;index&quot;);</span>
+
+<span class="fc" id="L73">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

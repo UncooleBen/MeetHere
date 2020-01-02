@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Building.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.model</a> &gt; <span class="el_source">Building.java</span></div><h1>Building.java</h1><pre class="source lang-java linenums">package com.webapp.model;
+
+/**
+ * @author Juntao Peng
+ * @author Shangzhen Li
+ */
+public class Building {
+    private int id;
+    private String name;
+    private String description;
+    private String price;
+
+<span class="fc" id="L13">    public Building() {</span>
+<span class="fc" id="L14">    }</span>
+
+    public int getId() {
+<span class="fc" id="L17">        return id;</span>
+    }
+
+    public void setId(int id) {
+<span class="fc" id="L21">        this.id = id;</span>
+<span class="fc" id="L22">    }</span>
+
+    public String getName() {
+<span class="fc" id="L25">        return name;</span>
+    }
+
+    public void setName(String name) {
+<span class="fc" id="L29">        this.name = name;</span>
+<span class="fc" id="L30">    }</span>
+
+    public String getDescription() {
+<span class="fc" id="L33">        return description;</span>
+    }
+
+    public void setDescription(String description) {
+<span class="fc" id="L37">        this.description = description;</span>
+<span class="fc" id="L38">    }</span>
+
+    public String getPrice() {
+<span class="fc" id="L41">        return price;</span>
+    }
+
+    public void setPrice(String price) {
+<span class="fc" id="L45">        this.price = price;</span>
+<span class="fc" id="L46">    }</span>
+
+<span class="nc" id="L48">    public Building(int id, String name, String description, String price) {</span>
+<span class="nc" id="L49">        this.id = id;</span>
+<span class="nc" id="L50">        this.name = name;</span>
+<span class="nc" id="L51">        this.description = description;</span>
+<span class="nc" id="L52">        this.price = price;</span>
+<span class="nc" id="L53">    }</span>
+
+<span class="fc" id="L55">    public Building(String name, String description, String price) {</span>
+<span class="fc" id="L56">        this.name = name;</span>
+<span class="fc" id="L57">        this.description = description;</span>
+<span class="fc" id="L58">        this.price = price;</span>
+<span class="fc" id="L59">    }</span>
+
+    @Override
+    public boolean equals(Object o) {
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        if (this == o) return true;</span>
+<span class="pc bpc" id="L64" title="2 of 4 branches missed.">        if (o == null || getClass() != o.getClass()) return false;</span>
+
+<span class="fc" id="L66">        Building building = (Building) o;</span>
+
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">        if (id != building.id) return false;</span>
+<span class="pc bpc" id="L69" title="1 of 2 branches missed.">        if (!name.equals(building.name)) return false;</span>
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">        if (!description.equals(building.description)) return false;</span>
+<span class="fc" id="L71">        return price.equals(building.price);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L76">        int result = id;</span>
+<span class="nc" id="L77">        result = 31 * result + name.hashCode();</span>
+<span class="nc" id="L78">        result = 31 * result + description.hashCode();</span>
+<span class="nc" id="L79">        result = 31 * result + price.hashCode();</span>
+<span class="nc" id="L80">        return result;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

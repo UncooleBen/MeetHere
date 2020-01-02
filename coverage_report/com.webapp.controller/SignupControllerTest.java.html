@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SignupControllerTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.controller</a> &gt; <span class="el_source">SignupControllerTest.java</span></div><h1>SignupControllerTest.java</h1><pre class="source lang-java linenums">package com.webapp.controller;
+
+import com.webapp.model.user.User;
+import com.webapp.service.database.dao.LoginDao;
+import org.junit.jupiter.api.Test;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
+/**
+ * @author Guoyuanjie
+ */
+
+<span class="fc" id="L21">class SignupControllerTest {</span>
+<span class="fc" id="L22">    private LoginDao loginDao = mock(LoginDao.class);</span>
+<span class="fc" id="L23">    private SignupController signupController = new SignupController(loginDao);</span>
+<span class="fc" id="L24">    private HttpServletRequest request = mock(HttpServletRequest.class);</span>
+<span class="fc" id="L25">    private HttpSession session = mock(HttpSession.class);</span>
+<span class="fc" id="L26">    private HttpServletResponse response = mock(HttpServletResponse.class);</span>
+
+
+    @Test
+    public void signUpPage_test() {
+<span class="fc" id="L31">        ModelAndView result = signupController.signupPage();</span>
+<span class="fc" id="L32">        assertEquals(result.getViewName(), &quot;signup&quot;);</span>
+
+<span class="fc" id="L34">    }</span>
+
+    @Test
+    public void signUpSubmit_WhenUserIsNull() throws ServletException, IOException {
+<span class="fc" id="L38">        when(request.getParameter(&quot;username&quot;)).thenReturn(&quot;PengGe&quot;);</span>
+<span class="fc" id="L39">        when(request.getParameter(&quot;password&quot;)).thenReturn(&quot;123456&quot;);</span>
+<span class="fc" id="L40">        when(request.getParameter(&quot;name&quot;)).thenReturn(&quot;PengJunTao&quot;);</span>
+<span class="fc" id="L41">        when(request.getParameter(&quot;tel&quot;)).thenReturn(&quot;911&quot;);</span>
+<span class="fc" id="L42">        when(request.getParameter(&quot;sex&quot;)).thenReturn(&quot;FEMALE&quot;);</span>
+
+<span class="fc" id="L44">        User user = new User(&quot;PengGe&quot;, &quot;123456&quot;, &quot;PengJunTao&quot;, &quot;FEMALE&quot;, &quot;911&quot;);</span>
+
+<span class="fc" id="L46">        User currentUser = null;</span>
+
+
+<span class="fc" id="L49">        when(loginDao.signup(user)).thenReturn(currentUser);</span>
+
+
+<span class="fc" id="L52">        ModelAndView result = signupController.signupSubmit(request, response);</span>
+
+<span class="fc" id="L54">        verify(request).setCharacterEncoding(&quot;utf-8&quot;);</span>
+<span class="fc" id="L55">        assertAll(</span>
+<span class="fc" id="L56">                () -&gt; assertEquals(result.getViewName(), &quot;signup&quot;),</span>
+<span class="fc" id="L57">                () -&gt; assertEquals(result.getModelMap().get(&quot;error&quot;), &quot;该用户名已存在&quot;)</span>
+        );
+<span class="fc" id="L59">    }</span>
+
+    @Test
+    public void signUpSubmit_WhenUserIsNotNull() throws ServletException, IOException {
+<span class="fc" id="L63">        when(request.getParameter(&quot;username&quot;)).thenReturn(&quot;PengGe&quot;);</span>
+<span class="fc" id="L64">        when(request.getParameter(&quot;password&quot;)).thenReturn(&quot;123456&quot;);</span>
+<span class="fc" id="L65">        when(request.getParameter(&quot;name&quot;)).thenReturn(&quot;PengJunTao&quot;);</span>
+<span class="fc" id="L66">        when(request.getParameter(&quot;tel&quot;)).thenReturn(&quot;911&quot;);</span>
+<span class="fc" id="L67">        when(request.getParameter(&quot;sex&quot;)).thenReturn(&quot;FEMALE&quot;);</span>
+
+<span class="fc" id="L69">        User user = new User(&quot;PengGe&quot;, &quot;123456&quot;, &quot;PengJunTao&quot;, &quot;FEMALE&quot;, &quot;911&quot;);</span>
+
+<span class="fc" id="L71">        User currentUser = new User();</span>
+
+
+<span class="fc" id="L74">        when(loginDao.signup(user)).thenReturn(currentUser);</span>
+
+
+<span class="fc" id="L77">        ModelAndView result = signupController.signupSubmit(request, response);</span>
+
+<span class="fc" id="L79">        assertAll(</span>
+<span class="fc" id="L80">                () -&gt; assertEquals(result.getViewName(), &quot;index&quot;),</span>
+<span class="fc" id="L81">                () -&gt; assertEquals(result.getModelMap().get(&quot;user&quot;), currentUser)</span>
+        );
+<span class="fc" id="L83">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

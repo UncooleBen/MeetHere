@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RecordControllerTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.controller</a> &gt; <span class="el_source">RecordControllerTest.java</span></div><h1>RecordControllerTest.java</h1><pre class="source lang-java linenums">package com.webapp.controller;
+
+import com.webapp.model.Record;
+import com.webapp.model.user.User;
+import com.webapp.service.database.dao.RecordDao;
+import org.junit.jupiter.api.Test;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.LinkedList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
+
+
+/**
+ * @author Guoyuanjie
+ */
+
+<span class="fc" id="L23">class RecordControllerTest {</span>
+
+
+<span class="fc" id="L26">    private RecordDao recordDao = mock(RecordDao.class);</span>
+<span class="fc" id="L27">    private HttpServletRequest request = mock(HttpServletRequest.class);</span>
+<span class="fc" id="L28">    private HttpSession session = mock(HttpSession.class);</span>
+
+<span class="fc" id="L30">    private RecordController recordController = new RecordController(recordDao);</span>
+
+    @Test
+    public void service_WhenUserTypeIsUser_ActionIsAdd() {
+<span class="fc" id="L34">        String action = &quot;add&quot;;</span>
+<span class="fc" id="L35">        String usertype = &quot;user&quot;;</span>
+
+<span class="fc" id="L37">        when(request.getSession()).thenReturn(session);</span>
+<span class="fc" id="L38">        when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(usertype);</span>
+
+
+<span class="fc" id="L41">        ModelAndView result = recordController.service(request, action);</span>
+
+<span class="fc" id="L43">        assertAll(</span>
+<span class="fc" id="L44">                () -&gt; assertEquals(result.getViewName(), &quot;mainUser&quot;),</span>
+<span class="fc" id="L45">                () -&gt; assertEquals(result.getModelMap().get(&quot;mainPage&quot;), &quot;user/recordAdd.jsp&quot;)</span>
+        );
+<span class="fc" id="L47">    }</span>
+
+    @Test
+    public void service_WhenUserTypeIsUser_ActionIsSave() {
+<span class="fc" id="L51">        String action = &quot;save&quot;;</span>
+<span class="fc" id="L52">        String usertype = &quot;user&quot;;</span>
+<span class="fc" id="L53">        User user = mock(User.class);</span>
+
+
+<span class="fc" id="L56">        Record record = new Record();</span>
+<span class="fc" id="L57">        record.setBuildingId(Integer.parseInt(&quot;13&quot;));</span>
+<span class="fc" id="L58">        record.setUserId(Integer.parseInt(&quot;100&quot;));</span>
+<span class="fc" id="L59">        long startDate = Long.parseLong(&quot;1&quot;);</span>
+<span class="fc" id="L60">        long endDate = Long.parseLong(&quot;1001&quot;);</span>
+<span class="fc" id="L61">        record.setStartDate(startDate);</span>
+<span class="fc" id="L62">        record.setEndDate(endDate);</span>
+<span class="fc" id="L63">        record.setTime(endDate - startDate);</span>
+<span class="fc" id="L64">        record.setVerified(false);</span>
+<span class="fc" id="L65">        when(user.getId()).thenReturn(100);</span>
+<span class="fc" id="L66">        when(session.getAttribute(&quot;currentUser&quot;)).thenReturn(user);</span>
+<span class="fc" id="L67">        when(request.getSession()).thenReturn(session);</span>
+<span class="fc" id="L68">        when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(usertype);</span>
+
+<span class="fc" id="L70">        when(request.getParameter(&quot;buildingId&quot;)).thenReturn(&quot;13&quot;);</span>
+<span class="fc" id="L71">        when(request.getParameter(&quot;userId&quot;)).thenReturn(&quot;305&quot;);</span>
+<span class="fc" id="L72">        when(request.getParameter(&quot;startDate&quot;)).thenReturn(&quot;1&quot;);</span>
+<span class="fc" id="L73">        when(request.getParameter(&quot;endDate&quot;)).thenReturn(&quot;1001&quot;);</span>
+
+
+<span class="fc" id="L76">        ModelAndView result = recordController.service(request, action);</span>
+
+<span class="fc" id="L78">        verify(recordDao).addRecord(record);</span>
+<span class="fc" id="L79">        assertAll(</span>
+<span class="fc" id="L80">                () -&gt; assertEquals(result.getViewName(), &quot;mainUser&quot;),</span>
+<span class="fc" id="L81">                () -&gt; assertEquals(result.getModelMap().get(&quot;mainPage&quot;), &quot;user/record.jsp&quot;)</span>
+        );
+<span class="fc" id="L83">    }</span>
+
+    @Test
+    public void service_WhenUserTypeIsUser_ActionIsDelete() {
+<span class="fc" id="L87">        String action = &quot;delete&quot;;</span>
+<span class="fc" id="L88">        String usertype = &quot;user&quot;;</span>
+
+<span class="fc" id="L90">        User user = mock(User.class);</span>
+<span class="fc" id="L91">        when(user.getId()).thenReturn(100);</span>
+
+<span class="fc" id="L93">        when(request.getSession()).thenReturn(session);</span>
+<span class="fc" id="L94">        when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(usertype);</span>
+<span class="fc" id="L95">        when(session.getAttribute(&quot;currentUser&quot;)).thenReturn(user);</span>
+<span class="fc" id="L96">        when(request.getParameter(&quot;recordId&quot;)).thenReturn(&quot;305&quot;);</span>
+
+
+<span class="fc" id="L99">        ModelAndView result = recordController.service(request, action);</span>
+
+<span class="fc" id="L101">        verify(recordDao).deleteRecord(305);</span>
+<span class="fc" id="L102">        assertAll(</span>
+<span class="fc" id="L103">                () -&gt; assertEquals(result.getViewName(), &quot;mainUser&quot;),</span>
+<span class="fc" id="L104">                () -&gt; assertEquals(result.getModelMap().get(&quot;mainPage&quot;), &quot;user/record.jsp&quot;)</span>
+        );
+<span class="fc" id="L106">    }</span>
+
+    @Test
+    public void service_WhenUserTypeIsUser_ActionIsList() {
+<span class="fc" id="L110">        String action = &quot;list&quot;;</span>
+<span class="fc" id="L111">        String usertype = &quot;user&quot;;</span>
+<span class="fc" id="L112">        User user = new User();</span>
+<span class="fc" id="L113">        user.setId(305);</span>
+
+<span class="fc" id="L115">        List&lt;Record&gt; verifiedRecordList = new LinkedList&lt;Record&gt;();</span>
+<span class="fc" id="L116">        List&lt;Record&gt; unverifiedRecordList = new LinkedList&lt;Record&gt;();</span>
+<span class="fc" id="L117">        verifiedRecordList.add(new Record());</span>
+<span class="fc" id="L118">        unverifiedRecordList.add(new Record());</span>
+
+<span class="fc" id="L120">        when(request.getSession()).thenReturn(session);</span>
+<span class="fc" id="L121">        when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(usertype);</span>
+<span class="fc" id="L122">        when(session.getAttribute(&quot;currentUser&quot;)).thenReturn(user);</span>
+
+
+<span class="fc" id="L125">        when(recordDao.listRecord(20, true)).thenReturn(verifiedRecordList);</span>
+<span class="fc" id="L126">        when(recordDao.listRecordWithUserId(20, 305, false)).thenReturn(unverifiedRecordList);</span>
+
+<span class="fc" id="L128">        ModelAndView result = recordController.service(request, action);</span>
+
+<span class="fc" id="L130">        assertAll(</span>
+<span class="fc" id="L131">                () -&gt; assertEquals(result.getViewName(), &quot;mainUser&quot;),</span>
+<span class="fc" id="L132">                () -&gt; assertEquals(result.getModelMap().get(&quot;mainPage&quot;), &quot;user/record.jsp&quot;),</span>
+<span class="fc" id="L133">                () -&gt; assertEquals(result.getModelMap().get(&quot;verifiedRecordList&quot;), verifiedRecordList),</span>
+<span class="fc" id="L134">                () -&gt; assertEquals(result.getModelMap().get(&quot;unverifiedRecordList&quot;), unverifiedRecordList)</span>
+        );
+<span class="fc" id="L136">    }</span>
+
+    @Test
+    public void service_WhenUserTypeIsUser_ActionIsDefault() {
+<span class="fc" id="L140">        String action = &quot;default&quot;;</span>
+<span class="fc" id="L141">        String usertype = &quot;user&quot;;</span>
+<span class="fc" id="L142">        User user = new User();</span>
+<span class="fc" id="L143">        user.setId(305);</span>
+
+<span class="fc" id="L145">        List&lt;Record&gt; verifiedRecordList = new LinkedList&lt;Record&gt;();</span>
+<span class="fc" id="L146">        List&lt;Record&gt; unverifiedRecordList = new LinkedList&lt;Record&gt;();</span>
+<span class="fc" id="L147">        verifiedRecordList.add(new Record());</span>
+<span class="fc" id="L148">        unverifiedRecordList.add(new Record());</span>
+
+
+<span class="fc" id="L151">        when(request.getSession()).thenReturn(session);</span>
+<span class="fc" id="L152">        when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(usertype);</span>
+<span class="fc" id="L153">        when(session.getAttribute(&quot;currentUser&quot;)).thenReturn(user);</span>
+
+<span class="fc" id="L155">        when(recordDao.listRecord(20, true)).thenReturn(verifiedRecordList);</span>
+<span class="fc" id="L156">        when(recordDao.listRecordWithUserId(20, 305, false)).thenReturn(unverifiedRecordList);</span>
+
+<span class="fc" id="L158">        ModelAndView result = recordController.service(request, action);</span>
+
+<span class="fc" id="L160">        assertAll(</span>
+<span class="fc" id="L161">                () -&gt; assertEquals(result.getViewName(), &quot;mainUser&quot;),</span>
+<span class="fc" id="L162">                () -&gt; assertEquals(result.getModelMap().get(&quot;mainPage&quot;), &quot;user/record.jsp&quot;),</span>
+<span class="fc" id="L163">                () -&gt; assertEquals(result.getModelMap().get(&quot;verifiedRecordList&quot;), verifiedRecordList),</span>
+<span class="fc" id="L164">                () -&gt; assertEquals(result.getModelMap().get(&quot;unverifiedRecordList&quot;), unverifiedRecordList)</span>
+        );
+<span class="fc" id="L166">    }</span>
+
+    @Test
+    public void service_WhenUserTypeIsAdmin_ActionIsDelete() {
+<span class="fc" id="L170">        String action = &quot;delete&quot;;</span>
+<span class="fc" id="L171">        String usertype = &quot;admin&quot;;</span>
+
+<span class="fc" id="L173">        List&lt;Record&gt; verifiedRecordList = new LinkedList&lt;Record&gt;();</span>
+<span class="fc" id="L174">        List&lt;Record&gt; unverifiedRecordList = new LinkedList&lt;Record&gt;();</span>
+<span class="fc" id="L175">        verifiedRecordList.add(new Record());</span>
+<span class="fc" id="L176">        unverifiedRecordList.add(new Record());</span>
+
+<span class="fc" id="L178">        when(request.getSession()).thenReturn(session);</span>
+<span class="fc" id="L179">        when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(usertype);</span>
+
+<span class="fc" id="L181">        when(request.getParameter(&quot;recordId&quot;)).thenReturn(&quot;305&quot;);</span>
+<span class="fc" id="L182">        when(recordDao.listRecord(20, true)).thenReturn(verifiedRecordList);</span>
+<span class="fc" id="L183">        when(recordDao.listRecord(20, false)).thenReturn(unverifiedRecordList);</span>
+
+<span class="fc" id="L185">        ModelAndView result = recordController.service(request, action);</span>
+
+<span class="fc" id="L187">        verify(recordDao).deleteRecord(305);</span>
+<span class="fc" id="L188">        assertAll(</span>
+<span class="fc" id="L189">                () -&gt; assertEquals(result.getViewName(), &quot;mainAdmin&quot;),</span>
+<span class="fc" id="L190">                () -&gt; assertEquals(result.getModelMap().get(&quot;mainPage&quot;), &quot;admin/record.jsp&quot;),</span>
+<span class="fc" id="L191">                () -&gt; assertEquals(result.getModelMap().get(&quot;verifiedRecordList&quot;), verifiedRecordList),</span>
+<span class="fc" id="L192">                () -&gt; assertEquals(result.getModelMap().get(&quot;unverifiedRecordList&quot;), unverifiedRecordList)</span>
+
+        );
+<span class="fc" id="L195">    }</span>
+
+    @Test
+    public void service_WhenUserTypeIsAdmin_ActionIsVetify() {
+<span class="fc" id="L199">        String action = &quot;verify&quot;;</span>
+<span class="fc" id="L200">        String usertype = &quot;admin&quot;;</span>
+
+<span class="fc" id="L202">        Record record = new Record();</span>
+<span class="fc" id="L203">        record.setVerified(true);</span>
+
+
+<span class="fc" id="L206">        List&lt;Record&gt; verifiedRecordList = new LinkedList&lt;Record&gt;();</span>
+<span class="fc" id="L207">        List&lt;Record&gt; unverifiedRecordList = new LinkedList&lt;Record&gt;();</span>
+<span class="fc" id="L208">        verifiedRecordList.add(new Record());</span>
+<span class="fc" id="L209">        unverifiedRecordList.add(new Record());</span>
+
+<span class="fc" id="L211">        when(request.getSession()).thenReturn(session);</span>
+<span class="fc" id="L212">        when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(usertype);</span>
+
+<span class="fc" id="L214">        when(request.getParameter(&quot;recordId&quot;)).thenReturn(&quot;305&quot;);</span>
+<span class="fc" id="L215">        when(recordDao.queryRecordById(305)).thenReturn(record);</span>
+
+<span class="fc" id="L217">        when(recordDao.listRecord(20, true)).thenReturn(verifiedRecordList);</span>
+<span class="fc" id="L218">        when(recordDao.listRecord(20, false)).thenReturn(unverifiedRecordList);</span>
+
+<span class="fc" id="L220">        ModelAndView result = recordController.service(request, action);</span>
+
+<span class="fc" id="L222">        verify(recordDao).updateRecord(record);</span>
+<span class="fc" id="L223">        assertAll(</span>
+<span class="fc" id="L224">                () -&gt; assertEquals(result.getViewName(), &quot;mainAdmin&quot;),</span>
+<span class="fc" id="L225">                () -&gt; assertEquals(result.getModelMap().get(&quot;mainPage&quot;), &quot;admin/record.jsp&quot;),</span>
+<span class="fc" id="L226">                () -&gt; assertEquals(result.getModelMap().get(&quot;verifiedRecordList&quot;), verifiedRecordList),</span>
+<span class="fc" id="L227">                () -&gt; assertEquals(result.getModelMap().get(&quot;unverifiedRecordList&quot;), unverifiedRecordList)</span>
+
+        );
+<span class="fc" id="L230">    }</span>
+
+    @Test
+    public void service_WhenUserTypeIsAdmin_ActionIsList() {
+<span class="fc" id="L234">        String action = &quot;list&quot;;</span>
+<span class="fc" id="L235">        String usertype = &quot;admin&quot;;</span>
+
+
+<span class="fc" id="L238">        List&lt;Record&gt; verifiedRecordList = new LinkedList&lt;Record&gt;();</span>
+<span class="fc" id="L239">        List&lt;Record&gt; unverifiedRecordList = new LinkedList&lt;Record&gt;();</span>
+<span class="fc" id="L240">        verifiedRecordList.add(new Record());</span>
+<span class="fc" id="L241">        unverifiedRecordList.add(new Record());</span>
+
+<span class="fc" id="L243">        when(request.getSession()).thenReturn(session);</span>
+<span class="fc" id="L244">        when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(usertype);</span>
+
+
+<span class="fc" id="L247">        when(recordDao.listRecord(20, true)).thenReturn(verifiedRecordList);</span>
+<span class="fc" id="L248">        when(recordDao.listRecord(20, false)).thenReturn(unverifiedRecordList);</span>
+
+<span class="fc" id="L250">        ModelAndView result = recordController.service(request, action);</span>
+<span class="fc" id="L251">        assertAll(</span>
+<span class="fc" id="L252">                () -&gt; assertEquals(result.getViewName(), &quot;mainAdmin&quot;),</span>
+<span class="fc" id="L253">                () -&gt; assertEquals(result.getModelMap().get(&quot;mainPage&quot;), &quot;admin/record.jsp&quot;),</span>
+<span class="fc" id="L254">                () -&gt; assertEquals(result.getModelMap().get(&quot;verifiedRecordList&quot;), verifiedRecordList),</span>
+<span class="fc" id="L255">                () -&gt; assertEquals(result.getModelMap().get(&quot;unverifiedRecordList&quot;), unverifiedRecordList)</span>
+
+        );
+<span class="fc" id="L258">    }</span>
+
+
+    @Test
+    public void service_WhenUserTypeIsAdmin_ActionIsOther() {
+<span class="fc" id="L263">        String action = &quot;other&quot;;</span>
+<span class="fc" id="L264">        String usertype = &quot;admin&quot;;</span>
+
+
+<span class="fc" id="L267">        List&lt;Record&gt; verifiedRecordList = new LinkedList&lt;Record&gt;();</span>
+<span class="fc" id="L268">        List&lt;Record&gt; unverifiedRecordList = new LinkedList&lt;Record&gt;();</span>
+<span class="fc" id="L269">        verifiedRecordList.add(new Record());</span>
+<span class="fc" id="L270">        unverifiedRecordList.add(new Record());</span>
+
+<span class="fc" id="L272">        when(request.getSession()).thenReturn(session);</span>
+<span class="fc" id="L273">        when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(usertype);</span>
+
+
+<span class="fc" id="L276">        when(recordDao.listRecord(20, true)).thenReturn(verifiedRecordList);</span>
+<span class="fc" id="L277">        when(recordDao.listRecord(20, false)).thenReturn(unverifiedRecordList);</span>
+
+<span class="fc" id="L279">        ModelAndView result = recordController.service(request, action);</span>
+
+<span class="fc" id="L281">        assertAll(</span>
+<span class="fc" id="L282">                () -&gt; assertEquals(result.getViewName(), &quot;mainAdmin&quot;),</span>
+<span class="fc" id="L283">                () -&gt; assertEquals(result.getModelMap().get(&quot;mainPage&quot;), &quot;admin/record.jsp&quot;),</span>
+<span class="fc" id="L284">                () -&gt; assertEquals(result.getModelMap().get(&quot;verifiedRecordList&quot;), verifiedRecordList),</span>
+<span class="fc" id="L285">                () -&gt; assertEquals(result.getModelMap().get(&quot;unverifiedRecordList&quot;), unverifiedRecordList)</span>
+
+        );
+<span class="fc" id="L288">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

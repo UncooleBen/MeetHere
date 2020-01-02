@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CommentDaoImplIT.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.service.database.dao.impl</a> &gt; <span class="el_source">CommentDaoImplIT.java</span></div><h1>CommentDaoImplIT.java</h1><pre class="source lang-java linenums">package com.webapp.service.database.dao.impl;
+
+import com.webapp.model.Comment;
+import com.webapp.service.database.dao.CommentDao;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.test.util.ReflectionTestUtils;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+<span class="fc" id="L14">public class CommentDaoImplIT {</span>
+
+<span class="fc" id="L16">    private final int TEST_USERID_0 = 0;</span>
+<span class="fc" id="L17">    private final long TEST_DATE_0 = 1000;</span>
+<span class="fc" id="L18">    private final String TEST_CONTENT_0 = &quot;test content 0&quot;;</span>
+<span class="fc" id="L19">    private final int TEST_USERID_1 = 1;</span>
+<span class="fc" id="L20">    private final long TEST_DATE_1 = 2000;</span>
+<span class="fc" id="L21">    private final String TEST_CONTENT_1 = &quot;test content 1&quot;;</span>
+<span class="fc" id="L22">    private final int TEST_USERID_2 = 2;</span>
+<span class="fc" id="L23">    private final long TEST_DATE_2 = 3000;</span>
+<span class="fc" id="L24">    private final String TEST_CONTENT_2 = &quot;test content 2&quot;;</span>
+    private CommentDao commentDao;
+
+    @BeforeEach
+    void init() {
+<span class="fc" id="L29">        commentDao = new CommentDaoImpl();</span>
+<span class="fc" id="L30">        String DB_URL =</span>
+                &quot;jdbc:mysql://localhost:3306/meethere?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=GMT%2B8&quot;;
+<span class="fc" id="L32">        ReflectionTestUtils.setField(commentDao, &quot;dbUrl&quot;, DB_URL);</span>
+<span class="fc" id="L33">        String DB_USERNAME = &quot;root&quot;;</span>
+<span class="fc" id="L34">        ReflectionTestUtils.setField(commentDao, &quot;dbUsername&quot;, DB_USERNAME);</span>
+<span class="fc" id="L35">        String DB_PASSWORD = &quot;root&quot;;</span>
+<span class="fc" id="L36">        ReflectionTestUtils.setField(commentDao, &quot;dbPassword&quot;, DB_PASSWORD);</span>
+<span class="fc" id="L37">        String DB_CLASSNAME = &quot;com.mysql.jdbc.Driver&quot;;</span>
+<span class="fc" id="L38">        ReflectionTestUtils.setField(commentDao, &quot;dbClassname&quot;, DB_CLASSNAME);</span>
+<span class="fc" id="L39">    }</span>
+
+    @Test
+    void add3CommentsAndList5ShouldGet3UnverifiedComments() {
+        // Add test comments to database
+<span class="fc" id="L44">        Comment testComment0 = new Comment(TEST_USERID_0, TEST_DATE_0, TEST_CONTENT_0);</span>
+<span class="fc" id="L45">        Comment testComment1 = new Comment(TEST_USERID_1, TEST_DATE_1, TEST_CONTENT_1);</span>
+<span class="fc" id="L46">        Comment testComment2 = new Comment(TEST_USERID_2, TEST_DATE_2, TEST_CONTENT_2);</span>
+<span class="fc" id="L47">        assertAll(</span>
+<span class="fc" id="L48">                () -&gt; assertTrue(commentDao.addComment(testComment0)),</span>
+<span class="fc" id="L49">                () -&gt; assertTrue(commentDao.addComment(testComment1)),</span>
+<span class="fc" id="L50">                () -&gt; assertTrue(commentDao.addComment(testComment2)));</span>
+        // Should be 3 unverified and 0 verified
+<span class="fc" id="L52">        List&lt;Comment&gt; verifiedCommentList = commentDao.listComment(5, true);</span>
+<span class="fc" id="L53">        List&lt;Comment&gt; unverifiedCommentList = commentDao.listComment(5, false);</span>
+<span class="fc" id="L54">        assertAll(</span>
+<span class="fc" id="L55">                () -&gt; assertEquals(0, verifiedCommentList.size()),</span>
+<span class="fc" id="L56">                () -&gt; assertEquals(3, unverifiedCommentList.size()));</span>
+<span class="fc" id="L57">        Comment returnedComment0 = unverifiedCommentList.get(0);</span>
+<span class="fc" id="L58">        Comment returnedComment1 = unverifiedCommentList.get(1);</span>
+<span class="fc" id="L59">        Comment returnedComment2 = unverifiedCommentList.get(2);</span>
+<span class="fc" id="L60">        assertAll(</span>
+<span class="fc" id="L61">                () -&gt; assertEquals(TEST_USERID_0, returnedComment0.getUserId()),</span>
+<span class="fc" id="L62">                () -&gt; assertEquals(TEST_DATE_0, returnedComment0.getDate()),</span>
+<span class="fc" id="L63">                () -&gt; assertEquals(TEST_CONTENT_0, returnedComment0.getContent()),</span>
+<span class="fc" id="L64">                () -&gt; assertEquals(TEST_USERID_1, returnedComment1.getUserId()),</span>
+<span class="fc" id="L65">                () -&gt; assertEquals(TEST_DATE_1, returnedComment1.getDate()),</span>
+<span class="fc" id="L66">                () -&gt; assertEquals(TEST_CONTENT_1, returnedComment1.getContent()),</span>
+<span class="fc" id="L67">                () -&gt; assertEquals(TEST_USERID_2, returnedComment2.getUserId()),</span>
+<span class="fc" id="L68">                () -&gt; assertEquals(TEST_DATE_2, returnedComment2.getDate()),</span>
+<span class="fc" id="L69">                () -&gt; assertEquals(TEST_CONTENT_2, returnedComment2.getContent()),</span>
+                // Delete test data from database
+<span class="fc" id="L71">                () -&gt; assertTrue(commentDao.deleteComment(returnedComment0.getId())),</span>
+<span class="fc" id="L72">                () -&gt; assertTrue(commentDao.deleteComment(returnedComment1.getId())),</span>
+<span class="fc" id="L73">                () -&gt; assertTrue(commentDao.deleteComment(returnedComment2.getId())));</span>
+<span class="fc" id="L74">    }</span>
+
+    @Test
+    void add3CommentsAndList2ShouldGet2UnverifiedComments() {
+        // Add test comments to database
+<span class="fc" id="L79">        Comment testComment0 = new Comment(TEST_USERID_0, TEST_DATE_0, TEST_CONTENT_0);</span>
+<span class="fc" id="L80">        Comment testComment1 = new Comment(TEST_USERID_1, TEST_DATE_1, TEST_CONTENT_1);</span>
+<span class="fc" id="L81">        Comment testComment2 = new Comment(TEST_USERID_2, TEST_DATE_2, TEST_CONTENT_2);</span>
+<span class="fc" id="L82">        assertAll(</span>
+<span class="fc" id="L83">                () -&gt; assertTrue(commentDao.addComment(testComment0)),</span>
+<span class="fc" id="L84">                () -&gt; assertTrue(commentDao.addComment(testComment1)),</span>
+<span class="fc" id="L85">                () -&gt; assertTrue(commentDao.addComment(testComment2)));</span>
+        // Should be 2 unverified and 0 verified
+<span class="fc" id="L87">        List&lt;Comment&gt; verifiedCommentList = commentDao.listComment(2, true);</span>
+<span class="fc" id="L88">        List&lt;Comment&gt; unverifiedCommentList = commentDao.listComment(2, false);</span>
+<span class="fc" id="L89">        assertAll(</span>
+<span class="fc" id="L90">                () -&gt; assertEquals(0, verifiedCommentList.size()),</span>
+<span class="fc" id="L91">                () -&gt; assertEquals(2, unverifiedCommentList.size()));</span>
+<span class="fc" id="L92">        Comment returnedComment0 = unverifiedCommentList.get(0);</span>
+<span class="fc" id="L93">        Comment returnedComment1 = unverifiedCommentList.get(1);</span>
+<span class="fc" id="L94">        assertAll(</span>
+<span class="fc" id="L95">                () -&gt; assertEquals(TEST_USERID_0, returnedComment0.getUserId()),</span>
+<span class="fc" id="L96">                () -&gt; assertEquals(TEST_DATE_0, returnedComment0.getDate()),</span>
+<span class="fc" id="L97">                () -&gt; assertEquals(TEST_CONTENT_0, returnedComment0.getContent()),</span>
+<span class="fc" id="L98">                () -&gt; assertEquals(TEST_USERID_1, returnedComment1.getUserId()),</span>
+<span class="fc" id="L99">                () -&gt; assertEquals(TEST_DATE_1, returnedComment1.getDate()),</span>
+<span class="fc" id="L100">                () -&gt; assertEquals(TEST_CONTENT_1, returnedComment1.getContent()),</span>
+                // Delete test data from database
+<span class="fc" id="L102">                () -&gt; assertTrue(commentDao.deleteComment(returnedComment0.getId())),</span>
+<span class="fc" id="L103">                () -&gt; assertTrue(commentDao.deleteComment(returnedComment1.getId())),</span>
+<span class="fc" id="L104">                () -&gt; assertTrue(commentDao.deleteComment(returnedComment1.getId() + 1)));</span>
+<span class="fc" id="L105">    }</span>
+
+    @Test
+    void add1CommentAndQueryById() {
+        // Add test data to database
+<span class="fc" id="L110">        Comment testComment = new Comment(TEST_USERID_0, TEST_DATE_0, TEST_CONTENT_0);</span>
+<span class="fc" id="L111">        assertAll(() -&gt; assertTrue(commentDao.addComment(testComment)));</span>
+<span class="fc" id="L112">        List&lt;Comment&gt; unverifiedCommentList = commentDao.listComment(1, false);</span>
+<span class="fc" id="L113">        assertAll(() -&gt; assertEquals(1, unverifiedCommentList.size()));</span>
+        // Execute query
+<span class="fc" id="L115">        int id = unverifiedCommentList.get(0).getId();</span>
+<span class="fc" id="L116">        Comment returnedComment = commentDao.queryCommentById(id);</span>
+<span class="fc" id="L117">        assertAll(</span>
+<span class="fc" id="L118">                () -&gt; assertEquals(TEST_USERID_0, returnedComment.getUserId()),</span>
+<span class="fc" id="L119">                () -&gt; assertEquals(TEST_DATE_0, returnedComment.getDate()),</span>
+<span class="fc" id="L120">                () -&gt; assertEquals(TEST_CONTENT_0, returnedComment.getContent()),</span>
+                // Delete test data from database
+<span class="fc" id="L122">                () -&gt; assertTrue(commentDao.deleteComment(id)));</span>
+<span class="fc" id="L123">    }</span>
+
+    @Test
+    void add1CommentAndUpdate() {
+        // Add test data to database
+<span class="fc" id="L128">        Comment testComment = new Comment(TEST_USERID_0, TEST_DATE_0, TEST_CONTENT_0);</span>
+<span class="fc" id="L129">        assertAll(() -&gt; assertTrue(commentDao.addComment(testComment)));</span>
+<span class="fc" id="L130">        List&lt;Comment&gt; unverifiedCommentList = commentDao.listComment(1, false);</span>
+<span class="fc" id="L131">        assertAll(() -&gt; assertEquals(1, unverifiedCommentList.size()));</span>
+        // Execute update
+<span class="fc" id="L133">        Comment newComment = unverifiedCommentList.get(0);</span>
+<span class="fc" id="L134">        int id = newComment.getId();</span>
+        // Only 'verified' can be updated
+<span class="fc" id="L136">        newComment.setVerified(true);</span>
+<span class="fc" id="L137">        assertAll(() -&gt; assertTrue(commentDao.updateComment(newComment)));</span>
+<span class="fc" id="L138">        Comment updatedComment = commentDao.queryCommentById(id);</span>
+<span class="fc" id="L139">        assertAll(</span>
+<span class="fc" id="L140">                () -&gt; assertEquals(id, newComment.getId()),</span>
+<span class="fc" id="L141">                () -&gt; assertEquals(TEST_USERID_0, newComment.getUserId()),</span>
+<span class="fc" id="L142">                () -&gt; assertEquals(TEST_DATE_0, newComment.getDate()),</span>
+<span class="fc" id="L143">                () -&gt; assertEquals(TEST_CONTENT_0, newComment.getContent()),</span>
+                // Delete test data from database
+<span class="fc" id="L145">                () -&gt; assertTrue(commentDao.deleteComment(id)));</span>
+<span class="fc" id="L146">    }</span>
+
+    @AfterEach
+    void restore() {
+<span class="fc" id="L150">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

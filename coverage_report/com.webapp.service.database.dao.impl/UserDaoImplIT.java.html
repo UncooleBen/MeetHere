@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserDaoImplIT.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.service.database.dao.impl</a> &gt; <span class="el_source">UserDaoImplIT.java</span></div><h1>UserDaoImplIT.java</h1><pre class="source lang-java linenums">package com.webapp.service.database.dao.impl;
+
+
+import com.webapp.model.user.User;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.test.util.ReflectionTestUtils;
+
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+/**
+ * @author Juntao Peng
+ */
+<span class="fc" id="L20">class UserDaoImplIT {</span>
+    UserDaoImpl userDao;
+    Connection connection;
+
+    @BeforeEach
+    void init() {
+<span class="fc" id="L26">        this.userDao = new UserDaoImpl();</span>
+<span class="fc" id="L27">        String dbUrl = &quot;jdbc:mysql://localhost:3306/meethere?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=GMT%2B8&quot;;</span>
+<span class="fc" id="L28">        String dbUsername = &quot;root&quot;;</span>
+<span class="fc" id="L29">        String dbPassword = &quot;root&quot;;</span>
+<span class="fc" id="L30">        String dbClassname = &quot;com.mysql.jdbc.Driver&quot;;</span>
+<span class="fc" id="L31">        ReflectionTestUtils.setField(this.userDao, &quot;dbUrl&quot;, dbUrl);</span>
+<span class="fc" id="L32">        ReflectionTestUtils.setField(this.userDao, &quot;dbUsername&quot;, dbUsername);</span>
+<span class="fc" id="L33">        ReflectionTestUtils.setField(this.userDao, &quot;dbPassword&quot;, dbPassword);</span>
+<span class="fc" id="L34">        ReflectionTestUtils.setField(this.userDao, &quot;dbClassname&quot;, dbClassname);</span>
+<span class="fc" id="L35">        this.connection = null;</span>
+<span class="fc" id="L36">    }</span>
+
+    @AfterEach
+    void tearDown() {
+<span class="fc" id="L40">        this.userDao.closeConnection(this.connection);</span>
+<span class="fc" id="L41">    }</span>
+
+    @Test
+    void addAUserAndQueryItByList() {
+<span class="fc" id="L45">        long time = System.currentTimeMillis();</span>
+<span class="fc" id="L46">        User user = new User(&quot;username&quot;, &quot;password&quot;, &quot;name&quot;, &quot;MALE&quot;, &quot;tel&quot;);</span>
+<span class="fc" id="L47">        this.userDao.addUser(user);</span>
+<span class="fc" id="L48">        User insertedUser = this.userDao.queryAllUsers().get(0);</span>
+<span class="fc" id="L49">        assertAll(</span>
+<span class="fc" id="L50">                () -&gt; assertEquals(user.getPermission(), insertedUser.getPermission()),</span>
+<span class="fc" id="L51">                () -&gt; assertEquals(user.getTel(), insertedUser.getTel()),</span>
+<span class="fc" id="L52">                () -&gt; assertEquals(user.getSex(), insertedUser.getSex()),</span>
+<span class="fc" id="L53">                () -&gt; assertEquals(user.getName(), insertedUser.getName()),</span>
+<span class="fc" id="L54">                () -&gt; assertEquals(user.getUsername(), insertedUser.getUsername()),</span>
+<span class="fc" id="L55">                () -&gt; assertEquals(user.getPassword(), insertedUser.getPassword()));</span>
+<span class="fc" id="L56">        this.userDao.deleteUser(insertedUser.getId());</span>
+<span class="fc" id="L57">    }</span>
+
+    @Test
+    void addAUserAndQueryItById() {
+<span class="fc" id="L61">        long time = System.currentTimeMillis();</span>
+<span class="fc" id="L62">        User user = new User(&quot;username&quot;, &quot;password&quot;, &quot;name&quot;, &quot;MALE&quot;, &quot;tel&quot;);</span>
+<span class="fc" id="L63">        this.userDao.addUser(user);</span>
+<span class="fc" id="L64">        User insertedUser = this.userDao.queryUserById(this.userDao.queryAllUsers().get(0).getId());</span>
+<span class="fc" id="L65">        assertAll(</span>
+<span class="fc" id="L66">                () -&gt; assertEquals(user.getPermission(), insertedUser.getPermission()),</span>
+<span class="fc" id="L67">                () -&gt; assertEquals(user.getTel(), insertedUser.getTel()),</span>
+<span class="fc" id="L68">                () -&gt; assertEquals(user.getSex(), insertedUser.getSex()),</span>
+<span class="fc" id="L69">                () -&gt; assertEquals(user.getName(), insertedUser.getName()),</span>
+<span class="fc" id="L70">                () -&gt; assertEquals(user.getUsername(), insertedUser.getUsername()),</span>
+<span class="fc" id="L71">                () -&gt; assertEquals(user.getPassword(), insertedUser.getPassword()));</span>
+<span class="fc" id="L72">        this.userDao.deleteUser(insertedUser.getId());</span>
+<span class="fc" id="L73">    }</span>
+
+
+    @Test
+    void add20UserAndQueryByList() {
+<span class="fc" id="L78">        List&lt;User&gt; userList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L79">        long time = System.currentTimeMillis();</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        for (int i = 0; i &lt; 20; i++) {</span>
+<span class="fc" id="L81">            userList.add(new User(&quot;username&quot; + i, &quot;password&quot; + i, &quot;name&quot; + i,</span>
+                    &quot;MALE&quot;, &quot;tel&quot; + i));
+        }
+<span class="fc bfc" id="L84" title="All 2 branches covered.">        for (User user : userList) {</span>
+<span class="fc" id="L85">            this.userDao.addUser(user);</span>
+<span class="fc" id="L86">        }</span>
+<span class="fc" id="L87">        List&lt;User&gt; resultList = this.userDao.queryAllUsers();</span>
+<span class="fc bfc" id="L88" title="All 2 branches covered.">        for (int i = 0; i &lt; 20; i++) {</span>
+<span class="fc" id="L89">            User user = userList.get(20 - i - 1);</span>
+<span class="fc" id="L90">            User insertedUser = resultList.get(i);</span>
+<span class="fc" id="L91">            assertAll(</span>
+<span class="fc" id="L92">                    () -&gt; assertEquals(user.getPermission(), insertedUser.getPermission()),</span>
+<span class="fc" id="L93">                    () -&gt; assertEquals(user.getTel(), insertedUser.getTel()),</span>
+<span class="fc" id="L94">                    () -&gt; assertEquals(user.getSex(), insertedUser.getSex()),</span>
+<span class="fc" id="L95">                    () -&gt; assertEquals(user.getName(), insertedUser.getName()),</span>
+<span class="fc" id="L96">                    () -&gt; assertEquals(user.getUsername(), insertedUser.getUsername()),</span>
+<span class="fc" id="L97">                    () -&gt; assertEquals(user.getPassword(), insertedUser.getPassword()));</span>
+        }
+<span class="fc bfc" id="L99" title="All 2 branches covered.">        for (int i = 0; i &lt; 20; i++) {</span>
+<span class="fc" id="L100">            User user = resultList.get(i);</span>
+<span class="fc" id="L101">            this.userDao.deleteUser(user.getId());</span>
+        }
+<span class="fc" id="L103">    }</span>
+
+    @Test
+    void add20UserAndUpdate() {
+<span class="fc" id="L107">        List&lt;User&gt; userList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L108">        long time = System.currentTimeMillis();</span>
+<span class="fc bfc" id="L109" title="All 2 branches covered.">        for (int i = 0; i &lt; 20; i++) {</span>
+<span class="fc" id="L110">            userList.add(new User(&quot;username&quot; + i, &quot;password&quot; + i, &quot;name&quot; + i,</span>
+                    &quot;MALE&quot;, &quot;tel&quot; + i));
+        }
+<span class="fc bfc" id="L113" title="All 2 branches covered.">        for (User user : userList) {</span>
+<span class="fc" id="L114">            this.userDao.addUser(user);</span>
+<span class="fc" id="L115">        }</span>
+<span class="fc" id="L116">        List&lt;User&gt; resultList = this.userDao.queryAllUsers();</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">        for (int i = 0; i &lt; 20; i++) {</span>
+<span class="fc" id="L118">            User resultUser = resultList.get(0);</span>
+<span class="fc" id="L119">            resultUser.setName(&quot;new name&quot;);</span>
+<span class="fc" id="L120">            resultUser.setPassword(&quot;new password&quot;);</span>
+<span class="fc" id="L121">            resultUser.setUsername(&quot;new username&quot;);</span>
+<span class="fc" id="L122">            resultUser.setSex(&quot;FEMALE&quot;);</span>
+<span class="fc" id="L123">            resultUser.setTel(&quot;new tel&quot;);</span>
+<span class="fc" id="L124">            this.userDao.updateUser(resultUser);</span>
+        }
+<span class="fc" id="L126">        List&lt;User&gt; updatedResultList = this.userDao.queryAllUsers();</span>
+<span class="fc bfc" id="L127" title="All 2 branches covered.">        for (int i = 0; i &lt; 20; i++) {</span>
+<span class="fc" id="L128">            User user = resultList.get(i);</span>
+<span class="fc" id="L129">            User insertedUser = updatedResultList.get(i);</span>
+<span class="fc" id="L130">            assertAll(</span>
+<span class="fc" id="L131">                    () -&gt; assertEquals(user.getPermission(), insertedUser.getPermission()),</span>
+<span class="fc" id="L132">                    () -&gt; assertEquals(user.getTel(), insertedUser.getTel()),</span>
+<span class="fc" id="L133">                    () -&gt; assertEquals(user.getSex(), insertedUser.getSex()),</span>
+<span class="fc" id="L134">                    () -&gt; assertEquals(user.getName(), insertedUser.getName()),</span>
+<span class="fc" id="L135">                    () -&gt; assertEquals(user.getUsername(), insertedUser.getUsername()),</span>
+<span class="fc" id="L136">                    () -&gt; assertEquals(user.getPassword(), insertedUser.getPassword()));</span>
+        }
+<span class="fc bfc" id="L138" title="All 2 branches covered.">        for (int i = 0; i &lt; 20; i++) {</span>
+<span class="fc" id="L139">            User user = resultList.get(i);</span>
+<span class="fc" id="L140">            this.userDao.deleteUser(user.getId());</span>
+        }
+<span class="fc" id="L142">    }</span>
+
+    @Test
+    void add20UserAndUpdatePassword() {
+<span class="fc" id="L146">        List&lt;User&gt; userList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L147">        long time = System.currentTimeMillis();</span>
+<span class="fc bfc" id="L148" title="All 2 branches covered.">        for (int i = 0; i &lt; 20; i++) {</span>
+<span class="fc" id="L149">            userList.add(new User(&quot;username&quot; + i, &quot;password&quot; + i, &quot;name&quot; + i,</span>
+                    &quot;MALE&quot;, &quot;tel&quot; + i));
+        }
+<span class="fc bfc" id="L152" title="All 2 branches covered.">        for (User user : userList) {</span>
+<span class="fc" id="L153">            this.userDao.addUser(user);</span>
+<span class="fc" id="L154">        }</span>
+<span class="fc" id="L155">        List&lt;User&gt; resultList = this.userDao.queryAllUsers();</span>
+<span class="fc bfc" id="L156" title="All 2 branches covered.">        for (int i = 0; i &lt; 20; i++) {</span>
+<span class="fc" id="L157">            User resultUser = resultList.get(i);</span>
+<span class="fc" id="L158">            this.userDao.updateUserPassword(resultUser.getId(), &quot;new password&quot; + i);</span>
+        }
+<span class="fc" id="L160">        List&lt;User&gt; updatedResultList = this.userDao.queryAllUsers();</span>
+<span class="fc bfc" id="L161" title="All 2 branches covered.">        for (int i = 0; i &lt; 20; i++) {</span>
+<span class="fc" id="L162">            User user = resultList.get(i);</span>
+<span class="fc" id="L163">            User insertedUser = updatedResultList.get(i);</span>
+<span class="fc" id="L164">            final int index = i;</span>
+<span class="fc" id="L165">            assertAll(</span>
+<span class="fc" id="L166">                    () -&gt; assertEquals(user.getPermission(), insertedUser.getPermission()),</span>
+<span class="fc" id="L167">                    () -&gt; assertEquals(user.getTel(), insertedUser.getTel()),</span>
+<span class="fc" id="L168">                    () -&gt; assertEquals(user.getSex(), insertedUser.getSex()),</span>
+<span class="fc" id="L169">                    () -&gt; assertEquals(user.getName(), insertedUser.getName()),</span>
+<span class="fc" id="L170">                    () -&gt; assertEquals(user.getUsername(), insertedUser.getUsername()),</span>
+<span class="fc" id="L171">                    () -&gt; assertEquals(&quot;new password&quot; + index, insertedUser.getPassword()));</span>
+        }
+<span class="fc bfc" id="L173" title="All 2 branches covered.">        for (int i = 0; i &lt; 20; i++) {</span>
+<span class="fc" id="L174">            User user = resultList.get(i);</span>
+<span class="fc" id="L175">            this.userDao.deleteUser(user.getId());</span>
+        }
+<span class="fc" id="L177">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

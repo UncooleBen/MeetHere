@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CommentDaoImplTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.service.database.dao.impl</a> &gt; <span class="el_source">CommentDaoImplTest.java</span></div><h1>CommentDaoImplTest.java</h1><pre class="source lang-java linenums">package com.webapp.service.database.dao.impl;
+
+import com.webapp.model.Comment;
+import com.webapp.service.database.dao.CommentDao;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
+
+
+/**
+ * @author Guoyuanjie
+ */
+<span class="fc" id="L28">class CommentDaoImplTest {</span>
+    private CommentDao commentDao;
+<span class="fc" id="L30">    private Connection connection = mock(Connection.class);</span>
+<span class="fc" id="L31">    private PreparedStatement preparedStatement = mock(PreparedStatement.class);</span>
+    private SQLException test_sql_exception;
+<span class="fc" id="L33">    private ResultSet rs = mock(ResultSet.class);</span>
+    private ByteArrayOutputStream outContent;
+    private ByteArrayOutputStream errContent;
+    private PrintStream originalOut;
+    private PrintStream originalErr;
+
+
+<span class="fc" id="L40">    class TestableCommentDaoImpl extends CommentDaoImpl {</span>
+        @Override
+        public Connection getConnection() {
+<span class="fc" id="L43">            return connection;</span>
+        }
+    }
+
+    @BeforeEach
+    void init() {
+<span class="fc" id="L49">        this.commentDao = new TestableCommentDaoImpl();</span>
+<span class="fc" id="L50">        this.test_sql_exception = new SQLException();</span>
+<span class="fc" id="L51">        this.outContent = new ByteArrayOutputStream();</span>
+<span class="fc" id="L52">        this.errContent = new ByteArrayOutputStream();</span>
+<span class="fc" id="L53">        this.originalOut = System.out;</span>
+<span class="fc" id="L54">        this.originalErr = System.err;</span>
+<span class="fc" id="L55">        System.setOut(new PrintStream(outContent));</span>
+<span class="fc" id="L56">        System.setErr(new PrintStream(errContent));</span>
+<span class="fc" id="L57">    }</span>
+
+    @AfterEach
+    void tear_down() throws IOException {
+<span class="fc" id="L61">        System.setErr(this.originalErr);</span>
+<span class="fc" id="L62">        System.setOut(this.originalOut);</span>
+<span class="fc" id="L63">        this.outContent.close();</span>
+<span class="fc" id="L64">        this.errContent.close();</span>
+<span class="fc" id="L65">    }</span>
+
+
+    @Test
+    void test_throws_sql_exception_when_list_comment() throws SQLException {
+<span class="fc" id="L70">        when(connection.prepareStatement(anyString())).thenThrow(test_sql_exception);</span>
+<span class="fc" id="L71">        this.commentDao.listComment(5, true);</span>
+<span class="fc" id="L72">        assertTrue(errContent.toString().contains(&quot;java.sql.SQLException&quot;));</span>
+<span class="fc" id="L73">    }</span>
+
+    @Test
+    void test_when_list_comment() throws SQLException {
+<span class="fc" id="L77">        int id = 305;</span>
+<span class="fc" id="L78">        int userid = 13;</span>
+<span class="fc" id="L79">        long date = 15000;</span>
+<span class="fc" id="L80">        String content = &quot;PGNB&quot;;</span>
+
+<span class="fc" id="L82">        Comment comment = new Comment();</span>
+<span class="fc" id="L83">        comment.setId(id);</span>
+<span class="fc" id="L84">        comment.setUserId(userid);</span>
+<span class="fc" id="L85">        comment.setDate(date);</span>
+<span class="fc" id="L86">        comment.setContent(content);</span>
+
+<span class="fc" id="L88">        List&lt;Comment&gt; commentList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L89">        commentList.add(comment);</span>
+
+<span class="fc" id="L91">        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);</span>
+
+<span class="fc" id="L93">        when(preparedStatement.executeQuery()).thenReturn(rs);</span>
+<span class="fc" id="L94">        when(rs.next()).thenReturn(true, false); /* First call returns true, second call returns false */</span>
+<span class="fc" id="L95">        when(rs.getInt(&quot;id&quot;)).thenReturn(id);</span>
+<span class="fc" id="L96">        when(rs.getInt(&quot;userId&quot;)).thenReturn(userid);</span>
+<span class="fc" id="L97">        when(rs.getLong(&quot;date&quot;)).thenReturn(date);</span>
+<span class="fc" id="L98">        when(rs.getString(&quot;content&quot;)).thenReturn(content);</span>
+
+
+<span class="fc" id="L101">        assertEquals(commentList, this.commentDao.listComment(5, true));</span>
+<span class="fc" id="L102">        verify(preparedStatement).setBoolean(1, true);</span>
+<span class="fc" id="L103">        verify(preparedStatement).setInt(2, 5);</span>
+
+<span class="fc" id="L105">    }</span>
+
+    @Test
+    void test_throws_sql_exception_when_query_comment_by_id() throws SQLException {
+<span class="fc" id="L109">        when(connection.prepareStatement(anyString())).thenThrow(test_sql_exception);</span>
+<span class="fc" id="L110">        this.commentDao.queryCommentById(5);</span>
+<span class="fc" id="L111">        assertTrue(errContent.toString().contains(&quot;java.sql.SQLException&quot;));</span>
+<span class="fc" id="L112">    }</span>
+
+    @Test
+    void test_query_Comment_By_Id() throws SQLException {
+<span class="fc" id="L116">        int id = 305;</span>
+<span class="fc" id="L117">        int userid = 13;</span>
+<span class="fc" id="L118">        long date = 15000;</span>
+<span class="fc" id="L119">        String content = &quot;PGNB&quot;;</span>
+
+<span class="fc" id="L121">        Comment comment = new Comment();</span>
+<span class="fc" id="L122">        comment.setId(id);</span>
+<span class="fc" id="L123">        comment.setUserId(userid);</span>
+<span class="fc" id="L124">        comment.setDate(date);</span>
+<span class="fc" id="L125">        comment.setContent(content);</span>
+
+<span class="fc" id="L127">        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);</span>
+<span class="fc" id="L128">        when(preparedStatement.executeQuery()).thenReturn(rs);</span>
+<span class="fc" id="L129">        when(rs.next()).thenReturn(true, false); /* First call returns true, second call returns false */</span>
+<span class="fc" id="L130">        when(rs.getInt(&quot;id&quot;)).thenReturn(id);</span>
+<span class="fc" id="L131">        when(rs.getInt(&quot;userId&quot;)).thenReturn(userid);</span>
+<span class="fc" id="L132">        when(rs.getLong(&quot;date&quot;)).thenReturn(date);</span>
+<span class="fc" id="L133">        when(rs.getString(&quot;content&quot;)).thenReturn(content);</span>
+
+
+<span class="fc" id="L136">        assertEquals(comment, this.commentDao.queryCommentById(5));</span>
+<span class="fc" id="L137">        verify(preparedStatement).setInt(1, 5);</span>
+<span class="fc" id="L138">    }</span>
+
+    @Test
+    void test_throws_sql_exception_when_add_Comment() throws SQLException {
+<span class="fc" id="L142">        when(connection.prepareStatement(anyString())).thenThrow(test_sql_exception);</span>
+<span class="fc" id="L143">        this.commentDao.addComment(new Comment());</span>
+<span class="fc" id="L144">        assertTrue(errContent.toString().contains(&quot;java.sql.SQLException&quot;));</span>
+<span class="fc" id="L145">    }</span>
+
+    @Test
+    void test_add_Comment_When_Result_Is_True() throws SQLException {
+<span class="fc" id="L149">        int id = 305;</span>
+<span class="fc" id="L150">        int userid = 13;</span>
+<span class="fc" id="L151">        long date = 15000;</span>
+<span class="fc" id="L152">        String content = &quot;PGNB&quot;;</span>
+
+<span class="fc" id="L154">        Comment comment = new Comment();</span>
+<span class="fc" id="L155">        comment.setId(id);</span>
+<span class="fc" id="L156">        comment.setUserId(userid);</span>
+<span class="fc" id="L157">        comment.setDate(date);</span>
+<span class="fc" id="L158">        comment.setContent(content);</span>
+
+<span class="fc" id="L160">        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);</span>
+<span class="fc" id="L161">        when(preparedStatement.executeUpdate()).thenReturn(1);</span>
+
+<span class="fc" id="L163">        boolean result = this.commentDao.addComment(comment);</span>
+
+<span class="fc" id="L165">        assertEquals(result, true);</span>
+<span class="fc" id="L166">        verify(preparedStatement).setInt(1, userid);</span>
+<span class="fc" id="L167">        verify(preparedStatement).setLong(2, date);</span>
+<span class="fc" id="L168">        verify(preparedStatement).setString(3, content);</span>
+
+
+<span class="fc" id="L171">    }</span>
+
+    @Test
+    void test_add_Comment_When_Result_Is_False() throws SQLException {
+<span class="fc" id="L175">        int id = 305;</span>
+<span class="fc" id="L176">        int userid = 13;</span>
+<span class="fc" id="L177">        long date = 15000;</span>
+<span class="fc" id="L178">        String content = &quot;PGNB&quot;;</span>
+
+<span class="fc" id="L180">        Comment comment = new Comment();</span>
+<span class="fc" id="L181">        comment.setId(id);</span>
+<span class="fc" id="L182">        comment.setUserId(userid);</span>
+<span class="fc" id="L183">        comment.setDate(date);</span>
+<span class="fc" id="L184">        comment.setContent(content);</span>
+
+<span class="fc" id="L186">        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);</span>
+<span class="fc" id="L187">        when(preparedStatement.executeUpdate()).thenReturn(0);</span>
+
+<span class="fc" id="L189">        boolean result = this.commentDao.addComment(comment);</span>
+
+<span class="fc" id="L191">        assertEquals(result, false);</span>
+<span class="fc" id="L192">        verify(preparedStatement).setInt(1, userid);</span>
+<span class="fc" id="L193">        verify(preparedStatement).setLong(2, date);</span>
+<span class="fc" id="L194">        verify(preparedStatement).setString(3, content);</span>
+
+
+<span class="fc" id="L197">    }</span>
+
+    @Test
+    void test_delete_Comment_When_Result_Is_True() throws SQLException {
+
+<span class="fc" id="L202">        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);</span>
+<span class="fc" id="L203">        when(preparedStatement.executeUpdate()).thenReturn(1);</span>
+
+<span class="fc" id="L205">        boolean result = this.commentDao.deleteComment(5);</span>
+
+<span class="fc" id="L207">        assertEquals(true, result);</span>
+<span class="fc" id="L208">        verify(preparedStatement).setInt(1, 5);</span>
+<span class="fc" id="L209">    }</span>
+
+    @Test
+    void test_delete_Comment_When_Result_Is_False() throws SQLException {
+
+<span class="fc" id="L214">        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);</span>
+<span class="fc" id="L215">        when(preparedStatement.executeUpdate()).thenThrow(SQLException.class);</span>
+
+<span class="fc" id="L217">        boolean result = this.commentDao.deleteComment(5);</span>
+
+<span class="fc" id="L219">        assertEquals(false, result);</span>
+<span class="fc" id="L220">        verify(preparedStatement).setInt(1, 5);</span>
+<span class="fc" id="L221">    }</span>
+
+    @Test
+    void test_throws_sql_exception_when_deleteComment() throws SQLException {
+<span class="fc" id="L225">        when(connection.prepareStatement(anyString())).thenThrow(test_sql_exception);</span>
+<span class="fc" id="L226">        this.commentDao.deleteComment(5);</span>
+<span class="fc" id="L227">        assertTrue(errContent.toString().contains(&quot;java.sql.SQLException&quot;));</span>
+<span class="fc" id="L228">    }</span>
+
+    @Test
+    void test_throws_sql_exception_when_updateComment() throws SQLException {
+<span class="fc" id="L232">        when(connection.prepareStatement(anyString())).thenThrow(test_sql_exception);</span>
+<span class="fc" id="L233">        this.commentDao.updateComment(new Comment());</span>
+<span class="fc" id="L234">        assertTrue(errContent.toString().contains(&quot;java.sql.SQLException&quot;));</span>
+<span class="fc" id="L235">    }</span>
+
+    @Test
+    void test_update_Comment_When_Result_Is_True() throws SQLException {
+<span class="fc" id="L239">        int id = 305;</span>
+<span class="fc" id="L240">        int userid = 13;</span>
+<span class="fc" id="L241">        long date = 15000;</span>
+<span class="fc" id="L242">        String content = &quot;PGNB&quot;;</span>
+
+<span class="fc" id="L244">        Comment comment = new Comment();</span>
+<span class="fc" id="L245">        comment.setId(id);</span>
+<span class="fc" id="L246">        comment.setUserId(userid);</span>
+<span class="fc" id="L247">        comment.setDate(date);</span>
+<span class="fc" id="L248">        comment.setContent(content);</span>
+<span class="fc" id="L249">        comment.setVerified(true);</span>
+
+
+<span class="fc" id="L252">        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);</span>
+<span class="fc" id="L253">        when(preparedStatement.executeUpdate()).thenReturn(1);</span>
+
+<span class="fc" id="L255">        boolean result = this.commentDao.updateComment(comment);</span>
+
+<span class="fc" id="L257">        assertEquals(result, true);</span>
+<span class="fc" id="L258">        verify(preparedStatement).setInt(1, userid);</span>
+<span class="fc" id="L259">        verify(preparedStatement).setLong(2, date);</span>
+<span class="fc" id="L260">        verify(preparedStatement).setString(3, content);</span>
+<span class="fc" id="L261">        verify(preparedStatement).setBoolean(4, true);</span>
+<span class="fc" id="L262">        verify(preparedStatement).setInt(5, id);</span>
+
+<span class="fc" id="L264">    }</span>
+
+    @Test
+    void test_update_Comment_When_Result_Is_False() throws SQLException {
+<span class="fc" id="L268">        int id = 305;</span>
+<span class="fc" id="L269">        int userid = 13;</span>
+<span class="fc" id="L270">        long date = 15000;</span>
+<span class="fc" id="L271">        String content = &quot;PGNB&quot;;</span>
+
+<span class="fc" id="L273">        Comment comment = new Comment();</span>
+<span class="fc" id="L274">        comment.setId(id);</span>
+<span class="fc" id="L275">        comment.setUserId(userid);</span>
+<span class="fc" id="L276">        comment.setDate(date);</span>
+<span class="fc" id="L277">        comment.setContent(content);</span>
+<span class="fc" id="L278">        comment.setVerified(true);</span>
+
+<span class="fc" id="L280">        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);</span>
+<span class="fc" id="L281">        when(preparedStatement.executeUpdate()).thenReturn(0);</span>
+
+<span class="fc" id="L283">        boolean result = this.commentDao.updateComment(comment);</span>
+
+<span class="fc" id="L285">        assertEquals(result, false);</span>
+<span class="fc" id="L286">        verify(preparedStatement).setInt(1, userid);</span>
+<span class="fc" id="L287">        verify(preparedStatement).setLong(2, date);</span>
+<span class="fc" id="L288">        verify(preparedStatement).setString(3, content);</span>
+<span class="fc" id="L289">        verify(preparedStatement).setBoolean(4, true);</span>
+<span class="fc" id="L290">        verify(preparedStatement).setInt(5, id);</span>
+
+<span class="fc" id="L292">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

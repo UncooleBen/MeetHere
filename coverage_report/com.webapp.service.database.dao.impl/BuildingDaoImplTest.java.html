@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BuildingDaoImplTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.service.database.dao.impl</a> &gt; <span class="el_source">BuildingDaoImplTest.java</span></div><h1>BuildingDaoImplTest.java</h1><pre class="source lang-java linenums">package com.webapp.service.database.dao.impl;
+
+import com.webapp.model.Building;
+import com.webapp.service.database.dao.BuildingDao;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
+
+/**
+ * @author Yuanjie Guo
+ */
+
+<span class="fc" id="L28">class BuildingDaoImplTest {</span>
+
+    private BuildingDao buildingDao;
+<span class="fc" id="L31">    private Connection connection = mock(Connection.class);</span>
+<span class="fc" id="L32">    private PreparedStatement preparedStatement = mock(PreparedStatement.class);</span>
+    private SQLException test_sql_exception;
+<span class="fc" id="L34">    private ResultSet rs = mock(ResultSet.class);</span>
+    private ByteArrayOutputStream outContent;
+    private ByteArrayOutputStream errContent;
+    private PrintStream originalOut;
+    private PrintStream originalErr;
+
+
+<span class="fc" id="L41">    class TestableBuildingDaoImpl extends BuildingDaoImpl {</span>
+        @Override
+        public Connection getConnection() {
+<span class="fc" id="L44">            return connection;</span>
+        }
+    }
+
+    @BeforeEach
+    void init() {
+<span class="fc" id="L50">        this.buildingDao = new TestableBuildingDaoImpl();</span>
+<span class="fc" id="L51">        this.test_sql_exception = new SQLException();</span>
+<span class="fc" id="L52">        this.outContent = new ByteArrayOutputStream();</span>
+<span class="fc" id="L53">        this.errContent = new ByteArrayOutputStream();</span>
+<span class="fc" id="L54">        this.originalOut = System.out;</span>
+<span class="fc" id="L55">        this.originalErr = System.err;</span>
+<span class="fc" id="L56">        System.setOut(new PrintStream(outContent));</span>
+<span class="fc" id="L57">        System.setErr(new PrintStream(errContent));</span>
+<span class="fc" id="L58">    }</span>
+
+    @AfterEach
+    void tear_down() throws IOException {
+<span class="fc" id="L62">        System.setErr(this.originalErr);</span>
+<span class="fc" id="L63">        System.setOut(this.originalOut);</span>
+<span class="fc" id="L64">        this.outContent.close();</span>
+<span class="fc" id="L65">        this.errContent.close();</span>
+<span class="fc" id="L66">    }</span>
+
+    @Test
+    void test_throws_sql_exception_when_list_building() throws SQLException {
+<span class="fc" id="L70">        when(connection.prepareStatement(anyString())).thenThrow(test_sql_exception);</span>
+<span class="fc" id="L71">        this.buildingDao.listBuilding(5);</span>
+<span class="fc" id="L72">        assertTrue(errContent.toString().contains(&quot;java.sql.SQLException&quot;));</span>
+<span class="fc" id="L73">    }</span>
+
+    @Test
+    void test_when_list_building() throws SQLException {
+<span class="fc" id="L77">        int id = 305;</span>
+<span class="fc" id="L78">        String name = &quot;PengGe&quot;;</span>
+<span class="fc" id="L79">        String description = &quot;PGNB&quot;;</span>
+<span class="fc" id="L80">        String price = &quot;999&quot;;</span>
+
+<span class="fc" id="L82">        Building building = new Building();</span>
+<span class="fc" id="L83">        building.setId(id);</span>
+<span class="fc" id="L84">        building.setName(name);</span>
+<span class="fc" id="L85">        building.setDescription(description);</span>
+<span class="fc" id="L86">        building.setPrice(price);</span>
+
+<span class="fc" id="L88">        List&lt;Building&gt; buildingList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L89">        buildingList.add(building);</span>
+
+<span class="fc" id="L91">        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);</span>
+
+<span class="fc" id="L93">        when(preparedStatement.executeQuery()).thenReturn(rs);</span>
+<span class="fc" id="L94">        when(rs.next()).thenReturn(true, false); /* First call returns true, second call returns false */</span>
+<span class="fc" id="L95">        when(rs.getInt(&quot;id&quot;)).thenReturn(id);</span>
+<span class="fc" id="L96">        when(rs.getString(&quot;name&quot;)).thenReturn(name);</span>
+<span class="fc" id="L97">        when(rs.getString(&quot;description&quot;)).thenReturn(description);</span>
+<span class="fc" id="L98">        when(rs.getString(&quot;price&quot;)).thenReturn(price);</span>
+
+
+<span class="fc" id="L101">        assertEquals(buildingList, this.buildingDao.listBuilding(5));</span>
+<span class="fc" id="L102">        verify(preparedStatement).setInt(1, 5);</span>
+
+<span class="fc" id="L104">    }</span>
+
+    @Test
+    void test_throws_sql_exception_query_Building_By_Id() throws SQLException {
+<span class="fc" id="L108">        when(connection.prepareStatement(anyString())).thenThrow(test_sql_exception);</span>
+<span class="fc" id="L109">        this.buildingDao.queryBuildingById(5);</span>
+<span class="fc" id="L110">        assertTrue(errContent.toString().contains(&quot;java.sql.SQLException&quot;));</span>
+
+<span class="fc" id="L112">    }</span>
+
+
+    @Test
+    void test_query_Building_By_Id() throws SQLException {
+<span class="fc" id="L117">        int id = 305;</span>
+<span class="fc" id="L118">        String name = &quot;PengGe&quot;;</span>
+<span class="fc" id="L119">        String description = &quot;PGNB&quot;;</span>
+<span class="fc" id="L120">        String price = &quot;999&quot;;</span>
+
+<span class="fc" id="L122">        Building building = new Building();</span>
+<span class="fc" id="L123">        building.setId(id);</span>
+<span class="fc" id="L124">        building.setName(name);</span>
+<span class="fc" id="L125">        building.setDescription(description);</span>
+<span class="fc" id="L126">        building.setPrice(price);</span>
+
+<span class="fc" id="L128">        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);</span>
+<span class="fc" id="L129">        when(preparedStatement.executeQuery()).thenReturn(rs);</span>
+<span class="fc" id="L130">        when(rs.next()).thenReturn(true, false); /* First call returns true, second call returns false */</span>
+<span class="fc" id="L131">        when(rs.getInt(&quot;id&quot;)).thenReturn(id);</span>
+<span class="fc" id="L132">        when(rs.getString(&quot;name&quot;)).thenReturn(name);</span>
+<span class="fc" id="L133">        when(rs.getString(&quot;description&quot;)).thenReturn(description);</span>
+<span class="fc" id="L134">        when(rs.getString(&quot;price&quot;)).thenReturn(price);</span>
+
+
+<span class="fc" id="L137">        assertEquals(building, this.buildingDao.queryBuildingById(5));</span>
+<span class="fc" id="L138">        verify(preparedStatement).setInt(1, 5);</span>
+<span class="fc" id="L139">    }</span>
+
+    @Test
+    void test_throws_sql_exception_when_add_Building() throws SQLException {
+<span class="fc" id="L143">        when(connection.prepareStatement(anyString())).thenThrow(test_sql_exception);</span>
+<span class="fc" id="L144">        this.buildingDao.addBuilding(new Building());</span>
+<span class="fc" id="L145">        assertTrue(errContent.toString().contains(&quot;java.sql.SQLException&quot;));</span>
+<span class="fc" id="L146">    }</span>
+
+    @Test
+    void test_add_Building_When_Result_Is_True() throws SQLException {
+<span class="fc" id="L150">        int id = 305;</span>
+<span class="fc" id="L151">        String name = &quot;PengGe&quot;;</span>
+<span class="fc" id="L152">        String description = &quot;PGNB&quot;;</span>
+<span class="fc" id="L153">        String price = &quot;999&quot;;</span>
+
+<span class="fc" id="L155">        Building building = new Building();</span>
+<span class="fc" id="L156">        building.setId(id);</span>
+<span class="fc" id="L157">        building.setName(name);</span>
+<span class="fc" id="L158">        building.setDescription(description);</span>
+<span class="fc" id="L159">        building.setPrice(price);</span>
+
+<span class="fc" id="L161">        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);</span>
+<span class="fc" id="L162">        when(preparedStatement.executeUpdate()).thenReturn(1);</span>
+
+<span class="fc" id="L164">        boolean result = this.buildingDao.addBuilding(building);</span>
+
+<span class="fc" id="L166">        assertEquals(result, true);</span>
+<span class="fc" id="L167">        verify(preparedStatement).setString(1, name);</span>
+<span class="fc" id="L168">        verify(preparedStatement).setString(2, description);</span>
+<span class="fc" id="L169">        verify(preparedStatement).setString(3, price);</span>
+
+
+<span class="fc" id="L172">    }</span>
+
+    @Test
+    void test_add_Building_When_Result_Is_False() throws SQLException {
+<span class="fc" id="L176">        int id = 305;</span>
+<span class="fc" id="L177">        String name = &quot;PengGe&quot;;</span>
+<span class="fc" id="L178">        String description = &quot;PGNB&quot;;</span>
+<span class="fc" id="L179">        String price = &quot;999&quot;;</span>
+
+
+<span class="fc" id="L182">        Building building = new Building();</span>
+<span class="fc" id="L183">        building.setId(id);</span>
+<span class="fc" id="L184">        building.setName(name);</span>
+<span class="fc" id="L185">        building.setDescription(description);</span>
+<span class="fc" id="L186">        building.setPrice(price);</span>
+
+<span class="fc" id="L188">        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);</span>
+<span class="fc" id="L189">        when(preparedStatement.executeUpdate()).thenReturn(0);</span>
+
+<span class="fc" id="L191">        boolean result = this.buildingDao.addBuilding(building);</span>
+
+<span class="fc" id="L193">        assertEquals(result, false);</span>
+<span class="fc" id="L194">        verify(preparedStatement).setString(1, name);</span>
+<span class="fc" id="L195">        verify(preparedStatement).setString(2, description);</span>
+<span class="fc" id="L196">        verify(preparedStatement).setString(3, price);</span>
+
+
+<span class="fc" id="L199">    }</span>
+
+    @Test
+    void test_delete_Building_When_Result_Is_True() throws SQLException {
+
+<span class="fc" id="L204">        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);</span>
+<span class="fc" id="L205">        when(preparedStatement.executeUpdate()).thenReturn(1);</span>
+
+<span class="fc" id="L207">        boolean result = this.buildingDao.deleteBuilding(5);</span>
+
+<span class="fc" id="L209">        assertEquals(result, true);</span>
+<span class="fc" id="L210">        verify(preparedStatement).setInt(1, 5);</span>
+<span class="fc" id="L211">    }</span>
+
+    @Test
+    void test_delete_Building_When_Result_Is_False() throws SQLException {
+
+<span class="fc" id="L216">        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);</span>
+<span class="fc" id="L217">        when(preparedStatement.executeUpdate()).thenReturn(0);</span>
+
+<span class="fc" id="L219">        boolean result = this.buildingDao.deleteBuilding(5);</span>
+
+<span class="fc" id="L221">        assertEquals(result, false);</span>
+<span class="fc" id="L222">        verify(preparedStatement).setInt(1, 5);</span>
+<span class="fc" id="L223">    }</span>
+
+    @Test
+    void test_throws_sql_exception_when_deleteBuilding() throws SQLException {
+<span class="fc" id="L227">        when(connection.prepareStatement(anyString())).thenThrow(test_sql_exception);</span>
+<span class="fc" id="L228">        this.buildingDao.deleteBuilding(5);</span>
+<span class="fc" id="L229">        assertTrue(errContent.toString().contains(&quot;java.sql.SQLException&quot;));</span>
+<span class="fc" id="L230">    }</span>
+
+    @Test
+    void test_throws_sql_exception_when_updateBuilding() throws SQLException {
+<span class="fc" id="L234">        when(connection.prepareStatement(anyString())).thenThrow(test_sql_exception);</span>
+<span class="fc" id="L235">        this.buildingDao.updateBuilding(new Building());</span>
+<span class="fc" id="L236">        assertTrue(errContent.toString().contains(&quot;java.sql.SQLException&quot;));</span>
+<span class="fc" id="L237">    }</span>
+
+    @Test
+    void test_update_Building_When_Result_Is_True() throws SQLException {
+<span class="fc" id="L241">        int id = 305;</span>
+<span class="fc" id="L242">        String name = &quot;PengGe&quot;;</span>
+<span class="fc" id="L243">        String description = &quot;PGNB&quot;;</span>
+<span class="fc" id="L244">        String price = &quot;999&quot;;</span>
+
+<span class="fc" id="L246">        Building building = new Building();</span>
+<span class="fc" id="L247">        building.setId(id);</span>
+<span class="fc" id="L248">        building.setName(name);</span>
+<span class="fc" id="L249">        building.setDescription(description);</span>
+<span class="fc" id="L250">        building.setPrice(price);</span>
+
+<span class="fc" id="L252">        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);</span>
+<span class="fc" id="L253">        when(preparedStatement.executeUpdate()).thenReturn(1);</span>
+
+<span class="fc" id="L255">        boolean result = this.buildingDao.updateBuilding(building);</span>
+
+<span class="fc" id="L257">        assertEquals(result, true);</span>
+<span class="fc" id="L258">        verify(preparedStatement).setString(1, name);</span>
+<span class="fc" id="L259">        verify(preparedStatement).setString(2, description);</span>
+<span class="fc" id="L260">        verify(preparedStatement).setString(3, price);</span>
+<span class="fc" id="L261">        verify(preparedStatement).setInt(4, id);</span>
+
+<span class="fc" id="L263">    }</span>
+
+    @Test
+    void test_update_Building_When_Result_Is_False() throws SQLException {
+<span class="fc" id="L267">        int id = 305;</span>
+<span class="fc" id="L268">        String name = &quot;PengGe&quot;;</span>
+<span class="fc" id="L269">        String description = &quot;PGNB&quot;;</span>
+<span class="fc" id="L270">        String price = &quot;999&quot;;</span>
+
+<span class="fc" id="L272">        Building building = new Building();</span>
+<span class="fc" id="L273">        building.setId(id);</span>
+<span class="fc" id="L274">        building.setName(name);</span>
+<span class="fc" id="L275">        building.setDescription(description);</span>
+<span class="fc" id="L276">        building.setPrice(price);</span>
+
+<span class="fc" id="L278">        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);</span>
+<span class="fc" id="L279">        when(preparedStatement.executeUpdate()).thenReturn(0);</span>
+
+<span class="fc" id="L281">        boolean result = this.buildingDao.updateBuilding(building);</span>
+
+<span class="fc" id="L283">        assertEquals(result, false);</span>
+<span class="fc" id="L284">        verify(preparedStatement).setString(1, name);</span>
+<span class="fc" id="L285">        verify(preparedStatement).setString(2, description);</span>
+<span class="fc" id="L286">        verify(preparedStatement).setString(3, price);</span>
+<span class="fc" id="L287">        verify(preparedStatement).setInt(4, id);</span>
+
+<span class="fc" id="L289">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

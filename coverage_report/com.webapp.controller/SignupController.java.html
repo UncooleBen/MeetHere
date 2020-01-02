@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SignupController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.controller</a> &gt; <span class="el_source">SignupController.java</span></div><h1>SignupController.java</h1><pre class="source lang-java linenums">package com.webapp.controller;
+
+import com.webapp.model.user.User;
+import com.webapp.service.database.dao.LoginDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+/**
+ * @author Juntao Peng
+ */
+@Controller
+public class SignupController {
+
+
+    private LoginDao loginDao;
+
+    @Autowired
+<span class="fc" id="L25">    public SignupController(LoginDao loginDao) {</span>
+<span class="fc" id="L26">        this.loginDao = loginDao;</span>
+<span class="fc" id="L27">    }</span>
+
+    @RequestMapping(&quot;/signup&quot;)
+    public ModelAndView signupPage() {
+<span class="fc" id="L31">        ModelAndView mv = new ModelAndView();</span>
+<span class="fc" id="L32">        mv.setViewName(&quot;signup&quot;);</span>
+<span class="fc" id="L33">        return mv;</span>
+    }
+
+    @RequestMapping(&quot;/signupSubmit&quot;)
+    public ModelAndView signupSubmit(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="fc" id="L39">        request.setCharacterEncoding(&quot;utf-8&quot;);</span>
+<span class="fc" id="L40">        ModelAndView mv = new ModelAndView();</span>
+<span class="fc" id="L41">        String username = request.getParameter(&quot;username&quot;);</span>
+<span class="fc" id="L42">        String password = request.getParameter(&quot;password&quot;);</span>
+<span class="fc" id="L43">        String name = request.getParameter(&quot;name&quot;);</span>
+<span class="fc" id="L44">        String tel = request.getParameter(&quot;tel&quot;);</span>
+<span class="fc" id="L45">        String sex = request.getParameter(&quot;sex&quot;);</span>
+
+<span class="fc" id="L47">        User currentUser = null;</span>
+<span class="fc" id="L48">        User user = new User(username, password, name, sex, tel);</span>
+<span class="fc" id="L49">        currentUser = loginDao.signup(user);</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        if (currentUser == null) {</span>
+<span class="fc" id="L51">            mv.setViewName(&quot;signup&quot;);</span>
+<span class="fc" id="L52">            mv.addObject(&quot;error&quot;, &quot;该用户名已存在&quot;);</span>
+        } else {
+<span class="fc" id="L54">            mv.setViewName(&quot;index&quot;);</span>
+<span class="fc" id="L55">            mv.addObject(&quot;user&quot;, currentUser);</span>
+        }
+<span class="fc" id="L57">        return mv;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

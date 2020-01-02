@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>News.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.model</a> &gt; <span class="el_source">News.java</span></div><h1>News.java</h1><pre class="source lang-java linenums">package com.webapp.model;
+
+/**
+ * @author Juntao Peng
+ */
+public class News {
+    private int id;
+    private String title;
+    private long created;
+    private long lastModified;
+    private String author;
+    private String detail;
+
+<span class="fc" id="L14">    public News(int id, String title, long created, long lastModified, String author, String detail) {</span>
+<span class="fc" id="L15">        this.id = id;</span>
+<span class="fc" id="L16">        this.title = title;</span>
+<span class="fc" id="L17">        this.created = created;</span>
+<span class="fc" id="L18">        this.lastModified = lastModified;</span>
+<span class="fc" id="L19">        this.author = author;</span>
+<span class="fc" id="L20">        this.detail = detail;</span>
+<span class="fc" id="L21">    }</span>
+
+<span class="fc" id="L23">    public News(String title, long created, long lastModified, String author, String detail) {</span>
+<span class="fc" id="L24">        this.title = title;</span>
+<span class="fc" id="L25">        this.created = created;</span>
+<span class="fc" id="L26">        this.lastModified = lastModified;</span>
+<span class="fc" id="L27">        this.author = author;</span>
+<span class="fc" id="L28">        this.detail = detail;</span>
+<span class="fc" id="L29">    }</span>
+
+<span class="fc" id="L31">    public News() {</span>
+<span class="fc" id="L32">    }</span>
+
+    public int getId() {
+<span class="fc" id="L35">        return id;</span>
+    }
+
+    public void setId(int id) {
+<span class="fc" id="L39">        this.id = id;</span>
+<span class="fc" id="L40">    }</span>
+
+    public String getTitle() {
+<span class="fc" id="L43">        return title;</span>
+    }
+
+    public void setTitle(String title) {
+<span class="fc" id="L47">        this.title = title;</span>
+<span class="fc" id="L48">    }</span>
+
+    public long getCreated() {
+<span class="fc" id="L51">        return created;</span>
+    }
+
+    public void setCreated(long created) {
+<span class="fc" id="L55">        this.created = created;</span>
+<span class="fc" id="L56">    }</span>
+
+    public long getLastModified() {
+<span class="fc" id="L59">        return lastModified;</span>
+    }
+
+    public void setLastModified(long lastModified) {
+<span class="fc" id="L63">        this.lastModified = lastModified;</span>
+<span class="fc" id="L64">    }</span>
+
+    public String getAuthor() {
+<span class="fc" id="L67">        return author;</span>
+    }
+
+    public void setAuthor(String author) {
+<span class="fc" id="L71">        this.author = author;</span>
+<span class="fc" id="L72">    }</span>
+
+    public String getDetail() {
+<span class="fc" id="L75">        return detail;</span>
+    }
+
+    public void setDetail(String detail) {
+<span class="fc" id="L79">        this.detail = detail;</span>
+<span class="fc" id="L80">    }</span>
+
+    @Override
+    public boolean equals(Object o) {
+<span class="fc bfc" id="L84" title="All 2 branches covered.">        if (this == o) return true;</span>
+<span class="pc bpc" id="L85" title="2 of 4 branches missed.">        if (o == null || getClass() != o.getClass()) return false;</span>
+
+<span class="fc" id="L87">        News news = (News) o;</span>
+
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">        if (id != news.id) return false;</span>
+<span class="pc bpc" id="L90" title="1 of 2 branches missed.">        if (created != news.created) return false;</span>
+<span class="pc bpc" id="L91" title="1 of 2 branches missed.">        if (lastModified != news.lastModified) return false;</span>
+<span class="pc bpc" id="L92" title="1 of 2 branches missed.">        if (!title.equals(news.title)) return false;</span>
+<span class="pc bpc" id="L93" title="1 of 2 branches missed.">        if (!author.equals(news.author)) return false;</span>
+<span class="fc" id="L94">        return detail.equals(news.detail);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L99">        int result = id;</span>
+<span class="nc" id="L100">        result = 31 * result + title.hashCode();</span>
+<span class="nc" id="L101">        result = 31 * result + (int) (created ^ (created &gt;&gt;&gt; 32));</span>
+<span class="nc" id="L102">        result = 31 * result + (int) (lastModified ^ (lastModified &gt;&gt;&gt; 32));</span>
+<span class="nc" id="L103">        result = 31 * result + author.hashCode();</span>
+<span class="nc" id="L104">        result = 31 * result + detail.hashCode();</span>
+<span class="nc" id="L105">        return result;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

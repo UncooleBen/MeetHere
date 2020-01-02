@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SignupControllerIT.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.controller</a> &gt; <span class="el_source">SignupControllerIT.java</span></div><h1>SignupControllerIT.java</h1><pre class="source lang-java linenums">package com.webapp.controller;
+
+import com.webapp.config.MvcConfig;
+import com.webapp.model.user.Gender;
+import com.webapp.model.user.User;
+import com.webapp.service.database.dao.UserDao;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
+import java.util.Arrays;
+import java.util.stream.Stream;
+
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+/**
+ * @author Juntao Peng
+ */
+@ExtendWith(SpringExtension.class)
+@WebAppConfiguration
+@ContextConfiguration(classes = MvcConfig.class)
+<span class="fc" id="L41">public class SignupControllerIT {</span>
+    @Autowired
+    WebApplicationContext wac;
+    MockMvc mockMvc;
+
+    @Autowired
+    UserDao userDao;
+
+    User addedUser;
+
+    @BeforeEach
+    void setup() {
+<span class="fc" id="L53">        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();</span>
+<span class="fc" id="L54">        User userToAdd = new User(&quot;999&quot;, &quot;999&quot;, &quot;999&quot;, &quot;MALE&quot;, &quot;13918300851&quot;);</span>
+<span class="fc" id="L55">        this.userDao.addUser(userToAdd);</span>
+<span class="fc" id="L56">        this.addedUser = this.userDao.queryAllUsers().get(0);</span>
+<span class="fc" id="L57">    }</span>
+
+    @AfterEach
+    void tearDown() {
+<span class="fc" id="L61">        this.userDao.deleteUser(this.addedUser.getId());</span>
+<span class="fc" id="L62">    }</span>
+
+    @Test
+    void shouldGoToSignupPage_WhenRequestIsSignup() throws Throwable {
+<span class="fc" id="L66">        this.mockMvc.perform(get(&quot;/signup&quot;))</span>
+<span class="fc" id="L67">                .andExpect(status().isOk())</span>
+<span class="fc" id="L68">                .andExpect(view().name(&quot;signup&quot;))</span>
+<span class="fc" id="L69">                .andExpect(forwardedUrl(&quot;/WEB-INF/jsp/signup.jsp&quot;));</span>
+<span class="fc" id="L70">    }</span>
+
+    static Stream&lt;Arguments&gt; validUsernamePasswordPairProvider() {
+<span class="fc" id="L73">        return Stream.of(</span>
+<span class="fc" id="L74">                Arguments.of(&quot;username1&quot;, &quot;password1&quot;, &quot;name1&quot;, &quot;MALE&quot;, &quot;tel1&quot;),</span>
+<span class="fc" id="L75">                Arguments.of(&quot;username2&quot;, &quot;password2&quot;, &quot;name2&quot;, &quot;FEMALE&quot;, &quot;tel2&quot;),</span>
+<span class="fc" id="L76">                Arguments.of(&quot;username3&quot;, &quot;password3&quot;, &quot;name3&quot;, &quot;MALE&quot;, &quot;tel3&quot;),</span>
+<span class="fc" id="L77">                Arguments.of(&quot;username4&quot;, &quot;password4&quot;, &quot;name4&quot;, &quot;FEMALE&quot;, &quot;tel4&quot;),</span>
+<span class="fc" id="L78">                Arguments.of(&quot;username5&quot;, &quot;password5&quot;, &quot;name5&quot;, &quot;MALE&quot;, &quot;tel5&quot;)</span>
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource(&quot;validUsernamePasswordPairProvider&quot;)
+    void shouldGoToIndexWithUsernameFilled_WhenSignupSucceeded(String username, String password, String name,
+                                                               String sex, String tel) throws Throwable {
+<span class="fc" id="L86">        this.mockMvc.perform(post(&quot;/signupSubmit&quot;)</span>
+<span class="fc" id="L87">                .contentType(MediaType.APPLICATION_FORM_URLENCODED)</span>
+<span class="fc" id="L88">                .content(EntityUtils.toString(new UrlEncodedFormEntity(Arrays.asList(</span>
+                        new BasicNameValuePair(&quot;username&quot;, username),
+                        new BasicNameValuePair(&quot;password&quot;, password),
+                        new BasicNameValuePair(&quot;name&quot;, name),
+                        new BasicNameValuePair(&quot;sex&quot;, sex),
+                        new BasicNameValuePair(&quot;tel&quot;, tel)
+                )))))
+<span class="fc" id="L95">                .andExpect(status().isOk())</span>
+<span class="fc" id="L96">                .andExpect(view().name(&quot;index&quot;))</span>
+<span class="fc" id="L97">                .andExpect(forwardedUrl(&quot;/WEB-INF/jsp/index.jsp&quot;))</span>
+<span class="fc" id="L98">                .andExpect(model().attribute(&quot;user&quot;, hasProperty(&quot;username&quot;, is(username))))</span>
+<span class="fc" id="L99">                .andExpect(model().attribute(&quot;user&quot;, hasProperty(&quot;password&quot;, is(password))))</span>
+<span class="fc" id="L100">                .andExpect(model().attribute(&quot;user&quot;, hasProperty(&quot;name&quot;, is(name))))</span>
+<span class="fc" id="L101">                .andExpect(model().attribute(&quot;user&quot;, hasProperty(&quot;sex&quot;, is(Gender.valueOf(sex)))))</span>
+<span class="fc" id="L102">                .andExpect(model().attribute(&quot;user&quot;, hasProperty(&quot;tel&quot;, is(tel))));</span>
+        // Delete the added user
+<span class="fc" id="L104">        User userAdded = this.userDao.queryUserByName(name).get(0);</span>
+<span class="fc" id="L105">        this.userDao.deleteUser(userAdded.getId());</span>
+<span class="fc" id="L106">    }</span>
+
+    static Stream&lt;Arguments&gt; invalidUsernamePasswordPairProvider() {
+<span class="fc" id="L109">        return Stream.of(</span>
+<span class="fc" id="L110">                Arguments.of(&quot;999&quot;, &quot;999&quot;, &quot;999&quot;, &quot;MALE&quot;, &quot;13918300851&quot;),</span>
+<span class="fc" id="L111">                Arguments.of(&quot;999&quot;, &quot;---&quot;, &quot;999&quot;, &quot;MALE&quot;, &quot;13918300851&quot;),</span>
+<span class="fc" id="L112">                Arguments.of(&quot;999&quot;, &quot;999&quot;, &quot;---&quot;, &quot;MALE&quot;, &quot;13918300851&quot;),</span>
+<span class="fc" id="L113">                Arguments.of(&quot;999&quot;, &quot;999&quot;, &quot;999&quot;, &quot;FEMALE&quot;, &quot;13918300851&quot;),</span>
+<span class="fc" id="L114">                Arguments.of(&quot;999&quot;, &quot;999&quot;, &quot;999&quot;, &quot;MALE&quot;, &quot;---&quot;)</span>
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource(&quot;invalidUsernamePasswordPairProvider&quot;)
+    void shouldErrorMessage_WhenSignupFailed(String username, String password, String name,
+                                             String sex, String tel) throws Throwable {
+<span class="fc" id="L122">        this.mockMvc.perform(post(&quot;/signupSubmit&quot;)</span>
+<span class="fc" id="L123">                .contentType(MediaType.APPLICATION_FORM_URLENCODED)</span>
+<span class="fc" id="L124">                .content(EntityUtils.toString(new UrlEncodedFormEntity(Arrays.asList(</span>
+                        new BasicNameValuePair(&quot;username&quot;, username),
+                        new BasicNameValuePair(&quot;password&quot;, password),
+                        new BasicNameValuePair(&quot;name&quot;, name),
+                        new BasicNameValuePair(&quot;sex&quot;, sex),
+                        new BasicNameValuePair(&quot;tel&quot;, tel)
+                )))))
+<span class="fc" id="L131">                .andExpect(status().isOk())</span>
+<span class="fc" id="L132">                .andExpect(view().name(&quot;signup&quot;))</span>
+<span class="fc" id="L133">                .andExpect(forwardedUrl(&quot;/WEB-INF/jsp/signup.jsp&quot;))</span>
+<span class="fc" id="L134">                .andExpect(model().attribute(&quot;error&quot;, &quot;该用户名已存在&quot;));</span>
+<span class="fc" id="L135">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

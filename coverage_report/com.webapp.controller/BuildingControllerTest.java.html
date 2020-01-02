@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BuildingControllerTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.controller</a> &gt; <span class="el_source">BuildingControllerTest.java</span></div><h1>BuildingControllerTest.java</h1><pre class="source lang-java linenums">package com.webapp.controller;
+
+import com.webapp.filter.LoginFilter;
+import com.webapp.model.Building;
+import com.webapp.model.Record;
+import com.webapp.model.user.User;
+import com.webapp.service.database.dao.BuildingDao;
+import com.webapp.service.database.dao.RecordDao;
+import org.junit.jupiter.api.Test;
+
+import org.springframework.util.Assert;
+import org.springframework.web.servlet.ModelAndView;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.text.ParseException;
+import java.util.LinkedList;
+import java.util.List;
+import java.text.SimpleDateFormat;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+
+/**
+ * @author Guoyuanjie
+ */
+
+<span class="fc" id="L32">class BuildingControllerTest {</span>
+
+<span class="fc" id="L34">        private BuildingDao buildingDao = mock(BuildingDao.class);</span>
+<span class="fc" id="L35">        private RecordDao recordDao=mock(RecordDao.class);</span>
+<span class="fc" id="L36">        private HttpServletRequest request=mock(HttpServletRequest.class);</span>
+<span class="fc" id="L37">        private HttpSession session=mock(HttpSession.class);</span>
+
+<span class="fc" id="L39">        private BuildingController buildingController =new BuildingController(buildingDao,recordDao);</span>
+
+
+       @Test
+        public void service_WhenIsAuthorized()
+        {
+<span class="fc" id="L45">            String action=&quot;&quot;;</span>
+<span class="fc" id="L46">            String currentUserType=&quot;&quot;;</span>
+<span class="fc" id="L47">            when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(currentUserType);</span>
+<span class="fc" id="L48">            ModelAndView result=buildingController.service(action,request,session);</span>
+<span class="fc" id="L49">            assertNotNull(result);</span>
+<span class="fc" id="L50">        }</span>
+
+        @Test
+        public void service_WhenActionIsNotListAndBook()
+        {
+<span class="fc" id="L55">                String action=&quot;sds&quot;;</span>
+<span class="fc" id="L56">                String currentUserType=&quot;user&quot;;</span>
+
+<span class="fc" id="L58">                when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(currentUserType);</span>
+<span class="fc" id="L59">                when(request.getParameter(&quot;id&quot;)).thenReturn(&quot;305&quot;);</span>
+
+
+<span class="fc" id="L62">                ModelAndView result=buildingController.service(action,request,session);</span>
+<span class="fc" id="L63">                assertNotNull(result);</span>
+<span class="fc" id="L64">        }</span>
+
+        @Test
+        public void service_WhenActionIsDelete_UserIsAdmin()
+        {
+<span class="fc" id="L69">                String action=&quot;delete&quot;;</span>
+<span class="fc" id="L70">                String currentUserType=&quot;admin&quot;;</span>
+
+<span class="fc" id="L72">                List&lt;Building&gt; buildingList=new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L73">                buildingList.add(new Building());</span>
+
+<span class="fc" id="L75">                when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(currentUserType);</span>
+<span class="fc" id="L76">                when(request.getParameter(&quot;id&quot;)).thenReturn(&quot;305&quot;);</span>
+<span class="fc" id="L77">                when(buildingDao.listBuilding(20)).thenReturn(buildingList);</span>
+
+
+<span class="fc" id="L80">                ModelAndView result=buildingController.service(action,request,session);</span>
+<span class="fc" id="L81">                verify(buildingDao).deleteBuilding(305);</span>
+
+<span class="fc" id="L83">                assertAll(</span>
+<span class="fc" id="L84">                        ()-&gt;assertEquals(&quot;mainAdmin&quot;,result.getViewName()),</span>
+<span class="fc" id="L85">                        ()-&gt;assertEquals(&quot;admin/building.jsp&quot;,result.getModelMap().get(&quot;mainPage&quot;)),</span>
+<span class="fc" id="L86">                        ()-&gt;assertEquals(result.getModelMap().get(&quot;buildingList&quot;),buildingList)</span>
+                );
+<span class="fc" id="L88">        }</span>
+
+        @Test
+        public void service_WhenActionIsModify_UserIsAdmin()
+        {
+<span class="fc" id="L93">                String action=&quot;modify&quot;;</span>
+<span class="fc" id="L94">                String currentUserType=&quot;admin&quot;;</span>
+
+<span class="fc" id="L96">                Building building=new Building();</span>
+
+<span class="fc" id="L98">                when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(currentUserType);</span>
+<span class="fc" id="L99">                when(request.getParameter(&quot;id&quot;)).thenReturn(&quot;305&quot;);</span>
+<span class="fc" id="L100">                when(buildingDao.queryBuildingById(305)).thenReturn(building);</span>
+
+
+<span class="fc" id="L103">                ModelAndView result=buildingController.service(action,request,session);</span>
+
+<span class="fc" id="L105">                assertAll(</span>
+<span class="fc" id="L106">                        ()-&gt;assertEquals(result.getViewName(),&quot;mainAdmin&quot;),</span>
+<span class="fc" id="L107">                        ()-&gt;assertEquals(result.getModelMap().get(&quot;mainPage&quot;),&quot;admin/buildingModify.jsp&quot;),</span>
+<span class="fc" id="L108">                        ()-&gt;assertEquals(result.getModelMap().get(&quot;id&quot;),&quot;305&quot;),</span>
+<span class="fc" id="L109">                        ()-&gt;assertEquals(result.getModelMap().get(&quot;building&quot;),building)</span>
+                );
+<span class="fc" id="L111">        }</span>
+
+        @Test
+        public void service_WhenActionIsAdd_UserIsAdmin()
+        {
+<span class="fc" id="L116">                String action=&quot;add&quot;;</span>
+<span class="fc" id="L117">                String currentUserType=&quot;admin&quot;;</span>
+
+
+<span class="fc" id="L120">                when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(currentUserType);</span>
+<span class="fc" id="L121">                when(request.getParameter(&quot;id&quot;)).thenReturn(&quot;305&quot;);</span>
+
+
+
+<span class="fc" id="L125">                ModelAndView result=buildingController.service(action,request,session);</span>
+
+<span class="fc" id="L127">                assertAll(</span>
+<span class="fc" id="L128">                        ()-&gt;assertEquals(result.getViewName(),&quot;mainAdmin&quot;),</span>
+<span class="fc" id="L129">                        ()-&gt;assertEquals(result.getModelMap().get(&quot;mainPage&quot;),&quot;admin/buildingModify.jsp&quot;),</span>
+<span class="fc" id="L130">                        ()-&gt;assertEquals(result.getModelMap().get(&quot;id&quot;),null),</span>
+<span class="fc" id="L131">                        ()-&gt;assertEquals(result.getModelMap().get(&quot;building&quot;),null)</span>
+                );
+<span class="fc" id="L133">        }</span>
+
+
+        @Test
+        public void service_WhenActionIsSave_UserIsAdmin_IDStrIsNotNull()
+        {
+<span class="fc" id="L139">                String action=&quot;save&quot;;</span>
+<span class="fc" id="L140">                String currentUserType=&quot;admin&quot;;</span>
+
+<span class="fc" id="L142">                List&lt;Building&gt; buildingList=new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L143">                buildingList.add(new Building());</span>
+
+<span class="fc" id="L145">                Building building=new Building(&quot;ECNU&quot;,&quot;none&quot;,&quot;999&quot;);</span>
+<span class="fc" id="L146">                building.setId(305);</span>
+
+<span class="fc" id="L148">                when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(currentUserType);</span>
+<span class="fc" id="L149">                when(request.getParameter(&quot;id&quot;)).thenReturn(&quot;305&quot;);</span>
+
+<span class="fc" id="L151">                when(request.getParameter(&quot;buildingName&quot;)).thenReturn(&quot;ECNU&quot;);</span>
+<span class="fc" id="L152">                when(request.getParameter(&quot;buildingDescription&quot;)).thenReturn(&quot;none&quot;);</span>
+<span class="fc" id="L153">                when(request.getParameter(&quot;buildingPrice&quot;)).thenReturn(&quot;999&quot;);</span>
+<span class="fc" id="L154">                when(request.getParameter(&quot;buildingId&quot;)).thenReturn(&quot;305&quot;);</span>
+
+<span class="fc" id="L156">                when(buildingDao.listBuilding(20)).thenReturn(buildingList);</span>
+
+
+<span class="fc" id="L159">                ModelAndView result=buildingController.service(action,request,session);</span>
+<span class="fc" id="L160">                verify(buildingDao).updateBuilding(building);</span>
+
+<span class="fc" id="L162">                assertAll(</span>
+<span class="fc" id="L163">                        ()-&gt;assertEquals(result.getViewName(),&quot;mainAdmin&quot;),</span>
+<span class="fc" id="L164">                        ()-&gt;assertEquals(result.getModelMap().get(&quot;mainPage&quot;),&quot;admin/building.jsp&quot;),</span>
+<span class="fc" id="L165">                        ()-&gt;assertEquals(result.getModelMap().get(&quot;buildingList&quot;),buildingList)</span>
+                );
+<span class="fc" id="L167">        }</span>
+
+        @Test
+        public void service_WhenActionIsSave_UserIsAdmin_IDStrIsNull()
+        {
+<span class="fc" id="L172">                String action=&quot;save&quot;;</span>
+<span class="fc" id="L173">                String currentUserType=&quot;admin&quot;;</span>
+
+<span class="fc" id="L175">                List&lt;Building&gt; buildingList=new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L176">                buildingList.add(new Building());</span>
+
+<span class="fc" id="L178">                Building building=new Building(&quot;ECNU&quot;,&quot;none&quot;,&quot;999&quot;);</span>
+
+<span class="fc" id="L180">                when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(currentUserType);</span>
+<span class="fc" id="L181">                when(request.getParameter(&quot;id&quot;)).thenReturn(&quot;305&quot;);</span>
+
+<span class="fc" id="L183">                when(request.getParameter(&quot;buildingName&quot;)).thenReturn(&quot;ECNU&quot;);</span>
+<span class="fc" id="L184">                when(request.getParameter(&quot;buildingDescription&quot;)).thenReturn(&quot;none&quot;);</span>
+<span class="fc" id="L185">                when(request.getParameter(&quot;buildingPrice&quot;)).thenReturn(&quot;999&quot;);</span>
+<span class="fc" id="L186">                when(request.getParameter(&quot;buildingId&quot;)).thenReturn(&quot;&quot;);</span>
+
+<span class="fc" id="L188">                when(buildingDao.listBuilding(20)).thenReturn(buildingList);</span>
+
+
+<span class="fc" id="L191">                ModelAndView result=buildingController.service(action,request,session);</span>
+<span class="fc" id="L192">                verify(buildingDao).addBuilding(building);</span>
+
+<span class="fc" id="L194">                assertAll(</span>
+<span class="fc" id="L195">                        ()-&gt;assertEquals(result.getViewName(),&quot;mainAdmin&quot;),</span>
+<span class="fc" id="L196">                        ()-&gt;assertEquals(result.getModelMap().get(&quot;mainPage&quot;),&quot;admin/building.jsp&quot;),</span>
+<span class="fc" id="L197">                        ()-&gt;assertEquals(result.getModelMap().get(&quot;buildingList&quot;),buildingList)</span>
+                );
+<span class="fc" id="L199">        }</span>
+
+        @Test
+        public void service_WhenActionIsList_UserIsAdmin()
+        {
+<span class="fc" id="L204">                String action=&quot;list&quot;;</span>
+<span class="fc" id="L205">                String currentUserType=&quot;admin&quot;;</span>
+<span class="fc" id="L206">                List&lt;Building&gt; buildingList=new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L207">                buildingList.add(new Building());</span>
+
+
+
+<span class="fc" id="L211">                when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(currentUserType);</span>
+<span class="fc" id="L212">                when(buildingDao.listBuilding(20)).thenReturn(buildingList);</span>
+
+
+<span class="fc" id="L215">                ModelAndView result=buildingController.service(action,request,session);</span>
+
+<span class="fc" id="L217">                assertAll(</span>
+<span class="fc" id="L218">                        ()-&gt;assertEquals(result.getViewName(),&quot;mainAdmin&quot;),</span>
+<span class="fc" id="L219">                        ()-&gt;assertEquals(result.getModelMap().get(&quot;mainPage&quot;),&quot;admin/building.jsp&quot;),</span>
+<span class="fc" id="L220">                        ()-&gt;assertEquals(result.getModelMap().get(&quot;buildingList&quot;),buildingList)</span>
+                );
+<span class="fc" id="L222">        }</span>
+
+        @Test
+        public void service_WhenActionIsList_UserIsUser()
+        {
+<span class="fc" id="L227">                String action=&quot;list&quot;;</span>
+<span class="fc" id="L228">                String currentUserType=&quot;user&quot;;</span>
+<span class="fc" id="L229">                List&lt;Building&gt; buildingList=new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L230">                buildingList.add(new Building());</span>
+
+
+
+<span class="fc" id="L234">                when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(currentUserType);</span>
+<span class="fc" id="L235">                when(buildingDao.listBuilding(20)).thenReturn(buildingList);</span>
+
+
+<span class="fc" id="L238">                ModelAndView result=buildingController.service(action,request,session);</span>
+
+<span class="fc" id="L240">                assertAll(</span>
+<span class="fc" id="L241">                        ()-&gt;assertEquals(result.getViewName(),&quot;mainUser&quot;),</span>
+<span class="fc" id="L242">                        ()-&gt;assertEquals(result.getModelMap().get(&quot;mainPage&quot;),&quot;user/building.jsp&quot;),</span>
+<span class="fc" id="L243">                        ()-&gt;assertEquals(result.getModelMap().get(&quot;buildingList&quot;),buildingList)</span>
+                );
+<span class="fc" id="L245">        }</span>
+        @Test
+        public void service_WhenActionIsOther_UserIsAdmin()
+        {
+<span class="fc" id="L249">                String action=&quot;other&quot;;</span>
+<span class="fc" id="L250">                String currentUserType=&quot;admin&quot;;</span>
+<span class="fc" id="L251">                List&lt;Building&gt; buildingList=new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L252">                buildingList.add(new Building());</span>
+
+
+
+<span class="fc" id="L256">                when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(currentUserType);</span>
+<span class="fc" id="L257">                when(buildingDao.listBuilding(20)).thenReturn(buildingList);</span>
+
+
+<span class="fc" id="L260">                ModelAndView result=buildingController.service(action,request,session);</span>
+
+<span class="fc" id="L262">                assertAll(</span>
+<span class="fc" id="L263">                        ()-&gt;assertEquals(result.getViewName(),&quot;mainAdmin&quot;),</span>
+<span class="fc" id="L264">                        ()-&gt;assertEquals(result.getModelMap().get(&quot;mainPage&quot;),&quot;admin/building.jsp&quot;),</span>
+<span class="fc" id="L265">                        ()-&gt;assertEquals(result.getModelMap().get(&quot;buildingList&quot;),buildingList)</span>
+                );
+<span class="fc" id="L267">        }</span>
+
+        @Test
+        public void service_WhenActionIsBook_UserIsUser()
+        {
+<span class="fc" id="L272">                String action=&quot;book&quot;;</span>
+<span class="fc" id="L273">                String currentUserType=&quot;user&quot;;</span>
+<span class="fc" id="L274">                String buildingId=&quot;305&quot;;</span>
+<span class="fc" id="L275">                String startDate=&quot;2019-02-16&quot;;</span>
+<span class="fc" id="L276">                String duration=&quot;1545&quot;;</span>
+
+<span class="fc" id="L278">                List&lt;Building&gt; buildingList=new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L279">                buildingList.add(new Building());</span>
+
+<span class="fc" id="L281">                User user =new User();</span>
+
+
+<span class="fc" id="L284">                when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(currentUserType);</span>
+<span class="fc" id="L285">                when(request.getParameter(&quot;id&quot;)).thenReturn(&quot;111&quot;);</span>
+<span class="fc" id="L286">                when(buildingDao.listBuilding(20)).thenReturn(buildingList);</span>
+
+<span class="fc" id="L288">                when(session.getAttribute(&quot;currentUser&quot;)).thenReturn(user);</span>
+<span class="fc" id="L289">                when(request.getParameter(&quot;buildingId&quot;)).thenReturn(buildingId);</span>
+<span class="fc" id="L290">                when(request.getParameter(&quot;startDate&quot;)).thenReturn(startDate);</span>
+<span class="fc" id="L291">                when(request.getParameter(&quot;duration&quot;)).thenReturn(duration);</span>
+
+
+<span class="fc" id="L294">                ModelAndView result=buildingController.service(action,request,session);</span>
+<span class="fc" id="L295">                verify(recordDao).addRecord(any(Record.class));</span>
+
+<span class="fc" id="L297">                assertAll(</span>
+<span class="fc" id="L298">                        ()-&gt;assertEquals(result.getViewName(),&quot;mainUser&quot;),</span>
+<span class="fc" id="L299">                        ()-&gt;assertEquals(result.getModelMap().get(&quot;mainPage&quot;),&quot;user/building.jsp&quot;),</span>
+<span class="fc" id="L300">                        ()-&gt;assertEquals(result.getModelMap().get(&quot;buildingList&quot;),buildingList)</span>
+                );
+<span class="fc" id="L302">        }</span>
+
+        @Test
+        public void service_Try_Throws_Parse_Exception_WhenActionIsBook_UserIsAdmin() throws IOException {
+<span class="fc" id="L306">            PrintStream originalOut = System.out;</span>
+<span class="fc" id="L307">            PrintStream originalErr = System.err;</span>
+<span class="fc" id="L308">            ByteArrayOutputStream outContent=new ByteArrayOutputStream();</span>
+<span class="fc" id="L309">            ByteArrayOutputStream errContent=new ByteArrayOutputStream();</span>
+<span class="fc" id="L310">            System.setOut(new PrintStream(outContent));</span>
+<span class="fc" id="L311">            System.setErr(new PrintStream(errContent));</span>
+
+
+<span class="fc" id="L314">            String action=&quot;book&quot;;</span>
+<span class="fc" id="L315">            String currentUserType=&quot;user&quot;;</span>
+<span class="fc" id="L316">            String buildingId=&quot;305&quot;;</span>
+<span class="fc" id="L317">            String startDate=&quot;&quot;;</span>
+<span class="fc" id="L318">            String duration=&quot;1545&quot;;</span>
+
+
+<span class="fc" id="L321">            User user =new User();</span>
+
+
+<span class="fc" id="L324">            when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(currentUserType);</span>
+<span class="fc" id="L325">            when(request.getParameter(&quot;id&quot;)).thenReturn(&quot;111&quot;);</span>
+
+<span class="fc" id="L327">            when(session.getAttribute(&quot;currentUser&quot;)).thenReturn(user);</span>
+<span class="fc" id="L328">            when(request.getParameter(&quot;buildingId&quot;)).thenReturn(buildingId);</span>
+<span class="fc" id="L329">            when(request.getParameter(&quot;startDate&quot;)).thenReturn(startDate);</span>
+<span class="fc" id="L330">            when(request.getParameter(&quot;duration&quot;)).thenReturn(duration);</span>
+
+<span class="fc" id="L332">            System.out.println(errContent.toString());</span>
+<span class="fc" id="L333">            buildingController.service(action,request,session);</span>
+<span class="fc" id="L334">            assertTrue(errContent.toString().contains(&quot;java.text.ParseException&quot;));</span>
+
+<span class="fc" id="L336">            System.setErr(originalErr);</span>
+<span class="fc" id="L337">            System.setOut(originalOut);</span>
+<span class="fc" id="L338">            outContent.close();</span>
+<span class="fc" id="L339">            errContent.close();</span>
+
+<span class="fc" id="L341">        }</span>
+
+
+
+
+
+        @Test
+        public void service_WhenActionIsBook_UserIsAdmin()
+        {
+<span class="fc" id="L350">            String action=&quot;book&quot;;</span>
+<span class="fc" id="L351">            String currentUserType=&quot;admin&quot;;</span>
+<span class="fc" id="L352">            String buildingId=&quot;305&quot;;</span>
+<span class="fc" id="L353">            String startDate=&quot;2019-02-16&quot;;</span>
+<span class="fc" id="L354">            String duration=&quot;1545&quot;;</span>
+
+<span class="fc" id="L356">            List&lt;Building&gt; buildingList=new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L357">            buildingList.add(new Building());</span>
+
+<span class="fc" id="L359">            User user =new User();</span>
+
+
+<span class="fc" id="L362">            when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(currentUserType);</span>
+<span class="fc" id="L363">            when(request.getParameter(&quot;id&quot;)).thenReturn(&quot;111&quot;);</span>
+<span class="fc" id="L364">            when(buildingDao.listBuilding(20)).thenReturn(buildingList);</span>
+
+<span class="fc" id="L366">            when(session.getAttribute(&quot;currentUser&quot;)).thenReturn(user);</span>
+<span class="fc" id="L367">            when(request.getParameter(&quot;buildingId&quot;)).thenReturn(buildingId);</span>
+<span class="fc" id="L368">            when(request.getParameter(&quot;startDate&quot;)).thenReturn(startDate);</span>
+<span class="fc" id="L369">            when(request.getParameter(&quot;duration&quot;)).thenReturn(duration);</span>
+
+
+<span class="fc" id="L372">            ModelAndView result=buildingController.service(action,request,session);</span>
+<span class="fc" id="L373">            verify(recordDao).addRecord(any(Record.class));</span>
+
+<span class="fc" id="L375">                assertAll(</span>
+<span class="fc" id="L376">                        ()-&gt;assertEquals(result.getViewName(),&quot;mainAdmin&quot;),</span>
+<span class="fc" id="L377">                        ()-&gt;assertEquals(result.getModelMap().get(&quot;mainPage&quot;),&quot;admin/building.jsp&quot;),</span>
+<span class="fc" id="L378">                        ()-&gt;assertEquals(result.getModelMap().get(&quot;buildingList&quot;),buildingList)</span>
+                );
+<span class="fc" id="L380">        }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

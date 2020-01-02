@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RecordControllerIT.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.controller</a> &gt; <span class="el_source">RecordControllerIT.java</span></div><h1>RecordControllerIT.java</h1><pre class="source lang-java linenums">package com.webapp.controller;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+
+import com.webapp.config.MvcConfig;
+import com.webapp.model.Record;
+import com.webapp.model.user.User;
+import com.webapp.service.database.dao.RecordDao;
+import com.webapp.service.database.dao.UserDao;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
+/**
+ * @author Shangzhen Li
+ */
+@ExtendWith(SpringExtension.class)
+@WebAppConfiguration
+@ContextConfiguration(classes = MvcConfig.class)
+<span class="fc" id="L44">public class RecordControllerIT {</span>
+
+  final static int totalCount = 6;
+<span class="fc" id="L47">  final String urlPrefix = &quot;/WEB-INF/jsp/&quot;;</span>
+<span class="fc" id="L48">  final int verifiedCount = 3;</span>
+<span class="fc" id="L49">  final long[] testTime = {1000, 2000, 3000, 4000, 5000, 6000};</span>
+<span class="fc" id="L50">  final long[] testStartDate = {10000, 20000, 30000, 40000, 50000, 60000};</span>
+<span class="fc" id="L51">  final long[] testEndDate = {20000, 30000, 40000, 50000, 60000, 70000};</span>
+<span class="fc" id="L52">  final int[] testUserId = {10, 20, 30, 40, 50, 60};</span>
+<span class="fc" id="L53">  final int[] testBuildingId = {100, 200, 300, 400, 500, 600};</span>
+  @Autowired
+  RecordDao recordDao;
+  @Autowired
+  UserDao userDao;
+  @Autowired
+  WebApplicationContext wac;
+  MockMvc mockMvc;
+  User testUser;
+  int[] idList;
+
+  static Stream&lt;Integer&gt; idIndexProvider() {
+<span class="fc" id="L65">    return Stream.of(0, totalCount / 2, totalCount - 1);</span>
+  }
+
+  @BeforeEach
+  void init() {
+<span class="fc" id="L70">    this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();</span>
+    //Add a test user
+<span class="fc" id="L72">    final String TEST_NAME = &quot;testName&quot;;</span>
+<span class="fc" id="L73">    assertTrue(</span>
+<span class="fc" id="L74">        userDao.addUser(new User(&quot;testUsername&quot;, &quot;testPassword&quot;, TEST_NAME, &quot;MALE&quot;, &quot;testTel&quot;)));</span>
+<span class="fc" id="L75">    List&lt;User&gt; userList = userDao.queryUserByName(TEST_NAME);</span>
+<span class="fc" id="L76">    assertEquals(1, userList.size());</span>
+<span class="fc" id="L77">    testUser = userList.get(0);</span>
+    // Add 3 unverified records and 3 verified records
+<span class="fc" id="L79">    Record[] records = new Record[6];</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">    for (int i = 0; i &lt; totalCount; i++) {</span>
+<span class="fc" id="L81">      records[i] = new Record(testTime[i], testStartDate[i], testEndDate[i], testUserId[i],</span>
+          testBuildingId[i], false);
+    }
+    //Set first verifiedCount records to verified
+<span class="fc bfc" id="L85" title="All 2 branches covered.">    for (int i = 0; i &lt; verifiedCount; i++) {</span>
+<span class="fc" id="L86">      records[i].setVerified(true);</span>
+    }
+<span class="fc" id="L88">    records[totalCount - 1].setUserId(testUser.getId());</span>
+<span class="fc bfc" id="L89" title="All 2 branches covered.">    for (int i = 0; i &lt; totalCount; i++) {</span>
+<span class="fc" id="L90">      assertTrue(this.recordDao.addRecord(records[i]));</span>
+    }
+    //Save the added records' id
+<span class="fc" id="L93">    this.idList = new int[totalCount];</span>
+<span class="fc" id="L94">    List&lt;Record&gt; verifiedRecordList = recordDao.listRecord(verifiedCount, true);</span>
+<span class="fc" id="L95">    List&lt;Record&gt; unverifiedRecordList = recordDao.listRecord(totalCount - verifiedCount, false);</span>
+<span class="fc" id="L96">    assertAll(</span>
+<span class="fc" id="L97">        () -&gt; assertEquals(verifiedCount, verifiedRecordList.size()),</span>
+<span class="fc" id="L98">        () -&gt; assertEquals(totalCount - verifiedCount, unverifiedRecordList.size())</span>
+    );
+<span class="fc bfc" id="L100" title="All 2 branches covered.">    for (int i = 0; i &lt; verifiedCount; i++) {</span>
+<span class="fc" id="L101">      idList[i] = verifiedRecordList.get(i).getId();</span>
+    }
+<span class="fc bfc" id="L103" title="All 2 branches covered.">    for (int i = verifiedCount; i &lt; totalCount; i++) {</span>
+<span class="fc" id="L104">      idList[i] = unverifiedRecordList.get(i - verifiedCount).getId();</span>
+    }
+<span class="fc" id="L106">  }</span>
+
+  @AfterEach
+  void restore() {
+<span class="fc bfc" id="L110" title="All 2 branches covered.">    for (int i = 0; i &lt; totalCount; i++) {</span>
+<span class="fc" id="L111">      assertTrue(recordDao.deleteRecord(idList[i]));</span>
+    }
+<span class="fc" id="L113">    assertTrue(userDao.deleteUser(testUser.getId()));</span>
+<span class="fc" id="L114">  }</span>
+
+  @ParameterizedTest
+  @ValueSource(strings = {&quot;other&quot;, &quot;verify&quot;, &quot;list&quot;})
+  void givenUserWhenActionIsIllegalOrListThenList(String action) throws Exception {
+<span class="fc" id="L119">    Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L120">    sessionAttrs.put(&quot;currentUserType&quot;, &quot;user&quot;);</span>
+<span class="fc" id="L121">    sessionAttrs.put(&quot;currentUser&quot;, testUser);</span>
+<span class="fc" id="L122">    MvcResult result = this.mockMvc</span>
+<span class="fc" id="L123">        .perform(get(&quot;/record?action=&quot; + action).sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L124">        .andExpect(status().isOk())</span>
+<span class="fc" id="L125">        .andExpect(view().name(&quot;mainUser&quot;))</span>
+<span class="fc" id="L126">        .andExpect(forwardedUrl(this.urlPrefix + &quot;mainUser.jsp&quot;))</span>
+<span class="fc" id="L127">        .andExpect(model().attribute(&quot;mainPage&quot;, &quot;user/record.jsp&quot;))</span>
+<span class="fc" id="L128">        .andReturn();</span>
+<span class="fc" id="L129">    List&lt;Record&gt; verifiedRecordList = (List&lt;Record&gt;) result.getModelAndView().getModelMap()</span>
+<span class="fc" id="L130">        .get(&quot;verifiedRecordList&quot;);</span>
+<span class="fc" id="L131">    List&lt;Record&gt; unverifiedRecordList = (List&lt;Record&gt;) result.getModelAndView().getModelMap()</span>
+<span class="fc" id="L132">        .get(&quot;unverifiedRecordList&quot;);</span>
+<span class="fc" id="L133">    assertAll(</span>
+<span class="fc" id="L134">        () -&gt; assertEquals(verifiedCount, verifiedRecordList.size()),</span>
+<span class="fc" id="L135">        () -&gt; assertEquals(1, unverifiedRecordList.size()));</span>
+<span class="fc" id="L136">    Record temp = unverifiedRecordList.get(0);</span>
+<span class="fc" id="L137">    assertAll(</span>
+<span class="fc" id="L138">        () -&gt; assertEquals(testTime[totalCount - 1], temp.getTime()),</span>
+<span class="fc" id="L139">        () -&gt; assertEquals(testStartDate[totalCount - 1], temp.getStartDate()),</span>
+<span class="fc" id="L140">        () -&gt; assertEquals(testEndDate[totalCount - 1], temp.getEndDate()),</span>
+<span class="fc" id="L141">        () -&gt; assertEquals(testUser.getId(), temp.getUserId()),</span>
+<span class="fc" id="L142">        () -&gt; assertEquals(testBuildingId[totalCount - 1], temp.getBuildingId())</span>
+    );
+<span class="fc bfc" id="L144" title="All 2 branches covered.">    for (int i = 0; i &lt; verifiedCount; i++) {</span>
+<span class="fc" id="L145">      Record finalTemp = verifiedRecordList.get(i);</span>
+<span class="fc" id="L146">      int finalI = verifiedCount - 1</span>
+          - i;/*For lambda expression only. Records are listed in decreasing time order*/
+<span class="fc" id="L148">      assertAll(</span>
+<span class="fc" id="L149">          () -&gt; assertEquals(testTime[finalI], finalTemp.getTime()),</span>
+<span class="fc" id="L150">          () -&gt; assertEquals(testStartDate[finalI], finalTemp.getStartDate()),</span>
+<span class="fc" id="L151">          () -&gt; assertEquals(testEndDate[finalI], finalTemp.getEndDate()),</span>
+<span class="fc" id="L152">          () -&gt; assertEquals(testUserId[finalI], finalTemp.getUserId()),</span>
+<span class="fc" id="L153">          () -&gt; assertEquals(testBuildingId[finalI], finalTemp.getBuildingId())</span>
+      );
+    }
+<span class="fc" id="L156">  }</span>
+
+  @ParameterizedTest
+  @ValueSource(strings = {&quot;add&quot;, &quot;save&quot;, &quot;other&quot;, &quot;list&quot;})
+  void givenAdminWhenActionIsIllegalOrListThenList(String action) throws Exception {
+<span class="fc" id="L161">    Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L162">    sessionAttrs.put(&quot;currentUserType&quot;, &quot;admin&quot;);</span>
+<span class="fc" id="L163">    MvcResult result = this.mockMvc</span>
+<span class="fc" id="L164">        .perform(get(&quot;/record?action=&quot; + action).sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L165">        .andExpect(status().isOk())</span>
+<span class="fc" id="L166">        .andExpect(view().name(&quot;mainAdmin&quot;))</span>
+<span class="fc" id="L167">        .andExpect(forwardedUrl(this.urlPrefix + &quot;mainAdmin.jsp&quot;))</span>
+<span class="fc" id="L168">        .andExpect(model().attribute(&quot;mainPage&quot;, &quot;admin/record.jsp&quot;))</span>
+<span class="fc" id="L169">        .andReturn();</span>
+<span class="fc" id="L170">    List&lt;Record&gt; verifiedRecordList = (List&lt;Record&gt;) result.getModelAndView().getModelMap()</span>
+<span class="fc" id="L171">        .get(&quot;verifiedRecordList&quot;);</span>
+<span class="fc" id="L172">    List&lt;Record&gt; unverifiedRecordList = (List&lt;Record&gt;) result.getModelAndView().getModelMap()</span>
+<span class="fc" id="L173">        .get(&quot;unverifiedRecordList&quot;);</span>
+<span class="fc" id="L174">    assertAll(</span>
+<span class="fc" id="L175">        () -&gt; assertEquals(verifiedCount, verifiedRecordList.size()),</span>
+<span class="fc" id="L176">        () -&gt; assertEquals(totalCount - verifiedCount, unverifiedRecordList.size()));</span>
+<span class="fc bfc" id="L177" title="All 2 branches covered.">    for (int i = 0; i &lt; verifiedCount; i++) {</span>
+<span class="fc" id="L178">      Record temp = verifiedRecordList.get(i);</span>
+<span class="fc" id="L179">      int finalI = verifiedCount - 1</span>
+          - i;/*For lambda expression only. Records are listed in decreasing time order*/
+<span class="fc" id="L181">      assertAll(</span>
+<span class="fc" id="L182">          () -&gt; assertEquals(testTime[finalI], temp.getTime()),</span>
+<span class="fc" id="L183">          () -&gt; assertEquals(testStartDate[finalI], temp.getStartDate()),</span>
+<span class="fc" id="L184">          () -&gt; assertEquals(testEndDate[finalI], temp.getEndDate()),</span>
+<span class="fc" id="L185">          () -&gt; assertEquals(testUserId[finalI], temp.getUserId()),</span>
+<span class="fc" id="L186">          () -&gt; assertEquals(testBuildingId[finalI], temp.getBuildingId())</span>
+      );
+    }
+<span class="fc bfc" id="L189" title="All 2 branches covered.">    for (int i = verifiedCount; i &lt; totalCount; i++) {</span>
+<span class="fc" id="L190">      Record temp = unverifiedRecordList.get(i - verifiedCount);</span>
+<span class="fc" id="L191">      int finalI = totalCount - 1 - i</span>
+          + verifiedCount;/*For lambda expression only. Records are listed in decreasing time order*/
+<span class="fc" id="L193">      assertAll(</span>
+<span class="fc" id="L194">          () -&gt; assertEquals(testTime[finalI], temp.getTime()),</span>
+<span class="fc" id="L195">          () -&gt; assertEquals(testStartDate[finalI], temp.getStartDate()),</span>
+<span class="fc" id="L196">          () -&gt; assertEquals(testEndDate[finalI], temp.getEndDate()),</span>
+          () -&gt; {
+<span class="fc bfc" id="L198" title="All 2 branches covered.">            if (totalCount - 1 != finalI) {</span>
+<span class="fc" id="L199">              assertEquals(testUserId[finalI], temp.getUserId());</span>
+            } else {
+<span class="fc" id="L201">              assertEquals(testUser.getId(), temp.getUserId());</span>
+            }
+<span class="fc" id="L203">          },</span>
+<span class="fc" id="L204">          () -&gt; assertEquals(testBuildingId[finalI], temp.getBuildingId())</span>
+      );
+    }
+<span class="fc" id="L207">  }</span>
+
+  @ParameterizedTest
+  @MethodSource(&quot;idIndexProvider&quot;)
+  void givenAdminWhenActionIsDeleteThenDelete(int idIndex) throws Exception {
+<span class="fc" id="L212">    Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L213">    sessionAttrs.put(&quot;currentUserType&quot;, &quot;admin&quot;);</span>
+<span class="fc" id="L214">    MvcResult result =</span>
+        this.mockMvc
+<span class="fc" id="L216">            .perform(</span>
+<span class="fc" id="L217">                get(&quot;/record?action=delete&amp;recordId=&quot; + this.idList[idIndex])</span>
+<span class="fc" id="L218">                    .sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L219">            .andExpect(status().isOk())</span>
+<span class="fc" id="L220">            .andExpect(view().name(&quot;mainAdmin&quot;))</span>
+<span class="fc" id="L221">            .andExpect(forwardedUrl(urlPrefix + &quot;mainAdmin.jsp&quot;))</span>
+<span class="fc" id="L222">            .andExpect(model().attribute(&quot;mainPage&quot;, &quot;admin/record.jsp&quot;))</span>
+<span class="fc" id="L223">            .andReturn();</span>
+<span class="fc" id="L224">    List&lt;Record&gt; verifiedRecordList =</span>
+<span class="fc" id="L225">        (List&lt;Record&gt;) result.getModelAndView().getModelMap().get(&quot;verifiedRecordList&quot;);</span>
+<span class="fc" id="L226">    List&lt;Record&gt; unverifiedRecordList =</span>
+<span class="fc" id="L227">        (List&lt;Record&gt;) result.getModelAndView().getModelMap().get(&quot;unverifiedRecordList&quot;);</span>
+    /*No record's id can equals to the deleted one*/
+<span class="fc bfc" id="L229" title="All 2 branches covered.">    for (Record record : verifiedRecordList) {</span>
+<span class="fc" id="L230">      assertNotEquals(this.idList[idIndex], record.getId());</span>
+<span class="fc" id="L231">    }</span>
+<span class="fc bfc" id="L232" title="All 2 branches covered.">    for (Record record : unverifiedRecordList) {</span>
+<span class="fc" id="L233">      assertNotEquals(this.idList[idIndex], record.getId());</span>
+<span class="fc" id="L234">    }</span>
+<span class="fc" id="L235">  }</span>
+
+  @ParameterizedTest
+  @MethodSource(&quot;idIndexProvider&quot;)
+  void givenAdminWhenActionIsVerifyThenVerify(int idIndex) throws Exception {
+<span class="fc" id="L240">    Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L241">    sessionAttrs.put(&quot;currentUserType&quot;, &quot;admin&quot;);</span>
+<span class="fc" id="L242">    MvcResult result =</span>
+        this.mockMvc
+<span class="fc" id="L244">            .perform(</span>
+<span class="fc" id="L245">                get(&quot;/record?action=verify&amp;recordId=&quot; + this.idList[idIndex])</span>
+<span class="fc" id="L246">                    .sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L247">            .andExpect(status().isOk())</span>
+<span class="fc" id="L248">            .andExpect(view().name(&quot;mainAdmin&quot;))</span>
+<span class="fc" id="L249">            .andExpect(forwardedUrl(urlPrefix + &quot;mainAdmin.jsp&quot;))</span>
+<span class="fc" id="L250">            .andExpect(model().attribute(&quot;mainPage&quot;, &quot;admin/record.jsp&quot;))</span>
+<span class="fc" id="L251">            .andReturn();</span>
+<span class="fc" id="L252">    Record verifiedRecord = recordDao.queryRecordById(idList[idIndex]);</span>
+<span class="fc" id="L253">    assertTrue(verifiedRecord.isVerified());</span>
+<span class="fc" id="L254">  }</span>
+
+  @Test
+  void givenUserWhenActionIsDeleteThenDelete() throws Exception {
+<span class="fc" id="L258">    Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L259">    sessionAttrs.put(&quot;currentUserType&quot;, &quot;user&quot;);</span>
+<span class="fc" id="L260">    sessionAttrs.put(&quot;currentUser&quot;, testUser);</span>
+<span class="fc" id="L261">    MvcResult result =</span>
+        this.mockMvc
+<span class="fc" id="L263">            .perform(</span>
+<span class="fc" id="L264">                get(&quot;/record?action=delete&amp;recordId=&quot; + this.idList[totalCount - 1])</span>
+<span class="fc" id="L265">                    .sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L266">            .andExpect(status().isOk())</span>
+<span class="fc" id="L267">            .andExpect(view().name(&quot;mainUser&quot;))</span>
+<span class="fc" id="L268">            .andExpect(forwardedUrl(urlPrefix + &quot;mainUser.jsp&quot;))</span>
+<span class="fc" id="L269">            .andExpect(model().attribute(&quot;mainPage&quot;, &quot;user/record.jsp&quot;))</span>
+<span class="fc" id="L270">            .andReturn();</span>
+<span class="fc" id="L271">    List&lt;Record&gt; verifiedRecordList =</span>
+<span class="fc" id="L272">        (List&lt;Record&gt;) result.getModelAndView().getModelMap().get(&quot;verifiedRecordList&quot;);</span>
+<span class="fc" id="L273">    List&lt;Record&gt; unverifiedRecordList =</span>
+<span class="fc" id="L274">        (List&lt;Record&gt;) result.getModelAndView().getModelMap().get(&quot;unverifiedRecordList&quot;);</span>
+    /*No record's id can equals to the deleted one*/
+<span class="fc bfc" id="L276" title="All 2 branches covered.">    for (Record record : verifiedRecordList) {</span>
+<span class="fc" id="L277">      assertNotEquals(this.idList[totalCount - 1], record.getId());</span>
+<span class="fc" id="L278">    }</span>
+<span class="fc bfc" id="L279" title="All 2 branches covered.">    for (Record record : unverifiedRecordList) {</span>
+<span class="fc" id="L280">      assertNotEquals(this.idList[totalCount - 1], record.getId());</span>
+<span class="fc" id="L281">    }</span>
+<span class="fc" id="L282">  }</span>
+
+  @Test
+  void givenUserWhenActionIsSaveThenSave() throws Exception {
+<span class="fc" id="L286">    Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L287">    sessionAttrs.put(&quot;currentUserType&quot;, &quot;user&quot;);</span>
+<span class="fc" id="L288">    final String TEST_NAME = &quot;newName&quot;;</span>
+<span class="fc" id="L289">    assertTrue(</span>
+<span class="fc" id="L290">        userDao.addUser(new User(&quot;newUsername&quot;, &quot;newPassword&quot;, TEST_NAME, &quot;MALE&quot;, &quot;newTel&quot;)));</span>
+<span class="fc" id="L291">    List&lt;User&gt; userList = userDao.queryUserByName(TEST_NAME);</span>
+<span class="fc" id="L292">    assertEquals(1, userList.size());</span>
+<span class="fc" id="L293">    User tempUser = userList.get(0);</span>
+<span class="fc" id="L294">    sessionAttrs.put(&quot;currentUser&quot;, tempUser);</span>
+<span class="fc" id="L295">    final long TEST_START_DATE = 80000;</span>
+<span class="fc" id="L296">    final long TEST_END_DATE = 90000;</span>
+<span class="fc" id="L297">    final long TEST_BUILDING_ID = 900;</span>
+<span class="fc" id="L298">    MvcResult result = this.mockMvc</span>
+<span class="fc" id="L299">        .perform(</span>
+<span class="fc" id="L300">            get(&quot;/record?action=save&quot;)</span>
+<span class="fc" id="L301">                .sessionAttrs(sessionAttrs)</span>
+<span class="fc" id="L302">                .param(&quot;startDate&quot;, String.valueOf(TEST_START_DATE))</span>
+<span class="fc" id="L303">                .param(&quot;endDate&quot;, String.valueOf(TEST_END_DATE))</span>
+<span class="fc" id="L304">                .param(&quot;buildingId&quot;, String.valueOf(TEST_BUILDING_ID)))</span>
+<span class="fc" id="L305">        .andExpect(status().isOk())</span>
+<span class="fc" id="L306">        .andExpect(view().name(&quot;mainUser&quot;))</span>
+<span class="fc" id="L307">        .andExpect(forwardedUrl(urlPrefix + &quot;mainUser.jsp&quot;))</span>
+<span class="fc" id="L308">        .andExpect(model().attribute(&quot;mainPage&quot;, &quot;user/record.jsp&quot;))</span>
+<span class="fc" id="L309">        .andReturn();</span>
+<span class="fc" id="L310">    List&lt;Record&gt; verifiedRecordList = (List&lt;Record&gt;) result.getModelAndView().getModelMap()</span>
+<span class="fc" id="L311">        .get(&quot;verifiedRecordList&quot;);</span>
+<span class="fc" id="L312">    List&lt;Record&gt; unverifiedRecordList = (List&lt;Record&gt;) result.getModelAndView().getModelMap()</span>
+<span class="fc" id="L313">        .get(&quot;unverifiedRecordList&quot;);</span>
+    //The newly added record should not appear in the verified list
+<span class="fc bfc" id="L315" title="All 2 branches covered.">    for (Record record : verifiedRecordList) {</span>
+<span class="fc" id="L316">      assertNotEquals(tempUser.getId(), record.getUserId());</span>
+<span class="fc" id="L317">    }</span>
+<span class="fc" id="L318">    assertAll(</span>
+<span class="fc" id="L319">        () -&gt; assertEquals(1, unverifiedRecordList.size()),</span>
+<span class="fc" id="L320">        () -&gt; assertEquals(TEST_START_DATE, unverifiedRecordList.get(0).getStartDate()),</span>
+<span class="fc" id="L321">        () -&gt; assertEquals(TEST_END_DATE, unverifiedRecordList.get(0).getEndDate()),</span>
+<span class="fc" id="L322">        () -&gt; assertEquals(TEST_BUILDING_ID, unverifiedRecordList.get(0).getBuildingId()),</span>
+        //Delete test data from database
+<span class="fc" id="L324">        () -&gt; assertTrue(userDao.deleteUser(tempUser.getId())),</span>
+<span class="fc" id="L325">        () -&gt; assertTrue(recordDao.deleteRecord(unverifiedRecordList.get(0).getId()))</span>
+    );
+<span class="fc" id="L327">  }</span>
+
+  @Test
+  void givenUserWhenActionIsAddThenRedirectToRecordAdd() throws Exception {
+<span class="fc" id="L331">    Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L332">    sessionAttrs.put(&quot;currentUserType&quot;, &quot;user&quot;);</span>
+<span class="fc" id="L333">    sessionAttrs.put(&quot;currentUser&quot;, testUser);</span>
+<span class="fc" id="L334">    this.mockMvc.perform(get(&quot;/record?action=add&quot;).sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L335">        .andExpect(status().isOk()).andExpect(view().name(&quot;mainUser&quot;))</span>
+<span class="fc" id="L336">        .andExpect(forwardedUrl(urlPrefix + &quot;mainUser.jsp&quot;))</span>
+<span class="fc" id="L337">        .andExpect(model().attribute(&quot;mainPage&quot;, &quot;user/recordAdd.jsp&quot;)).andReturn();</span>
+<span class="fc" id="L338">  }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

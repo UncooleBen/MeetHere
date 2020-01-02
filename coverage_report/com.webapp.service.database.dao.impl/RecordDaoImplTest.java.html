@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RecordDaoImplTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.service.database.dao.impl</a> &gt; <span class="el_source">RecordDaoImplTest.java</span></div><h1>RecordDaoImplTest.java</h1><pre class="source lang-java linenums">package com.webapp.service.database.dao.impl;
+
+
+import com.webapp.model.Record;
+import com.webapp.service.database.dao.RecordDao;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.*;
+
+
+/**
+ * @author Guoyuanjie
+ */
+<span class="fc" id="L28">class RecordDaoImplTest {</span>
+    private RecordDao recordDao;
+<span class="fc" id="L30">    private Connection connection = mock(Connection.class);</span>
+<span class="fc" id="L31">    private PreparedStatement preparedStatement = mock(PreparedStatement.class);</span>
+    private SQLException test_sql_exception;
+<span class="fc" id="L33">    private ResultSet rs = mock(ResultSet.class);</span>
+    private ByteArrayOutputStream outContent;
+    private ByteArrayOutputStream errContent;
+    private PrintStream originalOut;
+    private PrintStream originalErr;
+
+
+<span class="fc" id="L40">    class TestableRecordDaoImpl extends RecordDaoImpl {</span>
+        @Override
+        public Connection getConnection() {
+<span class="fc" id="L43">            return connection;</span>
+        }
+    }
+
+    @BeforeEach
+    void init() {
+<span class="fc" id="L49">        this.recordDao = new RecordDaoImplTest.TestableRecordDaoImpl();</span>
+<span class="fc" id="L50">        this.test_sql_exception = new SQLException();</span>
+<span class="fc" id="L51">        this.outContent = new ByteArrayOutputStream();</span>
+<span class="fc" id="L52">        this.errContent = new ByteArrayOutputStream();</span>
+<span class="fc" id="L53">        this.originalOut = System.out;</span>
+<span class="fc" id="L54">        this.originalErr = System.err;</span>
+<span class="fc" id="L55">        System.setOut(new PrintStream(outContent));</span>
+<span class="fc" id="L56">        System.setErr(new PrintStream(errContent));</span>
+<span class="fc" id="L57">    }</span>
+
+    @AfterEach
+    void tear_down() throws IOException {
+<span class="fc" id="L61">        System.setErr(this.originalErr);</span>
+<span class="fc" id="L62">        System.setOut(this.originalOut);</span>
+<span class="fc" id="L63">        this.outContent.close();</span>
+<span class="fc" id="L64">        this.errContent.close();</span>
+<span class="fc" id="L65">    }</span>
+
+
+    @Test
+    void test_throws_sql_exception_when_list_record() throws SQLException {
+<span class="fc" id="L70">        when(connection.prepareStatement(anyString())).thenThrow(test_sql_exception);</span>
+<span class="fc" id="L71">        this.recordDao.listRecord(5, true);</span>
+<span class="fc" id="L72">        assertTrue(errContent.toString().contains(&quot;java.sql.SQLException&quot;));</span>
+<span class="fc" id="L73">    }</span>
+
+    @Test
+    void test_when_list_record() throws SQLException {
+<span class="fc" id="L77">        int id = 305;</span>
+<span class="fc" id="L78">        long time = 4456;</span>
+<span class="fc" id="L79">        long start_date = 44556;</span>
+<span class="fc" id="L80">        long end_date = 45454;</span>
+<span class="fc" id="L81">        int user_id = 305;</span>
+<span class="fc" id="L82">        int building_id = 154;</span>
+<span class="fc" id="L83">        boolean verified = true;</span>
+
+<span class="fc" id="L85">        Record record = new Record(id, time, start_date, end_date, user_id, building_id, verified);</span>
+
+<span class="fc" id="L87">        List&lt;Record&gt; recordList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L88">        recordList.add(record);</span>
+
+<span class="fc" id="L90">        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);</span>
+
+<span class="fc" id="L92">        when(preparedStatement.executeQuery()).thenReturn(rs);</span>
+<span class="fc" id="L93">        when(rs.next()).thenReturn(true, false); /* First call returns true, second call returns false */</span>
+<span class="fc" id="L94">        when(rs.getInt(&quot;id&quot;)).thenReturn(id);</span>
+<span class="fc" id="L95">        when(rs.getLong(&quot;time&quot;)).thenReturn(time);</span>
+<span class="fc" id="L96">        when(rs.getLong(&quot;start_date&quot;)).thenReturn(start_date);</span>
+<span class="fc" id="L97">        when(rs.getLong(&quot;end_date&quot;)).thenReturn(end_date);</span>
+<span class="fc" id="L98">        when(rs.getInt(&quot;user_id&quot;)).thenReturn(user_id);</span>
+<span class="fc" id="L99">        when(rs.getInt(&quot;building_id&quot;)).thenReturn(building_id);</span>
+<span class="fc" id="L100">        when(rs.getBoolean(&quot;verified&quot;)).thenReturn(verified);</span>
+
+
+<span class="fc" id="L103">        assertEquals(recordList, this.recordDao.listRecord(5, true));</span>
+<span class="fc" id="L104">        verify(preparedStatement).setBoolean(1, verified);</span>
+<span class="fc" id="L105">        verify(preparedStatement).setInt(2, 5);</span>
+
+<span class="fc" id="L107">    }</span>
+
+    @Test
+    void test_throws_sql_exception_when_list_record_with_UserId() throws SQLException {
+<span class="fc" id="L111">        when(connection.prepareStatement(anyString())).thenThrow(test_sql_exception);</span>
+<span class="fc" id="L112">        this.recordDao.listRecordWithUserId(5, 305, true);</span>
+<span class="fc" id="L113">        assertTrue(errContent.toString().contains(&quot;java.sql.SQLException&quot;));</span>
+<span class="fc" id="L114">    }</span>
+
+    @Test
+    void test_list_record_with_UserId() throws SQLException {
+<span class="fc" id="L118">        int id = 305;</span>
+<span class="fc" id="L119">        long time = 4456;</span>
+<span class="fc" id="L120">        long start_date = 44556;</span>
+<span class="fc" id="L121">        long end_date = 45454;</span>
+<span class="fc" id="L122">        int user_id = 305;</span>
+<span class="fc" id="L123">        int building_id = 154;</span>
+<span class="fc" id="L124">        boolean verified = true;</span>
+
+<span class="fc" id="L126">        Record record = new Record(id, time, start_date, end_date, user_id, building_id, verified);</span>
+
+<span class="fc" id="L128">        List&lt;Record&gt; recordList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L129">        recordList.add(record);</span>
+
+<span class="fc" id="L131">        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);</span>
+
+<span class="fc" id="L133">        when(preparedStatement.executeQuery()).thenReturn(rs);</span>
+<span class="fc" id="L134">        when(rs.next()).thenReturn(true, false); /* First call returns true, second call returns false */</span>
+<span class="fc" id="L135">        when(rs.getInt(&quot;id&quot;)).thenReturn(id);</span>
+<span class="fc" id="L136">        when(rs.getLong(&quot;time&quot;)).thenReturn(time);</span>
+<span class="fc" id="L137">        when(rs.getLong(&quot;start_date&quot;)).thenReturn(start_date);</span>
+<span class="fc" id="L138">        when(rs.getLong(&quot;end_date&quot;)).thenReturn(end_date);</span>
+<span class="fc" id="L139">        when(rs.getInt(&quot;user_id&quot;)).thenReturn(user_id);</span>
+<span class="fc" id="L140">        when(rs.getInt(&quot;building_id&quot;)).thenReturn(building_id);</span>
+<span class="fc" id="L141">        when(rs.getBoolean(&quot;verified&quot;)).thenReturn(verified);</span>
+
+<span class="fc" id="L143">        this.recordDao.listRecordWithUserId(5, 305, true);</span>
+
+<span class="fc" id="L145">        verify(preparedStatement).setInt(1, 305);</span>
+<span class="fc" id="L146">        verify(preparedStatement).setInt(2, 5);</span>
+<span class="fc" id="L147">    }</span>
+
+
+    @Test
+    void test_throws_sql_exception_when_query_record_by_id() throws SQLException {
+<span class="fc" id="L152">        when(connection.prepareStatement(anyString())).thenThrow(test_sql_exception);</span>
+<span class="fc" id="L153">        this.recordDao.queryRecordById(5);</span>
+<span class="fc" id="L154">        assertTrue(errContent.toString().contains(&quot;java.sql.SQLException&quot;));</span>
+<span class="fc" id="L155">    }</span>
+
+    @Test
+    void test_query_Record_By_Id() throws SQLException {
+<span class="fc" id="L159">        int id = 305;</span>
+<span class="fc" id="L160">        long time = 4456;</span>
+<span class="fc" id="L161">        long start_date = 44556;</span>
+<span class="fc" id="L162">        long end_date = 45454;</span>
+<span class="fc" id="L163">        int user_id = 305;</span>
+<span class="fc" id="L164">        int building_id = 154;</span>
+<span class="fc" id="L165">        boolean verified = true;</span>
+
+<span class="fc" id="L167">        Record record = new Record(id, time, start_date, end_date, user_id, building_id, verified);</span>
+
+
+<span class="fc" id="L170">        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);</span>
+<span class="fc" id="L171">        when(preparedStatement.executeQuery()).thenReturn(rs);</span>
+<span class="fc" id="L172">        when(rs.next()).thenReturn(true, false); /* First call returns true, second call returns false */</span>
+<span class="fc" id="L173">        when(rs.getInt(&quot;id&quot;)).thenReturn(id);</span>
+<span class="fc" id="L174">        when(rs.getLong(&quot;time&quot;)).thenReturn(time);</span>
+<span class="fc" id="L175">        when(rs.getLong(&quot;start_date&quot;)).thenReturn(start_date);</span>
+<span class="fc" id="L176">        when(rs.getLong(&quot;end_date&quot;)).thenReturn(end_date);</span>
+<span class="fc" id="L177">        when(rs.getInt(&quot;user_id&quot;)).thenReturn(user_id);</span>
+<span class="fc" id="L178">        when(rs.getInt(&quot;building_id&quot;)).thenReturn(building_id);</span>
+<span class="fc" id="L179">        when(rs.getBoolean(&quot;verified&quot;)).thenReturn(verified);</span>
+
+
+<span class="fc" id="L182">        assertEquals(record, this.recordDao.queryRecordById(5));</span>
+<span class="fc" id="L183">        verify(preparedStatement).setInt(1, 5);</span>
+<span class="fc" id="L184">    }</span>
+
+    @Test
+    void test_throws_sql_exception_when_add_Record() throws SQLException {
+<span class="fc" id="L188">        when(connection.prepareStatement(anyString())).thenThrow(test_sql_exception);</span>
+<span class="fc" id="L189">        this.recordDao.addRecord(new Record());</span>
+<span class="fc" id="L190">        assertTrue(errContent.toString().contains(&quot;java.sql.SQLException&quot;));</span>
+<span class="fc" id="L191">    }</span>
+
+    @Test
+    void test_add_Record_When_Result_Is_True() throws SQLException {
+<span class="fc" id="L195">        int id = 305;</span>
+<span class="fc" id="L196">        long time = 4456;</span>
+<span class="fc" id="L197">        long start_date = 44556;</span>
+<span class="fc" id="L198">        long end_date = 45454;</span>
+<span class="fc" id="L199">        int user_id = 305;</span>
+<span class="fc" id="L200">        int building_id = 154;</span>
+<span class="fc" id="L201">        boolean verified = true;</span>
+
+<span class="fc" id="L203">        Record record = new Record(id, time, start_date, end_date, user_id, building_id, verified);</span>
+
+
+<span class="fc" id="L206">        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);</span>
+
+<span class="fc" id="L208">        boolean result = this.recordDao.addRecord(record);</span>
+
+<span class="fc" id="L210">        assertEquals(result, true);</span>
+<span class="fc" id="L211">        verify(preparedStatement).execute();</span>
+<span class="fc" id="L212">        verify(preparedStatement).setLong(1, time);</span>
+<span class="fc" id="L213">        verify(preparedStatement).setLong(2, start_date);</span>
+<span class="fc" id="L214">        verify(preparedStatement).setLong(3, end_date);</span>
+<span class="fc" id="L215">        verify(preparedStatement).setInt(4, user_id);</span>
+<span class="fc" id="L216">        verify(preparedStatement).setInt(5, building_id);</span>
+<span class="fc" id="L217">        verify(preparedStatement).setBoolean(6, verified);</span>
+
+
+<span class="fc" id="L220">    }</span>
+
+
+    @Test
+    void test_delete_Record_When_Result_Is_True() throws SQLException {
+
+<span class="fc" id="L226">        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);</span>
+
+<span class="fc" id="L228">        boolean result = this.recordDao.deleteRecord(5);</span>
+
+<span class="fc" id="L230">        assertEquals(result, true);</span>
+<span class="fc" id="L231">        verify(preparedStatement).execute();</span>
+<span class="fc" id="L232">        verify(preparedStatement).setInt(1, 5);</span>
+<span class="fc" id="L233">    }</span>
+
+
+    @Test
+    void test_throws_sql_exception_when_deleteRecord() throws SQLException {
+<span class="fc" id="L238">        when(connection.prepareStatement(anyString())).thenThrow(test_sql_exception);</span>
+<span class="fc" id="L239">        this.recordDao.deleteRecord(5);</span>
+<span class="fc" id="L240">        assertTrue(errContent.toString().contains(&quot;java.sql.SQLException&quot;));</span>
+<span class="fc" id="L241">    }</span>
+
+    @Test
+    void test_throws_sql_exception_when_updateRecord() throws SQLException {
+<span class="fc" id="L245">        when(connection.prepareStatement(anyString())).thenThrow(test_sql_exception);</span>
+<span class="fc" id="L246">        this.recordDao.updateRecord(new Record());</span>
+<span class="fc" id="L247">        assertTrue(errContent.toString().contains(&quot;java.sql.SQLException&quot;));</span>
+<span class="fc" id="L248">    }</span>
+
+    @Test
+    void test_update_Record_When_Result_Is_True() throws SQLException {
+<span class="fc" id="L252">        int id = 305;</span>
+<span class="fc" id="L253">        long time = 4456;</span>
+<span class="fc" id="L254">        long start_date = 44556;</span>
+<span class="fc" id="L255">        long end_date = 45454;</span>
+<span class="fc" id="L256">        int user_id = 305;</span>
+<span class="fc" id="L257">        int building_id = 154;</span>
+<span class="fc" id="L258">        boolean verified = true;</span>
+
+<span class="fc" id="L260">        Record record = new Record(id, time, start_date, end_date, user_id, building_id, verified);</span>
+
+
+<span class="fc" id="L263">        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);</span>
+<span class="fc" id="L264">        when(preparedStatement.executeUpdate()).thenReturn(1);</span>
+
+<span class="fc" id="L266">        boolean result = this.recordDao.updateRecord(record);</span>
+
+<span class="fc" id="L268">        assertEquals(result, true);</span>
+
+<span class="fc" id="L270">        verify(preparedStatement).execute();</span>
+<span class="fc" id="L271">        verify(preparedStatement).setLong(1, time);</span>
+<span class="fc" id="L272">        verify(preparedStatement).setLong(2, start_date);</span>
+<span class="fc" id="L273">        verify(preparedStatement).setLong(3, end_date);</span>
+<span class="fc" id="L274">        verify(preparedStatement).setInt(4, user_id);</span>
+<span class="fc" id="L275">        verify(preparedStatement).setInt(5, building_id);</span>
+<span class="fc" id="L276">        verify(preparedStatement).setBoolean(6, verified);</span>
+<span class="fc" id="L277">        verify(preparedStatement).setInt(7, id);</span>
+
+<span class="fc" id="L279">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CommentControllerIT.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.controller</a> &gt; <span class="el_source">CommentControllerIT.java</span></div><h1>CommentControllerIT.java</h1><pre class="source lang-java linenums">package com.webapp.controller;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+
+import com.webapp.config.MvcConfig;
+import com.webapp.model.Comment;
+import com.webapp.model.user.User;
+import com.webapp.service.database.dao.CommentDao;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
+/**
+ * @author Shangzhen Li
+ */
+@ExtendWith(SpringExtension.class)
+@WebAppConfiguration
+@ContextConfiguration(classes = MvcConfig.class)
+<span class="fc" id="L47">public class CommentControllerIT {</span>
+
+  static final int totalCount = 6;
+<span class="fc" id="L50">  final int[] userIdList = {1, 2, 3, 4, 5, 6};</span>
+<span class="fc" id="L51">  final long[] dateList = {1000, 2000, 3000, 4000, 5000, 6000};</span>
+<span class="fc" id="L52">  final String[] contentList = {</span>
+      &quot;content from user 1&quot;,
+      &quot;content from user 2&quot;,
+      &quot;content from user 3&quot;,
+      &quot;content from user 4&quot;,
+      &quot;content from user 5&quot;,
+      &quot;content from user 6&quot;
+  };
+<span class="fc" id="L60">  final int verifiedCount = 3;</span>
+<span class="fc" id="L61">  final String urlPrefix = &quot;/WEB-INF/jsp/&quot;;</span>
+  @Autowired
+  CommentDao commentDao;
+  @Autowired
+  WebApplicationContext wac;
+  MockMvc mockMvc;
+  int[] idList;
+
+  static Stream&lt;Arguments&gt; userIllegalActionProvider() {
+    if (totalCount &gt; 0) {
+<span class="fc" id="L71">      return Stream.of(</span>
+<span class="fc" id="L72">          arguments(&quot;delete&quot;, 0),</span>
+<span class="fc" id="L73">          arguments(&quot;delete&quot;, totalCount / 2),</span>
+<span class="fc" id="L74">          arguments(&quot;delete&quot;, totalCount - 1),</span>
+<span class="fc" id="L75">          arguments(&quot;verify&quot;, 0),</span>
+<span class="fc" id="L76">          arguments(&quot;verify&quot;, totalCount / 2),</span>
+<span class="fc" id="L77">          arguments(&quot;verify&quot;, totalCount - 1),</span>
+<span class="fc" id="L78">          arguments(&quot;other&quot;, 0),</span>
+<span class="fc" id="L79">          arguments(&quot;other&quot;, totalCount / 2),</span>
+<span class="fc" id="L80">          arguments(&quot;other&quot;, totalCount - 1));</span>
+    }
+    return null;
+  }
+
+  static Stream&lt;Arguments&gt; adminIllegalActionProvider() {
+    if (totalCount &gt; 0) {
+<span class="nc" id="L87">      return Stream.of(arguments(&quot;add&quot;), arguments(&quot;save&quot;), arguments(&quot;other&quot;));</span>
+    }
+    return null;
+  }
+
+  static Stream&lt;Integer&gt; idIndexProvider() {
+    if (totalCount &gt; 0) {
+<span class="fc" id="L94">      return Stream.of(0, totalCount / 2, totalCount - 1);</span>
+    }
+    return null;
+  }
+
+  @BeforeEach
+  void init() {
+<span class="fc" id="L101">    this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();</span>
+    // Add 3 unverified comments and 3 verified comments
+<span class="fc bfc" id="L103" title="All 2 branches covered.">    for (int i = 0; i &lt; totalCount; i++) {</span>
+<span class="fc" id="L104">      this.commentDao.addComment(</span>
+          new Comment(this.userIdList[i], this.dateList[i], this.contentList[i]));
+    }
+<span class="fc" id="L107">    this.idList = new int[totalCount];</span>
+<span class="fc" id="L108">    List&lt;Comment&gt; addedCommentList = this.commentDao.listComment(totalCount, false);</span>
+<span class="fc" id="L109">    assertEquals(totalCount, addedCommentList.size());</span>
+    // Save added Comment id
+<span class="fc bfc" id="L111" title="All 2 branches covered.">    for (int i = 0; i &lt; totalCount; i++) {</span>
+<span class="fc" id="L112">      this.idList[i] = addedCommentList.get(i).getId();</span>
+    }
+<span class="fc bfc" id="L114" title="All 2 branches covered.">    for (int i = 0; i &lt; this.verifiedCount; i++) {</span>
+<span class="fc" id="L115">      addedCommentList.get(i).setVerified(true);</span>
+<span class="fc" id="L116">      assertTrue(this.commentDao.updateComment(addedCommentList.get(i)));</span>
+    }
+<span class="fc" id="L118">  }</span>
+
+  @AfterEach
+  void restore() {
+<span class="fc" id="L122">    List&lt;Comment&gt; verifiedCommentList = this.commentDao.listComment(totalCount, true);</span>
+<span class="fc" id="L123">    List&lt;Comment&gt; unverifiedCommentList = this.commentDao.listComment(totalCount, false);</span>
+<span class="fc bfc" id="L124" title="All 2 branches covered.">    for (Comment comment : verifiedCommentList) {</span>
+<span class="fc" id="L125">      this.commentDao.deleteComment(comment.getId());</span>
+<span class="fc" id="L126">    }</span>
+<span class="fc bfc" id="L127" title="All 2 branches covered.">    for (Comment comment : unverifiedCommentList) {</span>
+<span class="fc" id="L128">      this.commentDao.deleteComment(comment.getId());</span>
+<span class="fc" id="L129">    }</span>
+<span class="fc" id="L130">  }</span>
+
+  @Test
+  void givenUserWhenActionIsListThenListVerifiedComments() throws Exception {
+<span class="fc" id="L134">    Map&lt;String, Object&gt; sessionAttr = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L135">    sessionAttr.put(&quot;currentUserType&quot;, &quot;user&quot;);</span>
+<span class="fc" id="L136">    MvcResult result =</span>
+        this.mockMvc
+<span class="fc" id="L138">            .perform(get(&quot;/comment?action=list&quot;).sessionAttrs(sessionAttr))</span>
+<span class="fc" id="L139">            .andExpect(status().isOk())</span>
+<span class="fc" id="L140">            .andExpect(view().name(&quot;mainUser&quot;))</span>
+<span class="fc" id="L141">            .andExpect(forwardedUrl(this.urlPrefix + &quot;mainUser.jsp&quot;))</span>
+<span class="fc" id="L142">            .andExpect(model().attribute(&quot;mainPage&quot;, &quot;user/comment.jsp&quot;))</span>
+<span class="fc" id="L143">            .andReturn();</span>
+<span class="fc" id="L144">    List&lt;Comment&gt; verifiedCommentList =</span>
+<span class="fc" id="L145">        (List&lt;Comment&gt;) result.getModelAndView().getModelMap().get(&quot;commentList&quot;);</span>
+<span class="fc" id="L146">    List&lt;Comment&gt; unverifiedCommentList =</span>
+<span class="fc" id="L147">        (List&lt;Comment&gt;) result.getModelAndView().getModelMap().get(&quot;unverifiedCommentList&quot;);</span>
+    /*unverifiedCommentList should be null*/
+<span class="fc" id="L149">    assertNull(unverifiedCommentList);</span>
+<span class="fc bfc" id="L150" title="All 2 branches covered.">    for (int i = 0; i &lt; this.verifiedCount; i++) {</span>
+<span class="fc" id="L151">      Comment temp = verifiedCommentList.get(i);</span>
+<span class="fc" id="L152">      int finalI = i; /*For lambda expression only*/</span>
+<span class="fc" id="L153">      assertAll(</span>
+<span class="fc" id="L154">          () -&gt; assertEquals(this.userIdList[finalI], temp.getUserId()),</span>
+<span class="fc" id="L155">          () -&gt; assertEquals(this.dateList[finalI], temp.getDate()),</span>
+<span class="fc" id="L156">          () -&gt; assertEquals(this.contentList[finalI], temp.getContent()));</span>
+    }
+<span class="fc" id="L158">  }</span>
+
+  @Test
+  void givenAdminWhenActionIsListThenListAllComments() throws Exception {
+<span class="fc" id="L162">    Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L163">    sessionAttrs.put(&quot;currentUserType&quot;, &quot;admin&quot;);</span>
+<span class="fc" id="L164">    MvcResult result =</span>
+        this.mockMvc
+<span class="fc" id="L166">            .perform(get(&quot;/comment?action=list&quot;).sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L167">            .andExpect(status().isOk())</span>
+<span class="fc" id="L168">            .andExpect(view().name(&quot;mainAdmin&quot;))</span>
+<span class="fc" id="L169">            .andExpect(forwardedUrl(this.urlPrefix + &quot;mainAdmin.jsp&quot;))</span>
+<span class="fc" id="L170">            .andExpect(model().attribute(&quot;mainPage&quot;, &quot;admin/comment.jsp&quot;))</span>
+<span class="fc" id="L171">            .andReturn();</span>
+<span class="fc" id="L172">    List&lt;Comment&gt; verifiedCommentList =</span>
+<span class="fc" id="L173">        (List&lt;Comment&gt;) result.getModelAndView().getModelMap().get(&quot;commentList&quot;);</span>
+<span class="fc" id="L174">    List&lt;Comment&gt; unverifiedCommentList =</span>
+<span class="fc" id="L175">        (List&lt;Comment&gt;) result.getModelAndView().getModelMap().get(&quot;unverifiedCommentList&quot;);</span>
+<span class="fc bfc" id="L176" title="All 2 branches covered.">    for (int i = 0; i &lt; totalCount - this.verifiedCount; i++) {</span>
+<span class="fc" id="L177">      Comment temp = unverifiedCommentList.get(i);</span>
+<span class="fc" id="L178">      int finalI = i + this.verifiedCount; /*For lambda expression only*/</span>
+<span class="fc" id="L179">      assertAll(</span>
+<span class="fc" id="L180">          () -&gt; assertEquals(this.userIdList[finalI], temp.getUserId()),</span>
+<span class="fc" id="L181">          () -&gt; assertEquals(this.dateList[finalI], temp.getDate()),</span>
+<span class="fc" id="L182">          () -&gt; assertEquals(this.contentList[finalI], temp.getContent()));</span>
+    }
+<span class="fc bfc" id="L184" title="All 2 branches covered.">    for (int i = 0; i &lt; this.verifiedCount; i++) {</span>
+<span class="fc" id="L185">      Comment temp = verifiedCommentList.get(i);</span>
+<span class="fc" id="L186">      int finalI = i; /*For lambda expression only*/</span>
+<span class="fc" id="L187">      assertAll(</span>
+<span class="fc" id="L188">          () -&gt; assertEquals(this.userIdList[finalI], temp.getUserId()),</span>
+<span class="fc" id="L189">          () -&gt; assertEquals(this.dateList[finalI], temp.getDate()),</span>
+<span class="fc" id="L190">          () -&gt; assertEquals(this.contentList[finalI], temp.getContent()));</span>
+    }
+<span class="fc" id="L192">  }</span>
+
+  @ParameterizedTest
+  @MethodSource(&quot;userIllegalActionProvider&quot;)
+  void givenUserWhenIllegalActionThenReturnToBlank(String action, Integer idIndex)
+      throws Exception {
+<span class="fc" id="L198">    Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L199">    sessionAttrs.put(&quot;currentUserType&quot;, &quot;user&quot;);</span>
+<span class="fc" id="L200">    this.mockMvc</span>
+<span class="fc" id="L201">        .perform(</span>
+<span class="fc" id="L202">            get(&quot;/comment?action=&quot; + action + &quot;&amp;id=&quot; + this.idList[idIndex])</span>
+<span class="fc" id="L203">                .sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L204">        .andExpect(status().isOk())</span>
+<span class="fc" id="L205">        .andExpect(view().name(&quot;mainUser&quot;))</span>
+<span class="fc" id="L206">        .andExpect(forwardedUrl(this.urlPrefix + &quot;mainUser.jsp&quot;))</span>
+<span class="fc" id="L207">        .andExpect(model().attribute(&quot;mainPage&quot;, &quot;user/blank.jsp&quot;))</span>
+<span class="fc" id="L208">        .andReturn();</span>
+<span class="fc" id="L209">  }</span>
+
+  @ParameterizedTest
+  @MethodSource(&quot;adminIllegalActionProvider&quot;)
+  @Disabled
+  void givenAdminWhenIllegalActionThenReturnToBlank(String action) throws Exception {
+<span class="nc" id="L215">    Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L216">    sessionAttrs.put(&quot;currentUserType&quot;, &quot;admin&quot;);</span>
+<span class="nc" id="L217">    this.mockMvc</span>
+<span class="nc" id="L218">        .perform(get(&quot;/comment?action=&quot; + action).sessionAttrs(sessionAttrs))</span>
+<span class="nc" id="L219">        .andExpect(status().isOk())</span>
+<span class="nc" id="L220">        .andExpect(view().name(&quot;mainAdmin&quot;))</span>
+<span class="nc" id="L221">        .andExpect(forwardedUrl(urlPrefix + &quot;mainAdmin.jsp&quot;))</span>
+<span class="nc" id="L222">        .andExpect(model().attribute(&quot;mainPage&quot;, &quot;admin/blank.jsp&quot;))</span>
+<span class="nc" id="L223">        .andReturn();</span>
+<span class="nc" id="L224">  }</span>
+
+  @ParameterizedTest
+  @MethodSource(&quot;idIndexProvider&quot;)
+  void givenAdminWhenActionIsDeleteThenDeleteComment(Integer idIndex) throws Exception {
+<span class="fc" id="L229">    Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L230">    sessionAttrs.put(&quot;currentUserType&quot;, &quot;admin&quot;);</span>
+<span class="fc" id="L231">    MvcResult result =</span>
+        this.mockMvc
+<span class="fc" id="L233">            .perform(</span>
+<span class="fc" id="L234">                get(&quot;/comment?action=delete&amp;id=&quot; + this.idList[idIndex]).sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L235">            .andExpect(status().isOk())</span>
+<span class="fc" id="L236">            .andExpect(view().name(&quot;mainAdmin&quot;))</span>
+<span class="fc" id="L237">            .andExpect(forwardedUrl(urlPrefix + &quot;mainAdmin.jsp&quot;))</span>
+<span class="fc" id="L238">            .andExpect(model().attribute(&quot;mainPage&quot;, &quot;admin/comment.jsp&quot;))</span>
+<span class="fc" id="L239">            .andReturn();</span>
+<span class="fc" id="L240">    List&lt;Comment&gt; verifiedCommentList =</span>
+<span class="fc" id="L241">        (List&lt;Comment&gt;) result.getModelAndView().getModelMap().get(&quot;commentList&quot;);</span>
+<span class="fc" id="L242">    List&lt;Comment&gt; unverifiedCommentList =</span>
+<span class="fc" id="L243">        (List&lt;Comment&gt;) result.getModelAndView().getModelMap().get(&quot;unverifiedCommentList&quot;);</span>
+    /*No comment's id can equals to the deleted one*/
+<span class="fc bfc" id="L245" title="All 2 branches covered.">    for (Comment comment : verifiedCommentList) {</span>
+<span class="fc" id="L246">      assertNotEquals(this.idList[idIndex], comment.getId());</span>
+<span class="fc" id="L247">    }</span>
+<span class="fc bfc" id="L248" title="All 2 branches covered.">    for (Comment comment : unverifiedCommentList) {</span>
+<span class="fc" id="L249">      assertNotEquals(this.idList[idIndex], comment.getId());</span>
+<span class="fc" id="L250">    }</span>
+<span class="fc" id="L251">  }</span>
+
+  @Test
+  void givenUserWhenActionIsAddThenRedirectToCommentSave() throws Exception {
+<span class="fc" id="L255">    Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L256">    sessionAttrs.put(&quot;currentUserType&quot;, &quot;user&quot;);</span>
+<span class="fc" id="L257">    this.mockMvc</span>
+<span class="fc" id="L258">        .perform(get(&quot;/comment?action=add&quot;).sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L259">        .andExpect(status().isOk())</span>
+<span class="fc" id="L260">        .andExpect(view().name(&quot;mainUser&quot;))</span>
+<span class="fc" id="L261">        .andExpect(forwardedUrl(urlPrefix + &quot;mainUser.jsp&quot;))</span>
+<span class="fc" id="L262">        .andExpect(model().attribute(&quot;mainPage&quot;, &quot;user/commentSave.jsp&quot;))</span>
+<span class="fc" id="L263">        .andReturn();</span>
+<span class="fc" id="L264">  }</span>
+
+  @Test
+  void givenUserWhenActionIsSaveThenSave() throws Exception {
+<span class="fc" id="L268">    Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L269">    final String TEST_CONTENT = &quot;comment content to test add&quot;;</span>
+<span class="fc" id="L270">    final User TEST_USER = new User(0);</span>
+<span class="fc" id="L271">    sessionAttrs.put(&quot;currentUserType&quot;, &quot;user&quot;);</span>
+<span class="fc" id="L272">    sessionAttrs.put(&quot;currentUser&quot;, TEST_USER);</span>
+<span class="fc" id="L273">    this.mockMvc</span>
+<span class="fc" id="L274">        .perform(</span>
+<span class="fc" id="L275">            post(&quot;/comment?action=save&quot;).sessionAttrs(sessionAttrs).param(&quot;content&quot;, TEST_CONTENT))</span>
+<span class="fc" id="L276">        .andExpect(status().isOk())</span>
+<span class="fc" id="L277">        .andExpect(view().name(&quot;mainUser&quot;))</span>
+<span class="fc" id="L278">        .andExpect(forwardedUrl(urlPrefix + &quot;mainUser.jsp&quot;))</span>
+<span class="fc" id="L279">        .andExpect(model().attribute(&quot;mainPage&quot;, &quot;user/comment.jsp&quot;))</span>
+<span class="fc" id="L280">        .andReturn();</span>
+<span class="fc" id="L281">    int unverifiedCount = totalCount - this.verifiedCount + 1;</span>
+<span class="fc" id="L282">    List&lt;Comment&gt; commentList = this.commentDao.listComment(unverifiedCount, false);</span>
+<span class="fc" id="L283">    assertAll(</span>
+<span class="fc" id="L284">        () -&gt; assertEquals(unverifiedCount, commentList.size()),</span>
+<span class="fc" id="L285">        () -&gt; assertEquals(TEST_USER.getId(), commentList.get(unverifiedCount - 1).getUserId()),</span>
+<span class="fc" id="L286">        () -&gt; assertEquals(TEST_CONTENT, commentList.get(unverifiedCount - 1).getContent()));</span>
+<span class="fc" id="L287">  }</span>
+
+  @ParameterizedTest
+  @MethodSource(&quot;idIndexProvider&quot;)
+  void givenAdminWhenActionIsVerifyThenVerify(Integer idIndex) throws Exception {
+<span class="fc" id="L292">    Map&lt;String, Object&gt; sessionAttrs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L293">    sessionAttrs.put(&quot;currentUserType&quot;, &quot;admin&quot;);</span>
+<span class="fc" id="L294">    MvcResult result =</span>
+        this.mockMvc
+<span class="fc" id="L296">            .perform(</span>
+<span class="fc" id="L297">                get(&quot;/comment?action=verify&amp;id=&quot; + this.idList[idIndex]).sessionAttrs(sessionAttrs))</span>
+<span class="fc" id="L298">            .andExpect(status().isOk())</span>
+<span class="fc" id="L299">            .andExpect(view().name(&quot;mainAdmin&quot;))</span>
+<span class="fc" id="L300">            .andExpect(forwardedUrl(this.urlPrefix + &quot;mainAdmin.jsp&quot;))</span>
+<span class="fc" id="L301">            .andExpect(model().attribute(&quot;mainPage&quot;, &quot;admin/comment.jsp&quot;))</span>
+<span class="fc" id="L302">            .andReturn();</span>
+<span class="fc" id="L303">    List&lt;Comment&gt; verifiedCommentList =</span>
+<span class="fc" id="L304">        (List&lt;Comment&gt;) result.getModelAndView().getModelMap().get(&quot;commentList&quot;);</span>
+<span class="fc" id="L305">    List&lt;Comment&gt; unverifiedCommentList =</span>
+<span class="fc" id="L306">        (List&lt;Comment&gt;) result.getModelAndView().getModelMap().get(&quot;unverifiedCommentList&quot;);</span>
+<span class="pc bpc" id="L307" title="1 of 2 branches missed.">    for (Comment comment : verifiedCommentList) {</span>
+<span class="fc bfc" id="L308" title="All 2 branches covered.">      if (comment.getId() == this.idList[idIndex]) {</span>
+<span class="fc" id="L309">        assertTrue(comment.isVerified());</span>
+<span class="fc" id="L310">        break;</span>
+      }
+<span class="fc" id="L312">    }</span>
+<span class="fc bfc" id="L313" title="All 2 branches covered.">    for (Comment comment : unverifiedCommentList) {</span>
+<span class="fc" id="L314">      assertNotEquals(this.idList[idIndex], comment.getId());</span>
+<span class="fc" id="L315">    }</span>
+<span class="fc" id="L316">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

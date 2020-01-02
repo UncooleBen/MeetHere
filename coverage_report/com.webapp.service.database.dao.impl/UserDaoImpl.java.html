@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserDaoImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.service.database.dao.impl</a> &gt; <span class="el_source">UserDaoImpl.java</span></div><h1>UserDaoImpl.java</h1><pre class="source lang-java linenums">package com.webapp.service.database.dao.impl;
+
+import com.webapp.model.user.Admin;
+import com.webapp.model.user.Gender;
+import com.webapp.model.user.User;
+import com.webapp.service.database.DatabaseService;
+import com.webapp.service.database.dao.UserDao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+
+/**
+ * @author Juntao Peng
+ */
+<span class="pc bpc" id="L19" title="1 of 2 branches missed.">public class UserDaoImpl extends DatabaseService implements UserDao {</span>
+
+    @Override
+    public List&lt;User&gt; queryAllUsers() {
+<span class="fc" id="L23">        Connection connection = getConnection();</span>
+<span class="pc bpc" id="L24" title="2 of 4 branches missed.">        assert connection != null;</span>
+<span class="fc" id="L25">        List&lt;User&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L26">        String SELECT = &quot;SELECT * FROM t_user ORDER BY id DESC&quot;;</span>
+        try {
+<span class="fc" id="L28">            PreparedStatement preparedStatement = connection.prepareStatement(SELECT);</span>
+<span class="fc" id="L29">            ResultSet rs = preparedStatement.executeQuery();</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">            while (rs.next()) {</span>
+<span class="fc" id="L31">                int id = rs.getInt(&quot;id&quot;);</span>
+<span class="fc" id="L32">                String username = rs.getString(&quot;username&quot;);</span>
+<span class="fc" id="L33">                String password = rs.getString(&quot;password&quot;);</span>
+<span class="fc" id="L34">                String name = rs.getString(&quot;name&quot;);</span>
+<span class="fc" id="L35">                String sex = rs.getString(&quot;sex&quot;);</span>
+<span class="fc" id="L36">                int permission = rs.getInt(&quot;permission&quot;);</span>
+<span class="fc" id="L37">                String tel = rs.getString(&quot;tel&quot;);</span>
+<span class="pc bpc" id="L38" title="1 of 3 branches missed.">                switch (permission) {</span>
+                    case 0:
+<span class="fc" id="L40">                        Admin admin = new Admin(id, username, password, name, sex, tel);</span>
+<span class="fc" id="L41">                        result.add(admin);</span>
+<span class="fc" id="L42">                        break;</span>
+                    case 1:
+<span class="fc" id="L44">                        User user = new User(id, username, password, name, sex, tel);</span>
+<span class="fc" id="L45">                        result.add(user);</span>
+<span class="fc" id="L46">                        break;</span>
+                    default:
+                        // Left blank
+                }
+<span class="fc" id="L50">            }</span>
+<span class="fc" id="L51">            closeConnection(connection);</span>
+<span class="fc" id="L52">            return result;</span>
+<span class="fc" id="L53">        } catch (SQLException sqlException) {</span>
+<span class="fc" id="L54">            sqlException.printStackTrace(System.err);</span>
+<span class="fc" id="L55">            return result;</span>
+        }
+    }
+
+    @Override
+    public User queryUserById(int id) {
+<span class="fc" id="L61">        Connection connection = getConnection();</span>
+<span class="pc bpc" id="L62" title="2 of 4 branches missed.">        assert connection != null;</span>
+<span class="pc bpc" id="L63" title="2 of 4 branches missed.">        assert id &gt;= 0;</span>
+<span class="fc" id="L64">        User result = null;</span>
+<span class="fc" id="L65">        String SELECT = &quot;SELECT * FROM t_user WHERE id=(?)&quot;;</span>
+        try {
+<span class="fc" id="L67">            PreparedStatement preparedStatement = connection.prepareStatement(SELECT);</span>
+<span class="fc" id="L68">            preparedStatement.setInt(1, id);</span>
+<span class="fc" id="L69">            ResultSet rs = preparedStatement.executeQuery();</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">            if (rs.next()) {</span>
+<span class="fc" id="L71">                String username = rs.getString(&quot;username&quot;);</span>
+<span class="fc" id="L72">                String password = rs.getString(&quot;password&quot;);</span>
+<span class="fc" id="L73">                String name = rs.getString(&quot;name&quot;);</span>
+<span class="fc" id="L74">                String sex = rs.getString(&quot;sex&quot;);</span>
+<span class="fc" id="L75">                int permission = rs.getInt(&quot;permission&quot;);</span>
+<span class="fc" id="L76">                String tel = rs.getString(&quot;tel&quot;);</span>
+<span class="pc bpc" id="L77" title="1 of 3 branches missed.">                switch (permission) {</span>
+                    case 0:
+<span class="fc" id="L79">                        result = new Admin(id, username, password, name, sex, tel);</span>
+<span class="fc" id="L80">                        break;</span>
+                    case 1:
+<span class="fc" id="L82">                        result = new User(id, username, password, name, sex, tel);</span>
+<span class="fc" id="L83">                        break;</span>
+                    default:
+                        // Left blank
+                }
+            }
+<span class="fc" id="L88">            closeConnection(connection);</span>
+<span class="fc" id="L89">            return result;</span>
+<span class="fc" id="L90">        } catch (SQLException sqlException) {</span>
+<span class="fc" id="L91">            sqlException.printStackTrace(System.err);</span>
+<span class="fc" id="L92">            return result;</span>
+        }
+    }
+
+    @Override
+    public List&lt;User&gt; queryUserByName(String name) {
+<span class="fc" id="L98">        Connection connection = getConnection();</span>
+<span class="pc bpc" id="L99" title="2 of 4 branches missed.">        assert connection != null;</span>
+<span class="pc bpc" id="L100" title="2 of 4 branches missed.">        assert name != null;</span>
+<span class="pc bpc" id="L101" title="2 of 4 branches missed.">        assert name.length() &gt; 0;</span>
+<span class="fc" id="L102">        List&lt;User&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L103">        String SELECT = &quot;SELECT * FROM t_user WHERE name=(?)&quot;;</span>
+        try {
+<span class="fc" id="L105">            PreparedStatement preparedStatement = connection.prepareStatement(SELECT);</span>
+<span class="fc" id="L106">            preparedStatement.setString(1, name);</span>
+<span class="fc" id="L107">            ResultSet rs = preparedStatement.executeQuery();</span>
+<span class="fc bfc" id="L108" title="All 2 branches covered.">            while (rs.next()) {</span>
+<span class="fc" id="L109">                int permission = rs.getInt(&quot;permission&quot;);</span>
+<span class="pc bpc" id="L110" title="1 of 2 branches missed.">                if (permission &gt; 0) {</span>
+<span class="fc" id="L111">                    int id = rs.getInt(&quot;id&quot;);</span>
+<span class="fc" id="L112">                    String username = rs.getString(&quot;username&quot;);</span>
+<span class="fc" id="L113">                    String password = rs.getString(&quot;password&quot;);</span>
+<span class="fc" id="L114">                    String _name = rs.getString(&quot;name&quot;);</span>
+<span class="fc" id="L115">                    String sex = rs.getString(&quot;sex&quot;);</span>
+<span class="fc" id="L116">                    String tel = rs.getString(&quot;tel&quot;);</span>
+<span class="fc" id="L117">                    result.add(new User(id, username, password, _name, sex, tel));</span>
+                }
+<span class="fc" id="L119">            }</span>
+<span class="fc" id="L120">            closeConnection(connection);</span>
+<span class="fc" id="L121">            return result;</span>
+<span class="fc" id="L122">        } catch (SQLException sqlException) {</span>
+<span class="fc" id="L123">            sqlException.printStackTrace(System.err);</span>
+<span class="fc" id="L124">            return result;</span>
+        }
+    }
+
+//    @Override
+//    public User queryUserByUsername(String username) {
+//        Connection connection = getConnection();
+//        assert connection != null;
+//        assert username != null;
+//        assert username.length() &gt; 0;
+//        User result = null;
+//        String SELECT = &quot;SELECT * FROM t_user WHERE username = ?&quot;;
+//        try {
+//            PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
+//            preparedStatement.setString(1, username);
+//            ResultSet rs = preparedStatement.executeQuery();
+//            while (rs.next()) {
+//                int permission = rs.getInt(&quot;permission&quot;);
+//                if (permission &gt; 0) {
+//                    int id = rs.getInt(&quot;id&quot;);
+//                    String password = rs.getString(&quot;password&quot;);
+//                    String name = rs.getString(&quot;name&quot;);
+//                    String sex = rs.getString(&quot;sex&quot;);
+//                    String tel = rs.getString(&quot;tel&quot;);
+//                    result = new User(id, username, password, name, sex, tel);
+//                }
+//            }
+//            closeConnection(connection);
+//            return result;
+//        } catch (SQLException sqlException) {
+//            sqlException.printStackTrace(System.err);
+//            return result;
+//        }
+//    }
+
+    @Override
+    public List&lt;User&gt; queryUserBySex(Gender gender) {
+<span class="fc" id="L161">        Connection connection = getConnection();</span>
+<span class="pc bpc" id="L162" title="2 of 4 branches missed.">        assert connection != null;</span>
+<span class="pc bpc" id="L163" title="2 of 4 branches missed.">        assert gender != null;</span>
+<span class="fc" id="L164">        List&lt;User&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L165">        String SELECT = &quot;SELECT * FROM t_user WHERE sex=(?)&quot;;</span>
+        try {
+<span class="fc" id="L167">            PreparedStatement preparedStatement = connection.prepareStatement(SELECT);</span>
+<span class="fc" id="L168">            preparedStatement.setString(1, gender.toString());</span>
+<span class="fc" id="L169">            ResultSet rs = preparedStatement.executeQuery();</span>
+<span class="fc bfc" id="L170" title="All 2 branches covered.">            while (rs.next()) {</span>
+<span class="fc" id="L171">                int permission = rs.getInt(&quot;permission&quot;);</span>
+<span class="pc bpc" id="L172" title="1 of 2 branches missed.">                if (permission &gt; 0) {</span>
+<span class="fc" id="L173">                    int id = rs.getInt(&quot;id&quot;);</span>
+<span class="fc" id="L174">                    String username = rs.getString(&quot;username&quot;);</span>
+<span class="fc" id="L175">                    String password = rs.getString(&quot;password&quot;);</span>
+<span class="fc" id="L176">                    String _name = rs.getString(&quot;name&quot;);</span>
+<span class="fc" id="L177">                    String sex = rs.getString(&quot;sex&quot;);</span>
+<span class="fc" id="L178">                    String tel = rs.getString(&quot;tel&quot;);</span>
+<span class="fc" id="L179">                    result.add(new User(id, username, password, _name, sex, tel));</span>
+                }
+<span class="fc" id="L181">            }</span>
+<span class="fc" id="L182">            closeConnection(connection);</span>
+<span class="fc" id="L183">            return result;</span>
+<span class="fc" id="L184">        } catch (SQLException sqlException) {</span>
+<span class="fc" id="L185">            sqlException.printStackTrace(System.err);</span>
+<span class="fc" id="L186">            return result;</span>
+        }
+    }
+
+    @Override
+    public boolean addUser(User user) {
+<span class="fc" id="L192">        Connection connection = getConnection();</span>
+<span class="pc bpc" id="L193" title="2 of 4 branches missed.">        assert connection != null;</span>
+<span class="pc bpc" id="L194" title="2 of 4 branches missed.">        assert user != null;</span>
+<span class="fc" id="L195">        boolean result = true;</span>
+<span class="fc" id="L196">        String INSERT = &quot;INSERT INTO t_user VALUES(null,?,?,?,?,?,?)&quot;;</span>
+        try {
+<span class="fc" id="L198">            PreparedStatement preparedStatement = connection.prepareStatement(INSERT);</span>
+<span class="fc" id="L199">            preparedStatement.setString(1, user.getUsername());</span>
+<span class="fc" id="L200">            preparedStatement.setString(2, user.getPassword());</span>
+<span class="fc" id="L201">            preparedStatement.setString(3, user.getName());</span>
+<span class="fc" id="L202">            preparedStatement.setString(4, user.getSex().toString());</span>
+<span class="fc" id="L203">            preparedStatement.setInt(5, user.getPermission());</span>
+<span class="fc" id="L204">            preparedStatement.setString(6, user.getTel());</span>
+<span class="fc" id="L205">            preparedStatement.executeUpdate();</span>
+<span class="fc" id="L206">            closeConnection(connection);</span>
+<span class="fc" id="L207">            return result;</span>
+<span class="fc" id="L208">        } catch (SQLException sqlException) {</span>
+<span class="fc" id="L209">            sqlException.printStackTrace(System.err);</span>
+<span class="fc" id="L210">            result = false;</span>
+<span class="fc" id="L211">            return result;</span>
+        }
+
+    }
+
+    @Override
+    public boolean deleteUser(int id) {
+<span class="fc" id="L218">        Connection connection = getConnection();</span>
+<span class="pc bpc" id="L219" title="2 of 4 branches missed.">        assert connection != null;</span>
+<span class="fc" id="L220">        boolean result = true;</span>
+<span class="fc" id="L221">        String DELETE = &quot;DELETE FROM t_user WHERE id=(?)&quot;;</span>
+        try {
+<span class="fc" id="L223">            PreparedStatement preparedStatement = connection.prepareStatement(DELETE);</span>
+<span class="fc" id="L224">            preparedStatement.setInt(1, id);</span>
+<span class="fc" id="L225">            preparedStatement.executeUpdate();</span>
+<span class="fc" id="L226">            closeConnection(connection);</span>
+<span class="fc" id="L227">            return result;</span>
+<span class="fc" id="L228">        } catch (SQLException sqlException) {</span>
+<span class="fc" id="L229">            sqlException.printStackTrace(System.err);</span>
+<span class="fc" id="L230">            result = false;</span>
+<span class="fc" id="L231">            return result;</span>
+        }
+    }
+
+    @Override
+    public boolean updateUser(User user) {
+<span class="fc" id="L237">        Connection connection = getConnection();</span>
+<span class="pc bpc" id="L238" title="2 of 4 branches missed.">        assert connection != null;</span>
+<span class="pc bpc" id="L239" title="2 of 4 branches missed.">        assert user != null;</span>
+<span class="pc bpc" id="L240" title="2 of 4 branches missed.">        assert user.getId() &gt; 0;</span>
+<span class="fc" id="L241">        boolean result = true;</span>
+<span class="fc" id="L242">        String UPDATE = &quot;UPDATE t_user SET username=(?), password=(?), name=(?), sex=(?), permission=(?), tel=(?) WHERE id=(?)&quot;;</span>
+<span class="fc" id="L243">        String SELECT = &quot;SELECT * FROM t_user WHERE username=(?) AND password=(?)&quot;;</span>
+        try {
+<span class="fc" id="L245">            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);</span>
+<span class="fc" id="L246">            preparedStatement.setString(1, user.getUsername());</span>
+<span class="fc" id="L247">            preparedStatement.setString(2, user.getPassword());</span>
+<span class="fc" id="L248">            preparedStatement.setString(3, user.getName());</span>
+<span class="fc" id="L249">            preparedStatement.setString(4, user.getSex().toString());</span>
+<span class="fc" id="L250">            preparedStatement.setInt(5, user.getPermission());</span>
+<span class="fc" id="L251">            preparedStatement.setString(6, user.getTel());</span>
+<span class="fc" id="L252">            preparedStatement.setInt(7, user.getId());</span>
+<span class="fc" id="L253">            preparedStatement.executeUpdate();</span>
+<span class="fc" id="L254">            closeConnection(connection);</span>
+<span class="fc" id="L255">            return result;</span>
+<span class="fc" id="L256">        } catch (SQLException sqlException) {</span>
+<span class="fc" id="L257">            sqlException.printStackTrace(System.err);</span>
+<span class="fc" id="L258">            result = false;</span>
+<span class="fc" id="L259">            return result;</span>
+        }
+    }
+
+    @Override
+    public boolean updateUserPassword(int id, String password) {
+<span class="fc" id="L265">        Connection connection = getConnection();</span>
+<span class="pc bpc" id="L266" title="2 of 4 branches missed.">        assert connection != null;</span>
+<span class="pc bpc" id="L267" title="2 of 4 branches missed.">        assert id &gt;= 0;</span>
+<span class="pc bpc" id="L268" title="2 of 4 branches missed.">        assert password != null;</span>
+<span class="pc bpc" id="L269" title="2 of 4 branches missed.">        assert password.length() &gt; 0;</span>
+<span class="fc" id="L270">        boolean result = false;</span>
+<span class="fc" id="L271">        String UPDATE = &quot;UPDATE t_user SET password=(?) WHERE id=(?)&quot;;</span>
+<span class="fc" id="L272">        String SELECT = &quot;SELECT * FROM t_user WHERE id=(?) AND password=(?)&quot;;</span>
+        try {
+<span class="fc" id="L274">            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);</span>
+<span class="fc" id="L275">            preparedStatement.setString(1, password);</span>
+<span class="fc" id="L276">            preparedStatement.setInt(2, id);</span>
+<span class="fc" id="L277">            preparedStatement.executeUpdate();</span>
+<span class="fc" id="L278">            closeConnection(connection);</span>
+<span class="fc" id="L279">            return result;</span>
+<span class="nc" id="L280">        } catch (SQLException sqlException) {</span>
+<span class="nc" id="L281">            sqlException.printStackTrace(System.err);</span>
+<span class="nc" id="L282">            return result;</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

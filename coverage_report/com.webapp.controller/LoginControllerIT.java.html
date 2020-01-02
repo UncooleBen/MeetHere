@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LoginControllerIT.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.controller</a> &gt; <span class="el_source">LoginControllerIT.java</span></div><h1>LoginControllerIT.java</h1><pre class="source lang-java linenums">package com.webapp.controller;
+
+import com.webapp.config.MvcConfig;
+import com.webapp.model.user.Admin;
+import com.webapp.model.user.User;
+import com.webapp.service.database.dao.UserDao;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
+import java.util.*;
+import java.util.stream.Stream;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+/**
+ * @author Juntao Peng
+ */
+@ExtendWith(SpringExtension.class)
+@WebAppConfiguration
+@ContextConfiguration(classes = MvcConfig.class)
+<span class="fc" id="L37">public class LoginControllerIT {</span>
+    @Autowired
+    WebApplicationContext wac;
+    MockMvc mockMvc;
+
+    @Autowired
+    UserDao userDao;
+
+    List&lt;User&gt; users;
+
+    static Stream&lt;String&gt; errorUsernameProvider() {
+<span class="fc" id="L48">        return Stream.of(&quot;1024&quot;, &quot;is&quot;, &quot;an&quot;, &quot;invalid&quot;, &quot;website&quot;);</span>
+    }
+
+    static Stream&lt;Arguments&gt; errorUsernamePasswordPairProvider() {
+<span class="fc" id="L52">        return Stream.of(</span>
+<span class="fc" id="L53">                Arguments.of(&quot;username1&quot;, &quot;password1-&quot;),</span>
+<span class="fc" id="L54">                Arguments.of(&quot;username2&quot;, &quot;passwo-rd2&quot;),</span>
+<span class="fc" id="L55">                Arguments.of(&quot;username3&quot;, &quot;passw-ord3&quot;),</span>
+<span class="fc" id="L56">                Arguments.of(&quot;username4&quot;, &quot;passwor-d4&quot;),</span>
+<span class="fc" id="L57">                Arguments.of(&quot;username5&quot;, &quot;passw-ord5&quot;)</span>
+        );
+    }
+
+    static Stream&lt;Arguments&gt; errorAdminUsernamePasswordPairProvider() {
+<span class="fc" id="L62">        return Stream.of(</span>
+<span class="fc" id="L63">                Arguments.of(&quot;admin1&quot;, &quot;password1-&quot;),</span>
+<span class="fc" id="L64">                Arguments.of(&quot;admin2&quot;, &quot;password2-&quot;),</span>
+<span class="fc" id="L65">                Arguments.of(&quot;admin3&quot;, &quot;password3-&quot;)</span>
+        );
+    }
+
+    static Stream&lt;Arguments&gt; correctUsernamePasswordPairProvider() {
+<span class="fc" id="L70">        return Stream.of(</span>
+<span class="fc" id="L71">                Arguments.of(&quot;username1&quot;, &quot;password1&quot;),</span>
+<span class="fc" id="L72">                Arguments.of(&quot;username2&quot;, &quot;password2&quot;),</span>
+<span class="fc" id="L73">                Arguments.of(&quot;username3&quot;, &quot;password3&quot;),</span>
+<span class="fc" id="L74">                Arguments.of(&quot;username4&quot;, &quot;password4&quot;),</span>
+<span class="fc" id="L75">                Arguments.of(&quot;username5&quot;, &quot;password5&quot;)</span>
+        );
+    }
+
+    static Stream&lt;Arguments&gt; correctAdminUsernamePasswordPairProvider() {
+<span class="fc" id="L80">        return Stream.of(</span>
+<span class="fc" id="L81">                Arguments.of(&quot;admin1&quot;, &quot;password1&quot;),</span>
+<span class="fc" id="L82">                Arguments.of(&quot;admin2&quot;, &quot;password2&quot;),</span>
+<span class="fc" id="L83">                Arguments.of(&quot;admin3&quot;, &quot;password3&quot;)</span>
+        );
+    }
+
+    @BeforeEach
+    void setup() {
+<span class="fc" id="L89">        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();</span>
+<span class="fc" id="L90">        User user1 = new User(&quot;username1&quot;, &quot;password1&quot;, &quot;name1&quot;, &quot;MALE&quot;, &quot;tel1&quot;);</span>
+<span class="fc" id="L91">        User user2 = new User(&quot;username2&quot;, &quot;password2&quot;, &quot;name2&quot;, &quot;FEMALE&quot;, &quot;tel2&quot;);</span>
+<span class="fc" id="L92">        User user3 = new User(&quot;username3&quot;, &quot;password3&quot;, &quot;name3&quot;, &quot;MALE&quot;, &quot;tel3&quot;);</span>
+<span class="fc" id="L93">        User user4 = new User(&quot;username4&quot;, &quot;password4&quot;, &quot;name4&quot;, &quot;FEMALE&quot;, &quot;tel4&quot;);</span>
+<span class="fc" id="L94">        User user5 = new User(&quot;username5&quot;, &quot;password5&quot;, &quot;name5&quot;, &quot;MALE&quot;, &quot;tel5&quot;);</span>
+<span class="fc" id="L95">        this.userDao.addUser(user1);</span>
+<span class="fc" id="L96">        this.userDao.addUser(user2);</span>
+<span class="fc" id="L97">        this.userDao.addUser(user3);</span>
+<span class="fc" id="L98">        this.userDao.addUser(user4);</span>
+<span class="fc" id="L99">        this.userDao.addUser(user5);</span>
+<span class="fc" id="L100">        Admin admin1 = new Admin(&quot;admin1&quot;, &quot;password1&quot;, &quot;name1&quot;, &quot;MALE&quot;, &quot;tel1&quot;);</span>
+<span class="fc" id="L101">        Admin admin2 = new Admin(&quot;admin2&quot;, &quot;password2&quot;, &quot;name2&quot;, &quot;MALE&quot;, &quot;tel2&quot;);</span>
+<span class="fc" id="L102">        Admin admin3 = new Admin(&quot;admin3&quot;, &quot;password3&quot;, &quot;name3&quot;, &quot;MALE&quot;, &quot;tel3&quot;);</span>
+<span class="fc" id="L103">        this.userDao.addUser(admin1);</span>
+<span class="fc" id="L104">        this.userDao.addUser(admin2);</span>
+<span class="fc" id="L105">        this.userDao.addUser(admin3);</span>
+<span class="fc" id="L106">        this.users = this.userDao.queryAllUsers();</span>
+<span class="fc" id="L107">    }</span>
+
+    @AfterEach
+    void tearDown() {
+<span class="fc bfc" id="L111" title="All 2 branches covered.">        for (User user : this.users) {</span>
+<span class="fc" id="L112">            this.userDao.deleteUser(user.getId());</span>
+<span class="fc" id="L113">        }</span>
+<span class="fc" id="L114">    }</span>
+
+    @ParameterizedTest
+    @MethodSource(&quot;errorUsernameProvider&quot;)
+    void shouldPromptErrorMessage_WhenUsernameError(String username) throws Throwable {
+<span class="fc" id="L119">        String password = &quot;clandestine password&quot;;</span>
+<span class="fc" id="L120">        this.mockMvc.perform(post(&quot;/login&quot;)</span>
+<span class="fc" id="L121">                .contentType(MediaType.APPLICATION_FORM_URLENCODED)</span>
+<span class="fc" id="L122">                .content(EntityUtils.toString(new UrlEncodedFormEntity(Arrays.asList(</span>
+                        new BasicNameValuePair(&quot;username&quot;, username),
+                        new BasicNameValuePair(&quot;password&quot;, password)
+                )))))
+<span class="fc" id="L126">                .andExpect(status().isOk())</span>
+<span class="fc" id="L127">                .andExpect(view().name(&quot;index&quot;))</span>
+<span class="fc" id="L128">                .andExpect(forwardedUrl(&quot;/WEB-INF/jsp/index.jsp&quot;))</span>
+<span class="fc" id="L129">                .andExpect(model().attribute(&quot;error&quot;, &quot;用户名或密码错误&quot;));</span>
+<span class="fc" id="L130">    }</span>
+
+    @ParameterizedTest
+    @MethodSource(&quot;errorUsernamePasswordPairProvider&quot;)
+    void shouldPromptErrorMessage_WhenPasswordError_OnUserType(String username, String password) throws Throwable {
+<span class="fc" id="L135">        this.mockMvc.perform(post(&quot;/login&quot;)</span>
+<span class="fc" id="L136">                .contentType(MediaType.APPLICATION_FORM_URLENCODED)</span>
+<span class="fc" id="L137">                .content(EntityUtils.toString(new UrlEncodedFormEntity(Arrays.asList(</span>
+                        new BasicNameValuePair(&quot;username&quot;, username),
+                        new BasicNameValuePair(&quot;password&quot;, password)
+                )))))
+<span class="fc" id="L141">                .andExpect(status().isOk())</span>
+<span class="fc" id="L142">                .andExpect(view().name(&quot;index&quot;))</span>
+<span class="fc" id="L143">                .andExpect(forwardedUrl(&quot;/WEB-INF/jsp/index.jsp&quot;))</span>
+<span class="fc" id="L144">                .andExpect(model().attribute(&quot;error&quot;, &quot;用户名或密码错误&quot;));</span>
+<span class="fc" id="L145">    }</span>
+
+    @ParameterizedTest
+    @MethodSource(&quot;errorAdminUsernamePasswordPairProvider&quot;)
+    void shouldPromptErrorMessage_WhenPasswordError_OnAdminType(String username, String password) throws Throwable {
+<span class="fc" id="L150">        this.mockMvc.perform(post(&quot;/login&quot;)</span>
+<span class="fc" id="L151">                .contentType(MediaType.APPLICATION_FORM_URLENCODED)</span>
+<span class="fc" id="L152">                .content(EntityUtils.toString(new UrlEncodedFormEntity(Arrays.asList(</span>
+                        new BasicNameValuePair(&quot;username&quot;, username),
+                        new BasicNameValuePair(&quot;password&quot;, password)
+                )))))
+<span class="fc" id="L156">                .andExpect(status().isOk())</span>
+<span class="fc" id="L157">                .andExpect(view().name(&quot;index&quot;))</span>
+<span class="fc" id="L158">                .andExpect(forwardedUrl(&quot;/WEB-INF/jsp/index.jsp&quot;))</span>
+<span class="fc" id="L159">                .andExpect(model().attribute(&quot;error&quot;, &quot;用户名或密码错误&quot;));</span>
+<span class="fc" id="L160">    }</span>
+
+    @ParameterizedTest
+    @MethodSource(&quot;correctUsernamePasswordPairProvider&quot;)
+    void shouldForwardToUserBlank_WhenPasswordCorrect_OnUserType(String username, String password) throws Throwable {
+<span class="fc" id="L165">        this.mockMvc.perform(post(&quot;/login&quot;)</span>
+<span class="fc" id="L166">                .contentType(MediaType.APPLICATION_FORM_URLENCODED)</span>
+<span class="fc" id="L167">                .content(EntityUtils.toString(new UrlEncodedFormEntity(Arrays.asList(</span>
+                        new BasicNameValuePair(&quot;username&quot;, username),
+                        new BasicNameValuePair(&quot;password&quot;, password)
+                )))))
+<span class="fc" id="L171">                .andExpect(status().isOk())</span>
+<span class="fc" id="L172">                .andExpect(view().name(&quot;mainUser&quot;))</span>
+<span class="fc" id="L173">                .andExpect(forwardedUrl(&quot;/WEB-INF/jsp/mainUser.jsp&quot;))</span>
+<span class="fc" id="L174">                .andExpect(model().attribute(&quot;mainPage&quot;, &quot;user/blank.jsp&quot;));</span>
+<span class="fc" id="L175">    }</span>
+
+    @ParameterizedTest
+    @MethodSource(&quot;correctAdminUsernamePasswordPairProvider&quot;)
+    void shouldForwardToAdminBlank_WhenPasswordCorrect_OnAdminType(String username, String password) throws Throwable {
+<span class="fc" id="L180">        this.mockMvc.perform(post(&quot;/login&quot;)</span>
+<span class="fc" id="L181">                .contentType(MediaType.APPLICATION_FORM_URLENCODED)</span>
+<span class="fc" id="L182">                .content(EntityUtils.toString(new UrlEncodedFormEntity(Arrays.asList(</span>
+                        new BasicNameValuePair(&quot;username&quot;, username),
+                        new BasicNameValuePair(&quot;password&quot;, password)
+                )))))
+<span class="fc" id="L186">                .andExpect(status().isOk())</span>
+<span class="fc" id="L187">                .andExpect(view().name(&quot;mainAdmin&quot;))</span>
+<span class="fc" id="L188">                .andExpect(forwardedUrl(&quot;/WEB-INF/jsp/mainAdmin.jsp&quot;))</span>
+<span class="fc" id="L189">                .andExpect(model().attribute(&quot;mainPage&quot;, &quot;admin/blank.jsp&quot;));</span>
+<span class="fc" id="L190">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

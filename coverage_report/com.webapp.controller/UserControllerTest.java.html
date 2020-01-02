@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserControllerTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.controller</a> &gt; <span class="el_source">UserControllerTest.java</span></div><h1>UserControllerTest.java</h1><pre class="source lang-java linenums">package com.webapp.controller;
+
+import com.webapp.model.user.Gender;
+import com.webapp.model.user.User;
+import com.webapp.service.database.dao.UserDao;
+import org.junit.jupiter.api.Test;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+/**
+ * @author Guoyuanjie
+ */
+
+<span class="fc" id="L21">class UserControllerTest {</span>
+
+<span class="fc" id="L23">    private UserDao userDao = mock(UserDao.class);</span>
+<span class="fc" id="L24">    private HttpServletRequest request = mock(HttpServletRequest.class);</span>
+<span class="fc" id="L25">    private HttpSession session = mock(HttpSession.class);</span>
+
+
+<span class="fc" id="L28">    private UserController userController = new UserController(userDao);</span>
+
+
+    @Test
+    public void service_When_IsNotAuthorized_ThenReturn_mv() {
+<span class="fc" id="L33">        String action = &quot;&quot;;</span>
+<span class="fc" id="L34">        String type = &quot;&quot;;</span>
+<span class="fc" id="L35">        when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(type);</span>
+<span class="fc" id="L36">        ModelAndView result = userController.service(action, request, session);</span>
+<span class="fc" id="L37">        assertNotNull(result);</span>
+
+<span class="fc" id="L39">    }</span>
+
+
+    @Test
+    public void service_When_ActionIsDelete() {
+<span class="fc" id="L44">        String action = &quot;delete&quot;;</span>
+<span class="fc" id="L45">        String type = &quot;admin&quot;;</span>
+
+<span class="fc" id="L47">        List&lt;User&gt; users = new ArrayList&lt;User&gt;();</span>
+<span class="fc" id="L48">        users.add(new User());</span>
+
+<span class="fc" id="L50">        when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(type);</span>
+<span class="fc" id="L51">        when(request.getParameter(&quot;id&quot;)).thenReturn(&quot;305&quot;);</span>
+<span class="fc" id="L52">        when(userDao.queryAllUsers()).thenReturn(users);</span>
+
+
+<span class="fc" id="L55">        ModelAndView result = userController.service(action, request, session);</span>
+
+<span class="fc" id="L57">        assertAll(</span>
+<span class="fc" id="L58">                () -&gt; assertEquals(result.getViewName(), &quot;mainAdmin&quot;),</span>
+<span class="fc" id="L59">                () -&gt; assertEquals(result.getModelMap().get(&quot;mainPage&quot;), &quot;admin/user.jsp&quot;),</span>
+<span class="fc" id="L60">                () -&gt; assertEquals(result.getModelMap().get(&quot;userList&quot;), users)</span>
+        );
+
+<span class="fc" id="L63">        verify(userDao).deleteUser(305);</span>
+<span class="fc" id="L64">    }</span>
+
+    @Test
+    public void service_When_ActionIsModify() {
+<span class="fc" id="L68">        String action = &quot;modify&quot;;</span>
+<span class="fc" id="L69">        String type = &quot;admin&quot;;</span>
+
+<span class="fc" id="L71">        User user = new User();</span>
+
+<span class="fc" id="L73">        when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(type);</span>
+<span class="fc" id="L74">        when(request.getParameter(&quot;id&quot;)).thenReturn(&quot;305&quot;);</span>
+
+
+<span class="fc" id="L77">        when(userDao.queryUserById(305)).thenReturn(user);</span>
+
+
+<span class="fc" id="L80">        ModelAndView result = userController.service(action, request, session);</span>
+
+<span class="fc" id="L82">        assertEquals(result.getViewName(), &quot;mainAdmin&quot;);</span>
+<span class="fc" id="L83">        assertEquals(result.getModelMap().get(&quot;mainPage&quot;), &quot;admin/userModify.jsp&quot;);</span>
+<span class="fc" id="L84">        assertEquals(result.getModelMap().get(&quot;id&quot;), String.valueOf(305));</span>
+<span class="fc" id="L85">        assertEquals(result.getModelMap().get(&quot;user&quot;), user);</span>
+
+<span class="fc" id="L87">    }</span>
+
+    @Test
+    public void service_When_ActionIsAdd() {
+<span class="fc" id="L91">        String action = &quot;add&quot;;</span>
+<span class="fc" id="L92">        String type = &quot;admin&quot;;</span>
+
+
+<span class="fc" id="L95">        when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(type);</span>
+<span class="fc" id="L96">        when(request.getParameter(&quot;id&quot;)).thenReturn(&quot;305&quot;);</span>
+
+
+<span class="fc" id="L99">        ModelAndView result = userController.service(action, request, session);</span>
+
+<span class="fc" id="L101">        assertEquals(result.getViewName(), &quot;mainAdmin&quot;);</span>
+<span class="fc" id="L102">        assertEquals(result.getModelMap().get(&quot;mainPage&quot;), &quot;admin/userModify.jsp&quot;);</span>
+<span class="fc" id="L103">        assertEquals(result.getModelMap().get(&quot;id&quot;), null);</span>
+<span class="fc" id="L104">        assertEquals(result.getModelMap().get(&quot;user&quot;), null);</span>
+
+<span class="fc" id="L106">    }</span>
+
+    @Test
+    public void service_When_ActionIsSave_IdstrIsNotNull() {
+<span class="fc" id="L110">        String action = &quot;save&quot;;</span>
+<span class="fc" id="L111">        String type = &quot;admin&quot;;</span>
+
+<span class="fc" id="L113">        List&lt;User&gt; users = new ArrayList&lt;User&gt;();</span>
+<span class="fc" id="L114">        users.add(new User());</span>
+<span class="fc" id="L115">        User user = new User(&quot;PengGe&quot;, &quot;123456&quot;, &quot;PengJunTao&quot;, &quot;FEMALE&quot;, &quot;911&quot;);</span>
+
+<span class="fc" id="L117">        when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(type);</span>
+<span class="fc" id="L118">        when(request.getParameter(&quot;id&quot;)).thenReturn(&quot;305&quot;);</span>
+<span class="fc" id="L119">        when(userDao.queryAllUsers()).thenReturn(users);</span>
+
+<span class="fc" id="L121">        when(request.getParameter(&quot;username&quot;)).thenReturn(&quot;PengGe&quot;);</span>
+<span class="fc" id="L122">        when(request.getParameter(&quot;password&quot;)).thenReturn(&quot;123456&quot;);</span>
+<span class="fc" id="L123">        when(request.getParameter(&quot;name&quot;)).thenReturn(&quot;PengJunTao&quot;);</span>
+<span class="fc" id="L124">        when(request.getParameter(&quot;tel&quot;)).thenReturn(&quot;911&quot;);</span>
+<span class="fc" id="L125">        when(request.getParameter(&quot;sex&quot;)).thenReturn(&quot;FEMALE&quot;);</span>
+
+
+<span class="fc" id="L128">        ModelAndView result = userController.service(action, request, session);</span>
+<span class="fc" id="L129">        user.setId(305);</span>
+<span class="fc" id="L130">        verify(userDao).updateUser(user);</span>
+<span class="fc" id="L131">        assertAll(</span>
+<span class="fc" id="L132">                () -&gt; assertEquals(result.getViewName(), &quot;mainAdmin&quot;),</span>
+<span class="fc" id="L133">                () -&gt; assertEquals(result.getModelMap().get(&quot;mainPage&quot;), &quot;admin/user.jsp&quot;),</span>
+<span class="fc" id="L134">                () -&gt; assertEquals(result.getModelMap().get(&quot;userList&quot;), users)</span>
+        );
+<span class="fc" id="L136">    }</span>
+
+    @Test
+    public void service_When_ActionIsSave_IdstrIsNull() {
+<span class="fc" id="L140">        String action = &quot;save&quot;;</span>
+<span class="fc" id="L141">        String type = &quot;admin&quot;;</span>
+
+<span class="fc" id="L143">        List&lt;User&gt; users = new ArrayList&lt;User&gt;();</span>
+<span class="fc" id="L144">        users.add(new User());</span>
+<span class="fc" id="L145">        User user = new User(&quot;PengGe&quot;, &quot;123456&quot;, &quot;PengJunTao&quot;, &quot;FEMALE&quot;, &quot;911&quot;);</span>
+
+<span class="fc" id="L147">        when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(type);</span>
+<span class="fc" id="L148">        when(request.getParameter(&quot;id&quot;)).thenReturn(&quot;&quot;);</span>
+<span class="fc" id="L149">        when(userDao.queryAllUsers()).thenReturn(users);</span>
+
+<span class="fc" id="L151">        when(request.getParameter(&quot;username&quot;)).thenReturn(&quot;PengGe&quot;);</span>
+<span class="fc" id="L152">        when(request.getParameter(&quot;password&quot;)).thenReturn(&quot;123456&quot;);</span>
+<span class="fc" id="L153">        when(request.getParameter(&quot;name&quot;)).thenReturn(&quot;PengJunTao&quot;);</span>
+<span class="fc" id="L154">        when(request.getParameter(&quot;tel&quot;)).thenReturn(&quot;911&quot;);</span>
+<span class="fc" id="L155">        when(request.getParameter(&quot;sex&quot;)).thenReturn(&quot;FEMALE&quot;);</span>
+
+
+<span class="fc" id="L158">        ModelAndView result = userController.service(action, request, session);</span>
+<span class="fc" id="L159">        verify(userDao).addUser(user);</span>
+<span class="fc" id="L160">        assertAll(</span>
+<span class="fc" id="L161">                () -&gt; assertEquals(result.getViewName(), &quot;mainAdmin&quot;),</span>
+<span class="fc" id="L162">                () -&gt; assertEquals(result.getModelMap().get(&quot;mainPage&quot;), &quot;admin/user.jsp&quot;),</span>
+<span class="fc" id="L163">                () -&gt; assertEquals(result.getModelMap().get(&quot;userList&quot;), users)</span>
+        );
+<span class="fc" id="L165">    }</span>
+
+
+    @Test
+    public void service_When_ActionIsSearch_KeyWordEqualName() {
+<span class="fc" id="L170">        String action = &quot;search&quot;;</span>
+<span class="fc" id="L171">        String type = &quot;admin&quot;;</span>
+
+<span class="fc" id="L173">        String keyword = &quot;name&quot;;</span>
+<span class="fc" id="L174">        String argument = &quot;456&quot;;</span>
+<span class="fc" id="L175">        List&lt;User&gt; resultList = new ArrayList&lt;User&gt;();</span>
+<span class="fc" id="L176">        resultList.add(new User());</span>
+
+
+<span class="fc" id="L179">        when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(type);</span>
+<span class="fc" id="L180">        when(request.getParameter(&quot;id&quot;)).thenReturn(&quot;305&quot;);</span>
+<span class="fc" id="L181">        when(request.getParameter(&quot;searchType&quot;)).thenReturn(keyword);</span>
+<span class="fc" id="L182">        when(request.getParameter(&quot;searchUser_text&quot;)).thenReturn(argument);</span>
+
+
+<span class="fc" id="L185">        when(userDao.queryUserByName(argument)).thenReturn(resultList);</span>
+
+
+<span class="fc" id="L188">        ModelAndView result = userController.service(action, request, session);</span>
+
+<span class="fc" id="L190">        assertAll(</span>
+<span class="fc" id="L191">                () -&gt; assertEquals(result.getViewName(), &quot;mainAdmin&quot;),</span>
+<span class="fc" id="L192">                () -&gt; assertEquals(result.getModelMap().get(&quot;mainPage&quot;), &quot;admin/user.jsp&quot;),</span>
+<span class="fc" id="L193">                () -&gt; assertEquals(result.getModelMap().get(&quot;userList&quot;), resultList)</span>
+        );
+<span class="fc" id="L195">    }</span>
+
+    @Test
+    public void service_When_ActionIsSearch_KeyWordEqualSex() {
+<span class="fc" id="L199">        String action = &quot;search&quot;;</span>
+<span class="fc" id="L200">        String type = &quot;admin&quot;;</span>
+
+<span class="fc" id="L202">        String keyword = &quot;sex&quot;;</span>
+<span class="fc" id="L203">        String argument = &quot;FEMALE&quot;;</span>
+<span class="fc" id="L204">        List&lt;User&gt; resultList = new ArrayList&lt;User&gt;();</span>
+<span class="fc" id="L205">        resultList.add(new User());</span>
+
+
+<span class="fc" id="L208">        when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(type);</span>
+<span class="fc" id="L209">        when(request.getParameter(&quot;id&quot;)).thenReturn(&quot;305&quot;);</span>
+<span class="fc" id="L210">        when(request.getParameter(&quot;searchType&quot;)).thenReturn(keyword);</span>
+<span class="fc" id="L211">        when(request.getParameter(&quot;searchUser_text&quot;)).thenReturn(argument);</span>
+
+
+<span class="fc" id="L214">        when(userDao.queryUserBySex(Gender.valueOf(argument))).thenReturn(resultList);</span>
+
+
+<span class="fc" id="L217">        ModelAndView result = userController.service(action, request, session);</span>
+
+<span class="fc" id="L219">        assertAll(</span>
+<span class="fc" id="L220">                () -&gt; assertEquals(result.getViewName(), &quot;mainAdmin&quot;),</span>
+<span class="fc" id="L221">                () -&gt; assertEquals(result.getModelMap().get(&quot;mainPage&quot;), &quot;admin/user.jsp&quot;),</span>
+<span class="fc" id="L222">                () -&gt; assertEquals(result.getModelMap().get(&quot;userList&quot;), resultList)</span>
+        );
+<span class="fc" id="L224">    }</span>
+
+    @Test
+    public void service_When_ActionIsSearch_KeyWordEqualId() {
+<span class="fc" id="L228">        String action = &quot;search&quot;;</span>
+<span class="fc" id="L229">        String type = &quot;admin&quot;;</span>
+
+<span class="fc" id="L231">        String keyword = &quot;id&quot;;</span>
+<span class="fc" id="L232">        String argument = &quot;305&quot;;</span>
+<span class="fc" id="L233">        List&lt;User&gt; resultList = new ArrayList&lt;User&gt;();</span>
+<span class="fc" id="L234">        User user = new User();</span>
+<span class="fc" id="L235">        resultList.add(user);</span>
+
+
+<span class="fc" id="L238">        when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(type);</span>
+<span class="fc" id="L239">        when(request.getParameter(&quot;id&quot;)).thenReturn(&quot;305&quot;);</span>
+<span class="fc" id="L240">        when(request.getParameter(&quot;searchType&quot;)).thenReturn(keyword);</span>
+<span class="fc" id="L241">        when(request.getParameter(&quot;searchUser_text&quot;)).thenReturn(argument);</span>
+
+
+<span class="fc" id="L244">        when(userDao.queryUserById(Integer.valueOf(argument))).thenReturn(user);</span>
+
+
+<span class="fc" id="L247">        ModelAndView result = userController.service(action, request, session);</span>
+
+<span class="fc" id="L249">        assertAll(</span>
+<span class="fc" id="L250">                () -&gt; assertEquals(result.getViewName(), &quot;mainAdmin&quot;),</span>
+<span class="fc" id="L251">                () -&gt; assertEquals(result.getModelMap().get(&quot;mainPage&quot;), &quot;admin/user.jsp&quot;),</span>
+<span class="fc" id="L252">                () -&gt; assertEquals(result.getModelMap().get(&quot;userList&quot;), resultList)</span>
+        );
+<span class="fc" id="L254">    }</span>
+
+    @Test
+    public void service_When_ActionIsSearch_ArgumentIsEmpty() {
+<span class="fc" id="L258">        String action = &quot;search&quot;;</span>
+<span class="fc" id="L259">        String type = &quot;admin&quot;;</span>
+
+<span class="fc" id="L261">        String keyword = &quot;id&quot;;</span>
+<span class="fc" id="L262">        String argument = &quot;&quot;;</span>
+
+<span class="fc" id="L264">        List&lt;User&gt; users = new ArrayList&lt;User&gt;();</span>
+<span class="fc" id="L265">        users.add(new User());</span>
+
+
+<span class="fc" id="L268">        when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(type);</span>
+<span class="fc" id="L269">        when(request.getParameter(&quot;id&quot;)).thenReturn(&quot;305&quot;);</span>
+<span class="fc" id="L270">        when(request.getParameter(&quot;searchType&quot;)).thenReturn(keyword);</span>
+<span class="fc" id="L271">        when(request.getParameter(&quot;searchUser_text&quot;)).thenReturn(argument);</span>
+
+
+<span class="fc" id="L274">        when(userDao.queryAllUsers()).thenReturn(users);</span>
+
+
+<span class="fc" id="L277">        ModelAndView result = userController.service(action, request, session);</span>
+
+<span class="fc" id="L279">        assertAll(</span>
+<span class="fc" id="L280">                () -&gt; assertEquals(result.getViewName(), &quot;mainAdmin&quot;),</span>
+<span class="fc" id="L281">                () -&gt; assertEquals(result.getModelMap().get(&quot;mainPage&quot;), &quot;admin/user.jsp&quot;),</span>
+<span class="fc" id="L282">                () -&gt; assertEquals(result.getModelMap().get(&quot;userList&quot;), users)</span>
+        );
+<span class="fc" id="L284">    }</span>
+
+
+    @Test
+    public void service_When_ActionIsList() {
+<span class="fc" id="L289">        String action = &quot;list&quot;;</span>
+<span class="fc" id="L290">        String type = &quot;admin&quot;;</span>
+
+<span class="fc" id="L292">        List&lt;User&gt; users = new ArrayList&lt;User&gt;();</span>
+<span class="fc" id="L293">        users.add(new User());</span>
+
+<span class="fc" id="L295">        when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(type);</span>
+<span class="fc" id="L296">        when(request.getParameter(&quot;id&quot;)).thenReturn(&quot;305&quot;);</span>
+<span class="fc" id="L297">        when(userDao.queryAllUsers()).thenReturn(users);</span>
+
+
+<span class="fc" id="L300">        ModelAndView result = userController.service(action, request, session);</span>
+
+<span class="fc" id="L302">        assertAll(</span>
+<span class="fc" id="L303">                () -&gt; assertEquals(result.getViewName(), &quot;mainAdmin&quot;),</span>
+<span class="fc" id="L304">                () -&gt; assertEquals(result.getModelMap().get(&quot;mainPage&quot;), &quot;admin/user.jsp&quot;),</span>
+<span class="fc" id="L305">                () -&gt; assertEquals(result.getModelMap().get(&quot;userList&quot;), users)</span>
+        );
+
+<span class="fc" id="L308">    }</span>
+
+    @Test
+    public void service_When_ActionIsOther() {
+<span class="fc" id="L312">        String action = &quot;other&quot;;</span>
+<span class="fc" id="L313">        String type = &quot;admin&quot;;</span>
+
+<span class="fc" id="L315">        List&lt;User&gt; users = new ArrayList&lt;User&gt;();</span>
+<span class="fc" id="L316">        users.add(new User());</span>
+
+<span class="fc" id="L318">        when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(type);</span>
+<span class="fc" id="L319">        when(request.getParameter(&quot;id&quot;)).thenReturn(&quot;305&quot;);</span>
+<span class="fc" id="L320">        when(userDao.queryAllUsers()).thenReturn(users);</span>
+
+
+<span class="fc" id="L323">        ModelAndView result = userController.service(action, request, session);</span>
+
+<span class="fc" id="L325">        assertAll(</span>
+<span class="fc" id="L326">                () -&gt; assertEquals(result.getViewName(), &quot;mainAdmin&quot;),</span>
+<span class="fc" id="L327">                () -&gt; assertEquals(result.getModelMap().get(&quot;mainPage&quot;), &quot;admin/user.jsp&quot;),</span>
+<span class="fc" id="L328">                () -&gt; assertEquals(result.getModelMap().get(&quot;userList&quot;), users)</span>
+        );
+
+
+<span class="fc" id="L332">    }</span>
+
+    @Test
+    public void service_When_UsersIsEmpty() {
+<span class="fc" id="L336">        String action = &quot;other&quot;;</span>
+<span class="fc" id="L337">        String type = &quot;admin&quot;;</span>
+
+<span class="fc" id="L339">        List&lt;User&gt; users = new ArrayList&lt;User&gt;();</span>
+
+<span class="fc" id="L341">        when(session.getAttribute(&quot;currentUserType&quot;)).thenReturn(type);</span>
+<span class="fc" id="L342">        when(request.getParameter(&quot;id&quot;)).thenReturn(&quot;305&quot;);</span>
+<span class="fc" id="L343">        when(userDao.queryAllUsers()).thenReturn(users);</span>
+
+
+<span class="fc" id="L346">        ModelAndView result = userController.service(action, request, session);</span>
+
+<span class="fc" id="L348">        assertAll(</span>
+<span class="fc" id="L349">                () -&gt; assertEquals(result.getViewName(), &quot;mainAdmin&quot;),</span>
+<span class="fc" id="L350">                () -&gt; assertEquals(result.getModelMap().get(&quot;mainPage&quot;), &quot;admin/user.jsp&quot;),</span>
+<span class="fc" id="L351">                () -&gt; assertEquals(result.getModelMap().get(&quot;userList&quot;), null)</span>
+        );
+
+
+<span class="fc" id="L355">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

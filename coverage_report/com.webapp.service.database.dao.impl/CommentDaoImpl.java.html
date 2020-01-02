@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CommentDaoImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.service.database.dao.impl</a> &gt; <span class="el_source">CommentDaoImpl.java</span></div><h1>CommentDaoImpl.java</h1><pre class="source lang-java linenums">package com.webapp.service.database.dao.impl;
+
+import com.webapp.model.Comment;
+import com.webapp.service.database.DatabaseService;
+import com.webapp.service.database.dao.CommentDao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * This class implements CommentDao interface to interact with table 't_comment' in the database.
+ *
+ * @author Juntao Peng (original creator)
+ * @author Shangzhen Li (refactor)
+ */
+public class CommentDaoImpl extends DatabaseService implements CommentDao {
+
+<span class="fc" id="L21">    public CommentDaoImpl() {</span>
+<span class="fc" id="L22">    }</span>
+
+    @Override
+    public List&lt;Comment&gt; listComment(int size, boolean verified) {
+<span class="fc" id="L26">        List&lt;Comment&gt; commentList = new ArrayList&lt;Comment&gt;();</span>
+<span class="fc" id="L27">        String sql = &quot;SELECT * FROM t_comment WHERE verified = ? LIMIT ?&quot;;</span>
+<span class="fc" id="L28">        Connection connection = getConnection();</span>
+        try {
+<span class="fc" id="L30">            PreparedStatement preparedStatement = connection.prepareStatement(sql);</span>
+<span class="fc" id="L31">            preparedStatement.setBoolean(1, verified);</span>
+<span class="fc" id="L32">            preparedStatement.setInt(2, size);</span>
+<span class="fc" id="L33">            ResultSet rs = preparedStatement.executeQuery();</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">            while (rs.next()) {</span>
+<span class="fc" id="L35">                Comment comment = new Comment();</span>
+<span class="fc" id="L36">                comment.setId(rs.getInt(&quot;id&quot;));</span>
+<span class="fc" id="L37">                comment.setUserId(rs.getInt(&quot;userId&quot;));</span>
+<span class="fc" id="L38">                comment.setDate(rs.getLong(&quot;date&quot;));</span>
+<span class="fc" id="L39">                comment.setContent(rs.getString(&quot;content&quot;));</span>
+<span class="fc" id="L40">                comment.setVerified(rs.getBoolean(&quot;verified&quot;));</span>
+<span class="fc" id="L41">                commentList.add(comment);</span>
+<span class="fc" id="L42">            }</span>
+<span class="fc" id="L43">        } catch (SQLException sqlException) {</span>
+<span class="fc" id="L44">            sqlException.printStackTrace(System.err);</span>
+        } finally {
+<span class="fc" id="L46">            closeConnection(connection);</span>
+        }
+<span class="fc" id="L48">        return commentList;</span>
+    }
+
+//  @Override
+//  public List&lt;Comment&gt; queryCommentByUserId(int userId, boolean verified) {
+//    List&lt;Comment&gt; commentList = new ArrayList&lt;&gt;();
+//    String sql = &quot;SELECT * FROM t_comment WHERE userId = ? AND verified=? &quot;;
+//    Connection connection = getConnection();
+//    try {
+//      PreparedStatement preparedStatement = connection.prepareStatement(sql);
+//      preparedStatement.setInt(1, userId);
+//      preparedStatement.setBoolean(2, verified);
+//      ResultSet rs = preparedStatement.executeQuery();
+//      while (rs.next()) {
+//        Comment comment = new Comment();
+//        comment.setId(rs.getInt(&quot;id&quot;));
+//        comment.setUserId(rs.getInt(&quot;userId&quot;));
+//        comment.setDate(rs.getLong(&quot;date&quot;));
+//          comment.setContent(rs.getString(&quot;content&quot;));
+//          comment.setVerified(rs.getBoolean(&quot;verified&quot;));
+//          commentList.add(comment);
+//      }
+//    } catch (SQLException sqlException) {
+//      sqlException.printStackTrace(System.err);
+//    } finally {
+//      closeConnection(connection);
+//    }
+//    return commentList;
+//  }
+
+    @Override
+    public Comment queryCommentById(int commentId) {
+<span class="fc" id="L80">        String sql = &quot;SELECT * FROM t_comment t1 WHERE t1.id=?&quot;;</span>
+<span class="fc" id="L81">        Connection connection = getConnection();</span>
+<span class="fc" id="L82">        Comment comment = null;</span>
+        try {
+<span class="fc" id="L84">            PreparedStatement preparedStatement = connection.prepareStatement(sql);</span>
+<span class="fc" id="L85">            preparedStatement.setInt(1, commentId);</span>
+<span class="fc" id="L86">            ResultSet rs = preparedStatement.executeQuery();</span>
+<span class="pc bpc" id="L87" title="1 of 2 branches missed.">            if (rs.next()) {</span>
+<span class="fc" id="L88">                comment = new Comment();</span>
+<span class="fc" id="L89">                comment.setId(rs.getInt(&quot;id&quot;));</span>
+<span class="fc" id="L90">                comment.setUserId(rs.getInt(&quot;userId&quot;));</span>
+<span class="fc" id="L91">                comment.setDate(rs.getLong(&quot;date&quot;));</span>
+<span class="fc" id="L92">                comment.setContent(rs.getString(&quot;content&quot;));</span>
+<span class="fc" id="L93">                comment.setVerified(rs.getBoolean(&quot;verified&quot;));</span>
+            }
+<span class="fc" id="L95">        } catch (SQLException sqle) {</span>
+<span class="fc" id="L96">            sqle.printStackTrace(System.err);</span>
+        } finally {
+<span class="fc" id="L98">            closeConnection(connection);</span>
+        }
+<span class="fc" id="L100">        return comment;</span>
+    }
+
+    @Override
+    public boolean addComment(Comment comment) {
+<span class="fc" id="L105">        String sql = &quot;INSERT INTO t_comment(userId,date,content) VALUES (?,?,?)&quot;;</span>
+<span class="fc" id="L106">        Connection connection = getConnection();</span>
+<span class="fc" id="L107">        int result = 0;</span>
+        try {
+<span class="fc" id="L109">            PreparedStatement preparedStatement = connection.prepareStatement(sql);</span>
+<span class="fc" id="L110">            preparedStatement.setInt(1, comment.getUserId());</span>
+<span class="fc" id="L111">            preparedStatement.setLong(2, comment.getDate());</span>
+<span class="fc" id="L112">            preparedStatement.setString(3, comment.getContent());</span>
+<span class="fc" id="L113">            result = preparedStatement.executeUpdate();</span>
+<span class="fc" id="L114">        } catch (SQLException sqle) {</span>
+<span class="fc" id="L115">            sqle.printStackTrace(System.err);</span>
+        } finally {
+<span class="fc" id="L117">            closeConnection(connection);</span>
+        }
+<span class="fc bfc" id="L119" title="All 2 branches covered.">        return 0 != result;</span>
+    }
+
+    @Override
+    public boolean deleteComment(int commentId) {
+<span class="fc" id="L124">        String sql = &quot;DELETE FROM t_comment WHERE id=?&quot;;</span>
+<span class="fc" id="L125">        Connection connection = getConnection();</span>
+        boolean result;
+        try {
+<span class="fc" id="L128">            PreparedStatement preparedStatement = connection.prepareStatement(sql);</span>
+<span class="fc" id="L129">            preparedStatement.setInt(1, commentId);</span>
+<span class="fc" id="L130">            preparedStatement.executeUpdate();</span>
+<span class="fc" id="L131">            result = true;</span>
+<span class="fc" id="L132">        } catch (SQLException sqle) {</span>
+<span class="fc" id="L133">            sqle.printStackTrace(System.err);</span>
+<span class="fc" id="L134">            result = false;</span>
+        } finally {
+<span class="fc" id="L136">            closeConnection(connection);</span>
+        }
+<span class="fc" id="L138">        return result;</span>
+    }
+
+    @Override
+    public boolean updateComment(Comment comment) {
+<span class="fc" id="L143">        String sql = &quot;UPDATE t_comment SET userId = ?, date = ?, content = ?, verified = ? WHERE id=?&quot;;</span>
+<span class="fc" id="L144">        Connection connection = getConnection();</span>
+<span class="fc" id="L145">        int result = 0;</span>
+        try {
+<span class="fc" id="L147">            PreparedStatement preparedStatement = connection.prepareStatement(sql);</span>
+<span class="fc" id="L148">            preparedStatement.setInt(1, comment.getUserId());</span>
+<span class="fc" id="L149">            preparedStatement.setLong(2, comment.getDate());</span>
+<span class="fc" id="L150">            preparedStatement.setString(3, comment.getContent());</span>
+<span class="fc" id="L151">            preparedStatement.setBoolean(4, comment.isVerified());</span>
+<span class="fc" id="L152">            preparedStatement.setInt(5, comment.getId());</span>
+<span class="fc" id="L153">            result = preparedStatement.executeUpdate();</span>
+<span class="fc" id="L154">        } catch (SQLException sqle) {</span>
+<span class="fc" id="L155">            sqle.printStackTrace(System.err);</span>
+        } finally {
+<span class="fc" id="L157">            closeConnection(connection);</span>
+        }
+<span class="fc bfc" id="L159" title="All 2 branches covered.">        return 0 != result;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

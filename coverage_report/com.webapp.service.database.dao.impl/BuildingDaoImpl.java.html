@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BuildingDaoImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.service.database.dao.impl</a> &gt; <span class="el_source">BuildingDaoImpl.java</span></div><h1>BuildingDaoImpl.java</h1><pre class="source lang-java linenums">package com.webapp.service.database.dao.impl;
+
+import com.webapp.model.Building;
+import com.webapp.service.database.DatabaseService;
+import com.webapp.service.database.dao.BuildingDao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * This class implements BuildingDao interface to interact with table 't_building' in database.
+ *
+ * @author Juntao Peng (original creator)
+ * @author Shangzhen Li (refactor)
+ */
+public class BuildingDaoImpl extends DatabaseService implements BuildingDao {
+
+<span class="fc" id="L22">    public BuildingDaoImpl() {</span>
+<span class="fc" id="L23">    }</span>
+
+    @Override
+    public List&lt;Building&gt; listBuilding(int size) {
+<span class="fc" id="L27">        List&lt;Building&gt; buildingList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L28">        String SQL = &quot;SELECT * FROM t_building ORDER BY id DESC LIMIT ?&quot;;</span>
+<span class="fc" id="L29">        Connection connection = getConnection();</span>
+        try {
+<span class="fc" id="L31">            PreparedStatement preparedStatement = connection.prepareStatement(SQL);</span>
+<span class="fc" id="L32">            preparedStatement.setInt(1, size);</span>
+<span class="fc" id="L33">            ResultSet rs = preparedStatement.executeQuery();</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">            while (rs.next()) {</span>
+<span class="fc" id="L35">                Building building = new Building();</span>
+<span class="fc" id="L36">                building.setId(rs.getInt(&quot;id&quot;));</span>
+<span class="fc" id="L37">                building.setName(rs.getString(&quot;name&quot;));</span>
+<span class="fc" id="L38">                building.setDescription(rs.getString(&quot;description&quot;));</span>
+<span class="fc" id="L39">                building.setPrice(rs.getString(&quot;price&quot;));</span>
+<span class="fc" id="L40">                buildingList.add(building);</span>
+<span class="fc" id="L41">            }</span>
+<span class="fc" id="L42">        } catch (SQLException sqle) {</span>
+<span class="fc" id="L43">            sqle.printStackTrace(System.err);</span>
+        } finally {
+<span class="fc" id="L45">            closeConnection(connection);</span>
+        }
+<span class="fc" id="L47">        return buildingList;</span>
+    }
+
+    @Override
+    public Building queryBuildingById(int id) {
+<span class="fc" id="L52">        String sql = &quot;SELECT * FROM t_building t1 WHERE t1.id=?&quot;;</span>
+<span class="fc" id="L53">        Building building = new Building();</span>
+<span class="fc" id="L54">        Connection connection = getConnection();</span>
+        try {
+<span class="fc" id="L56">            PreparedStatement pstmt = connection.prepareStatement(sql);</span>
+<span class="fc" id="L57">            pstmt.setInt(1, id);</span>
+<span class="fc" id="L58">            ResultSet rs = pstmt.executeQuery();</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">            if (rs.next()) {</span>
+<span class="fc" id="L60">                building.setId(rs.getInt(&quot;id&quot;));</span>
+<span class="fc" id="L61">                building.setName(rs.getString(&quot;name&quot;));</span>
+<span class="fc" id="L62">                building.setDescription(rs.getString(&quot;description&quot;));</span>
+<span class="fc" id="L63">                building.setPrice(rs.getString(&quot;price&quot;));</span>
+<span class="fc" id="L64">                return building;</span>
+            }
+<span class="fc" id="L66">        } catch (SQLException sqle) {</span>
+<span class="fc" id="L67">            sqle.printStackTrace(System.err);</span>
+        } finally {
+<span class="fc" id="L69">            closeConnection(connection);</span>
+        }
+<span class="fc" id="L71">        return null;</span>
+    }
+
+    @Override
+    public boolean addBuilding(Building building) {
+<span class="fc" id="L76">        String sql = &quot;INSERT INTO t_building(name,description,price) VALUES (?,?,?)&quot;;</span>
+<span class="fc" id="L77">        int result = 0;</span>
+<span class="fc" id="L78">        Connection connection = getConnection();</span>
+        try {
+<span class="fc" id="L80">            PreparedStatement pstmt = connection.prepareStatement(sql);</span>
+<span class="fc" id="L81">            pstmt.setString(1, building.getName());</span>
+<span class="fc" id="L82">            pstmt.setString(2, building.getDescription());</span>
+<span class="fc" id="L83">            pstmt.setString(3, building.getPrice());</span>
+<span class="fc" id="L84">            result = pstmt.executeUpdate();</span>
+<span class="fc" id="L85">        } catch (SQLException sqle) {</span>
+<span class="fc" id="L86">            sqle.printStackTrace(System.err);</span>
+        } finally {
+<span class="fc" id="L88">            closeConnection(connection);</span>
+        }
+<span class="fc bfc" id="L90" title="All 2 branches covered.">        return 0 != result;</span>
+    }
+
+    @Override
+    public boolean deleteBuilding(int id) {
+<span class="fc" id="L95">        String sql = &quot;DELETE FROM t_building WHERE id=?&quot;;</span>
+<span class="fc" id="L96">        int result = 0;</span>
+<span class="fc" id="L97">        Connection connection = getConnection();</span>
+        try {
+<span class="fc" id="L99">            PreparedStatement pstmt = connection.prepareStatement(sql);</span>
+<span class="fc" id="L100">            pstmt.setInt(1, id);</span>
+<span class="fc" id="L101">            result = pstmt.executeUpdate();</span>
+<span class="fc" id="L102">        } catch (SQLException sqle) {</span>
+<span class="fc" id="L103">            sqle.printStackTrace(System.err);</span>
+        } finally {
+<span class="fc" id="L105">            closeConnection(connection);</span>
+        }
+<span class="fc bfc" id="L107" title="All 2 branches covered.">        return 0 != result;</span>
+    }
+
+    @Override
+    public boolean updateBuilding(Building building) {
+<span class="fc" id="L112">        String sql = &quot;UPDATE t_building SET name=?,description=?,price=? WHERE id=?&quot;;</span>
+<span class="fc" id="L113">        int result = 0;</span>
+<span class="fc" id="L114">        Connection connection = getConnection();</span>
+        try {
+<span class="fc" id="L116">            PreparedStatement pstmt = connection.prepareStatement(sql);</span>
+<span class="fc" id="L117">            pstmt.setString(1, building.getName());</span>
+<span class="fc" id="L118">            pstmt.setString(2, building.getDescription());</span>
+<span class="fc" id="L119">            pstmt.setString(3, building.getPrice());</span>
+<span class="fc" id="L120">            pstmt.setInt(4, building.getId());</span>
+<span class="fc" id="L121">            result = pstmt.executeUpdate();</span>
+<span class="fc" id="L122">        } catch (SQLException sqle) {</span>
+<span class="fc" id="L123">            sqle.printStackTrace(System.err);</span>
+        } finally {
+<span class="fc" id="L125">            closeConnection(connection);</span>
+        }
+<span class="fc bfc" id="L127" title="All 2 branches covered.">        return 0 != result;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

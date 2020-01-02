@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MeetHere$All_in_MeetHere.exec</a> &gt; <a href="index.source.html" class="el_package">com.webapp.controller</a> &gt; <span class="el_source">UserController.java</span></div><h1>UserController.java</h1><pre class="source lang-java linenums">package com.webapp.controller;
+
+import com.webapp.filter.LoginFilter;
+import com.webapp.model.user.Gender;
+import com.webapp.model.user.User;
+import com.webapp.service.database.dao.UserDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @author Juntao Peng
+ */
+<span class="pc bpc" id="L21" title="1 of 2 branches missed.">@Controller</span>
+public class UserController {
+
+    UserDao userDao;
+
+    @Autowired
+<span class="fc" id="L27">    public UserController(UserDao userDao) {</span>
+<span class="fc" id="L28">        this.userDao = userDao;</span>
+<span class="fc" id="L29">    }</span>
+
+    @RequestMapping(value = &quot;/user&quot;)
+    public ModelAndView service(@RequestParam(&quot;action&quot;) String action, HttpServletRequest request,
+                                HttpSession session) {
+<span class="fc" id="L34">        ModelAndView mv = new ModelAndView();</span>
+<span class="fc" id="L35">        String currentUserType = (String) session.getAttribute(&quot;currentUserType&quot;);</span>
+<span class="fc" id="L36">        boolean isAuthorized = LoginFilter.isAuthorized(currentUserType, &quot;admin&quot;, mv);</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        if (!isAuthorized) {</span>
+<span class="fc" id="L38">            return mv;</span>
+        }
+<span class="fc" id="L40">        String idStr = request.getParameter(&quot;id&quot;);</span>
+<span class="fc" id="L41">        int id = 0;</span>
+<span class="fc bfc" id="L42" title="All 4 branches covered.">        if (idStr != null &amp;&amp; idStr.length() != 0) {</span>
+<span class="fc" id="L43">            id = Integer.parseInt(idStr);</span>
+        }
+
+<span class="fc" id="L46">        mv.setViewName(&quot;mainAdmin&quot;);</span>
+<span class="fc bfc" id="L47" title="All 6 branches covered.">        switch (action) {</span>
+            case &quot;delete&quot;:
+<span class="fc" id="L49">                deleteUser(mv, id);</span>
+<span class="fc" id="L50">                listUsers(mv);</span>
+<span class="fc" id="L51">                break;</span>
+            case &quot;modify&quot;:
+<span class="fc" id="L53">                modifyUser(mv, id);</span>
+<span class="fc" id="L54">                break;</span>
+            case &quot;add&quot;:
+<span class="fc" id="L56">                addUser(mv);</span>
+<span class="fc" id="L57">                break;</span>
+            case &quot;save&quot;:
+<span class="fc" id="L59">                saveUser(mv, request);</span>
+<span class="fc" id="L60">                listUsers(mv);</span>
+<span class="fc" id="L61">                break;</span>
+            case &quot;search&quot;:
+<span class="fc" id="L63">                searchUser(mv, request);</span>
+<span class="fc" id="L64">                break;</span>
+            case &quot;list&quot;:
+            default:
+<span class="fc" id="L67">                listUsers(mv);</span>
+        }
+<span class="fc" id="L69">        return mv;</span>
+    }
+
+    private void listUsers(ModelAndView mv) {
+<span class="fc" id="L73">        mv.addObject(&quot;mainPage&quot;, &quot;admin/user.jsp&quot;);</span>
+<span class="fc" id="L74">        List&lt;User&gt; users = this.userDao.queryAllUsers();</span>
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        if (users.size() &gt; 0) {</span>
+<span class="fc" id="L76">            mv.addObject(&quot;userList&quot;, users);</span>
+        }
+
+<span class="fc" id="L79">    }</span>
+
+    private void deleteUser(ModelAndView mv, int id) {
+<span class="fc" id="L82">        this.userDao.deleteUser(id);</span>
+<span class="fc" id="L83">    }</span>
+
+    private void modifyUser(ModelAndView mv, int id) {
+<span class="fc" id="L86">        User user = this.userDao.queryUserById(id);</span>
+<span class="fc" id="L87">        mv.addObject(&quot;mainPage&quot;, &quot;admin/userModify.jsp&quot;);</span>
+<span class="fc" id="L88">        mv.addObject(&quot;id&quot;, String.valueOf(id));</span>
+<span class="fc" id="L89">        mv.addObject(&quot;user&quot;, user);</span>
+<span class="fc" id="L90">    }</span>
+
+    private void addUser(ModelAndView mv) {
+<span class="fc" id="L93">        mv.addObject(&quot;mainPage&quot;, &quot;admin/userModify.jsp&quot;);</span>
+<span class="fc" id="L94">        mv.addObject(&quot;id&quot;, null);</span>
+<span class="fc" id="L95">        mv.addObject(&quot;user&quot;, null);</span>
+<span class="fc" id="L96">    }</span>
+
+    private void saveUser(ModelAndView mv, HttpServletRequest request) {
+<span class="fc" id="L99">        String username = request.getParameter(&quot;username&quot;);</span>
+<span class="fc" id="L100">        String password = request.getParameter(&quot;password&quot;);</span>
+<span class="fc" id="L101">        String name = request.getParameter(&quot;name&quot;);</span>
+<span class="fc" id="L102">        String tel = request.getParameter(&quot;tel&quot;);</span>
+<span class="fc" id="L103">        String sex = request.getParameter(&quot;sex&quot;);</span>
+<span class="fc" id="L104">        User user = new User(username, password, name, sex, tel);</span>
+<span class="fc" id="L105">        String idStr = request.getParameter(&quot;id&quot;);</span>
+
+<span class="fc bfc" id="L107" title="All 4 branches covered.">        if (idStr != null &amp;&amp; idStr.length() != 0) {</span>
+<span class="fc" id="L108">            int id = Integer.valueOf(idStr);</span>
+<span class="fc" id="L109">            user.setId(id);</span>
+<span class="fc" id="L110">            this.userDao.updateUser(user);</span>
+<span class="fc" id="L111">        } else {</span>
+<span class="fc" id="L112">            this.userDao.addUser(user);</span>
+        }
+
+<span class="fc" id="L115">    }</span>
+
+    private void searchUser(ModelAndView mv, HttpServletRequest request) {
+<span class="fc" id="L118">        String keyword = request.getParameter(&quot;searchType&quot;);</span>
+<span class="fc" id="L119">        String argument = request.getParameter(&quot;searchUser_text&quot;);</span>
+<span class="fc" id="L120">        mv.addObject(&quot;mainPage&quot;, &quot;admin/user.jsp&quot;);</span>
+<span class="pc bpc" id="L121" title="2 of 8 branches missed.">        assert &quot;name&quot;.equals(keyword) || &quot;id&quot;.equals(keyword) || &quot;sex&quot;.equals(keyword);</span>
+<span class="pc bpc" id="L122" title="1 of 4 branches missed.">        if (argument == null || argument.length() == 0) {</span>
+<span class="fc" id="L123">            listUsers(mv);</span>
+<span class="fc" id="L124">            return;</span>
+        }
+
+<span class="fc" id="L127">        List&lt;User&gt; resultList = new ArrayList&lt;&gt;();</span>
+<span class="pc bpc" id="L128" title="1 of 4 branches missed.">        switch (keyword) {</span>
+            case &quot;name&quot;:
+<span class="fc" id="L130">                resultList = this.userDao.queryUserByName(argument);</span>
+<span class="fc" id="L131">                break;</span>
+            case &quot;sex&quot;:
+<span class="fc" id="L133">                resultList = this.userDao.queryUserBySex(Gender.valueOf(argument));</span>
+<span class="fc" id="L134">                break;</span>
+            case &quot;id&quot;:
+<span class="fc" id="L136">                resultList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L137">                User result = this.userDao.queryUserById(Integer.valueOf(argument));</span>
+<span class="fc bfc" id="L138" title="All 2 branches covered.">                if (result != null) {</span>
+<span class="fc" id="L139">                    resultList.add(result);</span>
+                }
+            default:
+        }
+
+<span class="fc" id="L144">        mv.addObject(&quot;userList&quot;, resultList);</span>
+
+<span class="fc" id="L146">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

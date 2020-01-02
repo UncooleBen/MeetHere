@@ -7,7 +7,7 @@ Please refer to `documents/` for project reports and statistics.<br>
 
 ## Testing Results By Now
 Below image refreshes automatically according to our jenkins build lifecycle.<br>
-**Our build lifecycle is closed at 11:01 a.m. Jan.1.2019.**<br>
+**Our build lifecycle was closed at 11:01 a.m. Jan.1.2019.**<br>
 `Blue - Passed Tests`<br>
 `Red - Failed Tests`<br>
 `Yellow - Skipped Tests`<br>

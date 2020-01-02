@@ -1,0 +1,4 @@
+1 将MeetHere.war放入Tomcat/webapps/
+2 MySQL新建schema，命名为meethere，将meethere.sql导入meethere中
+3 若试运行系统功能，请在t_user中插入任意permission字段为0的用户作为系统管理员
+4 若进行集成测试，请清空数据库表（可以重新导入meethere.sql）

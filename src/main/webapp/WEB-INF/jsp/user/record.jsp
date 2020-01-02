@@ -134,7 +134,7 @@
                     <td>${record.userId }</td>
                     <td>${record.buildingId==null?"无":record.buildingId }</td>
                     <td id="unverifiedInterval${i.index}">
-                        <script>convertTime(${record.endDate }-${record.startDate},
+                        <script>convertTime(${record.endDate - record.startDate},
                             "unverifiedInterval${i.index}")</script>
                     </td>
                     <td>

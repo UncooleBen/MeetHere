@@ -29,7 +29,7 @@ Members of group 12: `Juntao Peng`, `Shangzhen Li`, `Yuanjie Guo`
 ## Contact
 { pengjuntao2016@foxmail.com, 798483752@qq.com, 327183023@qq.com }
 ## Legal Concerns
-**We'v noticed that there are multiple cloners of this repository by now.** <br>
+**We've noticed that there are multiple cloners of this repository by now.** <br>
 Please peruse the following passage if you'd like to use this project as a final one of ECNU's Software Testing course. <br>
 <br>
 Since the project is under the `BSD 3-Clause License`, any person who uses/modifies this project to fulfill the course requisites of Software Testing  **must** be consented by the original authors, i.e. `{Juntao Peng, Shangzhen Li, Yuanjie Guo}`, in **written form**.<br>
